@@ -1,0 +1,65 @@
+{
+    "usesTypeScript": true,
+    "usesCssModule": true,
+    "cssPreprocessor": "scss",
+    "component": {
+    "default": {
+        "path": "components",
+        "withLazy": false,
+        "withStory": false,
+        "withStyle": true,
+        "withTest": false,
+
+        "customTemplates": {
+        "component": "templates/component/index.tsx",
+        "style": "templates/component/TemplateName.module.scss"
+        }
+    },
+
+    "page": {
+        "path": "pages",
+        "withLazy": false,
+        "withStory": false,
+        "withStyle": false,
+        "withTest": false
+    },
+
+    "layout": {
+        "path": "layouts",
+        "withLazy": false,
+        "withStory": false,
+        "withStyle": true,
+        "withTest": false
+    },
+
+    "modal": {
+        "path": "components/Modal",
+        "withStyle": true,
+        "withTest": false,
+        "withStory": false,
+        "withLazy": false,
+        "withIndex": true,
+        "withStoryStyle": false,
+        "flat": true,
+        "customTemplates": {
+        "component": "templates/modal/Modal.tsx",
+        "index": "templates/modal/index.tsx",
+        "style": "templates/modal/Modal.module.scss"
+        }
+    },
+    "modalComponent": {
+        "path": "components/Modal",
+        "withStyle": true,
+        "withTest": false,
+        "withStory": false,
+        "withLazy": false,
+        "withStoryStyle": false,
+        "flat": true,
+        "customTemplates": {
+        "component": "templates/modal/TemplateNameModal.tsx",
+        "style": "templates/modal/TemplateNameModal.module.scss"
+        }
+    }
+    },
+    "testLibrary": "None"
+}  
