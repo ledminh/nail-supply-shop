@@ -1,17 +1,16 @@
 import { NextPage } from 'next'
 
 
+
 import styles from '../styles/Home.module.scss'
 
+import HeroImage from '../components/home_components/HeroImage';
+
 const Home:NextPage = () => {
-  
 
   return (
-    <div>
-      <section className={styles.welcome}>
-        <h1>Welcome to Nail Supply Shop</h1>
-        <p>We offer a wide selection of nail products, including polishes, tools, and accessories.</p>
-      </section>
+    <>
+      <HeroImage/>
   
       <section className={styles.newArrivals}>
         <h2>New Arrivals</h2>
@@ -40,7 +39,7 @@ const Home:NextPage = () => {
         </ul>
       </section>
   
-    </div>
+    </>
   )
 
 }

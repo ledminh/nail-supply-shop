@@ -1,7 +1,7 @@
 import '../styles/globals.scss'
 
 import type { AppProps } from 'next/app'
-import Layout from '../layouts/Layout';
+import MainLayout from '../layouts/MainLayout';
 import { NextComponentType, NextPageContext } from 'next';
 
 interface CustomAppProps extends AppProps {
@@ -14,8 +14,8 @@ interface CustomAppProps extends AppProps {
 export default function App({ Component, pageProps }: CustomAppProps) {
 
   return (
-      <Layout pageTitle={Component.name}>
+      <MainLayout pageTitle={Component.name}>
         <Component {...pageProps} />
-      </Layout>
+      </MainLayout>
     )
 }
