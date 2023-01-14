@@ -1,0 +1,11 @@
+@use '../../styles/base';
+
+.wrapper {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: adjust-color($color: base.$primaryColor, $lightness: -30%);
+
+    
+}
+

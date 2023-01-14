@@ -20,7 +20,7 @@ const Logo:LogoType = () => {
 
     return (
         <div className={styles.wrapper}>
-            Logo component
+            NAIL SUPPLY
         </div>
     )
 }
