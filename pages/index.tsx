@@ -13,7 +13,7 @@ const Home:NextPage = () => {
       <HeroImage/>
   
       <section className={styles.newArrivals}>
-        <h2>New Arrivals</h2>
+        <h3>New Arrivals</h3>
         <ul>
           <li>Gel polish in shades of red</li>
           <li>Stamping plates with floral designs</li>
@@ -22,7 +22,7 @@ const Home:NextPage = () => {
       </section>
   
       <section className={styles.bestSellers}>
-        <h2>Best Sellers</h2>
+        <h3>Best Sellers</h3>
         <ul>
           <li>Classic French manicure kit</li>
           <li>Acrylic powder and liquid set</li>
@@ -31,7 +31,7 @@ const Home:NextPage = () => {
       </section>
   
       <section className={styles.specialOffers}>
-        <h2>Special Offers</h2>
+        <h3>Special Offers</h3>
         <ul>
           <li>Buy one, get one 50% off on select polishes</li>
           <li>10% off your first purchase</li>

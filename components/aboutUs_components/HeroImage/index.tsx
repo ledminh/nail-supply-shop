@@ -2,9 +2,9 @@ import { FunctionComponent } from "react";
 
 import styles from './HeroImage.module.scss';
 
-import heroImageDesktop from '../../../assets/images/desktop/hero-image.jpg';
-import heroImageMobile from '../../../assets/images/mobile/hero-image.jpg';
-import heroImageTablet from '../../../assets/images/tablet/hero-image.jpg';
+import beauticianImageDesktop from '../../../assets/images/desktop/beautician.jpg';
+import beauticianImageMobile from '../../../assets/images/mobile/beautician.jpg';
+import beauticianImageTablet from '../../../assets/images/tablet/beautician.jpg';
 
 import HeroImageLayout from '../../../layouts/HeroImageLayout';
 
@@ -32,16 +32,15 @@ const HeroImage:HeroImageType = () => {
             desktop: '500px'
             }}
             images={{
-            mobile: heroImageMobile,
-            tablet: heroImageTablet,
-            desktop: heroImageDesktop
+            mobile: beauticianImageMobile,
+            tablet: beauticianImageTablet,
+            desktop: beauticianImageDesktop
             }}
             altText="Nails on a white blanket"  
         >
             <div className={styles.HeroImage}>
-                <h3 className={styles.h2}>Welcome to</h3>
-                <h1 className={styles.h1}> Nail Supply Shop</h1>
-                <p className={styles.p}>We offer a wide selection of nail products, including polishes, tools, and accessories.</p>
+                <h1 className={styles.h1}>About Us</h1>
+                <p className={styles.p}>Our team, our misson, and our values.</p>
             </div>
         </HeroImageLayout>
     )

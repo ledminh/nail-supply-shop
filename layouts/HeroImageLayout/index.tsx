@@ -48,8 +48,7 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     alt={altText}
                     fill
                     style={{
-                        objectFit: 'cover',
-                        opacity: 0.5
+                        objectFit: 'cover'
                     }}
                     sizes="640px"
                     placeholder='blur'
@@ -69,8 +68,7 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     alt={altText}
                     fill
                     style={{
-                        objectFit: 'cover',
-                        opacity: 0.5
+                        objectFit: 'cover'
                     }}
                     sizes="1280px"
                     placeholder='blur'
@@ -90,8 +88,7 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     alt={altText}
                     fill
                     style={{
-                        objectFit: 'cover',
-                        opacity: 0.5
+                        objectFit: 'cover'
                     }}
                     sizes="1920px"
                     placeholder='blur'

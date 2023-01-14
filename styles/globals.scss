@@ -1,5 +1,7 @@
 @use 'base';
 
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Playfair+Display:wght@700&display=swap');
+
 *,
 *::before,
 *::after {
@@ -15,7 +17,10 @@ body {
 }
 
 body {
+  font-family: 'Lato', sans-serif;
   background-color: base.$backgroundColor;
+  color: base.$textColor;
+
 }
 
 a {
@@ -26,3 +31,55 @@ a {
 ul {
   list-style: none;
 }
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 3rem;
+  
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+// make font size responsive mobile first
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+}
+
+// make font size responsive mobile first
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 4rem;
+  }
+
+  h3 {
+    font-size: 3rem;
+  }
+}
+
+
