@@ -2,6 +2,8 @@ import { FunctionComponent } from "react";
 
 import styles from './NavBar.module.scss';
 import Link from "next/link";
+import SmallScreen from "./SmallScreen";
+import LargeScreen from "./LargeScreen";
 
 /***************************
  *  Types
@@ -20,14 +22,10 @@ type NavBarType = FunctionComponent<NavBarPropsType>
 const NavBar:NavBarType = () => {
 
     return (
-        <nav className={styles.wrapper}>
-            <ul>
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About</Link></li>
-                <li><Link href="/shop">Shop</Link></li>
-                <li><Link href="/contact">Contact</Link></li>
-            </ul>
-        </nav>
+        <>
+            <SmallScreen/>
+            <LargeScreen/>
+        </>
     )
 }
 

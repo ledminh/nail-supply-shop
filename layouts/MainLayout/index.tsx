@@ -17,7 +17,7 @@ const MainLayout: FC<MainLayoutProps> = ({children, pageTitle}) => (
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.Layout}>
-        <header>
+        <header className={styles.header}>
           <Logo />
           <NavBar/>
         </header>

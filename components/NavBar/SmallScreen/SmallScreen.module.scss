@@ -1,0 +1,123 @@
+@use '../../../styles/base';
+
+.wrapper {
+    display: flex;
+}
+
+
+.toggleBtn {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+
+}
+
+
+.toggleBtn:focus {
+    outline: none;
+}
+
+.navScreen {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 5;
+
+
+    background: linear-gradient(base.$backgroundColor 40%, adjust-color($color:base.$backgroundColor, $alpha: -0.9));
+
+
+    
+}
+
+.navScreen.open {
+    display: block;
+    
+
+}
+
+.navScreen.close {
+    display: none;
+}
+
+.nav {
+    background-color: base.$backgroundColor;
+
+
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+
+    ul {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    li {
+        margin: 1rem 0;
+
+        a {
+            color: base.$textColor;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            transition: all .2s ease-in-out;
+
+            &::after {
+                content: '';
+                display: block;
+                width: 0;
+                height: 2px;
+                background-color: base.$textColor;
+                transition: width .2s ease-in-out;
+                
+            
+            }
+
+            
+        }
+
+        a:hover {
+            color: base.$primaryColor;
+
+            &::after {
+                width: 100%;
+                background-color: base.$primaryColor;
+            }
+        }
+    }
+
+}
+
+
+@media (min-width: 768px) {
+    .wrapper {
+        display: none;
+    }
+}
