@@ -19,7 +19,7 @@ const MainLayout: FC<MainLayoutProps> = ({children, pageTitle}) => (
       <div className={styles.Layout}>
         <header className={styles.header}>
           <Logo />
-          <NavBar/>
+          <NavBar currentPage={pageTitle}/>
         </header>
         <main className={styles.main}>
           {children}

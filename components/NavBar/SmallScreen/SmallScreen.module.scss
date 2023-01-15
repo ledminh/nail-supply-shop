@@ -111,6 +111,19 @@
                 background-color: base.$primaryColor;
             }
         }
+
+        a:focus {
+            outline: none;
+        }
+        
+        a.current {
+            color: base.$primaryColor;
+
+            &::after {
+                width: 100%;
+                background-color: base.$primaryColor;
+            }
+        }
     }
 
 }

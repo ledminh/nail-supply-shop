@@ -4,11 +4,14 @@ import styles from './LargeScreen.module.scss';
 
 import Link from 'next/link';
 
+import { LinkType } from '../../NavBar';
+
 /***************************
  *  Types
  */
 interface LargeScreenPropsType {
-
+    currentPage?: string,
+    links: LinkType[]
 } 
 
 type LargeScreenType = FunctionComponent<LargeScreenPropsType>
@@ -18,15 +21,23 @@ type LargeScreenType = FunctionComponent<LargeScreenPropsType>
 /***************************
  *  Main Component
  */
-const LargeScreen:LargeScreenType = () => {
+const LargeScreen:LargeScreenType = ({currentPage, links}) => {
+
+
 
     return (
         <nav className={styles.wrapper}>
-            <ul>
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About</Link></li>
-                <li><Link href="/shop">Shop</Link></li>
-                <li><Link href="/contact">Contact</Link></li>
+            <ul className={styles.ul}>
+                {
+                    links.map((link, index) => (
+                        <li key={index}>
+                            <Link className={currentPage === link.name? styles.current : ""} 
+                                href={link.href}>
+                                {link.name}
+                            </Link>
+                        </li>
+                    ))
+                }
             </ul>
         </nav>
     )

@@ -1,15 +1,22 @@
 import { FunctionComponent } from "react";
 
-import styles from './NavBar.module.scss';
-import Link from "next/link";
+import { GetServerSidePropsContext } from "next";
+
 import SmallScreen from "./SmallScreen";
 import LargeScreen from "./LargeScreen";
+
+
 
 /***************************
  *  Types
  */
-interface NavBarPropsType {
+export interface LinkType {
+    name: string,
+    href: string
+}
 
+interface NavBarPropsType {
+    currentPage?: string
 } 
 
 type NavBarType = FunctionComponent<NavBarPropsType>
@@ -19,14 +26,47 @@ type NavBarType = FunctionComponent<NavBarPropsType>
 /***************************
  *  Main Component
  */
-const NavBar:NavBarType = () => {
+const NavBar:NavBarType = ({currentPage}) => {
+
+
+
 
     return (
         <>
-            <SmallScreen/>
-            <LargeScreen/>
+            <SmallScreen 
+                currentPage={currentPage} 
+                links={links}
+            />
+            <LargeScreen 
+                currentPage={currentPage} 
+                links={links}
+                />
         </>
     )
 }
 
 export default NavBar;
+
+
+// data
+
+const links:LinkType[] = [
+    {
+        name: "Home",
+        href: "/"
+    },
+    {
+        name: "About",
+        href: "/about"
+    },
+    {
+        name: "Shop",
+        href: "/shop"
+    },
+    {
+        name: "Contact",
+        href: "/contact"
+    }
+]
+
+
