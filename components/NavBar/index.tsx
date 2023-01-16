@@ -1,7 +1,5 @@
 import { FunctionComponent } from "react";
 
-import { GetServerSidePropsContext } from "next";
-
 import SmallScreen from "./SmallScreen";
 import LargeScreen from "./LargeScreen";
 
@@ -10,7 +8,7 @@ import LargeScreen from "./LargeScreen";
 /***************************
  *  Types
  */
-export interface LinkType {
+interface LinkType {
     name: string,
     href: string
 }

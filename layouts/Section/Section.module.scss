@@ -1,0 +1,14 @@
+@use '../../styles/base';
+
+.Section {
+    margin-bottom: 40px;
+
+    border: 2px solid adjust-color($color: base.$backgroundColor, $lightness: -20%);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+
+
+}
