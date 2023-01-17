@@ -1,6 +1,22 @@
-import data from './data';
+import {products, categories} from './data';
 
-export type ProductType = {
+/*****************************
+ * Data Types  
+ */
+
+export type CategoryType = {
+    id: string;
+    name: string;
+    description: string;
+    imageUrl: string;
+};
+
+type CategoryInfoType = {
+    id: string;
+    name: string;
+};
+
+export type ProductSummaryType = {
     id: string;
     name: string;
     description: string;
@@ -8,17 +24,77 @@ export type ProductType = {
     imageUrl: string;
 };
 
+export type ProductType = ProductSummaryType & {
+    categoryInfo: CategoryInfoType;
+};
+
+/*****************************
+ * private functions
+ */
+
+const getCategoryInfo = (id: string):CategoryInfoType => {
+    const category = categories.find((category) => category.id === id);
+
+    if (!category) {
+        throw new Error('Category not found');
+    }
+
+    return {
+        id: category.id,
+        name: category.name,
+    }
+};
 
 
-export const getSummaryProducts = ():ProductType[] => {
-    const summaryProducts = data.map((product) => {
-        const { id, name, shortDescription, price, imageUrl } = product;
+/*****************************
+ * public functions
+ */
+
+export const getCategories = ():CategoryType[] => {
+    return categories;
+};
+
+export const getCategoryById = (id: string):CategoryType => {
+    const category = categories.find((category) => category.id === id);
+
+    if (!category) {
+        throw new Error('Category not found');
+    }
+
+    return category;
+};
+
+export const getSummaryProductsByCategoryID = (catID:string):ProductSummaryType[] => {
+    const summaryProducts = products
+                                .filter((product) => product.id === catID)
+                                .map((product) => {
+                                        const { id, name, shortDescription, price, imageUrl, categoryID } = product;
+
+                                        return {
+                                            id,
+                                            name,
+                                            price,
+                                            description: shortDescription,
+                                            imageUrl
+                                        };
+
+                                    });
+
+    return summaryProducts;
+};
+
+
+
+export const getSummaryProducts = ():ProductSummaryType[] => {
+    const summaryProducts = products.map((product) => {
+        const { id, name, shortDescription, price, imageUrl, categoryID } = product;
+
         return {
             id,
             name,
             price,
             description: shortDescription,
-            imageUrl,
+            imageUrl
         };
 
     });
@@ -27,14 +103,15 @@ export const getSummaryProducts = ():ProductType[] => {
 };
 
 export const getProducts = ():ProductType[] => {
-    return data.map((product) => {
-        const { id, name, fullDescription, price, imageUrl } = product;
+    return products.map((product) => {
+        const { id, name, fullDescription, price, imageUrl, categoryID } = product;
         return {
             id,
             name,
             price,
             description: fullDescription,
             imageUrl,
+            categoryInfo: getCategoryInfo(categoryID)
         };
     });
 };
@@ -42,7 +119,7 @@ export const getProducts = ():ProductType[] => {
 
 
 export const getProductById = (id: string):ProductType => {
-    const product = data.find((product) => product.id === id);
+    const product = products.find((product) => product.id === id);
 
     if (!product) {
         throw new Error('Product not found');
@@ -54,6 +131,7 @@ export const getProductById = (id: string):ProductType => {
         price: product.price,
         description: product.fullDescription,
         imageUrl: product.imageUrl,
+        categoryInfo: getCategoryInfo(product.categoryID)
     };
 };
 

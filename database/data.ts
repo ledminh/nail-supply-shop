@@ -1,208 +1,377 @@
-const data = [
-    {
-      id: "1",
-      name: 'Nail Polish Set',
-      shortDescription: 'A set of 12 vibrant nail polishes',
-      fullDescription: 'This set includes 12 highly pigmented and long-lasting nail polishes in a variety of shades. Perfect for both professional use and at-home manicures.',
-      price: 19.99,
-      imageUrl: '/images/001.jpg'
-    },
-    {
-      id: "2",
-      name: 'Acrylic Nail Kit',
-      shortDescription: 'Complete kit for creating acrylic nails',
-      fullDescription: 'This kit includes everything you need to create beautiful acrylic nails at home. It includes a liquid monomer, a powder polymer, a brush, and a file. With this kit, you can create salon-quality acrylic nails in the comfort of your own home.',
-      price: 29.99,
-      imageUrl: '/images/002.jpg'
-    },
-    {
-      id: "3",
-      name: 'Gel Nail Polish',
-      shortDescription: 'Long-lasting gel nail polish in a variety of shades',
-      fullDescription: 'This gel nail polish provides a long-lasting and glossy finish. The polish is easy to apply and cure under a UV lamp. It is available in a variety of shades to suit any occasion.',
-      price: 14.99,
-      imageUrl: '/images/003.jpg'
-    },
-    {
-      id: "4",
-      name: 'Nail Art Stamping Plate',
-      shortDescription: 'Stamping plate for creating intricate nail art designs',
-      fullDescription: 'This stamping plate includes a variety of intricate designs that can be used to create unique and professional-looking nail art. The plate is easy to use and can be used with any stamping polish.',
-      price: 9.99,
-      imageUrl: '/images/004.jpg'
-    },
-    {
-      id: "5",
-      name: 'Nail Buffer Block',
-      shortDescription: 'Buffer block for smoothing and shaping nails',
-      fullDescription: 'This buffer block is perfect for smoothing and shaping nails before applying polish. It can be used to file, buff, and shine nails to a natural finish.',
-      price: 3.99,
-      imageUrl: '/images/001.jpg'
-    },
-    {
-      id: "6",
-      name: 'Nail File Set',
-      shortDescription: 'Set of 6 different nail files',
-      fullDescription: 'This set includes 6 different types of nail files: coarse, medium, fine, glass, crystal, and buffer. Each file is designed for a specific purpose, allowing you to achieve a professional-looking manicure at home.',
-      price: 7.99,
-      imageUrl: '/images/002.jpg'
-    },
-    {
-      id: "7",
-      name: 'Nail Clipper Set',
-      shortDescription: 'Set of 2 clippers for finger and toe nails',
-      fullDescription: 'This set includes 2 different clippers, one for finger nails and one for toe nails. Both clippers feature precision-ground edges for clean and easy cutting.',
-      price: 5.99,
-      imageUrl: '/images/003.jpg'
-    },
-
-    {
-        id: "8",
-        name: 'Cuticle Pusher and Scraper Set',
-        shortDescription: 'Set of 2 tools for pushing and scraping cuticles',
-        fullDescription: 'This set includes 2 tools: a cuticle pusher and a cuticle scraper. Both tools are made of stainless steel and feature comfortable wooden handles. They are perfect for pushing and scraping cuticles to achieve a neat and polished look.',
-        price: 7.99,
-        imageUrl: '/images/004.jpg'
-      },
-      {
-        id: "9",
-        name: 'Nail Dryer',
-        shortDescription: 'UV nail dryer for drying gel nail polish',
-        fullDescription: 'This UV nail dryer is perfect for drying gel nail polish. It features a large lamp and a timer, allowing you to cure your nails quickly and evenly. It is easy to use and perfect for both professional and home use.',
-        price: 39.99,
-        imageUrl: '/images/001.jpg'
-      },
-      {
-        id: "10",
-        name: 'Nail Polish Remover',
-        shortDescription: 'Acetone-free nail polish remover',
-        fullDescription: 'This acetone-free nail polish remover is gentle on nails and cuticles. It effectively removes nail polish without leaving any residue. It is also infused with nourishing ingredients to keep your nails healthy.',
-        price: 7.99,
-        imageUrl: '/images/002.jpg'
-      },
-      {
-        id: "11",
-        name: 'Nail Strengthener',
-        shortDescription: 'Nail strengthener to repair and strengthen nails',
-        fullDescription: 'This nail strengthener is formulated to repair and strengthen nails. It is infused with nourishing ingredients such as keratin and calcium to promote healthy and strong nails. It can be used as a base coat or as a treatment.',
-        price: 12.99,
-        imageUrl: '/images/003.jpg'
-      },
-      {
-        id: "12",
-        name: 'Nail Art Brush Set',
-        shortDescription: 'Set of 7 brushes for creating intricate nail art designs',
-        fullDescription: 'This set includes 7 different brushes for creating intricate nail art designs. The brushes are made of high-quality synthetic fibers and have comfortable wooden handles. They are perfect for both professional and personal use.',
-        price: 14.99,
-        imageUrl: '/images/004.jpg'
-      },
-
-      {
-        id: "13",
-        name: 'Nail Sticker Set',
-        shortDescription: 'Set of various nail stickers for decorating nails',
-        fullDescription: 'This set includes a variety of nail stickers in different designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.',
-        price: 9.99,
-        imageUrl: '/images/001.jpg'
-      },
-      {
-        id: "14",
-        name: 'Nail Glitter Set',
-        shortDescription: 'Set of various nail glitters for decorating nails',
-        fullDescription: 'This set includes a variety of nail glitters in different shapes, sizes, and colors, perfect for adding sparkle and shine to any manicure. The glitters can be used alone or mixed with nail polish for a custom look.',
-        price: 14.99,
-        imageUrl: '/images/002.jpg'
-      },
-      {
-        id: "15",
-        name: 'Nail Extension Gel',
-        shortDescription: 'Gel for extending nails',
-        fullDescription: 'This extension gel is perfect for extending nails to create a longer and more elegant look. It is easy to apply and cure under a UV lamp, and can be sculpted and shaped to create any desired length or shape.',
-        price: 24.99,
-        imageUrl: '/images/003.jpg'
-      },
-      {
-        id: "16",
-        name: 'Nail Forms',
-        shortDescription: 'Nail forms for sculpting acrylic or gel nails',
-        fullDescription: 'These nail forms are perfect for sculpting acrylic or gel nails. They are easy to use and can be adjusted to fit any nail size or shape. They are also reusable, making them a cost-effective option for any salon or home use.',
-        price: 9.99,
-        imageUrl: '/images/004.jpg'
-      },
-      {
-        id: "17",
-        name: 'Nail Dipping Powder',
-        shortDescription: 'Dipping powder for creating a long-lasting manicure',
-        fullDescription: 'This dipping powder is perfect for creating a long-lasting manicure. It is applied by dipping nails into the powder, which is then cured under a UV lamp. It is available in a variety of shades and can be used to create natural or colored nails.',
-        price: 19.99,
-        imageUrl: '/images/001.jpg'
-      },
-      {
-        id: "18",
-        name: 'Nail Drill',
-        shortDescription: 'Professional nail drill for filing and shaping nails',
-        fullDescription: 'This professional nail drill is perfect for filing and shaping nails. It features a variety of attachments for different tasks such as filing, buffing, and polishing. It is easy to use and perfect for both professional and home use.',
-        price: 79.99,
-        imageUrl: '/images/002.jpg'
-      },
-
-      {
-        id: "20",
-        name: 'Nail Polish Remover Pads',
-        shortDescription: 'Pre-moistened pads for removing nail polish',
-        fullDescription: 'These pre-moistened pads make removing nail polish quick and easy. They are infused with acetone or non-acetone remover and are gentle on nails and cuticles. They are perfect for use at home or on-the-go.',
-        price: 5.99,
-        imageUrl: '/images/003.jpg'
-      },
-      {
-        id: "21",
-        name: 'Nail Art Rhinestones',
-        shortDescription: 'Rhinestones for decorating nails',
-        fullDescription: 'This set includes a variety of rhinestones in different shapes, sizes, and colors, perfect for adding sparkle and shine to any manicure. The rhinestones can be used alone or mixed with other nail art elements for a custom look.',
-        price: 7.99,
-        imageUrl: '/images/004.jpg'
-      },
-      {
-        id: "22",
-        name: 'Nail Tape',
-        shortDescription: 'Nail tape for creating geometric designs',
-        fullDescription: 'This nail tape is perfect for creating geometric designs on nails. It is easy to use and can be cut into different shapes and sizes to create unique and professional-looking designs. It is suitable for use with both natural and artificial nails.',
-        price: 4.99,
-        imageUrl: '/images/001.jpg'
-      },
-      {
-        id: "23",
-        name: 'Nail Extension Brush',
-        shortDescription: 'Brush for sculpting and shaping acrylic or gel nails',
-        fullDescription: 'This extension brush is perfect for sculpting and shaping acrylic or gel nails. It is made of high-quality synthetic fibers and has a comfortable wooden handle. It is suitable for both professional and home use.',
-        price: 7.99,
-        imageUrl: '/images/002.jpg'
-      },
-
-      {
-        id: "25",
-        name: 'Nail Art Foil',
-        shortDescription: 'Foil for creating unique nail designs',
-        fullDescription: 'This nail art foil can be used to create unique and eye-catching designs on nails. It can be cut into various shapes and sizes and applied with a foil adhesive. The foil comes in a variety of colors and patterns to suit any design.',
-        price: 6.99,
-        imageUrl: '/images/003.jpg'
-      },
-      {
-        id: "26",
-        name: 'Nail Art Stencils',
-        shortDescription: 'Stencils for creating intricate designs on nails',
-        fullDescription: 'This set of stencils includes a variety of intricate designs that can be used to create unique and professional-looking nail art. The stencils are easy to use and can be used with any nail polish or gel to create a perfect design.',
-        price: 12.99,
-        imageUrl: '/images/004.jpg'
-      },
-      {
-        id: "27",
-        name: 'Nail Art Dotting Tool',
-        shortDescription: 'Dotting tool for creating polka dots and other designs',
-        fullDescription: 'This dotting tool is perfect for creating polka dots and other designs on nails. It features two different sized tips for creating different size dots. It can be used with any nail polish or gel to create a perfect design.',
-        price: 5.99,
-        imageUrl: '/images/001.jpg'
-      },
+export const products = [
+  {
+    id: '1',
+    categoryID: '1',
+    name: 'Red Nail Polish',
+    shortDescription: 'Classic red nail polish',
+    fullDescription: 'This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.',
+    price: 5.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '2',
+    categoryID: '1',
+    name: 'Glitter Nail Polish',
+    shortDescription: 'Glitter nail polish for adding sparkle to your nails',
+    fullDescription: 'This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.',
+    price: 6.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '3',
+    categoryID: '2',
+    name: 'Nail Clipper',
+    shortDescription: 'Stainless steel nail clipper for trimming nails',
+    fullDescription: 'This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.',
+    price: 3.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '4',
+    categoryID: '3',
+    name: 'Nail Art Stickers',
+    shortDescription: 'Nail art stickers for decorating nails',
+    fullDescription: 'This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.',
+    price: 4.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '5',
+    categoryID: '4',
+    name: 'Acrylic Nail Kit',
+    shortDescription: 'Kit for sculpting and extending nails with acrylic',
+    fullDescription: 'This acrylic nail kit is perfect for sculpting and extending nails. It includes a liquid monomer, a powder polymer, and a nail brush for creating a perfect acrylic overlay. It also includes a file and buffer for shaping and smoothing nails.',
+    price: 19.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '6',
+    categoryID: '5',
+    name: 'Cuticle Oil',
+    shortDescription: 'Cuticle oil for nourishing and moisturizing cuticles',
+    fullDescription: 'This cuticle oil is perfect for nourishing and moisturizing cuticles. It is enriched with natural oils such as jojoba and sweet almond oil, which will keep your cuticles healthy and prevent them from cracking or splitting. It can be used daily for best results.',
+    price: 7.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '7',
+    categoryID: '5',
+    name: 'Nail Strengthener',
+    shortDescription: 'Nail strengthener for reinforcing weak nails',
+    fullDescription: 'This nail strengthener is perfect for reinforcing weak nails. It is formulated with ingredients such as keratin and biotin, which will strengthen and fortify nails. It can be used as a base coat or as a standalone treatment.',
+    price: 9.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '8',
+    categoryID: '2',
+    name: 'Cuticle Pusher',
+    shortDescription: 'Stainless steel cuticle pusher for pushing back cuticles',
+    fullDescription: 'This stainless steel cuticle pusher is perfect for pushing back cuticles. It features a pointed tip for precision and a flat end for pushing. It also has a built-in spoon for removing dead skin. It is suitable for use on both natural and artificial nails.',
+    price: 2.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '9',
+    categoryID: '4',
+    name: 'Gel Nail Kit',
+    shortDescription: 'Kit for sculpting and extending nails with gel',
+    fullDescription: 'This gel nail kit is perfect for sculpting and extending nails. It includes a gel base coat, a gel top coat, and a UV lamp for curing the gel. It also includes a file and buffer for shaping and smoothing nails.',
+    price: 34.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '10',
+    categoryID: '3',
+    name: 'Nail Art Brush Set',
+    shortDescription: 'Brush set for creating intricate nail designs',
+    fullDescription: 'This brush set includes a variety of brushes for creating intricate nail designs. The set includes brushes for fine lines, shading, and detailing. The brushes are made of high-quality synthetic fibers and have comfortable wooden handles.',
+    price: 14.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '11',
+    categoryID: '1',
+    name: 'French Manicure Kit',
+    shortDescription: 'Kit for creating a French manicure',
+    fullDescription: 'This French manicure kit includes everything you need to create a classic French manicure. It includes a white nail polish for the tips, a pink nail polish for the base, and a top coat for a glossy finish. It also includes a guide for creating the perfect French manicure.',
+    price: 14.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '12',
+    categoryID: '2',
+    name: 'Nail File',
+    shortDescription: 'Glass nail file for shaping and smoothing nails',
+    fullDescription: 'This glass nail file is perfect for shaping and smoothing nails. It is made of high-quality glass, making it long-lasting and durable. It is also gentle on nails and will not cause any damage. It can be used on both natural and artificial nails.',
+    price: 5.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '13',
+    categoryID: '3',
+    name: 'Nail Art Stamping Kit',
+    shortDescription: 'Kit for creating stamped nail designs',
+    fullDescription: 'This nail art stamping kit includes everything you need to create stamped nail designs. It includes a stamping plate with a variety of designs, a stamping polish, and a stamper. The kit also includes a guide for creating the perfect stamped design.',
+    price: 19.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '14',
+    categoryID: '4',
+    name: 'Nail Forms',
+    shortDescription: 'Nail forms for sculpting and extending nails',
+    fullDescription: 'These nail forms are perfect for sculpting and extending nails. They are made of a flexible and durable material that can be easily shaped to fit any nail. They can be used with any nail enhancement product and are suitable for both professional and home use.',
+    price: 9.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '15',
+    categoryID: '5',
+    name: 'Nail Repair Serum',
+    shortDescription: 'Serum for repairing damaged nails',
+    fullDescription: 'This nail repair serum is perfect for repairing damaged nails. It is formulated with ingredients such as keratin and biotin, which will strengthen and fortify nails. It can be used as a base coat or as a standalone treatment, it will help to prevent nails from cracking or splitting.',
+    price: 12.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '16',
+    categoryID: '1',
+    name: 'Matte Top Coat',
+    shortDescription: 'Matte top coat for creating a matte finish',
+    fullDescription: 'This matte top coat is perfect for creating a matte finish on your nails. It can be used over any nail polish to give it a matte finish. The long-lasting formula will keep your nails looking beautiful and matte.',
+    price: 7.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '17',
+    categoryID: '2',
+    name: 'Nail Scissors',
+    shortDescription: 'Stainless steel scissors for trimming nails',
+    fullDescription: 'These stainless steel scissors are perfect for trimming nails. They feature sharp and precise cutting edges for a clean cut every time. They are also suitable for use on both natural and artificial nails.',
+    price: 4.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '18',
+    categoryID: '3',
+    name: 'Nail Art Rhinestones',
+    shortDescription: 'Rhinestones for adding sparkle to your nails',
+    fullDescription: 'These rhinestones are perfect for adding sparkle to your nails. They come in a variety of sizes and colors, making them suitable for any nail design. They are easy to apply and can be used with any nail polish or gel.',
+    price: 6.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '19',
+    categoryID: '4',
+    name: 'Polygel Nail Kit',
+    shortDescription: 'Kit for sculpting and extending nails with polygel',
+    fullDescription: 'This polygel nail kit is perfect for sculpting and extending nails. It includes a polygel base, a polygel top coat, and a UV lamp for curing the gel. It also includes a file and buffer for shaping and smoothing nails.',
+    price: 24.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '20',
+    categoryID: '5',
+    name: 'Hand Cream',
+    shortDescription: 'Hand cream for moisturizing and nourishing hands',
+    fullDescription: 'This hand cream is perfect for moisturizing and nourishing hands. It is formulated with natural ingredients such as shea butter and vitamin E, which will leave your hands feeling soft and smooth. It can be used daily for best results.',
+    price: 8.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '21',
+    categoryID: '1',
+    name: 'Holographic Nail Polish',
+    shortDescription: 'Nail polish with holographic effect',
+    fullDescription: 'This nail polish is perfect for adding a holographic effect to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The holographic particles are fine and will not fall off easily.',
+    price: 8.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '22',
+    categoryID: '2',
+    name: 'Nail Buffer',
+    shortDescription: 'Buffer for smoothing and shining nails',
+    fullDescription: 'This buffer is perfect for smoothing and shining nails. It has four different surfaces for filing, buffing, shining, and smoothing nails. It can be used on both natural and artificial nails.',
+    price: 3.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '24',
+    categoryID: '4',
+    name: 'Nail Extension Glue',
+    shortDescription: 'Glue for attaching artificial nails',
+    fullDescription: 'This nail extension glue is perfect for attaching artificial nails. It is strong and long-lasting, ensuring that your artificial nails stay securely in place. It dries quickly and can be used with any type of artificial nails.',
+    price: 7.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '25',
+    categoryID: '5',
+    name: 'Nail Growth Serum',
+    shortDescription: 'Serum for promoting nail growth',
+    fullDescription: 'This nail growth serum is perfect for promoting nail growth. It is formulated with ingredients such as biotin and keratin, which will strengthen and nourish nails. It can be used as a base coat or as a standalone treatment to help nails grow faster.',
+    price: 12.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '27',
+    categoryID: '2',
+    name: 'Nail Clipper',
+    shortDescription: 'Stainless steel clipper for trimming nails',
+    fullDescription: 'This stainless steel clipper is perfect for trimming nails. It features sharp cutting edges for a clean cut every time. It also has a built-in file for shaping and smoothing nails. It is suitable for use on both natural and artificial nails.',
+    price: 4.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '28',
+    categoryID: '3',
+    name: 'Nail Art Stencils',
+    shortDescription: 'Stencils for creating intricate nail designs',
+    fullDescription: 'These stencils are perfect for creating intricate nail designs. They come in a variety of shapes and patterns, making them suitable for any nail design. They are easy to use and can be used with any nail polish or gel.',
+    price: 7.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '29',
+    categoryID: '4',
+    name: 'Nail Tips',
+    shortDescription: 'Nail tips for sculpting and extending nails',
+    fullDescription: 'These nail tips are perfect for sculpting and extending nails. They are made of a durable and flexible material that can be easily shaped to fit any nail. They can be used with any nail enhancement product and are suitable for both professional and home use.',
+    price: 14.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '30',
+    categoryID: '5',
+    name: 'Hand Scrub',
+    shortDescription: 'Hand scrub for exfoliating and moisturizing hands',
+    fullDescription: 'This hand scrub is perfect for exfoliating and moisturizing hands. It is formulated with natural ingredients such as sugar and coconut oil, which will leave your hands feeling soft and smooth. It can be used weekly for best results.',
+    price: 9.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '31',
+    categoryID: '1',
+    name: 'Nail Art Brush Set',
+    shortDescription: 'Set of brushes for creating intricate nail designs',
+    fullDescription: 'This set of brushes is perfect for creating intricate nail designs. It includes brushes of different sizes and shapes for fine detailing and overall coverage. They are easy to use and can be used with any nail polish or gel.',
+    price: 14.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '32',
+    categoryID: '2',
+    name: 'Nail Drill',
+    shortDescription: 'Electric nail drill for shaping and smoothing nails',
+    fullDescription: 'This electric nail drill is perfect for shaping and smoothing nails. It has a variety of attachments for different nail shaping and smoothing tasks. It is suitable for use on both natural and artificial nails and is suitable for both professional and home use.',
+    price: 34.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '33',
+    categoryID: '3',
+    name: 'Nail Art Foil',
+    shortDescription: 'Foil for creating metallic nail designs',
+    fullDescription: 'This nail art foil is perfect for creating metallic nail designs. It comes in a variety of colors and can be used with any nail polish or gel. It is easy to apply and will give a metallic finish to any nail design.',
+    price: 8.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '34',
+    categoryID: '4',
+    name: 'Acrylic Nail Powder',
+    shortDescription: 'Acrylic powder for sculpting and extending nails',
+    fullDescription: 'This acrylic powder is perfect for sculpting and extending nails. It can be mixed with liquid to create a paste for sculpting and extending nails. It is suitable for use on both natural and artificial nails and is suitable for both professional and home use.',
+    price: 19.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '35',
+    categoryID: '5',
+    name: 'Nail Cuticle Oil',
+    shortDescription: 'Oil for moisturizing and nourishing cuticles',
+    fullDescription: 'This cuticle oil is perfect for moisturizing and nourishing cuticles. It is formulated with natural ingredients such as jojoba oil and vitamin E, which will leave your cuticles looking healthy and hydrated. It can be used daily for best results.',
+    price: 9.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '36',
+    categoryID: '1',
+    name: 'Nail Art Stickers',
+    shortDescription: 'Stickers for decorating nails',
+    fullDescription: 'These stickers are perfect for decorating nails. They come in a variety of designs and patterns, making them suitable for any nail design. They are easy to apply and can be used with any nail polish or gel.',
+    price: 5.99,
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '37',
+    categoryID: '2',
+    name: 'Nail File',
+    shortDescription: 'File for shaping and smoothing nails',
+    fullDescription: 'This file is perfect for shaping and smoothing nails. It has different surfaces for filing, buffing, shining, and smoothing nails. It can be used on both natural and artificial nails and is suitable for both professional and home use.',
+    price: 2.99,
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '38',
+    categoryID: '3',
+    name: 'Nail Art Glitter',
+    shortDescription: 'Glitter for adding sparkle to your nails',
+    fullDescription: 'This glitter is perfect for adding sparkle to your nails. It comes in a variety of colors and can be used with any nail polish or gel. It is easy to apply and will give a sparkle finish to any nail design.',
+    price: 4.99,
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '39',
+    categoryID: '4',
+    name: 'Gel Nail Kit',
+    shortDescription: 'Kit for sculpting and extending nails with gel',
+    fullDescription: 'This gel nail kit is perfect for sculpting and extending nails. It includes a gel base, a gel top coat, and a UV lamp for curing the gel. It also includes a file and buffer for shaping and smoothing nails. It is suitable for both professional and home use.',
+    price: 29.99,
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '40',
+    categoryID: '5',
+    name: 'Hand Lotion',
+    shortDescription: 'Lotion for moisturizing and nourishing hands',
+    fullDescription: 'This hand lotion is perfect for moisturizing and nourishing hands. It is formulated with natural ingredients such as cocoa butter and vitamin E, which will leave your hands feeling soft and smooth. It can be used daily for best results.',
+    price: 7.99,
+    imageUrl: '/images/002.jpg'
+  }
 ]
 
-export default data;
+export const categories  = [
+  {
+    id: '1',
+    name: 'Nail Polish',
+    description: 'A wide variety of nail polishes in different shades and finishes',
+    imageUrl: '/images/001.jpg'
+  },
+  {
+    id: '2',
+    name: 'Nail Tools',
+    description: 'Essential tools for shaping and maintaining nails',
+    imageUrl: '/images/002.jpg'
+  },
+  {
+    id: '3',
+    name: 'Nail Art',
+    description: 'Decorations and embellishments for creating unique nail designs',
+    imageUrl: '/images/003.jpg'
+  },
+  {
+    id: '4',
+    name: 'Nail Extensions',
+    description: 'Products for extending and sculpting nails',
+    imageUrl: '/images/004.jpg'
+  },
+  {
+    id: '5',
+    name: 'Nail Care',
+    description: 'Products for maintaining the health and appearance of nails',
+    imageUrl: '/images/001.jpg'
+  }
+]
