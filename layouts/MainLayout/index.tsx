@@ -24,7 +24,7 @@ const MainLayout: FC<MainLayoutProps> = ({children, pageTitle}) => (
         <main className={styles.main}>
           {children}
         </main>
-        <footer>
+        <footer className={styles.footer}>
           <p>&copy; {(new Date()).getFullYear()} Nail Supply Shop</p>
         </footer>
       </div>

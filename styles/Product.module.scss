@@ -1,0 +1,77 @@
+@use '../styles/base';
+
+.wrapper {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+
+}
+
+.name, .image, .description, .price, .checkout {
+    grid-column: 1/3;
+}
+
+
+
+.image {
+    position: relative;
+    height: 350px;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.description {
+    h4 {
+        margin-bottom: 10px;
+        border-bottom: 1.5px solid adjust-color($color: base.$backgroundColor,  $lightness: -15%);
+    }
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.checkout {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: base.$primaryColor;
+        color: #ffffff;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+
+        transition: all 0.2s;
+
+        &:hover {
+            background-color: adjust-color($color: base.$primaryColor, $lightness: -10%);
+        }
+
+        &:active {
+            background-color: adjust-color($color: base.$primaryColor, $lightness: -30%);
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .image {
+        grid-column: 1/2;
+    }
+
+    .description, .price, .checkout {
+        grid-column: 2/3;
+    }
+}

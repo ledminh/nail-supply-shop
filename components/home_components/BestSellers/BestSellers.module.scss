@@ -1,0 +1,98 @@
+@use '../../../styles/base';
+
+.h3 {
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: -20%);
+
+    padding-left: 10px;
+}
+
+.ul {
+    padding: 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    li { // responsive mobile first
+        position: relative;
+        width: 100%;
+        height: 150px;
+        margin-bottom: 10px;
+
+        border-radius: 10px;
+        overflow: hidden;
+
+
+        .image {
+            z-index: -1;
+
+            
+            transition: all 0.3s;
+        }
+        
+        .text {
+            background-color: adjust-color($color: #000000, $alpha: -0.2);
+        
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        
+            padding: 20px;
+        
+            text-align: center;
+        
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        
+            color: #ffffff;
+
+            transition: all 0.3s;
+
+        }
+        
+    
+        &:hover {
+            .image {
+                transform: scale(1.2);
+            }
+    
+            .text {
+                background-color: adjust-color($color: #000000, $alpha: -0.6);
+            }
+        }
+    }
+
+
+}
+
+
+
+
+
+.name {
+    margin-bottom: 14px;
+}
+
+
+@media (min-width: 768px) {
+    .ul {
+        li {
+            width: 48%;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .ul {
+        li {
+            
+            height: 350px;
+            width: 23%;
+        }
+
+    }
+}
