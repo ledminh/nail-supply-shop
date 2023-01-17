@@ -8,13 +8,13 @@ import Image001JPG from '../../assets/images/samples/001.jpg';
 import styles from '../../styles/Product.module.scss';
 
 interface ProductDetailProps {
-  product: {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    imageUrl: string;
-  }
+    product: {
+        id: number;
+        name: string;
+        description: string;
+        price: number;
+        imageUrl: string;
+    }
 }
 
 const Product = ({ product }: ProductDetailProps) => {
@@ -45,15 +45,15 @@ const Product = ({ product }: ProductDetailProps) => {
 }
 
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
-  const { id } = context.query;
+    const { id } = context.query;
   
-  return {
-    props: {
-      product: {
-        id: id
-      }
-    },
-  };
+    return {
+        props: {
+            product: {
+                id: id
+            }
+        },
+    };
 }
 
 export default Product;
