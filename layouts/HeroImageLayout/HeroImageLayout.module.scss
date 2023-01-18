@@ -6,7 +6,7 @@
 
     overflow: hidden;
 
-    margin-bottom: 40px;
+    margin: 40px 0;
 
 }
 
@@ -21,9 +21,30 @@
     flex-flow: row wrap;
     
     justify-content: center;
-    align-content: center;
+    align-content: space-between;
+
+    // linear gradient
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0.2) 100%);
+
+
+
+    padding: 30px;
 
 }
+
+
+.header {
+    flex-basis: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+
+    justify-content: space-between;
+    align-items: center;
+
+
+
+}
+
 
 .wrapper.mobile {
     display: block;

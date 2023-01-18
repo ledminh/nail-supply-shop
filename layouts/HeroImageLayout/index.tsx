@@ -4,6 +4,9 @@ import styles from './HeroImageLayout.module.scss';
 
 import Image, { StaticImageData } from "next/image";
 
+import Logo from '../../components/Logo';
+import NavBar from '../../components/NavBar';
+
 /***************************
  * Type 
  */
@@ -54,7 +57,13 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     placeholder='blur'
                 />
                 <div className={styles.content}>
-                    {children}
+                    <header className={styles.header}>
+                        <Logo />
+                        <NavBar currentPage="Home"/>
+                    </header>
+                    <div className={styles.body}>
+                        {children}
+                    </div>
                 </div>
             </section>
 
@@ -73,8 +82,14 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     sizes="1280px"
                     placeholder='blur'
                 />
-                <div className={styles.content}>
-                    {children}
+                 <div className={styles.content}>
+                    <header className={styles.header}>
+                        <Logo />
+                        <NavBar currentPage="Home"/>
+                    </header>
+                    <div className={styles.body}>
+                        {children}
+                    </div>
                 </div>
             </section>
 
@@ -94,7 +109,13 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     placeholder='blur'
                 />
                 <div className={styles.content}>
-                    {children}
+                    <header className={styles.header}>
+                        <Logo />
+                        <NavBar currentPage="Home"/>
+                    </header>
+                    <div className={styles.body}>
+                        {children}
+                    </div>
                 </div>
             </section>
         </>
