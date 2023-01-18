@@ -1,34 +1,36 @@
-import { SummaryType } from "../../types";
-import clientPromise from "./mongodb";
+// import { SummaryType } from "../../types";
+// import clientPromise from "./mongodb";
 
 
 
 async function getDatabase(dbName:string) {
-    const client = await clientPromise;
-    return client.db(dbName);
+    // const client = await clientPromise;
+    // return client.db(dbName);
 }
 
 
 async function getCollection(dbName:string, collectionName:string) {
-    const db = await getDatabase(dbName);
-    return db.collection(collectionName);
+    // const db = await getDatabase(dbName);
+    // return db.collection(collectionName);
 }   
 
-export async function getPlans(userId:string):Promise<SummaryType[]> {
-    const plansCollection = await getCollection("coffee_roaster", "user_plans");
+//export async function getPlans(userId:string):Promise<SummaryType[]>
 
-    if(!plansCollection) {
-        return [];
-    }
+export async function getPlans(userId:string) {
+    // const plansCollection = await getCollection("coffee_roaster", "user_plans");
 
-    const plans = await plansCollection.findOne({userId});
+    // if(!plansCollection) {
+    //     return [];
+    // }
 
-    if(!plans) {
-        return [];
-    }
+    // const plans = await plansCollection.findOne({userId});
+
+    // if(!plans) {
+    //     return [];
+    // }
 
 
 
-    return plans.plans as SummaryType[];
+    // return plans.plans as SummaryType[];
 
 }
