@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { getProducts, getSummaryProductsByCategoryID, ProductSummaryType } from "../database";
+import { getSummaryProducts, getSummaryProductsByCategoryID, ProductSummaryType } from "../database";
 
 export const useData = (initProducts:ProductSummaryType[]) => {
     const [products, setProducts] = useState(initProducts);
@@ -12,7 +12,7 @@ export const useData = (initProducts:ProductSummaryType[]) => {
         if (selectedCategoryID) {
         setProducts(getSummaryProductsByCategoryID(selectedCategoryID));
         } else {
-        setProducts(getProducts());
+        setProducts(getSummaryProducts());
         }
     }, [selectedCategoryID]);
 

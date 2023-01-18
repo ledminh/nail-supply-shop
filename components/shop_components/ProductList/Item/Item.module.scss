@@ -35,12 +35,12 @@
     padding-bottom: 20px;
 
     // linear gradient from transparent to black from left to right
-    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 150%);
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 100%);
 
     
 
     &:hover {
-        background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 150%);
+        background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
     }
 }
 
@@ -49,6 +49,14 @@
 @media (min-width: 768px) {
     .wrapper {
         height: 200px;
+    }
+
+    .body {
+        background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 100%);
+
+        &:hover {
+            background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+        }
     }
 }
 
