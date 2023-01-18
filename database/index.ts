@@ -66,9 +66,9 @@ export const getCategoryById = (id: string):CategoryType => {
 
 export const getSummaryProductsByCategoryID = (catID:string):ProductSummaryType[] => {
     const summaryProducts = products
-                                .filter((product) => product.id === catID)
+                                .filter((product) => product.categoryID === catID)
                                 .map((product) => {
-                                        const { id, name, shortDescription, price, imageUrl, categoryID } = product;
+                                        const { id, name, shortDescription, price, imageUrl } = product;
 
                                         return {
                                             id,

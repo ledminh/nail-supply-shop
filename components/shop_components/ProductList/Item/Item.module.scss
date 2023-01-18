@@ -1,0 +1,69 @@
+@use '../../../../styles/base';
+
+.wrapper {
+    position: relative;
+
+    height: 150px;
+
+    margin-bottom: 30px;
+
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.image {
+    z-index: -1;
+
+
+}
+.body {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    color: rgb(196, 196, 196);
+
+    padding-left: 10px;
+    padding-bottom: 20px;
+
+    // linear gradient from transparent to black from left to right
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 150%);
+
+    
+
+    &:hover {
+        background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 150%);
+    }
+}
+
+// responsive mobile first
+
+@media (min-width: 768px) {
+    .wrapper {
+        height: 200px;
+    }
+}
+
+@media (min-width: 992px) {
+    .wrapper {
+        height: 250px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .wrapper {
+        height: 300px;
+    }
+}
+
+
+
+
