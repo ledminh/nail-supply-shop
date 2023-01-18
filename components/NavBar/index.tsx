@@ -8,7 +8,7 @@ import LargeScreen from "./LargeScreen";
 /***************************
  *  Types
  */
-interface LinkType {
+export interface LinkType {
     name: string,
     href: string
 }
