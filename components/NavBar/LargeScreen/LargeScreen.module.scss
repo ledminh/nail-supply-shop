@@ -2,6 +2,26 @@
 
 .wrapper {
     display: none;
+
+    position: relative;
+
+    padding: .3rem 1rem;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        background-color: adjust-color($color: black, $alpha: -.4);
+    }
 }
 
 
@@ -38,7 +58,7 @@
                 font-size: 1.2rem;
                 font-weight: 500;
 
-                color: base.$primaryColor;
+                color: base.$tertiaryColor;
 
 
                 transition: all .2s ease-in-out;

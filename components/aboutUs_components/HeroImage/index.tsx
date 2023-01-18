@@ -38,10 +38,8 @@ const HeroImage:HeroImageType = () => {
             }}
             altText="Nails on a white blanket"  
         >
-            <div className={styles.HeroImage}>
-                <h1 className={styles.h1}>About Us</h1>
-                <p className={styles.p}>Our team, our misson, and our values.</p>
-            </div>
+            <h1 className={styles.h1}>About Us</h1>
+            <p className={styles.p}>Our team, our misson, and our values.</p>
         </HeroImageLayout>
     )
 }
