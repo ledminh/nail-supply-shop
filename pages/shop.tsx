@@ -7,6 +7,7 @@ import styles from '../styles/Shop.module.scss';
 import { useData } from '../hooks/shop';
 import ProductList from '../components/shop_components/ProductList';
 import HeroImage from '../components/shop_components/HeroImage';
+import SideBar from '../components/shop_components/SideBar';
 
 
 interface ShopProps {
@@ -21,14 +22,21 @@ const Shop: FC<ShopProps> = ({categories, initProducts}) => {
   return (
     <div className={styles.wrapper}>
       <HeroImage />
-
-      <SelectionPanel
-        categories={categories}
-        onChange={handleCategoryChange}
-      />
-
-      <div className={styles.products}>
-        <ProductList products={products}/>
+      <div className={styles.body}>
+        <div className={styles.selectionPanel}>
+          <SelectionPanel
+            categories={categories}
+            onChange={handleCategoryChange}
+          />
+        </div>
+        <div className={styles.sideBar}>
+          <SideBar
+            categories={categories}
+          />
+        </div>
+        <div className={styles.products}>
+          <ProductList products={products}/>
+        </div>
       </div>
     </div>
   )

@@ -34,3 +34,8 @@
 
     background-color: adjust-color($color: base.$backgroundColor, $lightness: 7%);
 }
+
+.select:focus {
+    outline: none;
+}
+

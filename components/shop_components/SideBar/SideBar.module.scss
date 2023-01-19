@@ -1,0 +1,12 @@
+@use '../../../styles/base';
+
+.wrapper {
+    width: 90%;
+
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid adjust-color($color: base.$backgroundColor, $lightness: -30%);
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: 5%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+}

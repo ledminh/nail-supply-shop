@@ -1,0 +1,65 @@
+@use 'base';
+
+.body {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+}
+
+.selectionPanel {
+    display: block;
+
+    width: 100%;
+}
+
+.products {
+    width: 100%;
+}
+
+.sideBar {
+    display: none;
+}
+
+
+
+
+@media (min-width: base.$breakpointMobile) {
+    .body {
+
+        flex-direction: row;
+
+        align-items: flex-start;
+
+
+
+    }
+
+    .selectionPanel {
+        display: none;
+    }
+
+    .sideBar {
+
+        display: flex;
+
+        flex-flow: row wrap;
+
+        justify-content: flex-start;
+
+        flex-basis: 30%;
+
+        position: sticky;
+
+        top: 80px;
+
+    }
+
+    .products {
+        flex-basis: 70%;
+    }
+}
