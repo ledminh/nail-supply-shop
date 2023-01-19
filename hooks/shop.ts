@@ -8,7 +8,6 @@ export const useData = (initProducts:ProductSummaryType[]) => {
     const [selectedCategoryID, setSelectedCategoryID] = useState<string|null>(null);
 
     useEffect(() => {
-
         if (selectedCategoryID) {
         setProducts(getSummaryProductsByCategoryID(selectedCategoryID));
         } else {
@@ -17,15 +16,16 @@ export const useData = (initProducts:ProductSummaryType[]) => {
     }, [selectedCategoryID]);
 
     const handleCategoryChange = (catID: string) => {
-        if (catID === 'title') {
-        setSelectedCategoryID(null);
+        if (catID === 'CAT/ALL') {
+            setSelectedCategoryID(null);
         } else {
-        setSelectedCategoryID(catID);
+            setSelectedCategoryID(catID);
         }
     }
 
     return {
         products,
-        handleCategoryChange
+        handleCategoryChange,
+        selectedCategoryID
     };
 }

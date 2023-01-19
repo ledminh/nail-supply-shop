@@ -17,7 +17,7 @@ interface ShopProps {
 
 const Shop: FC<ShopProps> = ({categories, initProducts}) => {
   
-  const { products, handleCategoryChange } = useData(initProducts);
+  const { products, handleCategoryChange, selectedCategoryID } = useData(initProducts);
 
   return (
     <div className={styles.wrapper}>
@@ -32,6 +32,8 @@ const Shop: FC<ShopProps> = ({categories, initProducts}) => {
         <div className={styles.sideBar}>
           <SideBar
             categories={categories}
+            selectedCategoryID={selectedCategoryID}
+            handleCategoryChange={handleCategoryChange}
           />
         </div>
         <div className={styles.products}>
