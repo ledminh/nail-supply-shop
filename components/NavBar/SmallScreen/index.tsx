@@ -36,7 +36,13 @@ const SmallScreen:SmallScreenType = ({currentPage, links}) => {
                 onClick={handleToggleNav}
             >
                 {
-                    isNavOpen? <CloseSVG/> :<HamburgerSVG/>
+                    isNavOpen? 
+                        <CloseSVG
+                            stroke="black"
+                        /> :
+                        <HamburgerSVG
+                            stroke="#f2ddd6"
+                            />
                 }
             </button>
             <div className={`${styles.navScreen} ${isNavOpen? styles['open'] : styles['close']}`}>
