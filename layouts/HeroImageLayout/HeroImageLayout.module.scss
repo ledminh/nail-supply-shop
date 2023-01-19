@@ -24,6 +24,7 @@
     
     
     p {
+        display: none;
         color: base.$backgroundColor;
         font-weight: 600;
 
@@ -81,7 +82,12 @@
 }
 
 @media screen and (min-width: 700px) {
-    
+    .wrapper {
+        p {
+            display: block;
+        }
+    }
+
     .wrapper.mobile {
         display: none;
     }
