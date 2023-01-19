@@ -2,9 +2,9 @@ import { FunctionComponent } from "react";
 
 import styles from './HeroImage.module.scss';
 
-import heroImageDesktop from '../../../assets/images/desktop/hero-image.jpg';
-import heroImageMobile from '../../../assets/images/mobile/hero-image.jpg';
-import heroImageTablet from '../../../assets/images/tablet/hero-image.jpg';
+import nailPolishDesktop from '../../../assets/images/desktop/nail-polish.jpg';
+import nailPolishMobile from '../../../assets/images/mobile/nail-polish.jpg';
+import nailPolishTablet from '../../../assets/images/tablet/nail-polish.jpg';
 
 import HeroImageLayout from '../../../layouts/HeroImageLayout';
 
@@ -27,14 +27,14 @@ const HeroImage:HeroImageType = () => {
     return (
         <HeroImageLayout
             images={{
-            mobile: heroImageMobile,
-            tablet: heroImageTablet,
-            desktop: heroImageDesktop
+            mobile: nailPolishMobile,
+            tablet: nailPolishTablet,
+            desktop: nailPolishDesktop
             }}
             altText="Nails on a white blanket"  
         >
-            <h1 className={styles.h1}>Nail Supply</h1>
-            <p className={styles.p}>We offer a wide selection of nail products, including polishes, tools, and accessories.</p>
+            <h1 className={styles.h1}>SHOP</h1>
+            <p className={styles.p}>Achieve Professional-Level Style with Top-Notch Nail Supplies!</p>
         </HeroImageLayout>
     )
 }

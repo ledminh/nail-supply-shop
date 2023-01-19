@@ -6,6 +6,7 @@ import styles from '../styles/Shop.module.scss';
 
 import { useData } from '../hooks/shop';
 import ProductList from '../components/shop_components/ProductList';
+import HeroImage from '../components/shop_components/HeroImage';
 
 
 interface ShopProps {
@@ -19,7 +20,7 @@ const Shop: FC<ShopProps> = ({categories, initProducts}) => {
 
   return (
     <div className={styles.wrapper}>
-      <h2>Products</h2>
+      <HeroImage />
 
       <SelectionPanel
         categories={categories}
