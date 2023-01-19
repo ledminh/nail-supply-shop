@@ -27,9 +27,9 @@ const HeroImage:HeroImageType = () => {
     return (
         <HeroImageLayout
             heights={{
-            mobile: '150px',
-            tablet: '200px',
-            desktop: '300px'
+            mobile: '220px',
+            tablet: '270px',
+            desktop: '370px'
             }}
             images={{
             mobile: heroImageMobile,
@@ -38,7 +38,6 @@ const HeroImage:HeroImageType = () => {
             }}
             altText="Nails on a white blanket"  
         >
-            <h3 className={styles.h2}>Welcome to</h3>
             <h1 className={styles.h1}> Nail Supply Shop</h1>
             <p className={styles.p}>We offer a wide selection of nail products, including polishes, tools, and accessories.</p>
         </HeroImageLayout>

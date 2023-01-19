@@ -57,10 +57,6 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     placeholder='blur'
                 />
                 <div className={styles.content}>
-                    <header className={styles.header}>
-                        <Logo />
-                        <NavBar currentPage="Home"/>
-                    </header>
                     <div className={styles.body}>
                         {children}
                     </div>
@@ -83,10 +79,6 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     placeholder='blur'
                 />
                  <div className={styles.content}>
-                    <header className={styles.header}>
-                        <Logo />
-                        <NavBar currentPage="Home"/>
-                    </header>
                     <div className={styles.body}>
                         {children}
                     </div>
@@ -109,10 +101,6 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                     placeholder='blur'
                 />
                 <div className={styles.content}>
-                    <header className={styles.header}>
-                        <Logo />
-                        <NavBar currentPage="Home"/>
-                    </header>
                     <div className={styles.body}>
                         {children}
                     </div>

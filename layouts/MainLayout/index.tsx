@@ -17,7 +17,10 @@ const MainLayout: FC<MainLayoutProps> = ({children, pageTitle}) => (
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.Layout}>
-        
+        <header className={styles.header}>
+          <Logo />
+          <NavBar currentPage="Home"/>
+        </header>
         <main className={styles.main}>
           {children}
         </main>

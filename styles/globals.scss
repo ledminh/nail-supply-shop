@@ -56,7 +56,7 @@ h4 {
 
 // make font size responsive mobile first
 
-@media (min-width: 768px) {
+@media (min-width: base.$breakpointMobile) {
   h1 {
     font-size: 4rem;
   }
@@ -73,7 +73,7 @@ h4 {
 
 // make font size responsive mobile first
 
-@media (min-width: 1024px) {
+@media (min-width: base.$breakpointTablet) {
   h1 {
     font-size: 5rem;
   }
