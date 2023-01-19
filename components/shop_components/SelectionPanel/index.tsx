@@ -24,7 +24,7 @@ const SelectionPanel:SelectionPanelType = ({categories, onChange}) => {
 
     return (
         <div className={styles.wrapper}>
-            <select onChange={(e) => onChange(e.target.value)}>
+            <select className={styles.select} onChange={(e) => onChange(e.target.value)}>
                 <option key='title' value="title" selected>Category</option>
                 {categories.map((category) => (
                     <option key={category.id} value={category.id}>{category.name}</option>
