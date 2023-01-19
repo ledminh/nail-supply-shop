@@ -26,7 +26,7 @@ const Item:ItemType = ({product}) => {
 
     return (
         <div className={styles.wrapper}>
-            <Link href={`/shop/${product.id}`}>
+            <Link href={`/product/${product.id}`}>
                 <Image
                     className={styles.image}
                     src={product.imageUrl}
