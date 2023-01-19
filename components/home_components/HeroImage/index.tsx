@@ -26,11 +26,6 @@ const HeroImage:HeroImageType = () => {
 
     return (
         <HeroImageLayout
-            heights={{
-            mobile: '220px',
-            tablet: '270px',
-            desktop: '370px'
-            }}
             images={{
             mobile: heroImageMobile,
             tablet: heroImageTablet,

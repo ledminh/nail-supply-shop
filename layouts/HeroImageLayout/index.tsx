@@ -10,11 +10,7 @@ import NavBar from '../../components/NavBar';
 /***************************
  * Type 
  */
-type HeightsType = {
-    mobile: string,
-    tablet: string,
-    desktop: string
-}
+
 
 type ImagesType = {
     mobile: StaticImageData,
@@ -23,7 +19,6 @@ type ImagesType = {
 }
 
 interface HeroLayoutProps {
-    heights: HeightsType,
     images: ImagesType,
     altText: string,
     children: ReactNode
@@ -36,16 +31,12 @@ type HeroLayoutComponent = FunctionComponent<HeroLayoutProps>;
  * MainComponent 
  */
 
-const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}) => {
+const HeroImageLayout:HeroLayoutComponent = ({images, altText, children}) => {
 
 
     return (
         <>
-            <section className={`${styles.wrapper} ${styles.mobile}`}
-                style={{
-                    height: heights.mobile
-                }}
-            >
+            <section className={`${styles.wrapper} ${styles.mobile}`}>
                 <Image
                     src={images.mobile}
                     alt={altText}
@@ -63,11 +54,7 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                 </div>
             </section>
 
-            <section className={`${styles.wrapper} ${styles.tablet}`}
-                style={{
-                    height: heights.tablet
-                }}
-            >
+            <section className={`${styles.wrapper} ${styles.tablet}`}>
                 <Image
                     src={images.tablet}
                     alt={altText}
@@ -85,11 +72,7 @@ const HeroImageLayout:HeroLayoutComponent = ({heights,images, altText, children}
                 </div>
             </section>
 
-            <section className={`${styles.wrapper} ${styles.desktop}`}
-                style={{
-                    height: heights.desktop
-                }}
-            >
+            <section className={`${styles.wrapper} ${styles.desktop}`}>
                 <Image
                     src={images.desktop}
                     alt={altText}
