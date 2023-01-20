@@ -20,7 +20,21 @@ const Sort:SortType = () => {
 
     return (
         <div className={styles.wrapper}>
-            Sort component
+            <h4>SORT</h4>
+            <div className={styles.sortCriteria}>
+                <div className={styles.sort}>
+                    <select name="sort" id="sort">
+                        <option value="price">Price</option>
+                        <option value="name">Name</option>
+                    </select>
+                </div>
+                <div className={styles.order}>
+                    <select name="order" id="order">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+            </div>
         </div>
     )
 }

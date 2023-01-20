@@ -30,12 +30,6 @@ const SideBar:SideBarType = ({categories, selectedCategoryID, handleCategoryChan
                 selectedCategoryID={selectedCategoryID}
                 handleCategoryChange={handleCategoryChange}
                 />
-            <div>
-                <h4>PRICE</h4>
-                <div>
-                    <input type="range" min="0" max="100" value="50" className="slider" id="myRange" />
-                </div>
-            </div>
         </div>
     )
 }

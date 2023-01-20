@@ -17,7 +17,21 @@
 }
 
 .topPanel {
-    display: none;
+    display: flex;
+
+    width: 100%;
+
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid adjust-color($color: base.$backgroundColor, $lightness: -30%);
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: 5%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+
+    margin-bottom: 20px;
 }
 
 .main {
@@ -36,26 +50,7 @@
         display: none;
     }
 
-    .topPanel {
-        display: flex;
-
-        width: 100%;
-
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: center;
-
-        padding: 20px;
-        border-radius: 10px;
-        
-        border: 1px solid adjust-color($color: base.$backgroundColor, $lightness: -30%);
-        background-color: adjust-color($color: base.$backgroundColor, $lightness: 5%);
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
-
-        margin-bottom: 10px;
-
-    }
-
+ 
     .body {
         flex-direction: row;
         align-items: flex-start;

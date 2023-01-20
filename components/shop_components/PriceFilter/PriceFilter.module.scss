@@ -1,0 +1,59 @@
+@use '../../../styles/base';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    border-right: 1px solid #e0e0e0;
+    
+
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: 9%);
+    
+    
+    font-size: 14px;
+    line-height: 1.5;
+    color: #000;
+
+    transition: all 0.3s ease;
+    
+}
+
+.slider {
+    display: flex;
+
+    flex-flow: row nowrap;
+
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 100%;
+    
+    margin-bottom: 10px;
+
+    gap: 10px;
+    label {
+        flex-basis: 40%;
+        height: 100%;
+        
+        text-align: right;
+    }
+
+    input {
+        flex-basis: 60%;
+        height: 100%;
+
+
+    }
+}
+
+@media (min-width: base.$breakpointMobile) {
+    .wrapper {
+        flex-basis: 50%;
+    }
+}
