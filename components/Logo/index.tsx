@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 
 import styles from './Logo.module.scss';
 
+
 /***************************
  *  Types
  */
@@ -18,8 +19,11 @@ type LogoType = FunctionComponent<LogoPropsType>
  */
 const Logo:LogoType = () => {
 
+
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper}
+            onClick={() => window.location.href = '/'}
+            >
             NAIL SUPPLY
         </div>
     )

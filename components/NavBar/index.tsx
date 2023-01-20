@@ -60,10 +60,6 @@ const links:LinkType[] = [
     {
         name: "Shop",
         href: "/shop"
-    },
-    {
-        name: "Contact",
-        href: "/contact"
     }
 ]
 

@@ -1,0 +1,73 @@
+@use 'base';
+
+.body {
+    background: linear-gradient(to top, adjust-color($color: base.$backgroundColor, $lightness: -20%) 20%, adjust-color($color: base.$backgroundColor, $lightness: 5%) 100%);
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    border-top: 4px solid adjust-color($color: base.$backgroundColor, $lightness: -20%);
+
+
+}
+
+.text {
+    p {
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        li {
+            padding-left: 2rem;
+            margin-bottom: .7rem;    
+        }
+    }
+
+    border-bottom: 1px solid adjust-color($color: base.$backgroundColor, $lightness: 5);
+
+    padding-bottom: .5rem;
+    margin-bottom: 1rem;
+}
+
+.contact {
+    h4 {
+        margin-bottom: .6rem;
+    }
+
+    .label {
+        font-weight: 600;
+    }
+}
+
+@media (min-width: base.$breakpointMobile) {
+    .body {
+        display: flex;
+
+        justify-content: space-between;
+
+        background: linear-gradient(to left, adjust-color($color: base.$backgroundColor, $lightness: -20%) 20%, adjust-color($color: base.$backgroundColor, $lightness: 5%) 100%);
+
+        border-top: none;
+        border-left: 4px solid adjust-color($color: base.$backgroundColor, $lightness: -20%);
+    
+    }
+
+
+    .text {
+        border-bottom: none;
+        border-right: 1px solid adjust-color($color: base.$backgroundColor, $lightness: 5);
+
+        flex-basis: 70%;
+
+        
+        padding-right: 2.5rem;
+    }
+
+    .contact {
+        margin-left: 1rem;
+
+        flex-basis: 25%;
+
+    }
+}
