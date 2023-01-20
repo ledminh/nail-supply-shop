@@ -9,6 +9,9 @@ import ProductList from '../components/shop_components/ProductList';
 import HeroImage from '../components/shop_components/HeroImage';
 import SideBar from '../components/shop_components/SideBar';
 
+import PriceFilter from '../components/shop_components/PriceFilter';
+import Sort from '../components/shop_components/Sort';
+
 
 interface ShopProps {
   categories: CategoryType[];
@@ -23,20 +26,20 @@ const Shop: FC<ShopProps> = ({categories, initProducts}) => {
     <div className={styles.wrapper}>
       <HeroImage />
       <div className={styles.body}>
-        <div className={styles.selectionPanel}>
-          <SelectionPanel
+        {/* 'TopPanelMobile' is only visible on mobile devices */}
+        <TopPanelMobile
             categories={categories}
-            onChange={handleCategoryChange}
+            handleCategoryChange={handleCategoryChange}
           />
-        </div>
-        <div className={styles.sideBar}>
-          <SideBar
+
+        {/* 'SideBar' is only visible on desktop devices */}
+        <SideBar
             categories={categories}
             selectedCategoryID={selectedCategoryID}
             handleCategoryChange={handleCategoryChange}
           />
-        </div>
-        <div className={styles.products}>
+        <div className={styles.main}>
+          <TopPanel />
           <ProductList products={products}/>
         </div>
       </div>
@@ -56,4 +59,43 @@ export const getServerSideProps = async () => {
       initProducts: getSummaryProducts(),
     }
   }
+}
+
+
+/*************************
+ * TopPanelMobile
+ */
+
+interface TopPanelMobileProps {
+  categories: CategoryType[];
+  handleCategoryChange: (catID: string) => void;
+}
+
+const TopPanelMobile: FC<TopPanelMobileProps> = ({categories, handleCategoryChange}) => {
+  return (
+    <div className={styles.topPanelMobile}>
+      <SelectionPanel
+        categories={categories}
+        onChange={handleCategoryChange}
+      />
+    </div>
+  )
+}
+
+
+
+/*************************
+ * TopPanelDesktop
+ */
+
+interface TopPanelProps {
+}
+
+const TopPanel: FC<TopPanelProps> = () => {
+  return (
+    <div className={styles.topPanel}>
+      <PriceFilter />
+      <Sort/>
+    </div>
+  )
 }

@@ -11,13 +11,16 @@
 
 }
 
-.selectionPanel {
+.topPanelMobile {
     display: block;
-
     width: 100%;
 }
 
-.products {
+.topPanel {
+    display: none;
+}
+
+.main {
     width: 100%;
 }
 
@@ -29,37 +32,38 @@
 
 
 @media (min-width: base.$breakpointMobile) {
-    .body {
-
-        flex-direction: row;
-
-        align-items: flex-start;
-
-
-
-    }
-
-    .selectionPanel {
+    .topPanelMobile {
         display: none;
     }
 
-    .sideBar {
-
+    .topPanel {
         display: flex;
 
-        flex-flow: row wrap;
+        width: 100%;
 
-        justify-content: flex-start;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
 
-        flex-basis: 30%;
+        padding: 20px;
+        border-radius: 10px;
+        
+        border: 1px solid adjust-color($color: base.$backgroundColor, $lightness: -30%);
+        background-color: adjust-color($color: base.$backgroundColor, $lightness: 5%);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
 
-        position: sticky;
-
-        top: 80px;
+        margin-bottom: 10px;
 
     }
 
-    .products {
+    .body {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+
+
+    .main {
         flex-basis: 70%;
     }
 }
