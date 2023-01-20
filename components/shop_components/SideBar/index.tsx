@@ -3,6 +3,7 @@ import { FunctionComponent } from "react";
 import styles from './SideBar.module.scss';
 
 import { CategoryType } from '../../../database';
+import Categories from "./Categories";
 
 /***************************
  *  Types
@@ -24,26 +25,17 @@ const SideBar:SideBarType = ({categories, selectedCategoryID, handleCategoryChan
 
     return (
         <div className={styles.wrapper}>
-            <h4 className={styles.title}>CATEGORIES</h4>
-            <ul className={styles.list}>
-                <li className={styles.item}>
-                    <button
-                        className={selectedCategoryID === null ? styles.selected : ''}
-                        onClick={() => handleCategoryChange('CAT/ALL')}
-                    >All</button>
-                </li>
-                {
-                    categories.map((category) => (
-                        <li key={category.id} className={styles.item}>
-                            <button
-                                className={selectedCategoryID === category.id ? styles.selected : ''} 
-                                onClick={() => handleCategoryChange(category.id)}>
-                                {category.name}
-                            </button>
-                        </li>
-                    ))
-                }
-            </ul>    
+            <Categories
+                categories={categories}
+                selectedCategoryID={selectedCategoryID}
+                handleCategoryChange={handleCategoryChange}
+                />
+            <div>
+                <h4>PRICE</h4>
+                <div>
+                    <input type="range" min="0" max="100" value="50" className="slider" id="myRange" />
+                </div>
+            </div>
         </div>
     )
 }

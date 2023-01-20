@@ -1,46 +1,6 @@
 @use '../../../styles/base';
 
 .wrapper {
-    width: 90%;
-
-    border-radius: 10px;
-    padding: 10px;
-    border: 1px solid adjust-color($color: base.$backgroundColor, $lightness: -30%);
-    background-color: adjust-color($color: base.$backgroundColor, $lightness: 5%);
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
-    margin-bottom: 30px;
-}
-
-.title {
-    border-bottom: 1px solid adjust-color($color: base.$backgroundColor, $lightness: -30%);
-
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-}
-
-.list {
-    button {
-        width: 100%;
-        text-align: left;
-        padding: 10px;
-        border: none;
-        border-radius: 20px;
-        background-color: transparent;
-        color: base.$textColor;
-        font-size: 1.2rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-
-        margin-bottom: 10px;
-
-        &:hover {
-            background-color: adjust-color($color: base.$backgroundColor, $lightness: -5%);
-        }
-
-        &.selected {
-            background-color: adjust-color($color: base.$backgroundColor, $lightness: -5%);
-        }
-    }
+    width: 100%;
 }
 
