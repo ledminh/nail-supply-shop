@@ -11,7 +11,7 @@ export type CategoryType = {
     imageUrl: string;
 };
 
-type CategoryInfoType = {
+export type CategoryInfoType = {
     id: string;
     name: string;
 };
@@ -52,6 +52,15 @@ const getCategoryInfo = (id: string):CategoryInfoType => {
 
 export const getCategories = ():CategoryType[] => {
     return categories;
+};
+
+export const getCategoryInfos = ():CategoryInfoType[] => {
+    return categories.map((category) => {
+        return {
+            id: category.id,
+            name: category.name,
+        };
+    });
 };
 
 export const getCategoryById = (id: string):CategoryType => {

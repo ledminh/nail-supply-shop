@@ -13,7 +13,6 @@
 }
 
 
-
 .image {
     position: relative;
     height: 350px;
@@ -28,6 +27,8 @@
         margin-bottom: 10px;
         border-bottom: 1.5px solid adjust-color($color: base.$backgroundColor,  $lightness: -15%);
     }
+
+    border-bottom: 1.5px solid adjust-color($color: base.$backgroundColor,  $lightness: -15%);
 }
 
 .price {

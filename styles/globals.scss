@@ -39,7 +39,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 2.7rem;
+  font-size: 2.5rem;
   
 }
 
@@ -48,26 +48,30 @@ h2 {
 }
 
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 h4 {
-  font-size: 1.35rem;
+  font-size: 1.2rem;
 }
 
 // make font size responsive mobile first
 
 @media (min-width: base.$breakpointMobile) {
   h1 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   h2 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   h3 {
     font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
   }
 
 }
@@ -76,15 +80,19 @@ h4 {
 
 @media (min-width: base.$breakpointTablet) {
   h1 {
-    font-size: 5rem;
-  }
-
-  h2 {
     font-size: 4rem;
   }
 
-  h3 {
+  h2 {
     font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+  }
+
+  h4 {
+    font-size: 2rem;
   }
 
 }
