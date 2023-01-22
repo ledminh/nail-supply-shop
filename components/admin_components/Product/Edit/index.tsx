@@ -24,8 +24,6 @@ type EditType = FunctionComponent<EditPropsType>
  */
 const Edit:EditType = ({products}) => {
 
-    
-
 
     return (
         <AdminSubSection
