@@ -8,7 +8,7 @@ import styles from './Add.module.scss';
  *  Types
  */
 interface AddPropsType {
-    onClick: (data: {name: string, description: string}) => void
+    onClick: (data: {name: string, shortDescription: string, fullDescription: string, imageUrl: string}) => void
 } 
 
 type AddType = FunctionComponent<AddPropsType>
@@ -21,7 +21,10 @@ type AddType = FunctionComponent<AddPropsType>
 const Add:AddType = ({onClick}) => {
 
     const [name, setName] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
+    const [shortDescription, setShortDescription] = useState<string>('');
+    const [fullDescription, setFullDescription] = useState<string>('');
+    const [imageUrl, setImageUrl] = useState<string>('');
+
     
 
 
@@ -37,11 +40,24 @@ const Add:AddType = ({onClick}) => {
                     />
                 </div>
                 <div className={styles.field}>
-                    <label htmlFor="Description">Description</label>
-                    <input type="text" name="Description" id="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                    <label htmlFor="Short Description">Short Description</label>
+                    <input type="text" name="Short Description" id="short_description"
+                        value={shortDescription}
+                        onChange={(e) => setShortDescription(e.target.value)}
                     />
+                </div>
+                <div className={styles.field}>
+                    <label htmlFor="Full Description">Full Description</label>
+                    <textarea name="Full Description"
+                    rows={4}
+                    id="full_description"
+                        value={fullDescription}
+                        onChange={(e) => setFullDescription(e.target.value)}
+                    />
+                </div>
+                <div className={styles.field}>
+                    <label htmlFor="uploadImage">Upload Image</label>
+                    <input name="upload_image" id="uploadImage" type="file" />
                 </div>
                 <button className={styles.button}
                     onClick={(e) => {
@@ -49,7 +65,9 @@ const Add:AddType = ({onClick}) => {
 
                         onClick({
                             name,
-                            description
+                            shortDescription,
+                            fullDescription,
+                            imageUrl: ''
                         });
                     }}
                     >

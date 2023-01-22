@@ -26,7 +26,7 @@ const Admin: FC<AdminProps> = ({categories, products}) => (
       <div className={styles.product}>
         <Product
           products={products}
-        />
+          />
       </div>
     </div>
   </>
