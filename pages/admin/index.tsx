@@ -18,12 +18,16 @@ const Admin: FC<AdminProps> = ({categories, products}) => (
   <>
     <HeroImage/>
     <div className={styles.body}>
-      <Category
-        categories={categories}  
+      <div className={styles.category}>
+        <Category
+          categories={categories}  
+          />
+      </div>
+      <div className={styles.product}>
+        <Product
+          products={products}
         />
-      <Product
-        products={products}
-      />
+      </div>
     </div>
   </>
 );

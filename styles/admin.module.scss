@@ -1,0 +1,25 @@
+@use 'base';
+
+.body {
+    display: flex;
+
+    flex-flow: row wrap;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+.category,
+.product {
+    flex-basis: 100%;
+}
+
+@media (min-width: base.$breakpointMobile) {
+    .category,
+    .product {
+        flex-basis: 45%;
+    }
+}
