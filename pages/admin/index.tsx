@@ -5,22 +5,25 @@ import Product from '../../components/admin_components/Product';
 
 import styles from '../../styles/admin.module.scss';
 
-import { CategoryType, getCategories } from '../../database';
+import { CategoryType, ProductType, getCategories, getProducts } from '../../database';
 
 
 
 interface AdminProps {
   categories: CategoryType[];
+  products: ProductType[];
 }
 
-const Admin: FC<AdminProps> = ({categories}) => (
+const Admin: FC<AdminProps> = ({categories, products}) => (
   <>
     <HeroImage/>
     <div className={styles.body}>
       <Category
         categories={categories}  
         />
-      <Product/>
+      <Product
+        products={products}
+      />
     </div>
   </>
 );
@@ -30,10 +33,12 @@ export default Admin;
 
 export const getServerSideProps = async () => {
   const categories = getCategories();
+  const products = getProducts();
 
   return {
     props: {
-      categories
+      categories,
+      products
     }
   }
 }
