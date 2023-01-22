@@ -1,4 +1,5 @@
 import { useState, FunctionComponent } from "react";
+import { CategoryType } from "../../../../database";
 
 import styles from './Add.module.scss';
 
@@ -8,7 +9,8 @@ import styles from './Add.module.scss';
  *  Types
  */
 interface AddPropsType {
-    onClick: (data: {name: string, shortDescription: string, fullDescription: string, imageUrl: string}) => void
+    categories: CategoryType[],
+    onClick: (data: {categoryId: string, name: string, shortDescription: string, fullDescription: string, imageUrl: string}) => void
 } 
 
 type AddType = FunctionComponent<AddPropsType>
@@ -18,8 +20,9 @@ type AddType = FunctionComponent<AddPropsType>
 /***************************
  *  Main Component
  */
-const Add:AddType = ({onClick}) => {
+const Add:AddType = ({categories, onClick}) => {
 
+    const [categoryId, setCategoryId] = useState(categories[0].id);
     const [name, setName] = useState<string>('');
     const [shortDescription, setShortDescription] = useState<string>('');
     const [fullDescription, setFullDescription] = useState<string>('');
@@ -32,6 +35,18 @@ const Add:AddType = ({onClick}) => {
         <div className={styles.wrapper}>
             <h4>Add</h4>
             <form className={styles.form}>
+                <div className={styles.field}>
+                    <label htmlFor="category">Category</label>
+                    <select name="category" id="category"
+                        onChange={(e) => {
+                            setCategoryId(e.target.value);
+                        }}
+                        >
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>{category.name}</option>
+                        ))}
+                    </select>
+                </div>
                 <div className={styles.field}>
                     <label htmlFor="name">Name</label>
                     <input type="text" name="Name" id="name"
@@ -64,6 +79,7 @@ const Add:AddType = ({onClick}) => {
                         e.preventDefault();
 
                         onClick({
+                            categoryId,
                             name,
                             shortDescription,
                             fullDescription,

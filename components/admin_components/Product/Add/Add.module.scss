@@ -36,6 +36,19 @@
                 font-weight: 700;
             }
     
+            select {
+                flex-basis: 75%;
+                
+                padding: 5px;
+    
+                border: 1px solid #000;
+    
+                border-radius: 5px;
+            
+                &:focus {
+                    outline: none;
+                }
+            }
     
             input {
                 flex-basis: 75%;

@@ -10,6 +10,7 @@ import Edit from "./Edit";
  *  Types
  */
 interface ProductPropsType {
+    categories: CategoryType[],
     products: ProductType[]
 
 } 
@@ -21,12 +22,13 @@ type ProductComponentType = FunctionComponent<ProductPropsType>
 /***************************
  *  Main Component
  */
-const ProductComponent:ProductComponentType = ({products}) => {
+const ProductComponent:ProductComponentType = ({categories, products}) => {
 
     return (
         <div className={styles.wrapper}>
             <h3 className={styles.title}>Product</h3>
-            <Add 
+            <Add
+                categories={categories}
                 onClick={(data) => {
                     console.log(data);
                 }}
