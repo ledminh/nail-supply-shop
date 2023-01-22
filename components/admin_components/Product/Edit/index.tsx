@@ -4,6 +4,7 @@ import { ProductType } from "../../../../database";
 import Item from "./Item";
 
 import styles from './Edit.module.scss';
+import AdminSubSection from "../../../../layouts/AdminSubSection";
 
 
 
@@ -27,8 +28,10 @@ const Edit:EditType = ({products}) => {
 
 
     return (
-        <div className={styles.wrapper}>
-            <h4>Edit</h4>
+        <AdminSubSection
+            title="Edit"
+            last
+            >
             <div className={styles.categories}>
                 {
                     products.map((product, index) => (
@@ -38,8 +41,8 @@ const Edit:EditType = ({products}) => {
                             />
                     ))
                 }
-            </div>
-        </div>
+            </div>    
+        </AdminSubSection>
     )
 }
 

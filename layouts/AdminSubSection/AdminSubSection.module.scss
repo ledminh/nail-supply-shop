@@ -1,0 +1,23 @@
+@use '../../styles/base';
+
+.wrapper {
+    border-bottom: 1px solid #000;
+
+    padding: 10px;
+
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: -5%);
+
+    h4 {
+        margin-bottom: 10px;
+    }
+
+    
+}
+
+.wrapper.bold {
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: -10%);
+}
+
+.wrapper.last {
+    border-bottom: none;
+}

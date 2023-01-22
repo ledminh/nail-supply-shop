@@ -1,5 +1,6 @@
 import { useState, FunctionComponent } from "react";
 import { CategoryType } from "../../../../database";
+import AdminSubSection from "../../../../layouts/AdminSubSection";
 
 import styles from './Add.module.scss';
 
@@ -32,9 +33,11 @@ const Add:AddType = ({categories, onClick}) => {
 
 
     return (
-        <div className={styles.wrapper}>
-            <h4>Add</h4>
-            <form className={styles.form}>
+        <AdminSubSection
+            title="Add"
+            bold
+            >
+            <form className={styles.wrapper}>
                 <div className={styles.field}>
                     <label htmlFor="category">Category</label>
                     <select name="category" id="category"
@@ -90,7 +93,7 @@ const Add:AddType = ({categories, onClick}) => {
                     Add
                 </button>
             </form>
-        </div>
+        </AdminSubSection>
     )
 }
 

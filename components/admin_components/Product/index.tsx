@@ -5,6 +5,7 @@ import styles from './Product.module.scss';
 
 import Add from './Add';
 import Edit from "./Edit";
+import AdminSection from "../../../layouts/AdminSection";
 
 /***************************
  *  Types
@@ -25,8 +26,9 @@ type ProductComponentType = FunctionComponent<ProductPropsType>
 const ProductComponent:ProductComponentType = ({categories, products}) => {
 
     return (
-        <div className={styles.wrapper}>
-            <h3 className={styles.title}>Product</h3>
+        <AdminSection
+            title="Product"
+            >
             <Add
                 categories={categories}
                 onClick={(data) => {
@@ -36,7 +38,7 @@ const ProductComponent:ProductComponentType = ({categories, products}) => {
             <Edit 
                 products={products}
                 />
-        </div>
+        </AdminSection>
     )
 }
 

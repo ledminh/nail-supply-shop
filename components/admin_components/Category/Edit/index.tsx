@@ -4,6 +4,7 @@ import { CategoryType } from "../../../../database";
 import Item from "./Item";
 
 import styles from './Edit.module.scss';
+import AdminSubSection from "../../../../layouts/AdminSubSection";
 
 
 
@@ -27,8 +28,10 @@ const Edit:EditType = ({categories}) => {
 
 
     return (
-        <div className={styles.wrapper}>
-            <h4>Edit</h4>
+        <AdminSubSection
+            title="Edit"
+            last
+            >
             <div className={styles.categories}>
                 {
                     categories.map((category, index) => (
@@ -39,7 +42,7 @@ const Edit:EditType = ({categories}) => {
                     ))
                 }
             </div>
-        </div>
+        </AdminSubSection>
     )
 }
 

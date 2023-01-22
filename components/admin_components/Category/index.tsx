@@ -5,6 +5,7 @@ import styles from './Category.module.scss';
 
 import Add from './Add';
 import Edit from "./Edit";
+import AdminSection from "../../../layouts/AdminSection";
 
 /***************************
  *  Types
@@ -24,8 +25,9 @@ type CategoryComponentType = FunctionComponent<CategoryPropsType>
 const CategoryComponent:CategoryComponentType = ({categories}) => {
 
     return (
-        <div className={styles.wrapper}>
-            <h3 className={styles.title}>Category</h3>
+        <AdminSection
+            title="Category"
+        >   
             <Add 
                 onClick={(data) => {
                     console.log(data);
@@ -34,7 +36,7 @@ const CategoryComponent:CategoryComponentType = ({categories}) => {
             <Edit 
                 categories={categories}
                 />
-        </div>
+        </AdminSection>
     )
 }
 
