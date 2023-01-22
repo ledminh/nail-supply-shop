@@ -1,0 +1,36 @@
+.wrapper {
+    border: 1px solid adjust-color($color: #000000, $lightness: 10%);
+
+    padding: .5rem;
+
+    border-radius: 10px;
+
+    margin-bottom: 1rem;
+
+    box-shadow: 0 0 2px 0px #000000;
+
+    p {
+        font-size: .9rem;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 1rem;
+
+    button {
+
+        flex-basis: 48%;
+        padding: .5rem 1rem;
+
+        border: 1px solid #000000;
+
+        border-radius: 5px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

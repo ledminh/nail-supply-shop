@@ -1,22 +1,6 @@
-@use '../../../styles/base';
+@use '../../../../styles/base';
 
 .wrapper {
-    border: 1px solid #000;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-}
-
-.title {
-    background-color: #000;
-
-    color: #fff;
-
-    padding: 10px;
-}
-
-.add {
     border-bottom: 1px solid #000;
 
     padding: 10px;
@@ -30,32 +14,42 @@
     form {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-between;
-        
-        align-items: center;
 
         gap: 10px;
 
-        label {
-            flex-basis: 20%;
+        .field {
+            flex-basis: 100%;
+
+            display: flex;
+            justify-content: space-between;
             
-            font-weight: 700;
-        }
+            gap: 10px;
 
 
-        input {
-            flex-basis: 75%;
+
+            label {
+                flex-basis: 20%;
+                
+                font-weight: 700;
+            }
+    
+    
+            input {
+                flex-basis: 75%;
+                
+                padding: 5px;
+    
+                border: 1px solid #000;
+    
+                border-radius: 5px;
             
-            padding: 5px;
-
-            border: 1px solid #000;
-
-            border-radius: 5px;
-        
-            &:focus {
-                outline: none;
+                &:focus {
+                    outline: none;
+                }
             }
         }
+
+
 
         button {
             width: 100%;
