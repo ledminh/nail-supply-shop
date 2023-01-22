@@ -1,17 +1,7 @@
 @use '../../../../styles/base';
 
+
 .wrapper {
-    padding: 10px;
-
-    background-color: adjust-color($color: base.$backgroundColor, $lightness: -5%);
-    
-    h4 {
-        margin-bottom: 10px;
-    }   
-
-}
-
-.categories {
     height: 400px;
     overflow-y: scroll;
 }

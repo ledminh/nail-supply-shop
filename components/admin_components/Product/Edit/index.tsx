@@ -32,7 +32,7 @@ const Edit:EditType = ({products}) => {
             title="Edit"
             last
             >
-            <div className={styles.categories}>
+            <div className={styles.wrapper}>
                 {
                     products.map((product, index) => (
                         <Item 
