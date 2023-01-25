@@ -6,20 +6,20 @@
     flex-flow: row wrap;
 
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
 
     gap: 40px;
 
 }
 
-.category,
-.product {
+.section {
     flex-basis: 100%;
+
+    
 }
 
 @media (min-width: base.$breakpointMobile) {
-    .category,
-    .product {
+    .section {
         flex-basis: 45%;
     }
 }

@@ -34,8 +34,9 @@ const Add:AddType = ({categories, onClick}) => {
 
     return (
         <AdminSubSection
-            title="Add"
+            title="Add New Product"
             bold
+            collapsable
             >
             <form className={styles.wrapper}>
                 <div className={styles.field}>

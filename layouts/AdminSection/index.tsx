@@ -8,8 +8,10 @@ interface AdminSectionProps {
 
 const AdminSection: FC<AdminSectionProps> = ({title, children}) => (
   <div className={styles.wrapper}>
-      <h3 className={styles.title}>{title}</h3>
-      {children}
+      <h3 className={styles.header}>{title}</h3>
+      <div className={styles.body}>
+        {children}
+      </div>
   </div>
 );
 

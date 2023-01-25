@@ -6,14 +6,29 @@ interface AdminSubSectionProps {
   children: React.ReactNode;
   bold?: boolean;
   last?: boolean;
+  collapsable?: boolean;
   
 }
 
-const AdminSubSection: FC<AdminSubSectionProps> = ({title, children, bold, last}) => (
-    <div className={`${styles.wrapper}${bold? ' ' + styles.bold: ''}${last? ' ' + styles.last: ''}`}>
-      <h4>{title}</h4>
-      {children}    
+const AdminSubSection: FC<AdminSubSectionProps> = ({title, children, bold, last, collapsable}) => {
+  
+  const [collapsed, setCollapsed] = React.useState<boolean>(false);
+
+  const toggleCollapsed = () => {
+
+    setCollapsed(!collapsed);
+  }
+
+  return (
+    <div className={`${styles.wrapper}${collapsable? ' ' + styles.collapsable: ''}${collapsed? ' ' + styles.collapsed : ''}${bold? ' ' + styles.bold: ''}${last? ' ' + styles.last: ''}`}>
+      <div className={styles.title} onClick={toggleCollapsed}>
+        <h4>{title}</h4>
+      </div>
+      <div className={styles.content}>
+        {children}    
+      </div>
     </div>
-);
+  );
+} 
 
 export default AdminSubSection;
