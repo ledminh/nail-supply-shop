@@ -2,19 +2,20 @@ import React, { FC } from 'react';
 import Category from '../../components/admin_components/Category';
 import HeroImage from '../../components/admin_components/HeroImage';
 import Product from '../../components/admin_components/Product';
+import Subtitles from '../../components/admin_components/Subtitles';
 
 import styles from '../../styles/admin.module.scss';
 
-import { CategoryType, ProductType, getCategories, getProducts } from '../../database';
-
+import { CategoryType, ProductType, SubtitleType, getCategories, getProducts } from '../../database';
 
 
 interface AdminProps {
   categories: CategoryType[];
   products: ProductType[];
+  subtitles: SubtitleType[];
 }
 
-const Admin: FC<AdminProps> = ({categories, products}) => (
+const Admin: FC<AdminProps> = ({categories, products, subtitles}) => (
   <>
     <HeroImage/>
     <div className={styles.body}>
@@ -27,6 +28,11 @@ const Admin: FC<AdminProps> = ({categories, products}) => (
         <Product
           categories={categories}
           products={products}
+          />
+      </section>
+      <section className={styles.section}>
+        <Subtitles
+          subtitles={subtitles}
           />
       </section>
     </div>
@@ -43,7 +49,24 @@ export const getServerSideProps = async () => {
   return {
     props: {
       categories,
-      products
+      products,
+      subtitles: [
+        {
+          id: 1,
+          name: 'home',
+          subtitle: 'Home Subtitle'
+        },
+        {
+          id: 2,
+          name: 'about',
+          subtitle: 'About Subtitle'
+        },
+        {
+          id: 3,
+          name: 'shop',
+          subtitle: 'Shop Subtitle'
+        }
+      ] 
     }
   }
 }

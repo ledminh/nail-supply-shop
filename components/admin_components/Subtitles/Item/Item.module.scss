@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+
+    flex-flow: row nowrap;
+
+    justify-content: space-between;
+    gap: 10px;
+
+    padding-bottom: 10px;
+
+}
+
+.label,
+.button {
+    flex-basis: 22%;
+
+}
+
+.input {
+    flex-basis: 55%;
+
+    height: 1.5rem;
+
+}
+

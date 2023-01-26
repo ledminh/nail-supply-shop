@@ -4,6 +4,12 @@ import {products, categories} from './data';
  * Data Types  
  */
 
+export type SubtitleType = {
+    id: string,
+    name: 'home' | 'about' | 'shop';
+    text: string;
+};
+
 export type CategoryType = {
     id: string;
     name: string;
