@@ -3,6 +3,7 @@ import Category from '../../components/admin_components/Category';
 import HeroImage from '../../components/admin_components/HeroImage';
 import Product from '../../components/admin_components/Product';
 import Subtitles from '../../components/admin_components/Subtitles';
+import About from '../../components/admin_components/About';
 
 import styles from '../../styles/admin.module.scss';
 
@@ -13,9 +14,10 @@ interface AdminProps {
   categories: CategoryType[];
   products: ProductType[];
   subtitles: SubtitleType[];
+  aboutHtmlText: string;  
 }
 
-const Admin: FC<AdminProps> = ({categories, products, subtitles}) => (
+const Admin: FC<AdminProps> = ({categories, products, subtitles, aboutHtmlText}) => (
   <>
     <HeroImage/>
     <div className={styles.body}>
@@ -30,9 +32,14 @@ const Admin: FC<AdminProps> = ({categories, products, subtitles}) => (
           products={products}
           />
       </section>
-      <section className={styles.section}>
+      <section className={styles.section + ' ' + styles.full}>
         <Subtitles
           subtitles={subtitles}
+          />
+      </section>
+      <section className={styles.section + ' ' + styles.full}>
+        <About
+          htmlText={aboutHtmlText}
           />
       </section>
     </div>
@@ -50,6 +57,7 @@ export const getServerSideProps = async () => {
     props: {
       categories,
       products,
+      aboutHtmlText: 'About Text',
       subtitles: [
         {
           id: 1,

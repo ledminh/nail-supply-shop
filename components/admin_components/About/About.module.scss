@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+
+    flex-flow: column nowrap;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.textarea,
+.button {
+    width: 100%;
+
+}
+
+.textarea {
+    height: 300px;
+    resize: none;
+
+    border-radius: 7px;
+    padding: 5px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.button {
+    font-size: 1.2rem;
+    padding: 5px;
+}

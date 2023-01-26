@@ -14,12 +14,15 @@
 
 .section {
     flex-basis: 100%;
-
     
 }
 
 @media (min-width: base.$breakpointMobile) {
     .section {
         flex-basis: 45%;
+    }
+
+    .section.full {
+        flex-basis: 100%;
     }
 }
