@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { ProductType } from "../../../../database";
+import { CategoryType, ProductType } from "../../../../database";
 
 import Item from "./Item";
 
@@ -12,7 +12,8 @@ import AdminSubSection from "../../../../layouts/AdminSubSection";
  *  Types
  */
 interface EditPropsType {
-    products: ProductType[]
+    products: ProductType[];
+    categories: CategoryType[];
 } 
 
 type EditType = FunctionComponent<EditPropsType>
@@ -22,7 +23,7 @@ type EditType = FunctionComponent<EditPropsType>
 /***************************
  *  Main Component
  */
-const Edit:EditType = ({products}) => {
+const Edit:EditType = ({categories, products}) => {
 
 
     return (
@@ -31,6 +32,14 @@ const Edit:EditType = ({products}) => {
             last
             >
             <div className={styles.wrapper}>
+                <select className={styles.select}>
+                    <option value="title">Category</option>
+                    {
+                        categories.map((category, index) => (
+                            <option key={index} value={category.id}>{category.name}</option>
+                        ))
+                    }
+                </select>
                 {
                     products.map((product, index) => (
                         <Item 

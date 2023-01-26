@@ -36,6 +36,7 @@ const ProductComponent:ProductComponentType = ({categories, products}) => {
                 }}
             />
             <Edit 
+                categories={categories}
                 products={products}
                 />
         </AdminSection>
