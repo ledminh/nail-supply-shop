@@ -13,6 +13,7 @@ import PriceFilter from '../components/shop_components/PriceFilter';
 import Sort from '../components/shop_components/Sort';
 
 import ErrorLayout from '../layouts/ErrorLayout';
+import { NextPageWithLayout } from './_app';
 
 
 interface ShopProps {
@@ -20,16 +21,14 @@ interface ShopProps {
   productSummariesResponse: ResponseType<ProductSummaryType[]>;
 }
 
-const Shop: FC<ShopProps> = ({categoriesResponse, productSummariesResponse}) => {
+const Shop: NextPageWithLayout<ShopProps> = ({categoriesResponse, productSummariesResponse}) => {
   const { errResponses, categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productSummariesResponse);
   
 
   return (
-    <div className={styles.wrapper}>
-      <HeroImage />
-      <ErrorLayout
+    <ErrorLayout
         responses={[categoriesResponse, productSummariesResponse, ...errResponses]}
-      >
+      > 
         <div className={styles.body}>
           {/* 'TopPanelMobile' is only visible on mobile devices */}
           <TopPanelMobile
@@ -48,13 +47,30 @@ const Shop: FC<ShopProps> = ({categoriesResponse, productSummariesResponse}) => 
             <ProductList products={products}/>
           </div>
         </div>
-      </ErrorLayout>
-    </div>
+    </ErrorLayout>
   )
 };
 
 export default Shop;
 
+
+/********************
+ * GET LAYOUT
+ */
+Shop.getLayout = (page: ReactNode) => {
+  return (
+    <div className={styles.wrapper}>
+      <HeroImage />
+      {page}
+    </div>
+  )
+}
+
+
+
+/********************
+ * SERVER SIDE PROPS
+ */
 export const getServerSideProps = async () => {
   const categoriesResponse = await getCategories();
   const productSummariesResponse = await getSummaryProducts();  
@@ -69,9 +85,19 @@ export const getServerSideProps = async () => {
 }
 
 
-/*************************
- * TopPanelMobile
- */
+
+
+
+
+
+
+
+/*******************************************************************
+ * OTHER COMPONENTS
+ *******************************************************************/
+
+
+// TopPanelMobile
 
 interface TopPanelMobileProps {
   categories: CategoryType[];
@@ -91,9 +117,7 @@ const TopPanelMobile: FC<TopPanelMobileProps> = ({categories, handleCategoryChan
 
 
 
-/*************************
- * TopPanelDesktop
- */
+// TopPanelDesktop
 
 interface TopPanelProps {
 }

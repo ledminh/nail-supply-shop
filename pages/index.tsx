@@ -15,6 +15,7 @@ import Image002JPG from '../assets/images/samples/002.jpg';
 import Image003JPG from '../assets/images/samples/003.jpg';
 import Image004JPG from '../assets/images/samples/004.jpg';
 import BestSellers from '../components/home_components/BestSellers';
+import { NextPageWithLayout } from './_app';
 
 
 /***************************
@@ -33,15 +34,13 @@ interface HomePropsType {
   bestSellerProducts: ProductSummaryType[],
 }
 
-type HomeType = NextPage<HomePropsType>;
+type HomeType = NextPageWithLayout<HomePropsType>;
 
 
 const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
 
   return (
     <>
-      <HeroImage/>
-  
       <Section className={styles.newArrivals}>
         <NewArrivals
           products={newArrivalProducts}
@@ -60,6 +59,17 @@ const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
 
 
 export default Home;
+
+
+Home.getLayout = (page) => {
+  return (
+    <>
+      <HeroImage/>
+      {page}
+    </>
+  )
+}
+
 
 export const getServerSideProps = async () => {
   return {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { ReactNode } from 'react';
 import ErrorScreen from '../../components/ErrorScreen';
 import Category from '../../components/admin_components/Category';
 import HeroImage from '../../components/admin_components/HeroImage';
@@ -10,6 +10,7 @@ import styles from '../../styles/admin.module.scss';
 
 import { CategoryType, ProductType, SubtitleType, getCategories, getProducts, ResponseType } from '../../database';
 import ErrorLayout from '../../layouts/ErrorLayout';
+import { NextPageWithLayout } from '../_app';
 
 
 interface AdminProps {
@@ -19,7 +20,7 @@ interface AdminProps {
   aboutHtmlText: string;  
 }
 
-const Admin: FC<AdminProps> = ({categoriesResponse, productsResponse, subtitles, aboutHtmlText}) => {
+const Admin: NextPageWithLayout<AdminProps> = ({categoriesResponse, productsResponse, subtitles, aboutHtmlText}) => {
 
   // when status === 'error', the handling is done in ErrorLayout
   const [catStatus, categories] = categoriesResponse;
@@ -28,9 +29,7 @@ const Admin: FC<AdminProps> = ({categoriesResponse, productsResponse, subtitles,
   
 
   return (
-    <>
-      <HeroImage/>
-      <ErrorLayout
+    <ErrorLayout
         responses={[categoriesResponse, productsResponse]}
       >
         <div className={styles.body}>
@@ -56,13 +55,20 @@ const Admin: FC<AdminProps> = ({categoriesResponse, productsResponse, subtitles,
               />
           </section>
         </div>
-      </ErrorLayout>
-    </>
+    </ErrorLayout>
   ); 
 }
 
 export default Admin;
 
+
+
+Admin.getLayout = (page: ReactNode) => (
+  <>
+    <HeroImage/>
+    {page}
+  </>
+)
 
 export const getServerSideProps = async () => {
   const categoriesResponse = await getCategories();

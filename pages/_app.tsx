@@ -1,21 +1,26 @@
 import '../styles/globals.scss'
 
+import { ReactElement, ReactNode } from 'react';
+import {NextPage} from 'next';
+
 import type { AppProps } from 'next/app'
 import MainLayout from '../layouts/MainLayout';
-import { NextComponentType, NextPageContext } from 'next';
 
-interface CustomAppProps extends AppProps {
-  Component: AppProps['Component'] & {
-    title?: string;
-  } 
-
+export type NextPageWithLayout<P={}, IP=P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
 }
 
-export default function App({ Component, pageProps }: CustomAppProps) {
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
-      <MainLayout pageTitle={Component.name}>
-        <Component {...pageProps} />
-      </MainLayout>
-    )
+    <MainLayout pageTitle={Component.name}>
+      {getLayout(<Component {...pageProps} />)}
+    </MainLayout>
+  )
+  
 }

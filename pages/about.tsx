@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import HeroImage from '../components/aboutUs_components/HeroImage';
 
 import styles from '../styles/aboutUs.module.scss';
+import { NextPageWithLayout } from './_app';
 
 
 interface AboutProps {}
 
-const About: FC<AboutProps> = () => (
+const About: NextPageWithLayout<AboutProps> = () => (
   <div>
-    <HeroImage />
     <div className={styles.body}>
       <div className={styles.text}>
         <p>At our Nail Supply Shop, we&apos;ve been providing top-quality nail products and services for over 20 years. We take pride in offering a wide range of products to meet the needs of both professional nail technicians and at-home enthusiasts.</p>
@@ -31,3 +31,11 @@ const About: FC<AboutProps> = () => (
 );
 
 export default About;
+
+
+About.getLayout = (page: React.ReactNode) => (
+  <div>
+    <HeroImage/>
+    {page}
+  </div>
+);
