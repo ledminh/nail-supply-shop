@@ -1,153 +1,201 @@
-import {products, categories} from './data';
+import { CategoryInfoType, CategoryType, ProductSummaryType, ProductType, SubtitleType, ResponseType, getSummaryProductsByCategoryIDType } from './types';
+
+import {getCategoryInfoType, getCategoriesType, getProductsType, getSummaryProductsType, getProductByIdType} from './types';
+
+import {getCategoryInfosFromDB, getCategoriesFromDB, getProductsFromDB, getProductByIdFromDB, getSummaryProductsByCategoryIDFromDB} from './sampleData';
+
 
 /*****************************
- * Data Types  
+ * public types
  */
 
-export type SubtitleType = {
-    id: string,
-    name: 'home' | 'about' | 'shop';
-    text: string;
-};
+export type { CategoryType, CategoryInfoType, ProductSummaryType, ProductType, SubtitleType, ResponseType };
 
-export type CategoryType = {
-    id: string;
-    name: string;
-    description: string;
-    imageUrl: string;
-};
 
-export type CategoryInfoType = {
-    id: string;
-    name: string;
-};
 
-export type ProductSummaryType = {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    imageUrl: string;
-};
 
-export type ProductType = ProductSummaryType & {
-    categoryInfo: CategoryInfoType;
-};
 
-/*****************************
- * private functions
- */
-
-const getCategoryInfo = (id: string):CategoryInfoType => {
-    const category = categories.find((category) => category.id === id);
-
-    if (!category) {
-        throw new Error('Category not found');
-    }
-
-    return {
-        id: category.id,
-        name: category.name,
-    }
-};
 
 
 /*****************************
  * public functions
  */
 
-export const getCategories = ():CategoryType[] => {
-    return categories;
+export const getCategories:getCategoriesType = async () => {
+    try {
+        const categories = await getCategoriesFromDB();
+     
+        return ['success', categories];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }   
+
 };
 
-export const getCategoryInfos = ():CategoryInfoType[] => {
-    return categories.map((category) => {
-        return {
-            id: category.id,
-            name: category.name,
+
+
+
+export const getProducts:getProductsType = async () => {
+    try {
+        const products = await getProductsFromDB();
+        const categoryInfos = await getCategoryInfosFromDB(); 
+    
+        
+        const fullDescProducts = products.map((product) => {
+            const { id, name, fullDescription, price, imageUrl, categoryID } = product;
+    
+            const categoryInfo = categoryInfos.find((catInfo) => catInfo.id === categoryID);
+    
+            if(!categoryInfo) {
+                throw new Error(`Category of product ${name} not found`);
+            }
+    
+            return {
+                id,
+                name,
+                price,
+                description: fullDescription,
+                imageUrl,
+                categoryInfo: categoryInfo
+            };
+        });
+
+        return ['success', fullDescProducts]; 
+
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+};
+
+
+
+export const getSummaryProducts:getSummaryProductsType = async () => {
+    try {
+        const products = await getProductsFromDB();
+    
+        
+        const summaryProducts = products.map((product) => {
+            const { id, name, shortDescription, price, imageUrl } = product;
+    
+            return {
+                id,
+                name,
+                price,
+                description: shortDescription,
+                imageUrl
+            };
+    
+        });
+    
+        return ['success', summaryProducts];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+};
+
+
+export const getProductById:getProductByIdType = async (id) => {
+    try {
+        const product = await getProductByIdFromDB(id);
+        const [status, categoryInfoData] = await getCategoryInfo(product.categoryID);
+        
+        if (status === 'error') {
+            throw new Error(categoryInfoData);
+        }
+
+
+        const fullDescProduct = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            description: product.fullDescription,
+            imageUrl: product.imageUrl,
+            categoryInfo: categoryInfoData
         };
-    });
+    
+        return ['success', fullDescProduct]; 
+
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
 };
 
-export const getCategoryById = (id: string):CategoryType => {
-    const category = categories.find((category) => category.id === id);
 
-    if (!category) {
-        throw new Error('Category not found');
+
+
+/*****************************
+ * private functions
+ */
+
+const getCategoryInfo:getCategoryInfoType = async (id) => {
+
+    try {
+        const categoryInfos = await getCategoryInfosFromDB();
+    
+        const category = categoryInfos.find((catInfo) => catInfo.id === id);
+    
+        if (!category) {
+            throw new Error('Category not found');
+        }
+    
+        return ['success', category];
+    }
+    catch(err) {
+        return ['error', (err as Error).message]
     }
 
-    return category;
-};
-
-export const getSummaryProductsByCategoryID = (catID:string):ProductSummaryType[] => {
-    const summaryProducts = products
-                                .filter((product) => product.categoryID === catID)
-                                .map((product) => {
-                                        const { id, name, shortDescription, price, imageUrl } = product;
-
-                                        return {
-                                            id,
-                                            name,
-                                            price,
-                                            description: shortDescription,
-                                            imageUrl
-                                        };
-
-                                    });
-
-    return summaryProducts;
 };
 
 
 
-export const getSummaryProducts = ():ProductSummaryType[] => {
-    const summaryProducts = products.map((product) => {
-        const { id, name, shortDescription, price, imageUrl, categoryID } = product;
+export const getSummaryProductsByCategoryID:getSummaryProductsByCategoryIDType = async (catID) => {
 
-        return {
-            id,
-            name,
-            price,
-            description: shortDescription,
-            imageUrl
-        };
+    try {
+        const summaryProducts = await getSummaryProductsByCategoryIDFromDB(catID);
 
-    });
-
-    return summaryProducts;
-};
-
-export const getProducts = ():ProductType[] => {
-    return products.map((product) => {
-        const { id, name, fullDescription, price, imageUrl, categoryID } = product;
-        return {
-            id,
-            name,
-            price,
-            description: fullDescription,
-            imageUrl,
-            categoryInfo: getCategoryInfo(categoryID)
-        };
-    });
-};
-
-
-
-export const getProductById = (id: string):ProductType => {
-    const product = products.find((product) => product.id === id);
-
-    if (!product) {
-        throw new Error('Product not found');
+        return ['success', summaryProducts];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
     }
 
-    return {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        description: product.fullDescription,
-        imageUrl: product.imageUrl,
-        categoryInfo: getCategoryInfo(product.categoryID)
-    };
+   
 };
+
+
+
+
+
+
+
+/***********************************************************
+ ***********************************************************/ 
+
+
+
+// export const getCategoryInfos = ():CategoryInfoType[] => {
+//     return categories.map((category) => {
+//         return {
+//             id: category.id,
+//             name: category.name,
+//         };
+//     });
+// };
+
+// export const getCategoryById = (id: string):CategoryType => {
+//     const category = categories.find((category) => category.id === id);
+
+//     if (!category) {
+//         throw new Error('Category not found');
+//     }
+
+//     return category;
+// };
+
+
 
 

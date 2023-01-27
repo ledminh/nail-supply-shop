@@ -1,4 +1,109 @@
-export const products = [
+import { getCategoryInfosFromDBType, getCategoriesFromDBType, getProductsFromDBType, getProductByIdFromDBType, getSummaryProductsByCategoryIDFromDBType } from "./types";
+
+
+
+
+export const getCategoryInfosFromDB:getCategoryInfosFromDBType = async () => {
+  
+  return new Promise((resolve) => {
+    const categoryInfos = categories.map((category) => ({
+      id: category.id,
+      name: category.name,
+    }));
+    
+    setTimeout(() => {
+      resolve(categoryInfos);
+    }, 1000);
+    
+    
+  });
+  
+  
+};
+
+    
+
+export const getCategoriesFromDB:getCategoriesFromDBType = async () => {
+  
+  return new Promise((resolve) => {
+
+    setTimeout(() => {
+      resolve(categories);
+    }, 1000);
+    
+    
+  });
+
+}
+
+export const getProductsFromDB:getProductsFromDBType = async () => {
+
+  return new Promise((resolve) => {
+
+    setTimeout(() => {
+      resolve(products);
+    }, 1000);
+    
+    
+  });
+
+}
+
+export const getProductByIdFromDB:getProductByIdFromDBType = async (id) => {
+  
+  return new Promise((resolve) => {
+
+  
+  
+  const product = products.find((product) => product.id === id);
+
+  if (!product) {
+    throw new Error("Product not found on DB Server");
+  }
+
+  resolve(product);
+
+  });
+}
+
+export const getSummaryProductsByCategoryIDFromDB:getSummaryProductsByCategoryIDFromDBType = async (catID) => {
+
+  return new Promise((resolve) => {
+
+    const summaryProducts = products.filter((product) => product.categoryID === catID).map((product) => {
+      const { id, name, shortDescription, price, imageUrl } = product;
+
+      return {
+        id,
+        name,
+        price,
+        description: shortDescription,
+        imageUrl,
+      };
+    });
+
+    resolve(summaryProducts);
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************
+ *  Data
+ */
+
+const products = [
   {
     id: '1',
     categoryID: '1',
@@ -343,7 +448,7 @@ export const products = [
   }
 ]
 
-export const categories  = [
+const categories  = [
   {
     id: '1',
     name: 'Nail Polish',

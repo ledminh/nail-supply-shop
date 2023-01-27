@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import SelectionPanel from '../components/shop_components/SelectionPanel';
-import { getCategories, getSummaryProducts, ProductSummaryType, CategoryType } from '../database';
+import { getCategories, getSummaryProducts, ProductSummaryType, CategoryType, ResponseType } from '../database';
 
 import styles from '../styles/Shop.module.scss';
 
@@ -12,15 +12,25 @@ import SideBar from '../components/shop_components/SideBar';
 import PriceFilter from '../components/shop_components/PriceFilter';
 import Sort from '../components/shop_components/Sort';
 
+import ErrorScreen from '../components/ErrorScreen';
+
 
 interface ShopProps {
-  categories: CategoryType[];
-  initProducts: ProductSummaryType[];
+  categoriesResponse: ResponseType<CategoryType[]>;
+  productSummariesResponse: ResponseType<ProductSummaryType[]>;
 }
 
-const Shop: FC<ShopProps> = ({categories, initProducts}) => {
+const Shop: FC<ShopProps> = ({categoriesResponse, productSummariesResponse}) => {
   
-  const { products, handleCategoryChange, selectedCategoryID } = useData(initProducts);
+  const { errMessages, categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productSummariesResponse);
+
+  if(errMessages.length > 0) {
+    return (
+      <ErrorScreen
+        errMessages={errMessages}
+      />
+    )
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -50,13 +60,14 @@ const Shop: FC<ShopProps> = ({categories, initProducts}) => {
 export default Shop;
 
 export const getServerSideProps = async () => {
-  // Fetch data from API
+  const categoriesResponse = await getCategories();
+  const productSummariesResponse = await getSummaryProducts();  
   
-  
+
   return {
     props: {
-      categories: getCategories(),
-      initProducts: getSummaryProducts(),
+      categoriesResponse,
+      productSummariesResponse,
     }
   }
 }

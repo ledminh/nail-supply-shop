@@ -1,28 +1,30 @@
-import React from 'react';
+import {FC} from 'react';
 
 import { GetServerSidePropsContext } from 'next';
 
 import Image from 'next/image';
-import Image001JPG from '../../assets/images/samples/001.jpg';
 
 import styles from '../../styles/Product.module.scss';
-import { getProductById, ProductType } from '../../database';
+import { getProductById, ProductType, ResponseType } from '../../database';
+import ErrorScreen from '../../components/ErrorScreen';
 
 interface ProductDetailProps {
-    data: ['success'|'error', ProductType]
+    productResponse: ResponseType<ProductType>;
 }
 
-const Product = ({ data }: ProductDetailProps) => {
+type ProductPageType = FC<ProductDetailProps>;
+
+const Product:ProductPageType = ({ productResponse }) => {
     
-    if(data[0] === 'error') {
+    const [status, product] = productResponse;
+
+    if(status === 'error') {
         return (
-            <div>
-                <h3>Product Not Found</h3>
-            </div>
-        );
+            <ErrorScreen
+                errMessages={[product]}
+                />
+        )
     }
-    
-    const product = data[1];
     
     return (
         <div className={styles.wrapper}>
@@ -53,22 +55,13 @@ const Product = ({ data }: ProductDetailProps) => {
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     const { id } = context.query;
   
-    try {
-        const product = getProductById(id as string);
-        return {
-            props: {
-                data: ['success', product]
-            },
-        };
+    const productResponse = await getProductById(id as string);
 
-    }
-    catch (error) {
-        return {
-            props: {
-                data: ['error', null]
-            },
-        };
-    }
+    return {
+        props: {
+            productResponse: productResponse
+        },
+    };
 
 }
 
