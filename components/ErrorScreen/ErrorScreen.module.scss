@@ -1,6 +1,8 @@
 .wrapper {
     border: 3px solid rgb(133, 35, 35);
     border-radius: 10px;
+
+    grid-column: 1/4;
 }
 
 .header {

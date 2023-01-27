@@ -12,9 +12,7 @@ import SideBar from '../components/shop_components/SideBar';
 import PriceFilter from '../components/shop_components/PriceFilter';
 import Sort from '../components/shop_components/Sort';
 
-import ErrorScreen from '../components/ErrorScreen';
-import getErrMessages from '../utils/getErrMessages';
-import ErrorLayout from '../layouts/ErrorLayout/ErrorLayout';
+import ErrorLayout from '../layouts/ErrorLayout';
 
 
 interface ShopProps {

@@ -9,6 +9,7 @@ import About from '../../components/admin_components/About';
 import styles from '../../styles/admin.module.scss';
 
 import { CategoryType, ProductType, SubtitleType, getCategories, getProducts, ResponseType } from '../../database';
+import ErrorLayout from '../../layouts/ErrorLayout';
 
 
 interface AdminProps {
@@ -20,55 +21,42 @@ interface AdminProps {
 
 const Admin: FC<AdminProps> = ({categoriesResponse, productsResponse, subtitles, aboutHtmlText}) => {
 
+  // when status === 'error', the handling is done in ErrorLayout
   const [catStatus, categories] = categoriesResponse;
   const [prodStatus, products] = productsResponse;
 
-  
-  if(catStatus !== 'success' || prodStatus !== 'success') {
-
-    const errMessages = [];
-
-    if(catStatus === 'error') errMessages.push(categories);
-    if(prodStatus === 'error') errMessages.push(products);
-
-
-    return (
-      <>
-        <HeroImage/>
-        <ErrorScreen
-          errMessages={errMessages}
-          />
-      </>
-    )
-  }
   
 
   return (
     <>
       <HeroImage/>
-      <div className={styles.body}>
-        <section className={styles.section}>
-          <Category
-            categories={categories}  
-            />
-        </section>
-        <section className={styles.section}>
-          <Product
-            categories={categories}
-            products={products}
-            />
-        </section>
-        <section className={styles.section + ' ' + styles.full}>
-          <Subtitles
-            subtitles={subtitles}
-            />
-        </section>
-        <section className={styles.section + ' ' + styles.full}>
-          <About
-            htmlText={aboutHtmlText}
-            />
-        </section>
-      </div>
+      <ErrorLayout
+        responses={[categoriesResponse, productsResponse]}
+      >
+        <div className={styles.body}>
+          <section className={styles.section}>
+            <Category
+              categories={categories as CategoryType[]}  
+              />
+          </section>
+          <section className={styles.section}>
+            <Product
+              categories={categories as CategoryType[]}
+              products={products as ProductType[]}
+              />
+          </section>
+          <section className={styles.section + ' ' + styles.full}>
+            <Subtitles
+              subtitles={subtitles}
+              />
+          </section>
+          <section className={styles.section + ' ' + styles.full}>
+            <About
+              htmlText={aboutHtmlText}
+              />
+          </section>
+        </div>
+      </ErrorLayout>
     </>
   ); 
 }

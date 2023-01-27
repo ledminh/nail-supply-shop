@@ -12,11 +12,6 @@ import {getCategoryInfosFromDB, getCategoriesFromDB, getProductsFromDB, getProdu
 export type { CategoryType, CategoryInfoType, ProductSummaryType, ProductType, SubtitleType, ResponseType };
 
 
-
-
-
-
-
 /*****************************
  * public functions
  */
