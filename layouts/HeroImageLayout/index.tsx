@@ -65,7 +65,7 @@ const HeroImageLayout:HeroLayoutComponent = ({images, altText, children}) => {
                     sizes="1280px"
                     placeholder='blur'
                 />
-                 <div className={styles.content}>
+                <div className={styles.content}>
                     <div className={styles.body}>
                         {children}
                     </div>
