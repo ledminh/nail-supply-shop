@@ -1,13 +1,15 @@
-import React, { FC } from 'react';
+import React from 'react';
 import HeroImage from '../components/aboutUs_components/HeroImage';
 
 import styles from '../styles/aboutUs.module.scss';
-import { NextPageWithLayout } from './_app';
+import { NextPageCustomized } from './_app';
 
 
 interface AboutProps {}
 
-const About: NextPageWithLayout<AboutProps> = () => (
+type AboutPageType = NextPageCustomized<AboutProps>;
+
+const About: AboutPageType = () => (
   <div>
     <div className={styles.body}>
       <div className={styles.text}>
@@ -32,7 +34,9 @@ const About: NextPageWithLayout<AboutProps> = () => (
 
 export default About;
 
-
+/****************************
+ * Customized page
+ */
 About.getLayout = (page: React.ReactNode) => (
   <div>
     <HeroImage/>

@@ -1,5 +1,3 @@
-import { NextPage } from 'next'
-
 import {StaticImageData} from 'next/image';
 
 import styles from '../styles/Home.module.scss'
@@ -15,13 +13,14 @@ import Image002JPG from '../assets/images/samples/002.jpg';
 import Image003JPG from '../assets/images/samples/003.jpg';
 import Image004JPG from '../assets/images/samples/004.jpg';
 import BestSellers from '../components/home_components/BestSellers';
-import { NextPageWithLayout } from './_app';
+import { NextPageCustomized } from './_app';
 
 
 /***************************
  *  Types
  */
 
+// TODO: remove this type and use the one from the database
 export type ProductSummaryType = {
   id: number,
   name: string,
@@ -34,7 +33,7 @@ interface HomePropsType {
   bestSellerProducts: ProductSummaryType[],
 }
 
-type HomeType = NextPageWithLayout<HomePropsType>;
+type HomeType = NextPageCustomized<HomePropsType>;
 
 
 const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
@@ -61,6 +60,10 @@ const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
 export default Home;
 
 
+
+/****************************
+ * Customized page
+ */
 Home.getLayout = (page) => {
   return (
     <>
@@ -69,6 +72,8 @@ Home.getLayout = (page) => {
     </>
   )
 }
+
+
 
 
 export const getServerSideProps = async () => {

@@ -13,7 +13,7 @@ import PriceFilter from '../components/shop_components/PriceFilter';
 import Sort from '../components/shop_components/Sort';
 
 import ErrorLayout from '../layouts/ErrorLayout';
-import { NextPageWithLayout } from './_app';
+import { NextPageCustomized } from './_app';
 
 
 interface ShopProps {
@@ -21,7 +21,7 @@ interface ShopProps {
   productSummariesResponse: ResponseType<ProductSummaryType[]>;
 }
 
-const Shop: NextPageWithLayout<ShopProps> = ({categoriesResponse, productSummariesResponse}) => {
+const Shop: NextPageCustomized<ShopProps> = ({categoriesResponse, productSummariesResponse}) => {
   const { errResponses, categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productSummariesResponse);
   
 
@@ -54,8 +54,8 @@ const Shop: NextPageWithLayout<ShopProps> = ({categoriesResponse, productSummari
 export default Shop;
 
 
-/********************
- * GET LAYOUT
+/****************************
+ * Customized page
  */
 Shop.getLayout = (page: ReactNode) => {
   return (

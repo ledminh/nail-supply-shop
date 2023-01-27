@@ -7,13 +7,13 @@ import Image from 'next/image';
 import styles from '../../styles/Product.module.scss';
 import { getProductById, ProductType, ResponseType } from '../../database';
 import ErrorLayout from '../../layouts/ErrorLayout';
-import { NextPageWithLayout } from '../_app';
+import { NextPageCustomized } from '../_app';
 
 interface ProductDetailProps {
     productResponse: ResponseType<ProductType>;
 }
 
-type ProductPageType = NextPageWithLayout<ProductDetailProps>;
+type ProductPageType = NextPageCustomized<ProductDetailProps>;
 
 const Product:ProductPageType = ({ productResponse }) => {
     
@@ -50,6 +50,10 @@ const Product:ProductPageType = ({ productResponse }) => {
 
 
 export default Product;
+
+/****************************
+ * Customized page
+ */
 
 Product.getLayout = (page: ReactNode) => {
     return (

@@ -10,7 +10,7 @@ import styles from '../../styles/admin.module.scss';
 
 import { CategoryType, ProductType, SubtitleType, getCategories, getProducts, ResponseType } from '../../database';
 import ErrorLayout from '../../layouts/ErrorLayout';
-import { NextPageWithLayout } from '../_app';
+import { NextPageCustomized } from '../_app';
 
 
 interface AdminProps {
@@ -20,7 +20,7 @@ interface AdminProps {
   aboutHtmlText: string;  
 }
 
-const Admin: NextPageWithLayout<AdminProps> = ({categoriesResponse, productsResponse, subtitles, aboutHtmlText}) => {
+const Admin: NextPageCustomized<AdminProps> = ({categoriesResponse, productsResponse, subtitles, aboutHtmlText}) => {
 
   // when status === 'error', the handling is done in ErrorLayout
   const [catStatus, categories] = categoriesResponse;
@@ -62,7 +62,9 @@ const Admin: NextPageWithLayout<AdminProps> = ({categoriesResponse, productsResp
 export default Admin;
 
 
-
+/****************************
+ * Customized page
+ */
 Admin.getLayout = (page: ReactNode) => (
   <>
     <HeroImage/>
@@ -70,6 +72,11 @@ Admin.getLayout = (page: ReactNode) => (
   </>
 )
 
+
+
+/****************************
+ * getServerSideProps
+ */
 export const getServerSideProps = async () => {
   const categoriesResponse = await getCategories();
   const productsResponse = await getProducts();

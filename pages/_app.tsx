@@ -6,15 +6,15 @@ import {NextPage} from 'next';
 import type { AppProps } from 'next/app'
 import MainLayout from '../layouts/MainLayout';
 
-export type NextPageWithLayout<P={}, IP=P> = NextPage<P, IP> & {
+export type NextPageCustomized<P={}, IP=P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
+type AppPropsCustomized = AppProps & {
+  Component: NextPageCustomized
 }
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App({ Component, pageProps }: AppPropsCustomized) {
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
