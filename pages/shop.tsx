@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import SelectionPanel from '../components/shop_components/SelectionPanel';
 import { getCategories, getSummaryProducts, ProductSummaryType, CategoryType, ResponseType } from '../database';
 
@@ -13,6 +13,8 @@ import PriceFilter from '../components/shop_components/PriceFilter';
 import Sort from '../components/shop_components/Sort';
 
 import ErrorScreen from '../components/ErrorScreen';
+import getErrMessages from '../utils/getErrMessages';
+import ErrorLayout from '../layouts/ErrorLayout/ErrorLayout';
 
 
 interface ShopProps {
@@ -21,41 +23,34 @@ interface ShopProps {
 }
 
 const Shop: FC<ShopProps> = ({categoriesResponse, productSummariesResponse}) => {
+  const { errResponses, categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productSummariesResponse);
   
-  const { errMessages, categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productSummariesResponse);
-
-  if(errMessages.length > 0) {
-    return (
-      <>
-        <HeroImage/>
-        <ErrorScreen
-          errMessages={errMessages}
-        />
-      </>
-    )
-  }
 
   return (
     <div className={styles.wrapper}>
       <HeroImage />
-      <div className={styles.body}>
-        {/* 'TopPanelMobile' is only visible on mobile devices */}
-        <TopPanelMobile
-            categories={categories}
-            handleCategoryChange={handleCategoryChange}
-          />
+      <ErrorLayout
+        responses={[categoriesResponse, productSummariesResponse, ...errResponses]}
+      >
+        <div className={styles.body}>
+          {/* 'TopPanelMobile' is only visible on mobile devices */}
+          <TopPanelMobile
+              categories={categories}
+              handleCategoryChange={handleCategoryChange}
+            />
 
-        {/* 'SideBar' is only visible on desktop devices */}
-        <SideBar
-            categories={categories}
-            selectedCategoryID={selectedCategoryID}
-            handleCategoryChange={handleCategoryChange}
-          />
-        <div className={styles.main}>
-          <TopPanel />
-          <ProductList products={products}/>
+          {/* 'SideBar' is only visible on desktop devices */}
+          <SideBar
+              categories={categories}
+              selectedCategoryID={selectedCategoryID}
+              handleCategoryChange={handleCategoryChange}
+            />
+          <div className={styles.main}>
+            <TopPanel />
+            <ProductList products={products}/>
+          </div>
         </div>
-      </div>
+      </ErrorLayout>
     </div>
   )
 };

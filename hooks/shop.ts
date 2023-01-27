@@ -2,13 +2,9 @@ import { useState, useEffect } from 'react';
 
 import { CategoryType, ProductSummaryType, ResponseType, getSummaryProducts, getSummaryProductsByCategoryID } from "../database";
 
-interface paramsType {
-    
-}
-
 type useDataType = (categoriesResponse: ResponseType<CategoryType[]>,    
 productSummariesResponse: ResponseType<ProductSummaryType[]>) => {
-    errMessages: string[];
+    errResponses: ResponseType<any>[];
     categories: CategoryType[];
     products: ProductSummaryType[];
     handleCategoryChange: (catID: string) => void;
@@ -19,21 +15,25 @@ productSummariesResponse: ResponseType<ProductSummaryType[]>) => {
 
 export const useData:useDataType = (categoriesResponse, productSummariesResponse) => {
     
-    // get data from props 
+    // get props from responses, if status === 'error', nothing is done here, it is being handled in the component
     const [catStatus, categoriesResponseData] = categoriesResponse;
     const [prodStatus, productSummariesResponseData] = productSummariesResponse;
 
 
-    // set state
+    // error messages for category change, it will be added to the errResponses on ErrorLayout component
     const [errMessages, setErrMessages] = useState<string[]>([]);
 
-    const [products, setProducts] = useState(typeof productSummariesResponseData === 'string' ? [] : productSummariesResponseData);
+
+    /***************************************************
+     * Change list of products when category is changed
+     */ 
+    const [products, setProducts] = useState(productSummariesResponseData as ProductSummaryType[]);
 
     const [selectedCategoryID, setSelectedCategoryID] = useState<string|null>(null);
 
 
 
-    // handle category change
+        // handle category change
     useEffect(() => {
         async function run() {
             if (selectedCategoryID) {
@@ -63,26 +63,6 @@ export const useData:useDataType = (categoriesResponse, productSummariesResponse
 
 
     }, [selectedCategoryID]);
-
-
-    // handle error messages
-    useEffect(() => {                
-        const _errMessages:string[] = [];
-        
-        if (catStatus === 'error'){
-
-            _errMessages.push(categoriesResponseData);
-        }
-        
-        if (prodStatus === 'error'){
-            _errMessages.push(productSummariesResponseData);
-        }
-
-        setErrMessages(_errMessages);
-        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    
     
 
 
@@ -97,7 +77,7 @@ export const useData:useDataType = (categoriesResponse, productSummariesResponse
     }
 
     return {
-        errMessages,
+        errResponses: errMessages.map(errMessage => ['error', errMessage]),
         categories: categoriesResponseData as CategoryType[],
         products,
         handleCategoryChange,
