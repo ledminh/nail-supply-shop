@@ -33,9 +33,12 @@ const Admin: FC<AdminProps> = ({categoriesResponse, productsResponse, subtitles,
 
 
     return (
-      <ErrorScreen
-        errMessages={errMessages}
-        />
+      <>
+        <HeroImage/>
+        <ErrorScreen
+          errMessages={errMessages}
+          />
+      </>
     )
   }
   

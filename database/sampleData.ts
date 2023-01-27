@@ -25,9 +25,10 @@ export const getCategoryInfosFromDB:getCategoryInfosFromDBType = async () => {
 
 export const getCategoriesFromDB:getCategoriesFromDBType = async () => {
   
-  return new Promise((resolve) => {
+  return new Promise((resolve, rejects) => {
 
     setTimeout(() => {
+      // rejects(new Error("Test Error from getCategoriesFromDB"));
       resolve(categories);
     }, 1000);
     
@@ -38,9 +39,10 @@ export const getCategoriesFromDB:getCategoriesFromDBType = async () => {
 
 export const getProductsFromDB:getProductsFromDBType = async () => {
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, rejects) => {
 
     setTimeout(() => {
+      // rejects(new Error("Test Error from getProductsFromDB"))
       resolve(products);
     }, 1000);
     
@@ -68,7 +70,7 @@ export const getProductByIdFromDB:getProductByIdFromDBType = async (id) => {
 
 export const getSummaryProductsByCategoryIDFromDB:getSummaryProductsByCategoryIDFromDBType = async (catID) => {
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, rejects) => {
 
     const summaryProducts = products.filter((product) => product.categoryID === catID).map((product) => {
       const { id, name, shortDescription, price, imageUrl } = product;
@@ -81,6 +83,8 @@ export const getSummaryProductsByCategoryIDFromDB:getSummaryProductsByCategoryID
         imageUrl,
       };
     });
+
+    // rejects(new Error("Test Error from getSummaryProductsByCategoryIDFromDB"));
 
     resolve(summaryProducts);
   });

@@ -66,10 +66,11 @@ export const useData:useDataType = (categoriesResponse, productSummariesResponse
 
 
     // handle error messages
-    useEffect(() => {
+    useEffect(() => {                
         const _errMessages:string[] = [];
-
+        
         if (catStatus === 'error'){
+
             _errMessages.push(categoriesResponseData);
         }
         
@@ -80,7 +81,7 @@ export const useData:useDataType = (categoriesResponse, productSummariesResponse
         setErrMessages(_errMessages);
         
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [catStatus, prodStatus]);
+    }, []);
     
     
 

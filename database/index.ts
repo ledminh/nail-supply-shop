@@ -24,7 +24,7 @@ export type { CategoryType, CategoryInfoType, ProductSummaryType, ProductType, S
 export const getCategories:getCategoriesType = async () => {
     try {
         const categories = await getCategoriesFromDB();
-     
+
         return ['success', categories];
     }
     catch(err) {

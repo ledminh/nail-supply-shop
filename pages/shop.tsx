@@ -26,9 +26,12 @@ const Shop: FC<ShopProps> = ({categoriesResponse, productSummariesResponse}) => 
 
   if(errMessages.length > 0) {
     return (
-      <ErrorScreen
-        errMessages={errMessages}
-      />
+      <>
+        <HeroImage/>
+        <ErrorScreen
+          errMessages={errMessages}
+        />
+      </>
     )
   }
 
@@ -63,7 +66,7 @@ export const getServerSideProps = async () => {
   const categoriesResponse = await getCategories();
   const productSummariesResponse = await getSummaryProducts();  
   
-
+  
   return {
     props: {
       categoriesResponse,

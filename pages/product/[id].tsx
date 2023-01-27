@@ -22,8 +22,8 @@ const Product:ProductPageType = ({ productResponse }) => {
         return (
             <ErrorScreen
                 errMessages={[product]}
-                />
-        )
+                />        
+        );
     }
     
     return (

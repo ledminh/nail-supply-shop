@@ -20,7 +20,7 @@ type SelectionPanelType = FunctionComponent<SelectionPanelPropsType>
  *  Main Component
  */
 const SelectionPanel:SelectionPanelType = ({categories, onChange}) => {
-
+    
 
     return (
         <div className={styles.wrapper}>

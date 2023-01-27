@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import Link from 'next/link';
 
 import styles from './ErrorScreen.module.scss';
 
@@ -25,14 +26,15 @@ const ErrorScreen:ErrorScreenType = ({errMessages}) => {
         <div className={styles.wrapper}>
             <h3 className={styles.header}>Error</h3>
             <div className={styles.body}>
-                <p>Sorry, there was some error going on here.</p>
-                <ul>
+                <p className={styles.intro}>Sorry, there was some error going on here.</p>
+                <ul className={styles.errors}>
                     {
                         errMessages.map((errMessage, index) => (
                             <li key={index}>{errMessage}</li>
                         ))
                     }
                 </ul>
+                <p className={styles.goBack}>Go back <Link href="/">Home</Link></p>
             </div>
         </div>
     )

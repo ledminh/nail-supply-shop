@@ -1,0 +1,46 @@
+.wrapper {
+    border: 3px solid rgb(133, 35, 35);
+    border-radius: 10px;
+}
+
+.header {
+    background-color: rgb(133, 35, 35);
+    color: white;
+    padding: 10px;
+}
+
+.body {
+    padding: 10px;
+
+    background-color:rgb(188, 128, 128);
+    
+    
+}
+
+.intro {
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    margin-bottom: .7rem;
+}
+
+.errors {
+    padding-left: 1rem;
+
+    margin-bottom: .7rem;
+
+    li {
+        line-height: 1.5rem;
+        font-style: italic;
+    }
+}
+
+.goBack {
+    font-weight: 600;
+
+    a {
+        color: rgb(150, 3, 3);
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+}
