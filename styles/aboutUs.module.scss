@@ -1,6 +1,6 @@
 @use 'base';
 
-.body {
+.wrapper {
     background: linear-gradient(to top, adjust-color($color: base.$backgroundColor, $lightness: -20%) 20%, adjust-color($color: base.$backgroundColor, $lightness: 5%) 100%);
 
     padding: 10px;
@@ -41,7 +41,7 @@
 }
 
 @media (min-width: base.$breakpointMobile) {
-    .body {
+    .wrapper {
         display: flex;
 
         justify-content: space-between;

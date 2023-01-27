@@ -1,6 +1,6 @@
 @use 'base';
 
-.body {
+.wrapper {
     display: flex;
 
     flex-direction: column;
@@ -51,7 +51,7 @@
     }
 
  
-    .body {
+    .wrapper {
         flex-direction: row;
         align-items: flex-start;
     }

@@ -32,7 +32,7 @@ const Admin: NextPageCustomized<AdminProps> = ({categoriesResponse, productsResp
     <ErrorLayout
         responses={[categoriesResponse, productsResponse]}
       >
-        <div className={styles.body}>
+        <div className={styles.wrapper}>
           <section className={styles.section}>
             <Category
               categories={categories as CategoryType[]}  

@@ -29,7 +29,7 @@ const Shop: NextPageCustomized<ShopProps> = ({categoriesResponse, productSummari
     <ErrorLayout
         responses={[categoriesResponse, productSummariesResponse, ...errResponses]}
       > 
-        <div className={styles.body}>
+        <div className={styles.wrapper}>
           {/* 'TopPanelMobile' is only visible on mobile devices */}
           <TopPanelMobile
               categories={categories}
@@ -59,10 +59,10 @@ export default Shop;
  */
 Shop.getLayout = (page: ReactNode) => {
   return (
-    <div className={styles.wrapper}>
+    <>
       <HeroImage />
       {page}
-    </div>
+    </>
   )
 }
 

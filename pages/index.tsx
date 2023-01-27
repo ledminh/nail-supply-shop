@@ -39,7 +39,7 @@ type HomeType = NextPageCustomized<HomePropsType>;
 const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <Section className={styles.newArrivals}>
         <NewArrivals
           products={newArrivalProducts}
@@ -51,7 +51,7 @@ const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
           products={bestSellerProducts}
         />
       </Section>
-    </>
+    </div>
   )
 
 }
