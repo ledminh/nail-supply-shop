@@ -4,6 +4,8 @@ import SmallScreen from "./SmallScreen";
 import LargeScreen from "./LargeScreen";
 import { SlugType, pageInfos } from "../../config";
 
+import styles from './NavBar.module.scss';
+
 
 
 /***************************
@@ -29,7 +31,7 @@ const NavBar:NavBarType = ({currentPageSlug}) => {
 
 
     return (
-        <>
+        <div className={styles.wrapper}>
             <SmallScreen 
                 currentPageSlug={currentPageSlug} 
                 pageInfos={pageInfosArr.filter(pI => !pI.hide)}
@@ -38,7 +40,7 @@ const NavBar:NavBarType = ({currentPageSlug}) => {
                 currentPageSlug={currentPageSlug} 
                 pageInfos={pageInfosArr.filter(pI => !pI.hide)}
                 />
-        </>
+        </div>
     )
 }
 

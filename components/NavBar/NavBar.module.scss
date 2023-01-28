@@ -1,0 +1,8 @@
+.wrapper {
+    button:active,
+    a:active {
+        opacity: .75;
+
+        transition: all .2s ease-in-out;
+    }
+}

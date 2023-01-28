@@ -29,6 +29,14 @@ const SmallScreen:SmallScreenType = ({currentPageSlug, pageInfos}) => {
 
     const {isNavOpen, handleToggleNav} = useNavScreen();
     
+    useEffect(() => {
+        if(isNavOpen){
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+    }, [isNavOpen]);
+
 
     return (
         <div className={styles.wrapper}>
