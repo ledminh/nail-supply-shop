@@ -39,8 +39,11 @@
             background-color: adjust-color($color: base.$backgroundColor, $lightness: -5%);
         }
 
+        
         &.selected {
             background-color: adjust-color($color: base.$backgroundColor, $lightness: -5%);
+
+
         }
     }
 }
