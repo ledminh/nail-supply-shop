@@ -65,18 +65,16 @@ export default Home;
 /****************************
  * Customized page
  */
-Home.getLayout = (page) => {
-  return (
-    <>
-      <HeroImage/>
-      {page}
-    </>
-  )
-}
+Home.HeroImage = HeroImage;
 
 Home.pageInfo = pageInfos.home;
 
 
+
+
+/****************************
+ * getServerSideProps
+ */
 export const getServerSideProps = async () => {
   return {
     props: {

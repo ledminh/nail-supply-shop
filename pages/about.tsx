@@ -37,11 +37,6 @@ export default About;
 /****************************
  * Customized page
  */
-About.getLayout = (page: React.ReactNode) => (
-  <div>
-    <HeroImage/>
-    {page}
-  </div>
-);
+About.HeroImage = HeroImage;
 
 About.pageInfo = pageInfos.about;

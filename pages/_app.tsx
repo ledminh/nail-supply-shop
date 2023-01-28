@@ -1,6 +1,6 @@
 import '../styles/globals.scss'
 
-import { ReactElement, ReactNode } from 'react';
+import { FunctionComponent, ReactElement, ReactNode } from 'react';
 import {NextPage} from 'next';
 
 import type { AppProps } from 'next/app'
@@ -11,7 +11,7 @@ import { PageInfoType } from '../config';
 
 
 export type NextPageCustomized<P={}, IP=P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
+  HeroImage?: FunctionComponent;
   pageInfo?: PageInfoType
 }
 
@@ -20,11 +20,13 @@ type AppPropsCustomized = AppProps & {
 }
 
 export default function App({ Component, pageProps }: AppPropsCustomized) {
-  const getLayout = Component.getLayout ?? ((page) => page);
+  
+  const HeroImage = Component.HeroImage ?? (() => null);
 
   return (
     <MainLayout pageInfo={Component.pageInfo}>
-      {getLayout(<Component {...pageProps} />)}
+      <HeroImage />
+      <Component {...pageProps} />
     </MainLayout>
   )
   

@@ -66,12 +66,7 @@ export default Admin;
 /****************************
  * Customized page
  */
-Admin.getLayout = (page: ReactNode) => (
-  <>
-    <HeroImage/>
-    {page}
-  </>
-)
+Admin.HeroImage = HeroImage;
 
 
 Admin.pageInfo = pageInfos.admin;
