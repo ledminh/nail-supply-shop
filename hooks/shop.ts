@@ -36,7 +36,8 @@ export const useData:useDataType = (categoriesResponse, productSummariesResponse
             router.push('/shop');
         } else {
             setSelectedCategoryID(currentCat.id);
-            router.push(`/shop/${currentCat.slug}`);
+            console.log(currentCat);
+            router.push(`/shop/category/${currentCat.slug}`);
         }
     }
 

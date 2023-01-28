@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import { NextPageCustomized } from '../_app';
+import { NextPageCustomized } from '../../_app';
 
 interface CategoryDetailProps {    
     catSlug: string;
@@ -8,17 +8,17 @@ interface CategoryDetailProps {
 
 type CategoryPageType = NextPageCustomized<CategoryDetailProps>;
 
-const Product:CategoryPageType = ({catSlug}) => {
+const CategoryPage:CategoryPageType = ({catSlug}) => {
     
     
     return (
-        <>catSlug</>
+        <>{catSlug}</>
 
     );
 }
 
 
-export default Product;
+export default CategoryPage;
 
 
 

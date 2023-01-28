@@ -39,7 +39,9 @@ const Categories:CategoriesType = ({selectedCategoryID, handleCategoryChange, ca
                         <li key={category.id} className={styles.item}>
                             <button
                                 className={selectedCategoryID === category.id ? styles.selected : ''} 
-                                onClick={() => handleCategoryChange(category)}>
+                                onClick={() => {
+                                    handleCategoryChange(category);
+                                }}>
                                 {category.name}
                             </button>
                         </li>
