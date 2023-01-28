@@ -1,0 +1,30 @@
+@use '../../styles/base';
+
+.wrapper {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+}
+
+.main {
+    width: 100%;
+}
+
+
+@media (min-width: base.$breakpointMobile) {
+    .wrapper {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+
+
+    .main {
+        flex-basis: 70%;
+    }
+}

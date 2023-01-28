@@ -1,0 +1,13 @@
+@use '../../../styles/base';
+
+.wrapper {
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: base.$breakpointMobile) {
+    .wrapper {
+        display: none;
+    }
+
+}
