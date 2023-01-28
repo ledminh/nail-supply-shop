@@ -1,85 +1,47 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
-import { CategoryType, ProductSummaryType, ResponseType, getSummaryProducts, getSummaryProductsByCategoryID } from "../database";
-
-type useDataType = (categoriesResponse: ResponseType<CategoryType[]>,    
-productSummariesResponse: ResponseType<ProductSummaryType[]>) => {
-    errResponses: ResponseType<any>[];
-    categories: CategoryType[];
-    products: ProductSummaryType[];
-    handleCategoryChange: (catID: string) => void;
-    selectedCategoryID: string|null;
-}    
+import { CategoryType, ProductSummaryType, ResponseType } from "../database";
 
 
-// TODO: this useData is for shop/index.tsx, it uses fetches from database. Refactor this to use getServersideProps totally
+type useDataType = (
+    categoriesResponse: ResponseType<CategoryType[]>,
+    productSummariesResponse: ResponseType<ProductSummaryType[]>
+    ) => 
+    {
+        categories: CategoryType[];
+        products: ProductSummaryType[];
+        handleCategoryChange: (currentCat: CategoryType | null) => void;
+        selectedCategoryID: string|null;
+    }    
+
 
 export const useData:useDataType = (categoriesResponse, productSummariesResponse) => {
     
+    const router = useRouter();
+
     // get props from responses, if status === 'error', nothing is done here, it is being handled in the component
     const [catStatus, categoriesResponseData] = categoriesResponse;
     const [prodStatus, productSummariesResponseData] = productSummariesResponse;
 
-
-    // error messages for category change, it will be added to the errResponses on ErrorLayout component
-    const [errMessages, setErrMessages] = useState<string[]>([]);
-
-
-    /***************************************************
-     * Change list of products when category is changed
-     */ 
-    const [products, setProducts] = useState(productSummariesResponseData as ProductSummaryType[]);
+    const [products, setProducts] = useState(typeof productSummariesResponseData !== 'string' ? productSummariesResponseData : []);
 
     const [selectedCategoryID, setSelectedCategoryID] = useState<string|null>(null);
 
 
 
-        // handle category change
-    useEffect(() => {
-        async function run() {
-            if (selectedCategoryID) {
-                const [status, productsData] = await getSummaryProductsByCategoryID(selectedCategoryID);
-    
-                if (status === 'error') {
-                    setErrMessages([productsData]);
-                }
-                else {
-                    setProducts(productsData);
-                }
-
-                
-            } else {
-                const [status, productsData] = await getSummaryProducts();
-
-                if (status === 'error') {
-                    setErrMessages([productsData]);
-                }
-                else {
-                    setProducts(productsData);
-                }
-            }
-        }
-
-        run();
-
-
-    }, [selectedCategoryID]);
-    
-
-
-
-
-    const handleCategoryChange = (catID: string) => {
-        if (catID === 'CAT/ALL') {
+    const handleCategoryChange = (currentCat: CategoryType | null) => {
+        if (currentCat === null) {
             setSelectedCategoryID(null);
+            router.push('/shop');
         } else {
-            setSelectedCategoryID(catID);
+            setSelectedCategoryID(currentCat.id);
+            router.push(`/shop/${currentCat.slug}`);
         }
     }
 
     return {
-        errResponses: errMessages.map(errMessage => ['error', errMessage]),
-        categories: categoriesResponseData as CategoryType[],
+        categories: typeof categoriesResponseData !== 'string'? categoriesResponseData : [],
         products,
         handleCategoryChange,
         selectedCategoryID

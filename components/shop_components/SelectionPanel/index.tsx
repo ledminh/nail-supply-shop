@@ -9,7 +9,7 @@ import { CategoryType } from '../../../database';
  */
 interface SelectionPanelPropsType {
     categories: CategoryType[];
-    onChange: (catID: string) => void;
+    onChange: (currentCategory: CategoryType|null) => void;
 } 
 
 type SelectionPanelType = FunctionComponent<SelectionPanelPropsType>
@@ -24,10 +24,10 @@ const SelectionPanel:SelectionPanelType = ({categories, onChange}) => {
 
     return (
         <div className={styles.wrapper}>
-            <select className={styles.select} onChange={(e) => onChange(e.target.value)}>
-                <option key='all' value="CAT/ALL" selected>All</option>
-                {categories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
+            <select className={styles.select} onChange={(e) => onChange(e.target.value === ''? null : categories[+e.target.value])}>
+                <option key='all' value={''} selected>All</option>
+                {categories.map((category, index) => (
+                    <option key={category.id} value={index}>{category.name}</option>
                 ))}
             </select>
         </div>

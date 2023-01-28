@@ -11,6 +11,7 @@ export type SubtitleType = {
 export type CategoryType = {
     id: string;
     name: string;
+    slug: string;
     description: string;
     imageUrl: string;
 };

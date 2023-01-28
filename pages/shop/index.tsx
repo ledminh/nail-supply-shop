@@ -22,11 +22,10 @@ interface ShopProps {
 
 const Shop: NextPageCustomized<ShopProps> = ({categoriesResponse, productSummariesResponse}) => {
     
-    const { errResponses, categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productSummariesResponse);
+    const { categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productSummariesResponse);
     
-
     // this is for ErrorLayout on ShopLayout
-    const responses = [categoriesResponse, productSummariesResponse, ...errResponses];
+    const responses = [categoriesResponse, productSummariesResponse];
 
     return (
         <ShopLayout

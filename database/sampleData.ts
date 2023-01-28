@@ -1,4 +1,4 @@
-import { getCategoryInfosFromDBType, getCategoriesFromDBType, getProductsFromDBType, getProductByIdFromDBType, getSummaryProductsByCategoryIDFromDBType } from "./types";
+import { getCategoryInfosFromDBType, getCategoriesFromDBType, getProductsFromDBType, getProductByIdFromDBType, getSummaryProductsByCategoryIDFromDBType, ProductDBType, CategoryType } from "./types";
 
 
 
@@ -107,7 +107,7 @@ export const getSummaryProductsByCategoryIDFromDB:getSummaryProductsByCategoryID
  *  Data
  */
 
-const products = [
+const products:ProductDBType[] = [
   {
     id: '1',
     categoryID: '1',
@@ -452,34 +452,39 @@ const products = [
   }
 ]
 
-const categories  = [
+const categories:CategoryType[]  = [
   {
     id: '1',
     name: 'Nail Polish',
+    slug: 'nail-polish',
     description: 'A wide variety of nail polishes in different shades and finishes',
     imageUrl: '/images/001.jpg'
   },
   {
     id: '2',
     name: 'Nail Tools',
+    slug: 'nail-tools',
     description: 'Essential tools for shaping and maintaining nails',
     imageUrl: '/images/002.jpg'
   },
   {
     id: '3',
     name: 'Nail Art',
+    slug: 'nail-art',
     description: 'Decorations and embellishments for creating unique nail designs',
     imageUrl: '/images/003.jpg'
   },
   {
     id: '4',
     name: 'Nail Extensions',
+    slug: 'nail-extensions',
     description: 'Products for extending and sculpting nails',
     imageUrl: '/images/004.jpg'
   },
   {
     id: '5',
     name: 'Nail Care',
+    slug: 'nail-care',
     description: 'Products for maintaining the health and appearance of nails',
     imageUrl: '/images/001.jpg'
   }

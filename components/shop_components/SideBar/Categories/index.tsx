@@ -12,7 +12,7 @@ import { CategoryType } from '../../../../database';
 interface CategoriesPropsType {
     categories: CategoryType[];
     selectedCategoryID: string|null;
-    handleCategoryChange: (catID: string) => void;
+    handleCategoryChange: (currentCategory:CategoryType|null) => void;
 } 
 
 type CategoriesType = FunctionComponent<CategoriesPropsType>
@@ -31,7 +31,7 @@ const Categories:CategoriesType = ({selectedCategoryID, handleCategoryChange, ca
                 <li className={styles.item}>
                     <button
                         className={selectedCategoryID === null ? styles.selected : ''}
-                        onClick={() => handleCategoryChange('CAT/ALL')}
+                        onClick={() => handleCategoryChange(null)}
                     >All</button>
                 </li>
                 {
@@ -39,7 +39,7 @@ const Categories:CategoriesType = ({selectedCategoryID, handleCategoryChange, ca
                         <li key={category.id} className={styles.item}>
                             <button
                                 className={selectedCategoryID === category.id ? styles.selected : ''} 
-                                onClick={() => handleCategoryChange(category.id)}>
+                                onClick={() => handleCategoryChange(category)}>
                                 {category.name}
                             </button>
                         </li>

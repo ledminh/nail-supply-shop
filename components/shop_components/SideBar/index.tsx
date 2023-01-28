@@ -11,7 +11,7 @@ import Categories from "./Categories";
 interface SideBarPropsType {
     categories: CategoryType[];
     selectedCategoryID: string|null;
-    handleCategoryChange: (catID: string) => void;
+    handleCategoryChange: (currentCategory: CategoryType|null) => void;
 } 
 
 type SideBarType = FunctionComponent<SideBarPropsType>

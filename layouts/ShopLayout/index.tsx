@@ -13,7 +13,7 @@ interface ShopLayoutProps {
     responses: ResponseType<any>[];
     categories: CategoryType[];
     selectedCategoryID: string|null;
-    handleCategoryChange: (catID: string) => void;
+    handleCategoryChange: (currentCat: CategoryType|null) => void;
 }
 
 const ShopLayout: FC<ShopLayoutProps> = ({children, responses, categories, selectedCategoryID, handleCategoryChange}) => (

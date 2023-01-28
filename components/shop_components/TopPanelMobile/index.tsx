@@ -10,7 +10,7 @@ import SelectionPanel from "../SelectionPanel";
  */
 interface TopPanelMobilePropsType {
     categories: CategoryType[];
-    handleCategoryChange: (catID: string) => void;
+    handleCategoryChange: (currentCategory: CategoryType|null) => void;
 } 
 
 type TopPanelMobileType = FunctionComponent<TopPanelMobilePropsType>
