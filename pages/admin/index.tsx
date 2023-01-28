@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-import ErrorScreen from '../../components/ErrorScreen';
 import Category from '../../components/admin_components/Category';
 import HeroImage from '../../components/admin_components/HeroImage';
 import Product from '../../components/admin_components/Product';
@@ -8,16 +6,16 @@ import About from '../../components/admin_components/About';
 
 import styles from '../../styles/admin.module.scss';
 
-import { CategoryType, ProductType, SubtitleType, getCategories, getProducts, ResponseType } from '../../database';
+import { DBCategoryType, DBProductType, DBSubtitleType, getCategories, getProducts, ResponseType } from '../../database';
 import ErrorLayout from '../../layouts/ErrorLayout';
 import { NextPageCustomized } from '../_app';
 import { pageInfos } from '../../config';
 
 
 interface AdminProps {
-  categoriesResponse: ResponseType<CategoryType[]>;
-  productsResponse: ResponseType<ProductType[]>;
-  subtitles: SubtitleType[];
+  categoriesResponse: ResponseType<DBCategoryType[]>;
+  productsResponse: ResponseType<DBProductType[]>;
+  subtitles: DBSubtitleType[];
   aboutHtmlText: string;  
 }
 
@@ -36,13 +34,13 @@ const Admin: NextPageCustomized<AdminProps> = ({categoriesResponse, productsResp
         <div className={styles.wrapper}>
           <section className={styles.section}>
             <Category
-              categories={categories as CategoryType[]}  
+              categories={categories as DBCategoryType[]}  
               />
           </section>
           <section className={styles.section}>
             <Product
-              categories={categories as CategoryType[]}
-              products={products as ProductType[]}
+              categories={categories as DBCategoryType[]}
+              products={products as DBProductType[]}
               />
           </section>
           <section className={styles.section + ' ' + styles.full}>

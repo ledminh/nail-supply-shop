@@ -1,8 +1,10 @@
-/*****************************
- * Data Types  
- */
 
-    // database schema
+/*********************************************
+ *  Database schema
+ * -------------------------------------------
+ *  This is how the database should look like.
+ */  
+
 export type DBCategoryType = {
     id: string;
     name: string;
@@ -30,6 +32,10 @@ export type DBSubtitleType = {
 
 
 
+
+/*********************************************
+ * Response from API functions
+ */ 
 export type ResponseType<T> = ['success', T] | ['error', string];
 
 
@@ -44,7 +50,8 @@ export type ResponseType<T> = ['success', T] | ['error', string];
  */
 
 export type GetCategoriesType = () => Promise<ResponseType<DBCategoryType[]>>;
-export type GetProductsType = (options: {
+
+export type GetProductsType = (options?: {
     limit?: number;
     offset?: number;
     categoryID?: string;    
@@ -52,8 +59,6 @@ export type GetProductsType = (options: {
 
 
 export type GetProductType = (id: string) => Promise<ResponseType<DBProductType>>;
-
-
 
 
 
