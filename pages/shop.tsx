@@ -44,7 +44,7 @@ const Shop: NextPageCustomized<ShopProps> = ({categoriesResponse, productSummari
               handleCategoryChange={handleCategoryChange}
             />
           <div className={styles.main}>
-            <TopPanel />
+            <TopPanelFullSize />
             <ProductList products={products}/>
           </div>
         </div>
@@ -118,14 +118,14 @@ const TopPanelMobile: FC<TopPanelMobileProps> = ({categories, handleCategoryChan
 
 
 
-// TopPanelDesktop
+// TopPanelFullSize
 
-interface TopPanelProps {
+interface TopPanelFullSizeProps {
 }
 
-const TopPanel: FC<TopPanelProps> = () => {
+const TopPanelFullSize: FC<TopPanelFullSizeProps> = () => {
   return (
-    <div className={styles.topPanel}>
+    <div className={styles.topPanelFullSize}>
       <PriceFilter />
       <Sort/>
     </div>
