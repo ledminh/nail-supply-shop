@@ -3,7 +3,7 @@ import { GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
 
 import styles from '../../styles/Product.module.scss';
-import { getProductById, ProductType, ResponseType } from '../../database';
+import { getProduct, ProductType, ResponseType } from '../../database';
 import ErrorLayout from '../../layouts/ErrorLayout';
 import { NextPageCustomized } from '../_app';
 
@@ -34,7 +34,7 @@ const Product:ProductPageType = ({ productResponse }) => {
                 </div>
                 <div className={styles.description}>
                     <h4>Description</h4>
-                    <p>{(product as ProductType).description}</p>
+                    <p>{(product as ProductType).fullDescription}</p>
                 </div>
                 <div className={styles.price}>
                     <span className={styles.text}>Price:</span>
@@ -57,7 +57,32 @@ export default Product;
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     const { id } = context.query;
   
-    const productResponse = await getProductById(id as string);
+    if(!id) {
+        return {
+            props: {
+                productResponse: ['error', 'No product id provided']
+            },
+        };
+    }
+    
+    if(Array.isArray(id)) {
+        return {
+            props: {
+                productResponse: ['error', 'Multiple product ids provided']
+            },
+        };
+    }
+
+    if(id.length === 0) {
+        return {
+            props: {
+                productResponse: ['error', 'Empty product id provided']
+            },
+        };
+    }
+    
+
+    const productResponse = await getProduct(id);
 
     return {
         props: {

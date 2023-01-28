@@ -36,7 +36,14 @@ export type DBSubtitleType = {
 /*********************************************
  * Response from API functions
  */ 
+
+    // Generic type for response from API functions
 export type ResponseType<T> = ['success', T] | ['error', string];
+
+    // Specific types for response from API functions
+export type CategoryType = DBCategoryType;
+export type ProductType = DBProductType;
+export type SubtitleType = DBSubtitleType;
 
 
 
@@ -49,16 +56,16 @@ export type ResponseType<T> = ['success', T] | ['error', string];
  * by client code (frontend). 
  */
 
-export type GetCategoriesType = () => Promise<ResponseType<DBCategoryType[]>>;
+export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
 export type GetProductsType = (options?: {
     limit?: number;
     offset?: number;
     categoryID?: string;    
-}) => Promise<ResponseType<DBProductType[]>>;
+}) => Promise<ResponseType<ProductType[]>>;
 
 
-export type GetProductType = (id: string) => Promise<ResponseType<DBProductType>>;
+export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
 
 
 

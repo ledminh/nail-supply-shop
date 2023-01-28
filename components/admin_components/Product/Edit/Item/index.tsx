@@ -22,7 +22,7 @@ const Item:ItemType = ({product}) => {
     return (
         <div className={styles.wrapper}>
             <h5>{product.name}</h5>
-            <p>{product.description}</p>
+            <p>{product.fullDescription}</p>
             <div className={styles.buttons}>
                 <button className={styles.button}>Edit</button>
                 <button className={styles.button}>Delete</button>

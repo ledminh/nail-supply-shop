@@ -6,16 +6,16 @@ import About from '../../components/admin_components/About';
 
 import styles from '../../styles/admin.module.scss';
 
-import { DBCategoryType, DBProductType, DBSubtitleType, getCategories, getProducts, ResponseType } from '../../database';
+import { CategoryType, ProductType, SubtitleType, getCategories, getProducts, ResponseType } from '../../database';
 import ErrorLayout from '../../layouts/ErrorLayout';
 import { NextPageCustomized } from '../_app';
 import { pageInfos } from '../../config';
 
 
 interface AdminProps {
-  categoriesResponse: ResponseType<DBCategoryType[]>;
-  productsResponse: ResponseType<DBProductType[]>;
-  subtitles: DBSubtitleType[];
+  categoriesResponse: ResponseType<CategoryType[]>;
+  productsResponse: ResponseType<ProductType[]>;
+  subtitles: SubtitleType[];
   aboutHtmlText: string;  
 }
 
@@ -34,13 +34,13 @@ const Admin: NextPageCustomized<AdminProps> = ({categoriesResponse, productsResp
         <div className={styles.wrapper}>
           <section className={styles.section}>
             <Category
-              categories={categories as DBCategoryType[]}  
+              categories={categories as CategoryType[]}  
               />
           </section>
           <section className={styles.section}>
             <Product
-              categories={categories as DBCategoryType[]}
-              products={products as DBProductType[]}
+              categories={categories as CategoryType[]}
+              products={products as ProductType[]}
               />
           </section>
           <section className={styles.section + ' ' + styles.full}>
@@ -75,7 +75,7 @@ Admin.pageInfo = pageInfos.admin;
  */
 export const getServerSideProps = async () => {
   const categoriesResponse = await getCategories();
-  const productsResponse = await getProducts();
+  const productsResponse = await getProducts({limit: 20});
 
 
 

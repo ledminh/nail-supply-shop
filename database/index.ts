@@ -1,4 +1,4 @@
-import { DBCategoryType, DBProductType, DBSubtitleType, ResponseType } from './types';
+import { CategoryType, ProductType, SubtitleType, ResponseType } from './types';
 
 import {getDBCategories, getDBProducts, getDBProduct} from './sampleDB';
 
@@ -7,11 +7,16 @@ import {GetCategoriesType, GetProductsType, GetProductType} from './types';
 
 
 
-/*****************************
- * public types
+/**********************************
+ * Public types
+ * --------------------------------
+ * These types are used on Frontend,
+ * for now, they are the same as the
+ * types used on the database schema,
+ * but it may change in the future. 
  */
 
-export type { DBCategoryType, DBProductType, DBSubtitleType, ResponseType };
+export type {CategoryType, ProductType, SubtitleType, ResponseType};
 
 
 /*****************************

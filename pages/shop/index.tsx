@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { getCategories, getSummaryProducts, ProductSummaryType, CategoryType, ResponseType } from '../../database';
+import { getCategories, getProducts, ProductType, CategoryType, ResponseType } from '../../database';
 
 
 import { useData } from '../../hooks/shop';
@@ -14,18 +14,18 @@ import ShopLayout from '../../layouts/ShopLayout';
 
 
 interface ShopProps {
-  categoriesResponse: ResponseType<CategoryType[]>;
-  productSummariesResponse: ResponseType<ProductSummaryType[]>;
+    categoriesResponse: ResponseType<CategoryType[]>;
+    productsResponse: ResponseType<ProductType[]>;
 }
 
 // TODO: continue to refactor this page to shop/category/[catSlug].tsx
 
-const Shop: NextPageCustomized<ShopProps> = ({categoriesResponse, productSummariesResponse}) => {
+const Shop: NextPageCustomized<ShopProps> = ({categoriesResponse, productsResponse}) => {
     
-    const { categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productSummariesResponse);
+    const { categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productsResponse);
     
     // this is for ErrorLayout on ShopLayout
-    const responses = [categoriesResponse, productSummariesResponse];
+    const responses = [categoriesResponse, productsResponse];
 
     return (
         <ShopLayout
@@ -54,13 +54,13 @@ Shop.pageInfo = pageInfos.shop;
  */
 export const getServerSideProps = async () => {
     const categoriesResponse = await getCategories();
-    const productSummariesResponse = await getSummaryProducts();  
+    const productsResponse = await getProducts({limit: 20});  
     
     
     return {
         props: {
             categoriesResponse,
-            productSummariesResponse,
+            productsResponse,
         }
     }
 }
