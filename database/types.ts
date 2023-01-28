@@ -57,12 +57,19 @@ export type ResponseType<T> = ['success', T] | ['error', string];
     // from index.ts
 
 export type getCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
+export type getCategoryInfoType = (id: string) => Promise<ResponseType<CategoryInfoType>>;
+
+
 export type getProductsType = () => Promise<ResponseType<ProductType[]>>;
 export type getSummaryProductsType = () => Promise<ResponseType<ProductSummaryType[]>>;
+
+
 export type getProductByIdType = (id: string) => Promise<ResponseType<ProductType>>;
-export type getCategoryInfoType = (id: string) => Promise<ResponseType<CategoryInfoType>>;
+
+// TODO: change this to getProductSummariesByCatIDType
 export type getSummaryProductsByCategoryIDType = (catID: string) => Promise<ResponseType<ProductSummaryType[]>>;
 
+export type getProductSummariesByCatSlugType = (catSlug: string) => Promise<ResponseType<ProductSummaryType[]>>;
 
     // from *data.ts
 export type getCategoryInfosFromDBType = () => Promise<CategoryInfoType[]>;

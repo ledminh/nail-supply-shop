@@ -1,6 +1,6 @@
 import { CategoryInfoType, CategoryType, ProductSummaryType, ProductType, SubtitleType, ResponseType, getSummaryProductsByCategoryIDType } from './types';
 
-import {getCategoryInfoType, getCategoriesType, getProductsType, getSummaryProductsType, getProductByIdType} from './types';
+import {getCategoryInfoType, getCategoriesType, getProductSummariesByCatSlugType, getProductsType, getSummaryProductsType, getProductByIdType} from './types';
 
 import {getCategoryInfosFromDB, getCategoriesFromDB, getProductsFromDB, getProductByIdFromDB, getSummaryProductsByCategoryIDFromDB} from './sampleData';
 
@@ -89,6 +89,42 @@ export const getSummaryProducts:getSummaryProductsType = async () => {
     catch(err) {
         return ['error', (err as Error).message];
     }
+};
+
+
+// TODO: this function should return products with category info, especially the description
+const getProductSummariesByCatSlug:getProductSummariesByCatSlugType = async (catSlug) => {
+    try {
+        const products = await getProductsFromDB();
+        const categories = await getCategoriesFromDB();
+
+        const category = categories.find((cat) => cat.slug === catSlug);
+
+        if (!category) {
+            return ['error', `Category with slug ${catSlug} not found`];
+        }
+
+        const productSummaries = products.filter((product) => product.categoryID === category.id)
+            .map((product) => {
+                const { id, name, shortDescription, price, imageUrl } = product;
+
+                return {
+                    id,
+                    name,
+                    price,
+                    description: shortDescription,
+                    imageUrl
+                };
+                
+            });
+
+        return ['success', productSummaries];
+
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+
 };
 
 
