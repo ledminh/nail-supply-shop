@@ -13,6 +13,7 @@ productSummariesResponse: ResponseType<ProductSummaryType[]>) => {
 
 
 // TODO: this useData is for shop/index.tsx, it uses fetches from database. Refactor this to use getServersideProps totally
+
 export const useData:useDataType = (categoriesResponse, productSummariesResponse) => {
     
     // get props from responses, if status === 'error', nothing is done here, it is being handled in the component

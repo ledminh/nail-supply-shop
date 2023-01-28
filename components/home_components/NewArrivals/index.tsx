@@ -5,7 +5,8 @@ import styles from './NewArrivals.module.scss';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ProductSummaryType } from "../../../pages";
+
+import { ProductSummaryType } from '../../../database';
 
 /***************************
  *  Types
@@ -38,7 +39,7 @@ const NewArrivals:NewArrivalsType = ({products}) => {
                             <Link href={`/product/${product.id}`}>
                                 <Image 
                                     className={styles.image}
-                                    src={product.image} 
+                                    src={product.imageUrl} 
                                     alt={product.name}
                                     fill
                                     style={{objectFit: 'cover'}}

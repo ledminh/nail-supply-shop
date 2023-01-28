@@ -16,18 +16,13 @@ import BestSellers from '../components/home_components/BestSellers';
 import { NextPageCustomized } from './_app';
 import { pageInfos } from '../config';
 
+import { ProductSummaryType } from '../database';
+
 
 /***************************
  *  Types
  */
 
-// TODO: remove this type and use the one from the database
-export type ProductSummaryType = {
-  id: number,
-  name: string,
-  description: string,
-  image: StaticImageData
-}
 
 interface HomePropsType {
   newArrivalProducts: ProductSummaryType[],
@@ -75,7 +70,10 @@ Home.pageInfo = pageInfos.home;
 /****************************
  * getServerSideProps
  */
+
 export const getServerSideProps = async () => {
+
+  // TODO: create new API endpoint to fetch data from database: newArrivalProducts, bestSellerProducts
   return {
     props: {
       newArrivalProducts: [
