@@ -1,62 +1,53 @@
-import { getCategoryInfosFromDBType, getCategoriesFromDBType, getProductsFromDBType, getProductByIdFromDBType, getSummaryProductsByCategoryIDFromDBType, ProductDBType, CategoryType } from "./types";
+import { GetDBCategoriesType, GetDBProductsType, GetDBProductType, DBCategoryType, DBProductType, DBSubtitleType } from "./types";
 
 
-
-
-export const getCategoryInfosFromDB:getCategoryInfosFromDBType = async () => {
-  
-  return new Promise((resolve) => {
-    const categoryInfos = categories.map((category) => ({
-      id: category.id,
-      name: category.name,
-    }));
-    
-    setTimeout(() => {
-      resolve(categoryInfos);
-    }, 1000);
-    
-    
-  });
-  
-  
-};
-
-    
-
-export const getCategoriesFromDB:getCategoriesFromDBType = async () => {
+export const getDBCategories:GetDBCategoriesType = async () => {
   
   return new Promise((resolve, rejects) => {
-
-    setTimeout(() => {
-      // rejects(new Error("Test Error from getCategoriesFromDB"));
-      resolve(categories);
-    }, 1000);
-    
-    
+    // rejects(new Error("Test Error from getCategoriesFromDB"));
+    resolve(categories);
   });
 
 }
 
-export const getProductsFromDB:getProductsFromDBType = async () => {
+export const getDBProducts:GetDBProductsType = async (options) => {
 
   return new Promise((resolve, rejects) => {
-
-    setTimeout(() => {
-      // rejects(new Error("Test Error from getProductsFromDB"))
+    if(!options) {
       resolve(products);
-    }, 1000);
+      return;
+    }
+
+    const { limit, offset, categoryID } = options;
+
+    let returnedProducts = products;
+
+    if(categoryID) {
+      returnedProducts = returnedProducts.filter((product) => product.categoryID === categoryID);
+    }
+
+    let start = offset ?? 0;
+    
+    
+    if(limit) {
+      returnedProducts = returnedProducts.slice(start, start + limit);
+    }
+
+
+    // rejects(new Error("Test Error from getProductsFromDB"));
+
+    resolve(returnedProducts);
     
     
   });
 
 }
 
-export const getProductByIdFromDB:getProductByIdFromDBType = async (id) => {
+
+export const getDBProduct:GetDBProductType = async (id) => {
   
   return new Promise((resolve) => {
-
-  
-  
+    
   const product = products.find((product) => product.id === id);
 
   if (!product) {
@@ -68,46 +59,12 @@ export const getProductByIdFromDB:getProductByIdFromDBType = async (id) => {
   });
 }
 
-export const getSummaryProductsByCategoryIDFromDB:getSummaryProductsByCategoryIDFromDBType = async (catID) => {
-
-  return new Promise((resolve, rejects) => {
-
-    const summaryProducts = products.filter((product) => product.categoryID === catID).map((product) => {
-      const { id, name, shortDescription, price, imageUrl } = product;
-
-      return {
-        id,
-        name,
-        price,
-        description: shortDescription,
-        imageUrl,
-      };
-    });
-
-    // rejects(new Error("Test Error from getSummaryProductsByCategoryIDFromDB"));
-
-    resolve(summaryProducts);
-  });
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /************************************
  *  Data
  */
 
-const products:ProductDBType[] = [
+const products:DBProductType[] = [
   {
     id: '1',
     categoryID: '1',
@@ -452,7 +409,7 @@ const products:ProductDBType[] = [
   }
 ]
 
-const categories:CategoryType[]  = [
+const categories:DBCategoryType[]  = [
   {
     id: '1',
     name: 'Nail Polish',
@@ -487,5 +444,25 @@ const categories:CategoryType[]  = [
     slug: 'nail-care',
     description: 'Products for maintaining the health and appearance of nails',
     imageUrl: '/images/001.jpg'
+  }
+]
+
+
+// TODO: change text into those from source code
+const DBSubtitles:DBSubtitleType[]  = [
+  {
+    id: '1',
+    name: 'home',
+    text: 'Home Subtitle'
+  },
+  {
+    id: '2',
+    name: 'about',
+    text: 'About Subtitle'
+  },
+  {
+    id: '3',
+    name: 'shop',
+    text: 'Shop Subtitle'
   }
 ]

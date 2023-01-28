@@ -1,8 +1,6 @@
 import { FunctionComponent } from "react";
 
-import styles from './Subtitles.module.scss';
-
-import { SubtitleType } from "../../../database";
+import { DBSubtitleType } from "../../../database";
 import AdminSection from "../../../layouts/AdminSection";
 import AdminSubSection from "../../../layouts/AdminSubSection";
 import Item from "./Item";
@@ -11,7 +9,7 @@ import Item from "./Item";
  *  Types
  */
 interface SubtitlesPropsType {
-    subtitles: SubtitleType[]
+    subtitles: DBSubtitleType[]
 } 
 
 type SubtitlesComponentType = FunctionComponent<SubtitlesPropsType>

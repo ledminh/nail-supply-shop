@@ -82,11 +82,13 @@ export const getServerSideProps = async () => {
 
 
 
+
   return {
     props: {
       categoriesResponse,
       productsResponse,
       aboutHtmlText: 'About Text',
+      // TODO: get subtitles from database
       subtitles: [
         {
           id: 1,

@@ -2,13 +2,8 @@
  * Data Types  
  */
 
-export type SubtitleType = {
-    id: string,
-    name: 'home' | 'about' | 'shop';
-    text: string;
-};
-
-export type CategoryType = {
+    // database schema
+export type DBCategoryType = {
     id: string;
     name: string;
     slug: string;
@@ -16,12 +11,7 @@ export type CategoryType = {
     imageUrl: string;
 };
 
-export type CategoryInfoType = {
-    id: string;
-    name: string;
-};
-
-export type ProductDBType = {
+export type DBProductType = {
     categoryID: string;
     id: string;
     name: string;
@@ -31,17 +21,13 @@ export type ProductDBType = {
     imageUrl: string;
 };
 
-export type ProductSummaryType = {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    imageUrl: string;
+
+export type DBSubtitleType = {
+    id: string,
+    name: 'home' | 'about' | 'shop';
+    text: string;
 };
 
-export type ProductType = ProductSummaryType & {
-    categoryInfo: CategoryInfoType;
-};
 
 
 export type ResponseType<T> = ['success', T] | ['error', string];
@@ -50,30 +36,43 @@ export type ResponseType<T> = ['success', T] | ['error', string];
 
 
 
-/*****************************
- * Function Types  
+/*********************************************
+ *  API functions
+ * -------------------------------------------
+ * Functions in index.ts, which are called 
+ * by client code (frontend). 
  */
 
-    // from index.ts
-
-export type getCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
-export type getCategoryInfoType = (id: string) => Promise<ResponseType<CategoryInfoType>>;
-
-
-export type getProductsType = () => Promise<ResponseType<ProductType[]>>;
-export type getSummaryProductsType = () => Promise<ResponseType<ProductSummaryType[]>>;
+export type GetCategoriesType = () => Promise<ResponseType<DBCategoryType[]>>;
+export type GetProductsType = (options: {
+    limit?: number;
+    offset?: number;
+    categoryID?: string;    
+}) => Promise<ResponseType<DBProductType[]>>;
 
 
-export type getProductByIdType = (id: string) => Promise<ResponseType<ProductType>>;
+export type GetProductType = (id: string) => Promise<ResponseType<DBProductType>>;
 
-// TODO: change this to getProductSummariesByCatIDType
-export type getSummaryProductsByCategoryIDType = (catID: string) => Promise<ResponseType<ProductSummaryType[]>>;
 
-export type getProductSummariesByCatSlugType = (catSlug: string) => Promise<ResponseType<ProductSummaryType[]>>;
 
-    // from *data.ts
-export type getCategoryInfosFromDBType = () => Promise<CategoryInfoType[]>;
-export type getCategoriesFromDBType = () => Promise<CategoryType[]>;
-export type getProductsFromDBType = () => Promise<ProductDBType[]>;
-export type getProductByIdFromDBType = (id: string) => Promise<ProductDBType>;
-export type getSummaryProductsByCategoryIDFromDBType = (catID:string) => Promise<ProductSummaryType[]>;
+
+
+/*********************************************
+ * Database functions
+ * -------------------------------------------
+ * Functions from *DB.ts, which are called 
+ * by the functions in index.tsx and directly work 
+ * with the database. Should be implemented 
+ * differently for different databases.
+ */
+
+
+export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
+
+export type GetDBProductsType = (options?:{
+    limit?: number;
+    offset?: number;
+    categoryID?: string;    
+}) => Promise<DBProductType[]>;
+
+export type GetDBProductType = (id: string) => Promise<DBProductType>;
