@@ -56,8 +56,6 @@ export default Product;
 
 
 
-
-
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     const { id } = context.query;
   

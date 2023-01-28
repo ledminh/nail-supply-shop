@@ -5,9 +5,14 @@ import {NextPage} from 'next';
 
 import type { AppProps } from 'next/app'
 import MainLayout from '../layouts/MainLayout';
+import { PageInfoType } from '../config';
+
+
+
 
 export type NextPageCustomized<P={}, IP=P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode
+  getLayout?: (page: ReactElement) => ReactNode;
+  pageInfo?: PageInfoType
 }
 
 type AppPropsCustomized = AppProps & {
@@ -15,10 +20,10 @@ type AppPropsCustomized = AppProps & {
 }
 
 export default function App({ Component, pageProps }: AppPropsCustomized) {
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <MainLayout pageTitle={Component.name}>
+    <MainLayout pageInfo={Component.pageInfo}>
       {getLayout(<Component {...pageProps} />)}
     </MainLayout>
   )

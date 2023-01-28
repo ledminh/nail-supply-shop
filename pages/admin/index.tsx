@@ -11,6 +11,7 @@ import styles from '../../styles/admin.module.scss';
 import { CategoryType, ProductType, SubtitleType, getCategories, getProducts, ResponseType } from '../../database';
 import ErrorLayout from '../../layouts/ErrorLayout';
 import { NextPageCustomized } from '../_app';
+import { pageInfos } from '../../config';
 
 
 interface AdminProps {
@@ -72,6 +73,8 @@ Admin.getLayout = (page: ReactNode) => (
   </>
 )
 
+
+Admin.pageInfo = pageInfos.admin;
 
 
 /****************************

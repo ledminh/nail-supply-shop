@@ -2,19 +2,17 @@ import { FunctionComponent } from "react";
 
 import SmallScreen from "./SmallScreen";
 import LargeScreen from "./LargeScreen";
+import { SlugType, pageInfos } from "../../config";
 
 
 
 /***************************
  *  Types
  */
-export interface LinkType {
-    name: string,
-    href: string
-}
+
 
 interface NavBarPropsType {
-    currentPage?: string
+    currentPageSlug: SlugType | null
 } 
 
 type NavBarType = FunctionComponent<NavBarPropsType>
@@ -24,20 +22,21 @@ type NavBarType = FunctionComponent<NavBarPropsType>
 /***************************
  *  Main Component
  */
-const NavBar:NavBarType = ({currentPage}) => {
+const NavBar:NavBarType = ({currentPageSlug}) => {
 
+    const pageInfosArr = Object.values(pageInfos);
 
 
 
     return (
         <>
             <SmallScreen 
-                currentPage={currentPage} 
-                links={links}
+                currentPageSlug={currentPageSlug} 
+                pageInfos={pageInfosArr.filter(pI => !pI.hide)}
             />
             <LargeScreen 
-                currentPage={currentPage} 
-                links={links}
+                currentPageSlug={currentPageSlug} 
+                pageInfos={pageInfosArr.filter(pI => !pI.hide)}
                 />
         </>
     )
@@ -45,22 +44,5 @@ const NavBar:NavBarType = ({currentPage}) => {
 
 export default NavBar;
 
-
-// data
-
-const links:LinkType[] = [
-    {
-        name: "Home",
-        href: "/"
-    },
-    {
-        name: "About",
-        href: "/about"
-    },
-    {
-        name: "Shop",
-        href: "/shop"
-    }
-]
 
 

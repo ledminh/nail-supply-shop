@@ -4,14 +4,14 @@ import styles from './LargeScreen.module.scss';
 
 import Link from 'next/link';
 
-import { LinkType } from '../../NavBar';
+import { SlugType, PageInfoType } from "../../../config";
 
 /***************************
  *  Types
  */
 interface LargeScreenPropsType {
-    currentPage?: string,
-    links: LinkType[]
+    currentPageSlug: SlugType|null,
+    pageInfos: PageInfoType[]
 } 
 
 type LargeScreenType = FunctionComponent<LargeScreenPropsType>
@@ -21,7 +21,7 @@ type LargeScreenType = FunctionComponent<LargeScreenPropsType>
 /***************************
  *  Main Component
  */
-const LargeScreen:LargeScreenType = ({currentPage, links}) => {
+const LargeScreen:LargeScreenType = ({currentPageSlug, pageInfos}) => {
 
 
 
@@ -29,11 +29,11 @@ const LargeScreen:LargeScreenType = ({currentPage, links}) => {
         <nav className={styles.wrapper}>
             <ul className={styles.ul}>
                 {
-                    links.map((link, index) => (
-                        <li key={index}>
-                            <Link className={currentPage === link.name? styles.current : ""} 
-                                href={link.href}>
-                                {link.name}
+                    pageInfos.map((pIF, index) => (
+                        <li key={pIF.slug}>
+                            <Link className={currentPageSlug === pIF.slug? styles.current : ""} 
+                                href={pIF.url}>
+                                {pIF.title}
                             </Link>
                         </li>
                     ))

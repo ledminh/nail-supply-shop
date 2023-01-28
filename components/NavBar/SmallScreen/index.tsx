@@ -8,14 +8,14 @@ import HamburgerSVG from '../../../assets/images/hamburger.svg';
 import CloseSVG from '../../../assets/images/close_icon.svg';
 import { useNavScreen } from "./hooks";
 
-import { LinkType } from '../../NavBar';
+import { SlugType, PageInfoType } from "../../../config";
 
 /***************************
  *  Types
  */
 interface SmallScreenPropsType {
-    currentPage?: string,
-    links: LinkType[]
+    currentPageSlug: SlugType | null,
+    pageInfos: PageInfoType[]
 } 
 
 type SmallScreenType = FunctionComponent<SmallScreenPropsType>
@@ -25,7 +25,7 @@ type SmallScreenType = FunctionComponent<SmallScreenPropsType>
 /***************************
  *  Main Component
  */
-const SmallScreen:SmallScreenType = ({currentPage, links}) => {
+const SmallScreen:SmallScreenType = ({currentPageSlug, pageInfos}) => {
 
     const {isNavOpen, handleToggleNav} = useNavScreen();
     
@@ -49,12 +49,12 @@ const SmallScreen:SmallScreenType = ({currentPage, links}) => {
                 <nav className={styles.nav}>
                     <ul>
                         {
-                            links.map((link, index) => (
+                            pageInfos.map((pIF, index) => (
                                 <li key={index}>
-                                    <Link href={link.href}
-                                        className={currentPage === link.name? styles.current : ""}
+                                    <Link href={pIF.url}
+                                        className={currentPageSlug === pIF.slug? styles.current : ""}
                                     >
-                                        {link.name}
+                                        {pIF.title}
                                     </Link>
                                 </li>
                             ))

@@ -4,6 +4,8 @@ import HeroImage from '../components/aboutUs_components/HeroImage';
 import styles from '../styles/aboutUs.module.scss';
 import { NextPageCustomized } from './_app';
 
+import { pageInfos } from '../config';
+
 
 interface AboutProps {}
 
@@ -41,3 +43,5 @@ About.getLayout = (page: React.ReactNode) => (
     {page}
   </div>
 );
+
+About.pageInfo = pageInfos.about;

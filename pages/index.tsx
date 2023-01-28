@@ -14,6 +14,7 @@ import Image003JPG from '../assets/images/samples/003.jpg';
 import Image004JPG from '../assets/images/samples/004.jpg';
 import BestSellers from '../components/home_components/BestSellers';
 import { NextPageCustomized } from './_app';
+import { pageInfos } from '../config';
 
 
 /***************************
@@ -73,7 +74,7 @@ Home.getLayout = (page) => {
   )
 }
 
-
+Home.pageInfo = pageInfos.home;
 
 
 export const getServerSideProps = async () => {

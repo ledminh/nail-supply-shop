@@ -14,6 +14,7 @@ import Sort from '../components/shop_components/Sort';
 
 import ErrorLayout from '../layouts/ErrorLayout';
 import { NextPageCustomized } from './_app';
+import { pageInfos } from '../config';
 
 
 interface ShopProps {
@@ -66,7 +67,7 @@ Shop.getLayout = (page: ReactNode) => {
   )
 }
 
-
+Shop.pageInfo = pageInfos.shop;
 
 /********************
  * SERVER SIDE PROPS
