@@ -14,6 +14,8 @@ interface ShopProps {
     response: ResponseType<ShopPageDataType>;
 }
 
+// TODO: style this page
+
 const Shop: NextPageCustomized<ShopProps> = ({response}) => {
     
     

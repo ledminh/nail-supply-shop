@@ -2,7 +2,8 @@ import { GetServerSidePropsContext } from 'next';
 
 import { NextPageCustomized } from '../../_app';
 import { ResponseType, CategoryPageDataType, CategoryType, getCategoryPageData } from '../../../database';
-import ShopLayout from '../../../layouts/ShopLayout';
+
+import CategoryLayout from '../../../layouts/CategoryLayout';
 
 import { useRouter } from 'next/router';
 import ProductList from '../../../components/shop_components/ProductList';
@@ -24,7 +25,7 @@ const CategoryPage:CategoryPageType = ({response}) => {
     const router = useRouter();
 
     return (
-        <ShopLayout 
+        <CategoryLayout 
             responses={responses}
             categories={(data as CategoryPageDataType).categories}
             selectedCategoryID={(data as CategoryPageDataType).currentCategoryID} 
@@ -38,7 +39,7 @@ const CategoryPage:CategoryPageType = ({response}) => {
             }}
             >
                 <ProductList products={(data as CategoryPageDataType).products} />
-        </ShopLayout>
+        </CategoryLayout>
 
     );
 }

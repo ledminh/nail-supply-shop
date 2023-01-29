@@ -1,24 +1,24 @@
 import { FunctionComponent, ReactNode } from "react";
 
-import styles from './ShopSection.module.scss';
+import styles from './Section.module.scss';
 
 /***************************
  *  Types
  */
 
-interface ShopSectionPropsType {
+interface SectionPropsType {
     children: ReactNode;
     type: 'MainBar' | 'SideBar' | 'MobileBar';
 } 
 
-type ShopSectionType = FunctionComponent<ShopSectionPropsType>
+type SectionType = FunctionComponent<SectionPropsType>
 
 
 
 /***************************
  *  Main Component
  */
-const ShopSection:ShopSectionType = ({children, type}) => {
+const Section:SectionType = ({children, type}) => {
 
     return (
         <section className={styles.wrapper + ' ' + styles[type]}>
@@ -27,4 +27,4 @@ const ShopSection:ShopSectionType = ({children, type}) => {
     )
 }
 
-export default ShopSection;
+export default Section;

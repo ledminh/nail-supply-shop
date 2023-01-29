@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import styles from './ShopLayout.module.scss';
+import styles from './CategoryLayout.module.scss';
 
 import ErrorLayout from '../ErrorLayout';
 import { ResponseType, CategoryType } from '../../database';
@@ -10,9 +10,9 @@ import CategoryList from '../../components/shop_components/CategoryMenu';
 
 import PriceFilter from '../../components/shop_components/PriceFilter';
 import Sort from '../../components/shop_components/Sort';
-import ShopSection from './ShopSection';
+import Section from './Section';
 
-interface ShopLayoutProps {
+interface CategoryLayoutProps {
     children: ReactNode;
     responses: ResponseType<any>[];
     categories: CategoryType[];
@@ -20,39 +20,39 @@ interface ShopLayoutProps {
     handleCategoryChange: (currentCat: CategoryType|null) => void;
 }
 
-const ShopLayout: FC<ShopLayoutProps> = ({children, responses, categories, selectedCategoryID, handleCategoryChange}) => (
+const CategoryLayout: FC<CategoryLayoutProps> = ({children, responses, categories, selectedCategoryID, handleCategoryChange}) => (
   <ErrorLayout
       responses={responses}
     > 
       <div className={styles.wrapper}>
         {/* 'MobileBar' is only visible on mobile devices */}
           
-          <ShopSection type='MobileBar'>        
+          <Section type='MobileBar'>        
             <CategorySelect
                 categories={categories}
                 selectedCategoryID={selectedCategoryID}
                 onChange={handleCategoryChange}
             />
-          </ShopSection>
+          </Section>
         {/* 'SideBar' is only visible on desktop devices */}
-        <ShopSection type='SideBar'>
+        <Section type='SideBar'>
           <CategoryList
             categories={categories}
             selectedCategoryID={selectedCategoryID}
             handleCategoryChange={handleCategoryChange}
           />
-        </ShopSection>
+        </Section>
           
         <div className={styles.main}>
             {/* 'MainBar' is visible on both desktop and mobile devices */}
-            <ShopSection type='MainBar'>
+            <Section type='MainBar'>
                 <PriceFilter/>
                 <Sort/>
-            </ShopSection>
+            </Section>
             {children}
         </div>
       </div>
     </ErrorLayout>
 );
 
-export default ShopLayout;
+export default CategoryLayout;

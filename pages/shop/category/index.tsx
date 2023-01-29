@@ -4,7 +4,8 @@ import { NextPageCustomized } from '../../_app';
 import HeroImage from '../../../components/shop_components/HeroImage';
 import { pageInfos } from '../../../config';
 
-import ShopLayout from '../../../layouts/ShopLayout';
+import CategoryLayout from '../../../layouts/CategoryLayout';
+
 import { CategoryPageDataType, ResponseType, getCategoryPageData } from '../../../database';
 
 import ProductList from '../../../components/shop_components/ProductList';
@@ -31,7 +32,7 @@ const CategoryIndexPage:CategoryIndexPageType = ({response}) => {
 
     
     return (
-        <ShopLayout 
+        <CategoryLayout 
             responses={responses}
             categories={(data as CategoryPageDataType).categories}
             selectedCategoryID={null} 
@@ -45,7 +46,7 @@ const CategoryIndexPage:CategoryIndexPageType = ({response}) => {
             }}
             >
                 <ProductList products={(data as CategoryPageDataType).products} />
-        </ShopLayout>
+        </CategoryLayout>
     );
 }
 
