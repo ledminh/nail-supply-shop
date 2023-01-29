@@ -30,7 +30,7 @@ const CategoryPage:CategoryPageType = ({response}) => {
             selectedCategoryID={(data as CategoryPageDataType).currentCategoryID} 
             handleCategoryChange={(currentCat) => {
                 if(!currentCat) {
-                    router.push('/shop');
+                    router.push('/shop/category');
                 }
                 else {
                     router.push(`/shop/category/${currentCat.slug}`);
@@ -56,6 +56,7 @@ CategoryPage.pageInfo = pageInfos.shop;
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     const { catSlug } = context.query;
 
+    
     if(!catSlug) {
         return {
             response: ['error', 'No category slug found']

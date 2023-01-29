@@ -1,8 +1,19 @@
-import { CategoryType, ProductType, SubtitleType, CategoryPageDataType, ResponseType, GetCategoryPageDataType } from './types';
+/**********************************************************
+ * This file is the entry point for the database module
+ * It exports the types and functions that are used on the
+ * frontend
+ *********************************************************/
 
+
+// return types for API functions
+import { CategoryType, ProductType, SubtitleType, CategoryPageDataType, ShopPageDataType, ResponseType } from './types';
+
+// database functions, these functions are used to get data from the database, interact directly with the database
 import {getDBCategories, getDBProducts, getDBProduct} from './sampleDB';
 
-import {GetCategoriesType, GetProductsType, GetProductType} from './types';
+// types for API functions implemented in this file
+import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType} from './types';
+
 
 
 
@@ -16,7 +27,7 @@ import {GetCategoriesType, GetProductsType, GetProductType} from './types';
  * but it may change in the future. 
  */
 
-export type {CategoryType, ProductType, SubtitleType, CategoryPageDataType, ResponseType};
+export type {CategoryType, ProductType, SubtitleType, CategoryPageDataType, ShopPageDataType, ResponseType};
 
 
 /*****************************
@@ -60,8 +71,15 @@ export const getProduct:GetProductType = async (id) => {
 
 export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) => {
 
-    try {
+    try {       
+
         const categories = await getDBCategories();
+
+        if(!categorySlug) {
+            const products = await getDBProducts();
+
+            return ['success', {categories, currentCategoryID: '', products}];
+        }
 
         const category = categories.find(category => category.slug === categorySlug);
 
@@ -72,6 +90,17 @@ export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) 
         const products = await getDBProducts({categoryID: category.id});
 
         return ['success', {categories, currentCategoryID: category.id, products}];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
+export const getShopPageData:GetShopPageDataType = async () => {
+    try {
+        const categories = await getDBCategories();
+
+        return ['success', {categories}];
     }
     catch(err) {
         return ['error', (err as Error).message];

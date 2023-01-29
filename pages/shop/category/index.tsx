@@ -1,0 +1,71 @@
+import { NextPageCustomized } from '../../_app';
+
+
+import HeroImage from '../../../components/shop_components/HeroImage';
+import { pageInfos } from '../../../config';
+
+import ShopLayout from '../../../layouts/ShopLayout';
+import { CategoryPageDataType, ResponseType, getCategoryPageData } from '../../../database';
+
+import ProductList from '../../../components/shop_components/ProductList';
+
+import { useRouter } from 'next/router';
+
+
+interface CategoryIndexProps {
+    response: ResponseType<CategoryPageDataType>;
+}
+
+type CategoryIndexPageType = NextPageCustomized<CategoryIndexProps>;
+
+
+
+
+const CategoryIndexPage:CategoryIndexPageType = ({response}) => {
+    
+    const [status, data] = response;
+   
+    const responses = [response];    
+
+    const router = useRouter();
+
+    
+    return (
+        <ShopLayout 
+            responses={responses}
+            categories={(data as CategoryPageDataType).categories}
+            selectedCategoryID={null} 
+            handleCategoryChange={(currentCat) => {
+                if(!currentCat) {
+                    router.push('/shop/category');
+                }
+                else {
+                    router.push(`/shop/category/${currentCat.slug}`);
+                }
+            }}
+            >
+                <ProductList products={(data as CategoryPageDataType).products} />
+        </ShopLayout>
+    );
+}
+
+
+export default CategoryIndexPage;
+
+CategoryIndexPage.HeroImage = HeroImage;
+CategoryIndexPage.pageInfo = pageInfos.shop;
+
+
+
+
+export const getServerSideProps = async () => {
+    
+    const response = await getCategoryPageData();
+
+    return {
+        props: {
+            response
+        },
+    };
+
+}

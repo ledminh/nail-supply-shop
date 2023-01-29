@@ -1,39 +1,40 @@
-import { ReactNode } from 'react';
-
-import { getCategories, getProducts, ProductType, CategoryType, ResponseType } from '../../database';
-
-
-import { useData } from '../../hooks/shop';
-import ProductList from '../../components/shop_components/ProductList';
 import HeroImage from '../../components/shop_components/HeroImage';
 
 
 import { NextPageCustomized } from '../_app';
 import { pageInfos } from '../../config';
-import ShopLayout from '../../layouts/ShopLayout';
+import ErrorLayout from '../../layouts/ErrorLayout';
+
+import { ResponseType, ShopPageDataType, getShopPageData } from '../../database';
+
+import Link from 'next/link';
 
 
 interface ShopProps {
-    categoriesResponse: ResponseType<CategoryType[]>;
-    productsResponse: ResponseType<ProductType[]>;
+    response: ResponseType<ShopPageDataType>;
 }
 
-const Shop: NextPageCustomized<ShopProps> = ({categoriesResponse, productsResponse}) => {
+const Shop: NextPageCustomized<ShopProps> = ({response}) => {
     
-    const { categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productsResponse);
     
-    // this is for ErrorLayout on ShopLayout
-    const responses = [categoriesResponse, productsResponse];
-
     return (
-        <ShopLayout
-            responses={responses}
-            categories={categories}
-            selectedCategoryID={selectedCategoryID}
-            handleCategoryChange={handleCategoryChange}
+        <ErrorLayout
+            responses={[response]}
             >
-            <ProductList products={products}/>
-        </ShopLayout>
+            <h2>Category List</h2>
+            {
+                response[0] === 'success' && response[1].categories.map((cat) => {
+                    return (
+                        <Link key={cat.id}
+                            href={`/shop/category/${cat.slug}`}
+                            >
+                            <h3>{cat.name}</h3>
+                            <p>{cat.description}</p>
+                        </Link>
+                    )
+                })
+            }
+        </ErrorLayout>
     )
 };
 
@@ -44,21 +45,18 @@ export default Shop;
  * Customized page
  */
 Shop.HeroImage = HeroImage;
-
 Shop.pageInfo = pageInfos.shop;
 
 /********************
  * SERVER SIDE PROPS
  */
 export const getServerSideProps = async () => {
-    const categoriesResponse = await getCategories();
-    const productsResponse = await getProducts({limit: 20});  
     
+    const response = await getShopPageData();
     
     return {
         props: {
-            categoriesResponse,
-            productsResponse,
+            response
         }
     }
 }

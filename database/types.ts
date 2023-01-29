@@ -51,6 +51,9 @@ export type CategoryPageDataType = {
     products: ProductType[];
 };
 
+export type ShopPageDataType = {
+    categories: CategoryType[];
+}
 
 
 
@@ -73,7 +76,12 @@ export type GetProductsType = (options?: {
 
 export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
 
-export type GetCategoryPageDataType = (categorySlug: string) => Promise<ResponseType<CategoryPageDataType>>;
+
+// fetches data for category pages
+export type GetCategoryPageDataType = (categorySlug?: string) => Promise<ResponseType<CategoryPageDataType>>;
+
+// fetches data for shop page
+export type GetShopPageDataType = () => Promise<ResponseType<ShopPageDataType>>;
 
 
 /*********************************************
