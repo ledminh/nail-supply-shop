@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import styles from './ProductList.module.scss';
 
 
-import { ProductSummaryType } from '../../../database';
+import { ProductType } from '../../../database';
 
 import Item from './Item';
 
@@ -12,7 +12,7 @@ import Item from './Item';
  *  Types
  */
 interface ProductListPropsType {
-    products: ProductSummaryType[];
+    products: ProductType[];
 } 
 
 type ProductListType = FunctionComponent<ProductListPropsType>

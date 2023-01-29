@@ -4,7 +4,7 @@ import styles from './Item.module.scss';
 
 import Image from 'next/image';
 
-import { ProductSummaryType } from '../../../../database';
+import { ProductType } from '../../../../database';
 
 import Link from 'next/link';
 
@@ -12,7 +12,7 @@ import Link from 'next/link';
  *  Types
  */
 interface ItemPropsType {
-    product: ProductSummaryType;
+    product: ProductType;
 } 
 
 type ItemType = FunctionComponent<ItemPropsType>
@@ -36,7 +36,7 @@ const Item:ItemType = ({product}) => {
                     />
                 <div className={styles.body}>
                     <h4>{product.name}</h4>
-                    <p>{product.description}</p>
+                    <p>{product.shortDescription}</p>
                     <div className={styles.price}>
                         <span>Price: </span>
                         <span>${product.price}</span>

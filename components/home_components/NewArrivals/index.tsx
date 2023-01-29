@@ -6,7 +6,7 @@ import styles from './NewArrivals.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ProductSummaryType } from '../../../database';
+import { ProductType } from '../../../database';
 
 /***************************
  *  Types
@@ -16,7 +16,7 @@ import { ProductSummaryType } from '../../../database';
 
 
 interface NewArrivalsPropsType {
-    products: ProductSummaryType[]
+    products: ProductType[]
 } 
 
 type NewArrivalsType = FunctionComponent<NewArrivalsPropsType>
@@ -46,7 +46,7 @@ const NewArrivals:NewArrivalsType = ({products}) => {
                                     />
                                 <div className={styles.text}>
                                     <h4 className={styles.name}>{product.name}</h4>
-                                    <span>{product.description}</span>
+                                    <span>{product.shortDescription}</span>
                                 </div>
                             </Link>
                         </li>

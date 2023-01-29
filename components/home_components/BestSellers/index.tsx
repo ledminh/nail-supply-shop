@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import styles from './BestSellers.module.scss';
 
-import { ProductSummaryType } from '../../../database';
+import { ProductType } from '../../../database';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ import Link from 'next/link';
  *  Types
  */
 interface BestSellersPropsType {
-    products: ProductSummaryType[]
+    products: ProductType[]
 } 
 
 type BestSellersType = FunctionComponent<BestSellersPropsType>
@@ -41,7 +41,7 @@ const BestSellers:BestSellersType = ({products}) => {
                                     />
                                 <div className={styles.text}>
                                     <h4 className={styles.name}>{product.name}</h4>
-                                    <span>{product.description}</span>
+                                    <span>{product.shortDescription}</span>
                                 </div>
                             </Link>
                         </li>
