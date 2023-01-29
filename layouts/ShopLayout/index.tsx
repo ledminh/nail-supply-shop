@@ -4,9 +4,15 @@ import styles from './ShopLayout.module.scss';
 import ErrorLayout from '../ErrorLayout';
 import { ResponseType, CategoryType } from '../../database';
 
-import TopPanelMobile from '../../components/shop_components/TopPanelMobile';
-import SideBar from '../../components/shop_components/SideBar';
-import TopPanelFullSize from '../../components/shop_components/TopPanelFullSize';
+import SideBar from './SideBar';
+import MobileBar from './MobileBar';
+
+import SelectionPanel from '../../components/shop_components/SelectionPanel';
+import CategoryList from '../../components/shop_components/CategoryList';
+
+import MainBar from './MainBar';
+import PriceFilter from '../../components/shop_components/PriceFilter';
+import Sort from '../../components/shop_components/Sort';
 
 interface ShopLayoutProps {
     children: ReactNode;
@@ -21,20 +27,28 @@ const ShopLayout: FC<ShopLayoutProps> = ({children, responses, categories, selec
       responses={responses}
     > 
       <div className={styles.wrapper}>
-        {/* 'TopPanelMobile' is only visible on mobile devices */}
-        <TopPanelMobile
-            categories={categories}
-            handleCategoryChange={handleCategoryChange}
+        {/* 'MobileBar' is only visible on mobile devices */}
+        <MobileBar>
+            <SelectionPanel
+                categories={categories}
+                onChange={handleCategoryChange}
             />
+        </MobileBar>
 
         {/* 'SideBar' is only visible on desktop devices */}
-        <SideBar
+        <SideBar>
+          <CategoryList
             categories={categories}
             selectedCategoryID={selectedCategoryID}
             handleCategoryChange={handleCategoryChange}
-            />
+          />
+        </SideBar>
+          
         <div className={styles.main}>
-            <TopPanelFullSize />
+            <MainBar>
+                <PriceFilter/>
+                <Sort/>
+            </MainBar>
             {children}
         </div>
       </div>

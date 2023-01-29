@@ -1,28 +1,28 @@
 import { FunctionComponent } from "react";
 
-import styles from './Categories.module.scss';
+import styles from './CategoryList.module.scss';
 
 
-import { CategoryType } from '../../../../database';
+import { CategoryType } from '../../../database';
 
 
 /***************************
  *  Types
  */
-interface CategoriesPropsType {
+interface CategoryListPropsType {
     categories: CategoryType[];
     selectedCategoryID: string|null;
     handleCategoryChange: (currentCategory:CategoryType|null) => void;
 } 
 
-type CategoriesType = FunctionComponent<CategoriesPropsType>
+type CategoryListType = FunctionComponent<CategoryListPropsType>
 
 
 
 /***************************
  *  Main Component
  */
-const Categories:CategoriesType = ({selectedCategoryID, handleCategoryChange, categories}) => {
+const CategoryList:CategoryListType = ({selectedCategoryID, handleCategoryChange, categories}) => {
 
     return (
         <div className={styles.wrapper}>
@@ -52,4 +52,4 @@ const Categories:CategoriesType = ({selectedCategoryID, handleCategoryChange, ca
     )
 }
 
-export default Categories;
+export default CategoryList;
