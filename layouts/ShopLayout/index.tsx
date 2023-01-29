@@ -4,8 +4,6 @@ import styles from './ShopLayout.module.scss';
 import ErrorLayout from '../ErrorLayout';
 import { ResponseType, CategoryType } from '../../database';
 
-import SideBar from './SideBar';
-import MobileBar from './MobileBar';
 
 import SelectionPanel from '../../components/shop_components/SelectionPanel';
 import CategoryList from '../../components/shop_components/CategoryList';
@@ -13,6 +11,7 @@ import CategoryList from '../../components/shop_components/CategoryList';
 import MainBar from './MainBar';
 import PriceFilter from '../../components/shop_components/PriceFilter';
 import Sort from '../../components/shop_components/Sort';
+import ShopSection from './ShopSection';
 
 interface ShopLayoutProps {
     children: ReactNode;
@@ -28,27 +27,28 @@ const ShopLayout: FC<ShopLayoutProps> = ({children, responses, categories, selec
     > 
       <div className={styles.wrapper}>
         {/* 'MobileBar' is only visible on mobile devices */}
-        <MobileBar>
+          
+          <ShopSection type='MobileBar'>        
             <SelectionPanel
                 categories={categories}
                 onChange={handleCategoryChange}
             />
-        </MobileBar>
-
+          </ShopSection>
         {/* 'SideBar' is only visible on desktop devices */}
-        <SideBar>
+        <ShopSection type='SideBar'>
           <CategoryList
             categories={categories}
             selectedCategoryID={selectedCategoryID}
             handleCategoryChange={handleCategoryChange}
           />
-        </SideBar>
+        </ShopSection>
           
         <div className={styles.main}>
-            <MainBar>
+            {/* 'MainBar' is visible on both desktop and mobile devices */}
+            <ShopSection type='MainBar'>
                 <PriceFilter/>
                 <Sort/>
-            </MainBar>
+            </ShopSection>
             {children}
         </div>
       </div>

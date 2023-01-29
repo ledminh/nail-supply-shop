@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 
 import styles from './SelectionPanel.module.scss';
 
@@ -21,10 +21,16 @@ type SelectionPanelType = FunctionComponent<SelectionPanelPropsType>
  */
 const SelectionPanel:SelectionPanelType = ({categories, onChange}) => {
     
+    const [index, setIndex] = useState<number>(0);
 
     return (
         <div className={styles.wrapper}>
-            <select className={styles.select} onChange={(e) => onChange(e.target.value === ''? null : categories[+e.target.value])}>
+            <select className={styles.select} 
+                    onChange={(e) => {
+                        setIndex(+e.target.value);
+                        onChange(e.target.value === ''? null : categories[+e.target.value]);
+                    }}
+                    value={index}>
                 <option key='all' value={''} selected>All</option>
                 {categories.map((category, index) => (
                     <option key={category.id} value={index}>{category.name}</option>

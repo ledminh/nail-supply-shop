@@ -1,0 +1,49 @@
+@use '../../../styles/base';
+
+.MobileBar {
+    display: block;
+    width: 100%;
+}
+
+.SideBar {
+    display: none;
+
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    flex-basis: 30%;
+    position: sticky;
+    top: 80px;
+}
+
+
+.MainBar {
+    display: flex;
+    width: 100%;
+
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    border: 1px solid adjust-color($color: base.$backgroundColor, $lightness: -30%);
+
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: 5%);
+
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+
+    margin-bottom: 20px;
+}
+
+
+
+@media (min-width: base.$breakpointMobile) {
+    .MobileBar {
+        display: none;
+    }
+
+    .SideBar {
+        display: flex;
+    }
+}
