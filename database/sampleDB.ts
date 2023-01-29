@@ -43,7 +43,6 @@ export const getDBProducts:GetDBProductsType = async (options) => {
 
 }
 
-
 export const getDBProduct:GetDBProductType = async (id) => {
   
   return new Promise((resolve) => {

@@ -45,6 +45,12 @@ export type CategoryType = DBCategoryType;
 export type ProductType = DBProductType;
 export type SubtitleType = DBSubtitleType;
 
+export type CategoryPageDataType = {
+    currentCategoryID: string;
+    categories: CategoryType[];
+    products: ProductType[];
+};
+
 
 
 
@@ -67,6 +73,7 @@ export type GetProductsType = (options?: {
 
 export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
 
+export type GetCategoryPageDataType = (categorySlug: string) => Promise<ResponseType<CategoryPageDataType>>;
 
 
 /*********************************************

@@ -1,4 +1,4 @@
-import { CategoryType, ProductType, SubtitleType, ResponseType } from './types';
+import { CategoryType, ProductType, SubtitleType, CategoryPageDataType, ResponseType, GetCategoryPageDataType } from './types';
 
 import {getDBCategories, getDBProducts, getDBProduct} from './sampleDB';
 
@@ -16,7 +16,7 @@ import {GetCategoriesType, GetProductsType, GetProductType} from './types';
  * but it may change in the future. 
  */
 
-export type {CategoryType, ProductType, SubtitleType, ResponseType};
+export type {CategoryType, ProductType, SubtitleType, CategoryPageDataType, ResponseType};
 
 
 /*****************************
@@ -47,7 +47,6 @@ export const getProducts:GetProductsType = async (options) => {
     }
 };
 
-
 export const getProduct:GetProductType = async (id) => {
     try {
         const product = await getDBProduct(id);
@@ -58,3 +57,23 @@ export const getProduct:GetProductType = async (id) => {
         return ['error', (err as Error).message];
     }
 };
+
+export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) => {
+
+    try {
+        const categories = await getDBCategories();
+
+        const category = categories.find(category => category.slug === categorySlug);
+
+        if(!category) {
+            return ['error', 'Category not found'];
+        }
+
+        const products = await getDBProducts({categoryID: category.id});
+
+        return ['success', {categories, currentCategoryID: category.id, products}];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}

@@ -18,8 +18,6 @@ interface ShopProps {
     productsResponse: ResponseType<ProductType[]>;
 }
 
-// TODO: continue to refactor this page to shop/category/[catSlug].tsx
-
 const Shop: NextPageCustomized<ShopProps> = ({categoriesResponse, productsResponse}) => {
     
     const { categories, products, handleCategoryChange, selectedCategoryID } = useData(categoriesResponse, productsResponse);
