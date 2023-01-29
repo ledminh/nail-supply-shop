@@ -45,6 +45,7 @@ export type CategoryType = DBCategoryType;
 export type ProductType = DBProductType;
 export type SubtitleType = DBSubtitleType;
 
+    // Data types for pages
 export type CategoryPageDataType = {
     currentCategoryID: string;
     categories: CategoryType[];
@@ -65,6 +66,7 @@ export type ShopPageDataType = {
  * by client code (frontend). 
  */
 
+
 export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
 export type GetProductsType = (options?: {
@@ -77,11 +79,18 @@ export type GetProductsType = (options?: {
 export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
 
 
-// fetches data for category pages
+    //------------------------------------------------
+    // Each page has its own function, which fetches 
+    // data for that page. These functions are called in 
+    // the getServerSideProps function in the page 
+    // component.
+
+    // fetches data for category pages
 export type GetCategoryPageDataType = (categorySlug?: string) => Promise<ResponseType<CategoryPageDataType>>;
 
-// fetches data for shop page
+    // fetches data for shop page
 export type GetShopPageDataType = () => Promise<ResponseType<ShopPageDataType>>;
+
 
 
 /*********************************************

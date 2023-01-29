@@ -8,9 +8,8 @@ import CategoryLayout from '../../../layouts/CategoryLayout';
 
 import { CategoryPageDataType, ResponseType, getCategoryPageData } from '../../../database';
 
-import ProductList from '../../../components/shop_components/ProductList';
+import ProductList from '../../../components/category_components/ProductList';
 
-import { useRouter } from 'next/router';
 
 
 interface CategoryIndexProps {
@@ -25,27 +24,17 @@ type CategoryIndexPageType = NextPageCustomized<CategoryIndexProps>;
 const CategoryIndexPage:CategoryIndexPageType = ({response}) => {
     
     const [status, data] = response;
-   
-    const responses = [response];    
 
-    const router = useRouter();
-
-    
     return (
         <CategoryLayout 
-            responses={responses}
-            categories={(data as CategoryPageDataType).categories}
-            selectedCategoryID={null} 
-            handleCategoryChange={(currentCat) => {
-                if(!currentCat) {
-                    router.push('/shop/category');
-                }
-                else {
-                    router.push(`/shop/category/${currentCat.slug}`);
-                }
-            }}
+            responses={[response]}
+            categories={status === 'success' ? data.categories : []}
+            selectedCategoryID={null}
             >
-                <ProductList products={(data as CategoryPageDataType).products} />
+                {
+                    status === 'success' && <ProductList products={data.products} /> 
+                }
+
         </CategoryLayout>
     );
 }
@@ -53,8 +42,10 @@ const CategoryIndexPage:CategoryIndexPageType = ({response}) => {
 
 export default CategoryIndexPage;
 
+
+// TODO: this HeroImage is from shop_components, change it to category_components
 CategoryIndexPage.HeroImage = HeroImage;
-CategoryIndexPage.pageInfo = pageInfos.shop;
+CategoryIndexPage.pageInfo = pageInfos.category;
 
 
 

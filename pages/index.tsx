@@ -16,7 +16,7 @@ import BestSellers from '../components/home_components/BestSellers';
 import { NextPageCustomized } from './_app';
 import { pageInfos } from '../config';
 
-import { ProductSummaryType } from '../database';
+import { ProductType } from '../database';
 
 
 /***************************
@@ -25,8 +25,8 @@ import { ProductSummaryType } from '../database';
 
 
 interface HomePropsType {
-  newArrivalProducts: ProductSummaryType[],
-  bestSellerProducts: ProductSummaryType[],
+  newArrivalProducts: ProductType[],
+  bestSellerProducts: ProductType[],
 }
 
 type HomeType = NextPageCustomized<HomePropsType>;

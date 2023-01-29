@@ -1,4 +1,4 @@
-export type SlugType = 'home' | 'shop' | 'about' | 'admin';
+export type SlugType = 'home' | 'shop' | 'about' | 'category' | 'admin';
 
 export interface PageInfoType {
     title: string;
@@ -29,6 +29,14 @@ export const pageInfos: PageInfosType = {
         slug: 'about',
         url: '/about'
     },
+    category: {
+        title: 'Category',
+        description: 'Category Nail Supply Shop',
+        slug: 'category',
+        url: '/category',
+        hide: true
+    },
+
     admin: {
         title: 'Admin',
         description: 'Admin Panel', 

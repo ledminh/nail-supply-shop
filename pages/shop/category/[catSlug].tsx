@@ -1,12 +1,11 @@
 import { GetServerSidePropsContext } from 'next';
 
 import { NextPageCustomized } from '../../_app';
-import { ResponseType, CategoryPageDataType, CategoryType, getCategoryPageData } from '../../../database';
+import { ResponseType, CategoryPageDataType, getCategoryPageData } from '../../../database';
 
 import CategoryLayout from '../../../layouts/CategoryLayout';
 
-import { useRouter } from 'next/router';
-import ProductList from '../../../components/shop_components/ProductList';
+import ProductList from '../../../components/category_components/ProductList';
 
 import HeroImage from '../../../components/shop_components/HeroImage';
 import { pageInfos } from '../../../config';
@@ -20,25 +19,16 @@ type CategoryPageType = NextPageCustomized<CategoryDetailProps>;
 const CategoryPage:CategoryPageType = ({response}) => {
     const [status, data] = response;
    
-    const responses = [response];    
-
-    const router = useRouter();
 
     return (
         <CategoryLayout 
-            responses={responses}
-            categories={(data as CategoryPageDataType).categories}
+            responses={[response]}
+            categories={status === 'success' ? data.categories : []}
             selectedCategoryID={(data as CategoryPageDataType).currentCategoryID} 
-            handleCategoryChange={(currentCat) => {
-                if(!currentCat) {
-                    router.push('/shop/category');
-                }
-                else {
-                    router.push(`/shop/category/${currentCat.slug}`);
-                }
-            }}
             >
-                <ProductList products={(data as CategoryPageDataType).products} />
+                {
+                    status === 'success' && <ProductList products={data.products} /> 
+                }
         </CategoryLayout>
 
     );
@@ -71,6 +61,7 @@ export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     }
 
 
+    
 
     const response = await getCategoryPageData(catSlug);
 
