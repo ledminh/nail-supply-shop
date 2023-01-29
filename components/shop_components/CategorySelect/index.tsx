@@ -1,33 +1,33 @@
 import { FunctionComponent, useState } from "react";
 
-import styles from './SelectionPanel.module.scss';
+import styles from './CategorySelect.module.scss';
 
 import { CategoryType } from '../../../database';
 
 /***************************
  *  Types
  */
-interface SelectionPanelPropsType {
+interface CategorySelectPropsType {
     categories: CategoryType[];
+    selectedCategoryID: string|null;
     onChange: (currentCategory: CategoryType|null) => void;
 } 
 
-type SelectionPanelType = FunctionComponent<SelectionPanelPropsType>
+type CategorySelectType = FunctionComponent<CategorySelectPropsType>
 
 
 
 /***************************
  *  Main Component
  */
-const SelectionPanel:SelectionPanelType = ({categories, onChange}) => {
+const CategorySelect:CategorySelectType = ({categories, selectedCategoryID, onChange}) => {
     
-    const [index, setIndex] = useState<number>(0);
+    const index = selectedCategoryID === null? '' : categories.findIndex((category) => category.id === selectedCategoryID);
 
     return (
         <div className={styles.wrapper}>
             <select className={styles.select} 
                     onChange={(e) => {
-                        setIndex(+e.target.value);
                         onChange(e.target.value === ''? null : categories[+e.target.value]);
                     }}
                     value={index}>
@@ -40,4 +40,4 @@ const SelectionPanel:SelectionPanelType = ({categories, onChange}) => {
     )
 }
 
-export default SelectionPanel;
+export default CategorySelect;

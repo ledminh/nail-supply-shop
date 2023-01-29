@@ -5,10 +5,9 @@ import ErrorLayout from '../ErrorLayout';
 import { ResponseType, CategoryType } from '../../database';
 
 
-import SelectionPanel from '../../components/shop_components/SelectionPanel';
-import CategoryList from '../../components/shop_components/CategoryList';
+import CategorySelect from '../../components/shop_components/CategorySelect';
+import CategoryList from '../../components/shop_components/CategoryMenu';
 
-import MainBar from './MainBar';
 import PriceFilter from '../../components/shop_components/PriceFilter';
 import Sort from '../../components/shop_components/Sort';
 import ShopSection from './ShopSection';
@@ -29,8 +28,9 @@ const ShopLayout: FC<ShopLayoutProps> = ({children, responses, categories, selec
         {/* 'MobileBar' is only visible on mobile devices */}
           
           <ShopSection type='MobileBar'>        
-            <SelectionPanel
+            <CategorySelect
                 categories={categories}
+                selectedCategoryID={selectedCategoryID}
                 onChange={handleCategoryChange}
             />
           </ShopSection>

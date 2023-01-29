@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import styles from './CategoryList.module.scss';
+import styles from './CategoryMenu.module.scss';
 
 
 import { CategoryType } from '../../../database';
@@ -9,20 +9,20 @@ import { CategoryType } from '../../../database';
 /***************************
  *  Types
  */
-interface CategoryListPropsType {
+interface CategoryMenuPropsType {
     categories: CategoryType[];
     selectedCategoryID: string|null;
     handleCategoryChange: (currentCategory:CategoryType|null) => void;
 } 
 
-type CategoryListType = FunctionComponent<CategoryListPropsType>
+type CategoryMenuType = FunctionComponent<CategoryMenuPropsType>
 
 
 
 /***************************
  *  Main Component
  */
-const CategoryList:CategoryListType = ({selectedCategoryID, handleCategoryChange, categories}) => {
+const CategoryMenu:CategoryMenuType = ({selectedCategoryID, handleCategoryChange, categories}) => {
 
     return (
         <div className={styles.wrapper}>
@@ -52,4 +52,4 @@ const CategoryList:CategoryListType = ({selectedCategoryID, handleCategoryChange
     )
 }
 
-export default CategoryList;
+export default CategoryMenu;
