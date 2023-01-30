@@ -1,6 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 
 import Image from 'next/image';
+import Head from 'next/head';
 
 import styles from '../../styles/Product.module.scss';
 import { getProduct, ProductType, ResponseType } from '../../database';
@@ -23,6 +24,11 @@ const Product:ProductPageType = ({ productResponse }) => {
         <ErrorLayout
             responses={[productResponse]}
             >
+            <Head>
+                <title>{(product as ProductType).name + " :: "}Nail Supply Shop</title>
+                <link rel="icon" href="/favicon.ico" />
+                {<meta name="description" content={(product as ProductType).fullDescription} />}
+            </Head>
             <div className={styles.wrapper}>
                 <h2 className={styles.name}>{(product as ProductType).name}</h2>
                 <div className={styles.image}>
