@@ -6,6 +6,7 @@ import styles from '../../styles/Product.module.scss';
 import { getProduct, ProductType, ResponseType } from '../../database';
 import ErrorLayout from '../../layouts/ErrorLayout';
 import { NextPageCustomized } from '../_app';
+import { pageInfos } from '../../config';
 
 interface ProductDetailProps {
     productResponse: ResponseType<ProductType>;
@@ -51,6 +52,7 @@ const Product:ProductPageType = ({ productResponse }) => {
 
 export default Product;
 
+Product.pageInfo = pageInfos.product;
 
 
 
