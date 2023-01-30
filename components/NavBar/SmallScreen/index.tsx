@@ -8,13 +8,13 @@ import HamburgerSVG from '../../../assets/images/hamburger.svg';
 import CloseSVG from '../../../assets/images/close_icon.svg';
 import { useNavScreen } from "./hooks";
 
-import { SlugType, PageInfoType } from "../../../config";
+import { PageInfoType, SlugType } from "../../../config";
 
 /***************************
  *  Types
  */
 interface SmallScreenPropsType {
-    currentPageSlug: SlugType | null,
+    currentPageSlug: SlugType|null,
     pageInfos: PageInfoType[]
 } 
 
@@ -58,13 +58,19 @@ const SmallScreen:SmallScreenType = ({currentPageSlug, pageInfos}) => {
                     <ul>
                         {
                             pageInfos.map((pIF, index) => (
-                                <li key={index}>
-                                    <Link href={pIF.url}
-                                        className={currentPageSlug === pIF.slug? styles.current : ""}
-                                    >
-                                        {pIF.title}
-                                    </Link>
-                                </li>
+                                <>
+                                    {
+                                        !pIF.hide &&
+                                        <li key={index}>
+                                            <Link href={pIF.path}
+                                                className={currentPageSlug === pIF.slug? styles.current : ""}
+                                            >
+                                                {pIF.title}
+                                            </Link>
+                                        </li>
+
+                                    }
+                                </>
                             ))
                         }
                     </ul>

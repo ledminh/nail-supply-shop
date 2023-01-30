@@ -14,7 +14,7 @@ import styles from './NavBar.module.scss';
 
 
 interface NavBarPropsType {
-    currentPageSlug: SlugType | null
+    currentPageSlug: SlugType|null
 } 
 
 type NavBarType = FunctionComponent<NavBarPropsType>
@@ -29,16 +29,15 @@ const NavBar:NavBarType = ({currentPageSlug}) => {
     const pageInfosArr = Object.values(pageInfos);
 
 
-
     return (
         <div className={styles.wrapper}>
             <SmallScreen 
                 currentPageSlug={currentPageSlug} 
-                pageInfos={pageInfosArr.filter(pI => !pI.hide)}
+                pageInfos={pageInfosArr}
             />
             <LargeScreen 
                 currentPageSlug={currentPageSlug} 
-                pageInfos={pageInfosArr.filter(pI => !pI.hide)}
+                pageInfos={pageInfosArr}
                 />
         </div>
     )

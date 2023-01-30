@@ -29,13 +29,19 @@ const LargeScreen:LargeScreenType = ({currentPageSlug, pageInfos}) => {
         <nav className={styles.wrapper}>
             <ul className={styles.ul}>
                 {
-                    pageInfos.map((pIF, index) => (
-                        <li key={pIF.slug}>
-                            <Link className={currentPageSlug === pIF.slug? styles.current : ""} 
-                                href={pIF.url}>
-                                {pIF.title}
-                            </Link>
-                        </li>
+                    pageInfos.map((pIF) => (
+                        <>
+                            {   
+                                !pIF.hide && (
+                                    <li key={pIF.slug}>
+                                        <Link className={currentPageSlug === pIF.slug? styles.current : ""} 
+                                            href={pIF.path}>
+                                            {pIF.title}
+                                        </Link>
+                                    </li>
+                                )
+                            }
+                        </>
                     ))
                 }
             </ul>
