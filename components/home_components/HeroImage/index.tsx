@@ -12,17 +12,18 @@ import HeroImageLayout from '../../../layouts/HeroImageLayout';
  *  Types
  */
 interface HeroImagePropsType {
-
+    title: string,
+    subtitle: string
 } 
 
-type HeroImageType = FunctionComponent<HeroImagePropsType>
+export type HeroImageType = FunctionComponent<HeroImagePropsType>
 
 
 
 /***************************
  *  Main Component
  */
-const HeroImage:HeroImageType = () => {
+const HeroImage:HeroImageType = ({title, subtitle}) => {
 
     return (
         <HeroImageLayout
@@ -33,8 +34,8 @@ const HeroImage:HeroImageType = () => {
             }}
             altText="Nails on a white blanket"  
         >
-            <h1 className={styles.h1}>Nail Supply</h1>
-            <p className={styles.p}>We offer a wide selection of nail products, including polishes, tools, and accessories.</p>
+            <h1 className={styles.h1}>{title}</h1>
+            <p className={styles.p}>{subtitle}</p>
         </HeroImageLayout>
     )
 }

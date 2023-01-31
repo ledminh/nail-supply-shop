@@ -8,14 +8,14 @@ import HamburgerSVG from '../../../assets/images/hamburger.svg';
 import CloseSVG from '../../../assets/images/close_icon.svg';
 import { useNavScreen } from "./hooks";
 
-import { PageInfoType, SlugType } from "../../../config";
+import { PageConfigType, SlugType } from "../../../config";
 
 /***************************
  *  Types
  */
 interface SmallScreenPropsType {
     currentPageSlug: SlugType|null,
-    pageInfos: PageInfoType[]
+    pageConfigs: PageConfigType[]
 } 
 
 type SmallScreenType = FunctionComponent<SmallScreenPropsType>
@@ -25,7 +25,7 @@ type SmallScreenType = FunctionComponent<SmallScreenPropsType>
 /***************************
  *  Main Component
  */
-const SmallScreen:SmallScreenType = ({currentPageSlug, pageInfos}) => {
+const SmallScreen:SmallScreenType = ({currentPageSlug, pageConfigs}) => {
 
     const {isNavOpen, handleToggleNav} = useNavScreen();
     
@@ -57,15 +57,15 @@ const SmallScreen:SmallScreenType = ({currentPageSlug, pageInfos}) => {
                 <nav className={styles.nav}>
                     <ul>
                         {
-                            pageInfos.map((pIF, index) => (
+                            pageConfigs.map((pCF, index) => (
                                 <>
                                     {
-                                        pIF.onNav &&
+                                        pCF.onNav &&
                                         <li key={index}>
-                                            <Link href={pIF.path}
-                                                className={currentPageSlug === pIF.slug? styles.current : ""}
+                                            <Link href={pCF.path}
+                                                className={currentPageSlug === pCF.slug? styles.current : ""}
                                             >
-                                                {pIF.title}
+                                                {pCF.name}
                                             </Link>
                                         </li>
 

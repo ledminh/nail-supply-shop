@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 
 import SmallScreen from "./SmallScreen";
 import LargeScreen from "./LargeScreen";
-import { SlugType, pageInfos } from "../../config";
+import { SlugType, pageConfigs } from "../../config";
 
 import styles from './NavBar.module.scss';
 
@@ -26,18 +26,18 @@ type NavBarType = FunctionComponent<NavBarPropsType>
  */
 const NavBar:NavBarType = ({currentPageSlug}) => {
 
-    const pageInfosArr = Object.values(pageInfos);
+    const pageConfigsArr = Object.values(pageConfigs);
 
 
     return (
         <div className={styles.wrapper}>
             <SmallScreen 
                 currentPageSlug={currentPageSlug} 
-                pageInfos={pageInfosArr}
+                pageConfigs={pageConfigsArr}
             />
             <LargeScreen 
                 currentPageSlug={currentPageSlug} 
-                pageInfos={pageInfosArr}
+                pageConfigs={pageConfigsArr}
                 />
         </div>
     )

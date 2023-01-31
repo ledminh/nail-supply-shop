@@ -1,31 +1,32 @@
 import React, { FC } from 'react';
 import styles from './Layout.module.scss';
 
-import Head from 'next/head';
 import NavBar from '../../components/NavBar';
 import Logo from '../../components/Logo';
-import { PageInfoType, SlugType } from '../../config';
+import { PageConfigType } from '../../config';
+import PageHead from '../../components/PageHead';
 
 interface MainLayoutProps {
   children: React.ReactNode;
-  pageInfo?: PageInfoType;
+  pageConfig?: PageConfigType; 
+  title: string;
+  description: string;
 }
 
-const MainLayout: FC<MainLayoutProps> = ({children, pageInfo}) => {
+const MainLayout: FC<MainLayoutProps> = ({children, pageConfig, title, description}) => {
 
   // Get the current page's slug to highlight the correct nav link
   // (if the current page is a child page, get the parent page's slug) since
   // the nav links are for the parent pages
-  const currentSlug = getCurrentSlug(pageInfo);
+  const currentSlug = getCurrentSlug(pageConfig);
 
 
   return (
     <>
-      <Head>
-        <title>{pageInfo? pageInfo.title + " :: " : ''}Nail Supply Shop</title>
-        <link rel="icon" href="/favicon.ico" />
-        {pageInfo && <meta name="description" content={pageInfo.description} />}
-      </Head>
+      <PageHead 
+        title={title}
+        description={description}
+        />
       <div className={styles.Layout}>
         <header className={styles.header}>
           <Logo />
@@ -52,13 +53,13 @@ export default MainLayout;
 /**********************
  * Helper Functions
  */
-const getCurrentSlug = (pageInfo?: PageInfoType) => {
-  if(!pageInfo) return null;
+const getCurrentSlug = (pageConfig?: PageConfigType) => {
+  if(!pageConfig) return null;
 
 
-  while(pageInfo.getParent) {
-    pageInfo = pageInfo.getParent();
+  while(pageConfig.getParent) {
+    pageConfig = pageConfig.getParent();
   }
 
-  return pageInfo.slug;
+  return pageConfig.slug;
 }

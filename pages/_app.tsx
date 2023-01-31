@@ -5,14 +5,15 @@ import {NextPage} from 'next';
 
 import type { AppProps } from 'next/app'
 import MainLayout from '../layouts/MainLayout';
-import { PageInfoType } from '../config';
+import { PageConfigType } from '../config';
+import { HeroImageType } from '../components/home_components/HeroImage';
 
 
 
 
 export type NextPageCustomized<P={}, IP=P> = NextPage<P, IP> & {
-  HeroImage?: FunctionComponent;
-  pageInfo?: PageInfoType
+  HeroImage?: HeroImageType
+  pageConfig?: PageConfigType
 }
 
 type AppPropsCustomized = AppProps & {
@@ -22,12 +23,22 @@ type AppPropsCustomized = AppProps & {
 export default function App({ Component, pageProps }: AppPropsCustomized) {
   
   const HeroImage = Component.HeroImage ?? (() => null);
+  const {info} = pageProps.response;
 
   return (
-    <MainLayout pageInfo={Component.pageInfo}>
-      <HeroImage />
-      <Component {...pageProps} />
-    </MainLayout>
+    <>
+      <MainLayout 
+        pageConfig={Component.pageConfig}
+        title={info.title}
+        description={info.description}
+        >
+        <HeroImage 
+          subtitle={info.subtitle}
+          title={info.title}
+        />
+        <Component {...pageProps} />
+      </MainLayout>
+    </>
   )
   
 }
