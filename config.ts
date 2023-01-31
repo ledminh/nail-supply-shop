@@ -1,3 +1,8 @@
+import { StaticImageData } from "next/image";
+
+import homeHeroImage from './assets/images/homeHeroImage.jpg';
+
+
 export type SlugType = 'home' | 'shop' | 'about' | 'category' | 'product'| 'admin';
 
 
@@ -5,6 +10,10 @@ export type SlugType = 'home' | 'shop' | 'about' | 'category' | 'product'| 'admi
 export type PageConfigType = {
     slug: SlugType;
     getParent?: () => PageConfigType;
+    heroImage?: {
+        image: StaticImageData,
+        alt: string
+    };
 } & (
     {
         name: string;
@@ -23,6 +32,10 @@ export const pageConfigs: PageConfigsType = {
     home: {
         name: "Home",
         slug: 'home',
+        heroImage: {
+            image: homeHeroImage,
+            alt: 'Nails are being painted'
+        },
         onNav: true,
         path: '/',
 

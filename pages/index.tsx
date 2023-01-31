@@ -2,7 +2,7 @@ import {StaticImageData} from 'next/image';
 
 import styles from '../styles/Home.module.scss'
 
-import HeroImage from '../components/home_components/HeroImage';
+import HeroImage from '../components/HeroImage';
 
 import Section from '../layouts/Section';
 import NewArrivals from '../components/home_components/NewArrivals';
@@ -29,7 +29,9 @@ interface HomePropsType {
     pageInfo: {
       title: string,
       description: string,
-      subtitle: string
+      subtitle: string,
+      heroImageUrl: string,
+      heroImageAltText: string,
     },
 
     newArrivalProducts: ProductType[],
@@ -71,8 +73,6 @@ export default Home;
 /****************************
  * Customized page
  */
-Home.HeroImage = HeroImage;
-
 Home.pageConfig = pageConfigs.home;
 
 
@@ -88,10 +88,12 @@ export const getServerSideProps = async () => {
   return {
     props: {
       response: {
-        info: {
+        pageInfo: {
           title: "Home",
           description: "Nail art supplies and accessories",
           subtitle: "We offer a wide selection of nail products, including polishes, tools, and accessories.",
+          heroImageUrl: '/images/hero-image.jpg',
+          heroImageAltText: 'Nails are being painted'
         },
 
         newArrivalProducts: [

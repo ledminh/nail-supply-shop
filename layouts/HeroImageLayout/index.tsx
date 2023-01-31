@@ -4,8 +4,6 @@ import styles from './HeroImageLayout.module.scss';
 
 import Image, { StaticImageData } from "next/image";
 
-import Logo from '../../components/Logo';
-import NavBar from '../../components/NavBar';
 
 /***************************
  * Type 
@@ -36,24 +34,6 @@ const HeroImageLayout:HeroLayoutComponent = ({images, altText, children}) => {
 
     return (
         <>
-            <section className={`${styles.wrapper} ${styles.mobile}`}>
-                <Image
-                    src={images.mobile}
-                    alt={altText}
-                    fill
-                    style={{
-                        objectFit: 'cover'
-                    }}
-                    sizes="640px"
-                    placeholder='blur'
-                />
-                <div className={styles.content}>
-                    <div className={styles.body}>
-                        {children}
-                    </div>
-                </div>
-            </section>
-
             <section className={`${styles.wrapper} ${styles.tablet}`}>
                 <Image
                     src={images.tablet}

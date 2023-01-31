@@ -1,18 +1,17 @@
 import '../styles/globals.scss'
 
-import { FunctionComponent, ReactElement, ReactNode } from 'react';
 import {NextPage} from 'next';
 
 import type { AppProps } from 'next/app'
 import MainLayout from '../layouts/MainLayout';
 import { PageConfigType } from '../config';
-import { HeroImageType } from '../components/home_components/HeroImage';
+
+import HeroImage from '../components/HeroImage';
 
 
 
 
 export type NextPageCustomized<P={}, IP=P> = NextPage<P, IP> & {
-  HeroImage?: HeroImageType
   pageConfig?: PageConfigType
 }
 
@@ -22,20 +21,27 @@ type AppPropsCustomized = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsCustomized) {
   
-  const HeroImage = Component.HeroImage ?? (() => null);
-  const {info} = pageProps.response;
+  const {heroImage} = Component.pageConfig || {heroImage: undefined};
+
+  const {title, description, subtitle} = pageProps.response.pageInfo;
 
   return (
     <>
       <MainLayout 
+        // pass the whole object to MainLayout to traced back the parent page
         pageConfig={Component.pageConfig}
-        title={info.title}
-        description={info.description}
+        title={title}
+        description={description}
         >
-        <HeroImage 
-          subtitle={info.subtitle}
-          title={info.title}
-        />
+          {
+            heroImage &&
+              <HeroImage 
+                subtitle={subtitle}
+                title={title}
+                image={heroImage.image}
+                imgAltText={heroImage.alt}
+              />
+          }
         <Component {...pageProps} />
       </MainLayout>
     </>
