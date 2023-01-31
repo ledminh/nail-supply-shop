@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppPropsCustomized) {
             // 2. If it reaches here, no error found. Response[0] === 'success' is just for typescript doesn't complain
             response[0] === 'success' &&
             (
-              // 3. populate the layout with pageInfo
+              // 3. populate the layout with pageInfo and pageConfig
               <MainLayout 
                 // pass the whole config object to MainLayout to traced back the parent page
                 pageConfig={Component.pageConfig}

@@ -50,31 +50,31 @@ export type ProductType = DBProductType;
 export type PageInfoType = DBPageInfoType;
 
     // Data types for pages
-export type HomePageDataType = {
+
+// base type for all page data types
+type PageDataType = {
     pageInfo: PageInfoType;
+}
+
+
+export type HomePageDataType = PageDataType & {
     newArrivalProducts: ProductType[];
     bestSellerProducts: ProductType[];
 };
 
-export type AboutPageDataType = {
-    pageInfo: PageInfoType;
-};
+export type AboutPageDataType = PageDataType;
 
-export type CategoryPageDataType = {
-    pageInfo: PageInfoType;
+export type CategoryPageDataType = PageDataType & {
     currentCategoryID: string;
     categories: CategoryType[];
     products: ProductType[];
 };
 
-export type ShopPageDataType = {
-    pageInfo: PageInfoType;
+export type ShopPageDataType =  PageDataType &{
     categories: CategoryType[];
 }
 
-export type AdminPageDataType = {
-    pageInfo: PageInfoType;
-}
+export type AdminPageDataType = PageDataType; 
 
 
 /*********************************************
