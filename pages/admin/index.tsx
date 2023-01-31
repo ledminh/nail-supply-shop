@@ -6,20 +6,20 @@ import About from '../../components/admin_components/About';
 
 import styles from '../../styles/admin.module.scss';
 
-import { CategoryType, ProductType, SubtitleType, getCategories, getProducts, ResponseType } from '../../database';
-import ErrorLayout from '../../layouts/ErrorLayout';
+import { CategoryType, ProductType, PageInfoType, getCategories, getProducts, ResponseType } from '../../database';
+
 import { NextPageCustomized } from '../_app';
-import { pageInfos } from '../../config';
+import { pageConfigs } from '../../config';
 
 
 interface AdminProps {
   categoriesResponse: ResponseType<CategoryType[]>;
   productsResponse: ResponseType<ProductType[]>;
-  subtitles: SubtitleType[];
+  pageInfos: PageInfoType[];
   aboutHtmlText: string;  
 }
 
-const Admin: NextPageCustomized<AdminProps> = ({categoriesResponse, productsResponse, subtitles, aboutHtmlText}) => {
+const Admin: NextPageCustomized<AdminProps> = ({categoriesResponse, productsResponse, pageInfos, aboutHtmlText}) => {
 
   // when status === 'error', the handling is done in ErrorLayout
   const [catStatus, categories] = categoriesResponse;
@@ -28,33 +28,29 @@ const Admin: NextPageCustomized<AdminProps> = ({categoriesResponse, productsResp
   
 
   return (
-    <ErrorLayout
-        responses={[categoriesResponse, productsResponse]}
-      >
-        <div className={styles.wrapper}>
-          <section className={styles.section}>
-            <Category
-              categories={categories as CategoryType[]}  
-              />
-          </section>
-          <section className={styles.section}>
-            <Product
-              categories={categories as CategoryType[]}
-              products={products as ProductType[]}
-              />
-          </section>
-          <section className={styles.section + ' ' + styles.full}>
-            <Subtitles
-              subtitles={subtitles}
-              />
-          </section>
-          <section className={styles.section + ' ' + styles.full}>
-            <About
-              htmlText={aboutHtmlText}
-              />
-          </section>
-        </div>
-    </ErrorLayout>
+    <div className={styles.wrapper}>
+      <section className={styles.section}>
+        <Category
+          categories={categories as CategoryType[]}  
+          />
+      </section>
+      <section className={styles.section}>
+        <Product
+          categories={categories as CategoryType[]}
+          products={products as ProductType[]}
+          />
+      </section>
+      <section className={styles.section + ' ' + styles.full}>
+        <Subtitles
+          subtitles={[]}
+          />
+      </section>
+      <section className={styles.section + ' ' + styles.full}>
+        <About
+          htmlText={aboutHtmlText}
+          />
+      </section>
+    </div>
   ); 
 }
 
@@ -64,10 +60,9 @@ export default Admin;
 /****************************
  * Customized page
  */
-Admin.HeroImage = HeroImage;
 
 
-Admin.pageInfo = pageInfos.admin;
+Admin.pageConfig = pageConfigs.admin;
 
 
 /****************************

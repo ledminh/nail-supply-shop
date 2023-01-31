@@ -6,13 +6,13 @@
 
 
 // return types for API functions
-import { CategoryType, ProductType, SubtitleType, CategoryPageDataType, ShopPageDataType, ResponseType } from './types';
+import { CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ResponseType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
-import {getDBCategories, getDBProducts, getDBProduct} from './sampleDB';
+import {getDBCategories, getDBProducts, getDBProduct, getDBPageInfo} from './sampleDB';
 
 // types for API functions implemented in this file
-import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType} from './types';
+import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetHomePageDataType} from './types';
 
 
 
@@ -27,7 +27,7 @@ import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataT
  * but it may change in the future. 
  */
 
-export type {CategoryType, ProductType, SubtitleType, CategoryPageDataType, ShopPageDataType, ResponseType};
+export type {CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
 
 
 /*****************************
@@ -69,6 +69,126 @@ export const getProduct:GetProductType = async (id) => {
     }
 };
 
+
+// fetches data for pages
+
+export const getHomePageData:GetHomePageDataType = async () => {
+    try {
+        const pageInfo = await getDBPageInfo('Home');
+
+        return ['success', {pageInfo, ...{
+            newArrivalProducts: [
+                {
+                    id: '1',
+                    categoryID: '1',
+                    name: 'Red Nail Polish',
+                    shortDescription: 'Classic red nail polish',
+                    fullDescription: 'This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.',
+                    price: 5.99,
+                    imageUrl: '/images/001.jpg'
+                },
+                {
+                    id: '2',
+                    categoryID: '1',
+                    name: 'Glitter Nail Polish',
+                    shortDescription: 'Glitter nail polish for adding sparkle to your nails',
+                    fullDescription: 'This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.',
+                    price: 6.99,
+                    imageUrl: '/images/002.jpg'
+                },
+                {
+                    id: '3',
+                    categoryID: '2',
+                    name: 'Nail Clipper',
+                    shortDescription: 'Stainless steel nail clipper for trimming nails',
+                    fullDescription: 'This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.',
+                    price: 3.99,
+                    imageUrl: '/images/003.jpg'
+                },
+                {
+                    id: '4',
+                    categoryID: '3',
+                    name: 'Nail Art Stickers',
+                    shortDescription: 'Nail art stickers for decorating nails',
+                    fullDescription: 'This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.',
+                    price: 4.99,
+                    imageUrl: '/images/004.jpg'
+                }
+            ],
+    
+            bestSellerProducts: [
+                {
+                    id: '1',
+                    categoryID: '1',
+                    name: 'Red Nail Polish',
+                    shortDescription: 'Classic red nail polish',
+                    fullDescription: 'This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.',
+                    price: 5.99,
+                    imageUrl: '/images/001.jpg'
+                },
+                {
+                    id: '2',
+                    categoryID: '1',
+                    name: 'Glitter Nail Polish',
+                    shortDescription: 'Glitter nail polish for adding sparkle to your nails',
+                    fullDescription: 'This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.',
+                    price: 6.99,
+                    imageUrl: '/images/002.jpg'
+                },
+                {
+                    id: '3',
+                    categoryID: '2',
+                    name: 'Nail Clipper',
+                    shortDescription: 'Stainless steel nail clipper for trimming nails',
+                    fullDescription: 'This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.',
+                    price: 3.99,
+                    imageUrl: '/images/003.jpg'
+                },
+                {
+                    id: '4',
+                    categoryID: '3',
+                    name: 'Nail Art Stickers',
+                    shortDescription: 'Nail art stickers for decorating nails',
+                    fullDescription: 'This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.',
+                    price: 4.99,
+                    imageUrl: '/images/004.jpg'
+                }
+            ]
+        }}];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
+export const getAboutPageData:GetAboutPageDataType = async () => {
+    try {
+        const pageInfo = await getDBPageInfo('About');
+
+        return ['success', {pageInfo}];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
+
+export const getShopPageData:GetShopPageDataType = async () => {
+    try {
+        const pageInfo = await getDBPageInfo('Shop');
+        const categories = await getDBCategories();
+
+        return ['success', {
+            pageInfo, 
+            categories
+        }];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
+
 export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) => {
 
     try {       
@@ -78,7 +198,18 @@ export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) 
         if(!categorySlug) {
             const products = await getDBProducts();
 
-            return ['success', {categories, currentCategoryID: '', products}];
+            return ['success', {
+                pageInfo: {
+                    id: 'category/all-products',
+                    title: 'All Products',
+                    description: 'All Products',
+                },
+                
+                categories, 
+                currentCategoryID: '', 
+                products
+                
+            }];
         }
 
         const category = categories.find(category => category.slug === categorySlug);
@@ -89,20 +220,21 @@ export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) 
 
         const products = await getDBProducts({categoryID: category.id});
 
-        return ['success', {categories, currentCategoryID: category.id, products}];
+        return ['success', {
+            pageInfo: {
+                id: category.id,
+                title: category.name,
+                description: category.description,
+                subtitle: category.description,
+            },
+            categories, 
+            currentCategoryID: category.id, 
+            products
+
+        }];
     }
     catch(err) {
         return ['error', (err as Error).message];
     }
 }
 
-export const getShopPageData:GetShopPageDataType = async () => {
-    try {
-        const categories = await getDBCategories();
-
-        return ['success', {categories}];
-    }
-    catch(err) {
-        return ['error', (err as Error).message];
-    }
-}

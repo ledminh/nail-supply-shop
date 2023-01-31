@@ -24,26 +24,14 @@ export type DBProductType = {
 };
 
 
-// type SlugType = 'home' | 'shop' | 'about' | 'category' | 'product'| 'admin';
-
-
-// export type DBPageType = {
-//     id: string;
-//     name: 'home' | 'about' | 'shop' | 'admin';
-//     title: string;
-//     description: string;
-//     subtitle: string;
-//     slug: SlugType;
-//     path: string;
-//     onNav: boolean;
-    
-// };
-
-export type DBSubtitleType = {
+export type DBPageInfoType = {
     id: string,
-    name: 'home' | 'about' | 'shop';
-    text: string;
-};
+    title: string;
+    description?: string;
+    subtitle?: string;
+}
+
+
 
 
 
@@ -51,26 +39,65 @@ export type DBSubtitleType = {
 /*********************************************
  * Response from API functions
  */ 
-
+    
     // Generic type for response from API functions
-export type ResponseType<T> = ['success', T] | ['error', string];
+export type ResponseType<T> = ['success', T ]
+| ['error', string];
 
     // Specific types for response from API functions
 export type CategoryType = DBCategoryType;
 export type ProductType = DBProductType;
-export type SubtitleType = DBSubtitleType;
+export type PageInfoType = DBPageInfoType;
 
     // Data types for pages
+export type HomePageDataType = {
+    pageInfo: PageInfoType;
+    newArrivalProducts: ProductType[];
+    bestSellerProducts: ProductType[];
+};
+
+export type AboutPageDataType = {
+    pageInfo: PageInfoType;
+};
+
 export type CategoryPageDataType = {
+    pageInfo: PageInfoType;
     currentCategoryID: string;
     categories: CategoryType[];
     products: ProductType[];
 };
 
 export type ShopPageDataType = {
+    pageInfo: PageInfoType;
     categories: CategoryType[];
 }
 
+export type AdminPageDataType = {
+    pageInfo: PageInfoType;
+}
+
+
+/*********************************************
+ * Database functions
+ * -------------------------------------------
+ * Functions from *DB.ts, which are called 
+ * by the functions in index.tsx and directly work 
+ * with the database. Should be implemented 
+ * differently for different databases.
+ */
+
+
+export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
+
+export type GetDBProductsType = (options?:{
+    limit?: number;
+    offset?: number;
+    categoryID?: string;    
+}) => Promise<DBProductType[]>;
+
+export type GetDBProductType = (id: string) => Promise<DBProductType>;
+
+export type GetDBPageInfoType = (title: 'Home' | 'About' | 'Shop') => Promise<DBPageInfoType>;
 
 
 
@@ -100,30 +127,21 @@ export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
     // the getServerSideProps function in the page 
     // component.
 
+    // fetches data for home page
+export type GetHomePageDataType = () => Promise<ResponseType<HomePageDataType>>;
+
+    // fetches data for about page
+export type GetAboutPageDataType = () => Promise<ResponseType<AboutPageDataType>>;
+
+
     // fetches data for category pages
 export type GetCategoryPageDataType = (categorySlug?: string) => Promise<ResponseType<CategoryPageDataType>>;
 
     // fetches data for shop page
 export type GetShopPageDataType = () => Promise<ResponseType<ShopPageDataType>>;
 
+    // fetches data for admin page
+export type GetAdminPageDataType = () => Promise<ResponseType<AdminPageDataType>>;
 
 
-/*********************************************
- * Database functions
- * -------------------------------------------
- * Functions from *DB.ts, which are called 
- * by the functions in index.tsx and directly work 
- * with the database. Should be implemented 
- * differently for different databases.
- */
 
-
-export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
-
-export type GetDBProductsType = (options?:{
-    limit?: number;
-    offset?: number;
-    categoryID?: string;    
-}) => Promise<DBProductType[]>;
-
-export type GetDBProductType = (id: string) => Promise<DBProductType>;

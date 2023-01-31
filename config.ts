@@ -1,6 +1,8 @@
 import { StaticImageData } from "next/image";
 
 import homeHeroImage from './assets/images/homeHeroImage.jpg';
+import aboutHeroImage from './assets/images/aboutHeroImage.jpg';
+import shopHeroImage from './assets/images/shopHeroImage.jpg';
 
 
 export type SlugType = 'home' | 'shop' | 'about' | 'category' | 'product'| 'admin';
@@ -43,6 +45,10 @@ export const pageConfigs: PageConfigsType = {
     shop: {
         name: "Shop",
         slug: 'shop',
+        heroImage: {
+            image: shopHeroImage,
+            alt: 'Nails polish bottles'
+        },
         onNav: true,
         path: '/shop',
 
@@ -64,6 +70,10 @@ export const pageConfigs: PageConfigsType = {
     about: {
         name: "About",
         slug: 'about',
+        heroImage: {
+            image: aboutHeroImage,
+            alt: 'Nail technicians are working' 
+        },
         onNav: true,
         path: '/about',
 

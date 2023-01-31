@@ -10,7 +10,7 @@ import Image, {StaticImageData} from "next/image";
  */
 interface HeroImagePropsType {
     title: string,
-    subtitle: string,
+    subtitle?: string,
     image: StaticImageData,
     imgAltText: string
 } 
@@ -39,7 +39,9 @@ const HeroImage:HeroImageType = ({title, subtitle, image, imgAltText}) => {
             <div className={styles.content}>
                 <div className={styles.body}>
                     <h1 className={styles.h1}>{title}</h1>
-                    <p className={styles.p}>{subtitle}</p>
+                    {
+                        subtitle && <p className={styles.p}>{subtitle}</p>
+                    }
                 </div>
             </div>
         </section>

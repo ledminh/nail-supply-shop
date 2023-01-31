@@ -7,6 +7,9 @@ import MainLayout from '../layouts/MainLayout';
 import { PageConfigType } from '../config';
 
 import HeroImage from '../components/HeroImage';
+import ErrorLayout from '../layouts/ErrorLayout';
+import { ResponseType } from '../database';
+import { AboutPageDataType, CategoryPageDataType, HomePageDataType, ShopPageDataType, AdminPageDataType } from '../database/types';
 
 
 
@@ -23,27 +26,38 @@ export default function App({ Component, pageProps }: AppPropsCustomized) {
   
   const {heroImage} = Component.pageConfig || {heroImage: undefined};
 
-  const {title, description, subtitle} = pageProps.response.pageInfo;
+  const response:ResponseType<HomePageDataType|AboutPageDataType|ShopPageDataType|AdminPageDataType|CategoryPageDataType> = pageProps.response;
 
   return (
     <>
-      <MainLayout 
-        // pass the whole object to MainLayout to traced back the parent page
-        pageConfig={Component.pageConfig}
-        title={title}
-        description={description}
-        >
+      {/* 1. Check for error first */}
+      <ErrorLayout responses={[pageProps.response]}>
           {
-            heroImage &&
-              <HeroImage 
-                subtitle={subtitle}
-                title={title}
-                image={heroImage.image}
-                imgAltText={heroImage.alt}
-              />
+            // 2. If it reaches here, no error found. Response[0] === 'success' is just for typescript doesn't complain
+            response[0] === 'success' &&
+            (
+              // 3. populate the layout with pageInfo
+              <MainLayout 
+                // pass the whole config object to MainLayout to traced back the parent page
+                pageConfig={Component.pageConfig}
+                title={response[1].pageInfo.title}
+                description={response[1].pageInfo.description}
+                >
+                  {
+                    heroImage &&
+                      <HeroImage 
+                        subtitle={response[1].pageInfo.subtitle}
+                        title={response[1].pageInfo.title}
+                        image={heroImage.image}
+                        imgAltText={heroImage.alt}
+                      />
+                  }
+                  {/* 4. pageInfo has no use here, but still being passed along with other page data */}
+                <Component {...pageProps.response[1]} />
+              </MainLayout>
+            )
           }
-        <Component {...pageProps} />
-      </MainLayout>
+      </ErrorLayout>
     </>
   )
   

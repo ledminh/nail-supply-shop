@@ -1,8 +1,7 @@
 import { NextPageCustomized } from '../../_app';
 
 
-import HeroImage from '../../../components/shop_components/HeroImage';
-import { pageInfos } from '../../../config';
+import { pageConfigs } from '../../../config';
 
 import CategoryLayout from '../../../layouts/CategoryLayout';
 
@@ -44,8 +43,7 @@ export default CategoryIndexPage;
 
 
 // TODO: this HeroImage is from shop_components, change it to category_components
-CategoryIndexPage.HeroImage = HeroImage;
-CategoryIndexPage.pageInfo = pageInfos.category;
+CategoryIndexPage.pageConfig = pageConfigs.category;
 
 
 

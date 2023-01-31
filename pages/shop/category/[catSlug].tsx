@@ -7,8 +7,7 @@ import CategoryLayout from '../../../layouts/CategoryLayout';
 
 import ProductList from '../../../components/category_components/ProductList';
 
-import HeroImage from '../../../components/shop_components/HeroImage';
-import { pageInfos } from '../../../config';
+import { pageConfigs } from '../../../config';
 
 interface CategoryDetailProps {    
     response: ResponseType<CategoryPageDataType>;
@@ -38,8 +37,7 @@ const CategoryPage:CategoryPageType = ({response}) => {
 export default CategoryPage;
 
 
-CategoryPage.HeroImage = HeroImage;
-CategoryPage.pageInfo = pageInfos.shop;
+CategoryPage.pageConfig = pageConfigs.shop;
 
 
 

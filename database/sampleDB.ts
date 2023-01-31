@@ -1,4 +1,4 @@
-import { GetDBCategoriesType, GetDBProductsType, GetDBProductType, DBCategoryType, DBProductType, DBSubtitleType } from "./types";
+import { GetDBCategoriesType, GetDBProductsType, GetDBProductType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType } from "./types";
 
 
 export const getDBCategories:GetDBCategoriesType = async () => {
@@ -58,6 +58,20 @@ export const getDBProduct:GetDBProductType = async (id) => {
   });
 }
 
+export const getDBPageInfo:GetDBPageInfoType = async (title) => {
+
+  return new Promise((resolve) => {
+    const pageInfo = pageInfos.find((pageInfo) => pageInfo.title === title);
+  
+    if (!pageInfo) {
+      throw new Error(`PageInfo of "${title}" not found on DB Server`);
+    }
+
+    resolve(pageInfo);
+  
+  });
+
+}
 
 /************************************
  *  Data
@@ -447,21 +461,23 @@ const categories:DBCategoryType[]  = [
 ]
 
 
-// TODO: change text into those from source code
-const DBSubtitles:DBSubtitleType[]  = [
+const pageInfos:DBPageInfoType[]  = [
   {
     id: '1',
-    name: 'home',
-    text: 'Home Subtitle'
+    title: 'Home',
+    description: 'Nail art supplies and accessories',
+    subtitle: "We offer a wide selection of nail products, including polishes, tools, and accessories."
   },
   {
     id: '2',
-    name: 'about',
-    text: 'About Subtitle'
+    title: "About",
+    description: "About us",
+    subtitle: "Our team, our misson, and our values."
   },
   {
     id: '3',
-    name: 'shop',
-    text: 'Shop Subtitle'
+    title: "Shop",
+    description: "Shop for premium quality nail supplies at our online store. Find polishes, tools, and everything you need for stunning nail art. Order now.",
+    subtitle: "Transform your nails with our top-notch nail supplies."
   }
 ]

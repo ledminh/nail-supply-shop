@@ -10,7 +10,7 @@ interface MainLayoutProps {
   children: React.ReactNode;
   pageConfig?: PageConfigType; 
   title: string;
-  description: string;
+  description?: string;
 }
 
 const MainLayout: FC<MainLayoutProps> = ({children, pageConfig, title, description}) => {
@@ -25,7 +25,7 @@ const MainLayout: FC<MainLayoutProps> = ({children, pageConfig, title, descripti
     <>
       <PageHead 
         title={title}
-        description={description}
+        description={description ?? 'Nail Supply Shop'}
         />
       <div className={styles.Layout}>
         <header className={styles.header}>
