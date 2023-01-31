@@ -32,7 +32,7 @@ const LargeScreen:LargeScreenType = ({currentPageSlug, pageInfos}) => {
                     pageInfos.map((pIF) => (
                         <>
                             {   
-                                !pIF.hide && (
+                                pIF.onNav && (
                                     <li key={pIF.slug}>
                                         <Link className={currentPageSlug === pIF.slug? styles.current : ""} 
                                             href={pIF.path}>

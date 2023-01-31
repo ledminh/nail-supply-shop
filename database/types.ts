@@ -24,6 +24,21 @@ export type DBProductType = {
 };
 
 
+// type SlugType = 'home' | 'shop' | 'about' | 'category' | 'product'| 'admin';
+
+
+// export type DBPageType = {
+//     id: string;
+//     name: 'home' | 'about' | 'shop' | 'admin';
+//     title: string;
+//     description: string;
+//     subtitle: string;
+//     slug: SlugType;
+//     path: string;
+//     onNav: boolean;
+    
+// };
+
 export type DBSubtitleType = {
     id: string,
     name: 'home' | 'about' | 'shop';

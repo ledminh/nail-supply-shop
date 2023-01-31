@@ -4,13 +4,13 @@ export type PageInfoType = {
     title: string;
     description: string;
     slug: SlugType;
-    hide: true;
+    onNav?: false;
     getParent?: () => PageInfoType;
 } |
 {   title: string;
     description: string;
     slug: SlugType;
-    hide?: false;
+    onNav: true;
     path: string;
     getParent?: () => PageInfoType;
 };
@@ -22,18 +22,21 @@ export const pageInfos: PageInfosType = {
         title: 'Home',
         description: 'Nail Supply Shop',
         slug: 'home',
+        onNav: true,
         path: '/'
     },
     shop: {
         title: 'Shop',
         description: 'Nail Supply Shop',
         slug: 'shop',
+        onNav: true,
         path: '/shop'
     },
     about: {
         title: 'About',
         description: 'About Nail Supply Shop',
         slug: 'about',
+        onNav: true,
         path: '/about'
     },
 
@@ -42,14 +45,12 @@ export const pageInfos: PageInfosType = {
         description: 'Category Nail Supply Shop',
         slug: 'category',
         getParent: () => pageInfos.shop,
-        hide: true
     },
 
     admin: {
         title: 'Admin',
         description: 'Admin Panel', 
         slug: 'admin',
-        hide: true
     },
 
     product: {
@@ -57,6 +58,6 @@ export const pageInfos: PageInfosType = {
         description: 'Product of Nail Supply Shop',
         slug: 'product',
         getParent: () => pageInfos.shop,
-        hide: true
+        
     },
 };

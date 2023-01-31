@@ -85,6 +85,7 @@ export const getServerSideProps = async () => {
     props: {
       categoriesResponse,
       productsResponse,
+      // TODO: get aboutHtmlText from database
       aboutHtmlText: 'About Text',
       // TODO: get subtitles from database
       subtitles: [

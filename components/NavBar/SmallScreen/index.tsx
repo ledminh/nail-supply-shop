@@ -60,7 +60,7 @@ const SmallScreen:SmallScreenType = ({currentPageSlug, pageInfos}) => {
                             pageInfos.map((pIF, index) => (
                                 <>
                                     {
-                                        !pIF.hide &&
+                                        pIF.onNav &&
                                         <li key={index}>
                                             <Link href={pIF.path}
                                                 className={currentPageSlug === pIF.slug? styles.current : ""}
