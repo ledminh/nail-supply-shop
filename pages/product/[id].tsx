@@ -4,28 +4,22 @@ import Image from 'next/image';
 import Head from 'next/head';
 
 import styles from '../../styles/Product.module.scss';
-import { getProduct, ProductType, ResponseType } from '../../database';
-import ErrorLayout from '../../layouts/ErrorLayout';
+import { getProductPageData, ProductPageDataType } from '../../database';
 import { NextPageCustomized } from '../_app';
 import { pageConfigs } from '../../config';
 
-interface ProductDetailProps {
-    response: ResponseType<ProductType>;
-}
+type ProductDetailProps = ProductPageDataType;
 
 type ProductPageType = NextPageCustomized<ProductDetailProps>;
 
-const Product:ProductPageType = ({ response }) => {
-    
-    // when status === 'error', the handling is done in ErrorLayout
-    const [status, product] = response;
+const Product:ProductPageType = ({ product }) => {
     
     return (
         <div className={styles.wrapper}>
-            <h2 className={styles.name}>{(product as ProductType).name}</h2>
+            <h2 className={styles.name}>{product.name}</h2>
             <div className={styles.image}>
                 <Image 
-                    src={(product as ProductType).imageUrl}
+                    src={product.imageUrl}
                     alt="Product Image"
                     fill
                     style={{objectFit: 'cover'}}
@@ -33,11 +27,11 @@ const Product:ProductPageType = ({ response }) => {
             </div>
             <div className={styles.description}>
                 <h4>Description</h4>
-                <p>{(product as ProductType).fullDescription}</p>
+                <p>{product.fullDescription}</p>
             </div>
             <div className={styles.price}>
                 <span className={styles.text}>Price:</span>
-                <span className={styles.value}>${(product as ProductType).price}</span>
+                <span className={styles.value}>${product.price}</span>
             </div>
             <div className={styles.checkout}>
                 <button>Add to Cart</button>
@@ -81,7 +75,7 @@ export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     }
     
 
-    const response = await getProduct(id);
+    const response = await getProductPageData(id);
 
     return {
         props: {

@@ -49,15 +49,7 @@ export const getServerSideProps = async () => {
     
     return {
         props: {
-            // TODO: this response here is [string, someType], so it can't be passed like this. Change the other pages also (index, about)
-            response: {
-                ...response,
-                pageInfo: {
-                    title: 'Shop',
-                    description: 'Shop page',
-                    subtitle: '',
-                },
-            }            
+            response     
         }
     }
 }

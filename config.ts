@@ -18,8 +18,8 @@ export type PageConfigType = {
     };
 } & (
     {
+        onNav: true; // the properties below are for navigation
         name: string;
-        onNav: true;
         path: string;
     }
     | {
@@ -63,6 +63,10 @@ export const pageConfigs: PageConfigsType = {
 
     category: {
         slug: 'category',
+        heroImage: {
+            image: shopHeroImage,
+            alt: 'Nails polish bottles'
+        },
         getParent: () => pageConfigs.shop,
     },
 

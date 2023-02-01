@@ -6,13 +6,13 @@
 
 
 // return types for API functions
-import { CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ResponseType } from './types';
+import { CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
 import {getDBCategories, getDBProducts, getDBProduct, getDBPageInfo} from './sampleDB';
 
 // types for API functions implemented in this file
-import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetHomePageDataType} from './types';
+import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
 
 
 
@@ -27,7 +27,7 @@ import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataT
  * but it may change in the future. 
  */
 
-export type {CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
+export type {CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ProductPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
 
 
 /*****************************
@@ -226,6 +226,10 @@ export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) 
                 title: category.name,
                 description: category.description,
                 subtitle: category.description,
+                heroImage: {
+                    image: category.imageUrl,
+                    alt: category.name
+                }
             },
             categories, 
             currentCategoryID: category.id, 
@@ -238,3 +242,29 @@ export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) 
     }
 }
 
+export const getProductPageData:GetProductPageDataType = async (productID) => {
+    try {
+        const product = await getDBProduct(productID);
+
+        if(!product) {
+            return ['error', 'Product not found'];
+        }
+
+        return ['success', {
+            pageInfo: {
+                id: product.id,
+                title: product.name,
+                description: product.shortDescription,
+                subtitle: product.shortDescription,
+                heroImage: {
+                    image: product.imageUrl,
+                    alt: product.name
+                }
+            },
+            product
+        }];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}

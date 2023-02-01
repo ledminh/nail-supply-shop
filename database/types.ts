@@ -29,6 +29,10 @@ export type DBPageInfoType = {
     title: string;
     description?: string;
     subtitle?: string;
+    heroImage?: {
+        image: string,
+        alt: string
+    };
 }
 
 
@@ -72,6 +76,10 @@ export type CategoryPageDataType = PageDataType & {
 
 export type ShopPageDataType =  PageDataType &{
     categories: CategoryType[];
+}
+
+export type ProductPageDataType = PageDataType & {
+    product: ProductType;
 }
 
 export type AdminPageDataType = PageDataType; 
@@ -133,12 +141,14 @@ export type GetHomePageDataType = () => Promise<ResponseType<HomePageDataType>>;
     // fetches data for about page
 export type GetAboutPageDataType = () => Promise<ResponseType<AboutPageDataType>>;
 
-
     // fetches data for category pages
 export type GetCategoryPageDataType = (categorySlug?: string) => Promise<ResponseType<CategoryPageDataType>>;
 
     // fetches data for shop page
 export type GetShopPageDataType = () => Promise<ResponseType<ShopPageDataType>>;
+
+    // fetches data for product page
+export type GetProductPageDataType = (productID: string) => Promise<ResponseType<ProductPageDataType>>;
 
     // fetches data for admin page
 export type GetAdminPageDataType = () => Promise<ResponseType<AdminPageDataType>>;

@@ -9,25 +9,19 @@ import ProductList from '../../../components/category_components/ProductList';
 
 import { pageConfigs } from '../../../config';
 
-interface CategoryDetailProps {    
-    response: ResponseType<CategoryPageDataType>;
-}
+type CategoryDetailProps = CategoryPageDataType;
 
 type CategoryPageType = NextPageCustomized<CategoryDetailProps>;
 
-const CategoryPage:CategoryPageType = ({response}) => {
-    const [status, data] = response;
+const CategoryPage:CategoryPageType = ({categories, currentCategoryID, products}) => {
    
 
     return (
         <CategoryLayout 
-            responses={[response]}
-            categories={status === 'success' ? data.categories : []}
-            selectedCategoryID={(data as CategoryPageDataType).currentCategoryID} 
+            categories={categories}
+            selectedCategoryID={currentCategoryID} 
             >
-                {
-                    status === 'success' && <ProductList products={data.products} /> 
-                }
+                <ProductList products={products} />
         </CategoryLayout>
 
     );

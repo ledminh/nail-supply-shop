@@ -11,29 +11,21 @@ import ProductList from '../../../components/category_components/ProductList';
 
 
 
-interface CategoryIndexProps {
-    response: ResponseType<CategoryPageDataType>;
-}
+type CategoryIndexProps = CategoryPageDataType;
 
 type CategoryIndexPageType = NextPageCustomized<CategoryIndexProps>;
 
 
 
 
-const CategoryIndexPage:CategoryIndexPageType = ({response}) => {
+const CategoryIndexPage:CategoryIndexPageType = ({categories, products}) => {
     
-    const [status, data] = response;
-
     return (
         <CategoryLayout 
-            responses={[response]}
-            categories={status === 'success' ? data.categories : []}
+            categories={categories}
             selectedCategoryID={null}
             >
-                {
-                    status === 'success' && <ProductList products={data.products} /> 
-                }
-
+                <ProductList products={products} />
         </CategoryLayout>
     );
 }
@@ -42,7 +34,6 @@ const CategoryIndexPage:CategoryIndexPageType = ({response}) => {
 export default CategoryIndexPage;
 
 
-// TODO: this HeroImage is from shop_components, change it to category_components
 CategoryIndexPage.pageConfig = pageConfigs.category;
 
 

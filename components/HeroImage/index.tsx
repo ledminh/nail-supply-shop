@@ -11,8 +11,9 @@ import Image, {StaticImageData} from "next/image";
 interface HeroImagePropsType {
     title: string,
     subtitle?: string,
-    image: StaticImageData,
-    imgAltText: string
+    image: StaticImageData | string,
+    imgAltText: string,
+    havePlaceholder: boolean
 } 
 
 export type HeroImageType = FunctionComponent<HeroImagePropsType>
@@ -22,7 +23,7 @@ export type HeroImageType = FunctionComponent<HeroImagePropsType>
 /***************************
  *  Main Component
  */
-const HeroImage:HeroImageType = ({title, subtitle, image, imgAltText}) => {
+const HeroImage:HeroImageType = ({title, subtitle, image, imgAltText, havePlaceholder}) => {
 
     return (
         <section className={styles.wrapper}>
@@ -33,7 +34,7 @@ const HeroImage:HeroImageType = ({title, subtitle, image, imgAltText}) => {
                 style={{
                     objectFit: 'cover'
                 }}
-                placeholder="blur"
+                placeholder={havePlaceholder? "blur" : undefined}
                 
             />
             <div className={styles.content}>

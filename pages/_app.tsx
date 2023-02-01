@@ -24,7 +24,7 @@ type AppPropsCustomized = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsCustomized) {
   
-  const {heroImage} = Component.pageConfig || {heroImage: undefined};
+  const pageConfig = Component.pageConfig; 
 
   const response:ResponseType<HomePageDataType|AboutPageDataType|ShopPageDataType|AdminPageDataType|CategoryPageDataType> = pageProps.response;
 
@@ -39,18 +39,39 @@ export default function App({ Component, pageProps }: AppPropsCustomized) {
               // 3. populate the layout with pageInfo and pageConfig
               <MainLayout 
                 // pass the whole config object to MainLayout to traced back the parent page
-                pageConfig={Component.pageConfig}
+                pageConfig={pageConfig}
                 title={response[1].pageInfo.title}
                 description={response[1].pageInfo.description}
                 >
                   {
-                    heroImage &&
+                    // TODO: check pageConfig of category.
+                    response[1].pageInfo.heroImage ?
                       <HeroImage 
                         subtitle={response[1].pageInfo.subtitle}
                         title={response[1].pageInfo.title}
-                        image={heroImage.image}
-                        imgAltText={heroImage.alt}
-                      />
+                        
+                        image={
+                          response[1].pageInfo.heroImage.image
+                        }
+                        
+                        imgAltText={
+                          response[1].pageInfo.heroImage.alt
+                        }
+                        havePlaceholder={false}
+                        />: pageConfig?.heroImage?
+                        <HeroImage 
+                          subtitle={response[1].pageInfo.subtitle}
+                          title={response[1].pageInfo.title}
+                          
+                          image={
+                            pageConfig.heroImage.image
+                          }
+                          
+                          imgAltText={
+                            pageConfig.heroImage.alt
+                          }
+                          havePlaceholder={true}
+                        />: null                       
                   }
                   {/* 4. pageInfo has no use here, but still being passed along with other page data */}
                 <Component {...pageProps.response[1]} />

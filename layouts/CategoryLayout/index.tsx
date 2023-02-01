@@ -15,12 +15,11 @@ import Section from './Section';
 
 interface CategoryLayoutProps {
     children: ReactNode;
-    responses: ResponseType<any>[];
     categories: CategoryType[];
     selectedCategoryID: string|null;
 }
 
-const CategoryLayout: FC<CategoryLayoutProps> = ({children, responses, categories, selectedCategoryID}) => {
+const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategoryID}) => {
 
   const router = useRouter();
 
@@ -36,38 +35,34 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, responses, categorie
 
 
   return (
-    <ErrorLayout
-      responses={responses}
-    > 
-      <div className={styles.wrapper}>
-        {/* 'MobileBar' is only visible on mobile devices */}
-          
-          <Section type='MobileBar'>        
-            <CategorySelect
-                categories={categories}
-                selectedCategoryID={selectedCategoryID}
-                onChange={handleCategoryChange}
-            />
-          </Section>
-        {/* 'SideBar' is only visible on desktop devices */}
-        <Section type='SideBar'>
-          <CategoryList
-            categories={categories}
-            selectedCategoryID={selectedCategoryID}
-            handleCategoryChange={handleCategoryChange}
+    <div className={styles.wrapper}>
+      {/* 'MobileBar' is only visible on mobile devices */}
+        
+        <Section type='MobileBar'>        
+          <CategorySelect
+              categories={categories}
+              selectedCategoryID={selectedCategoryID}
+              onChange={handleCategoryChange}
           />
         </Section>
-          
-        <div className={styles.main}>
-            {/* 'MainBar' is visible on both desktop and mobile devices */}
-            <Section type='MainBar'>
-                <PriceFilter/>
-                <Sort/>
-            </Section>
-            {children}
-        </div>
+      {/* 'SideBar' is only visible on desktop devices */}
+      <Section type='SideBar'>
+        <CategoryList
+          categories={categories}
+          selectedCategoryID={selectedCategoryID}
+          handleCategoryChange={handleCategoryChange}
+        />
+      </Section>
+        
+      <div className={styles.main}>
+          {/* 'MainBar' is visible on both desktop and mobile devices */}
+          <Section type='MainBar'>
+              <PriceFilter/>
+              <Sort/>
+          </Section>
+          {children}
       </div>
-    </ErrorLayout>
+    </div>
   )
 } 
   
