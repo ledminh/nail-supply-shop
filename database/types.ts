@@ -82,7 +82,11 @@ export type ProductPageDataType = PageDataType & {
     product: ProductType;
 }
 
-export type AdminPageDataType = PageDataType; 
+export type AdminPageDataType = PageDataType & {
+    categories: CategoryType[];
+    products: ProductType[];
+    aboutHtmlText: string;
+}; 
 
 
 /*********************************************

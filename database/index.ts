@@ -268,3 +268,24 @@ export const getProductPageData:GetProductPageDataType = async (productID) => {
         return ['error', (err as Error).message];
     }
 }
+
+export const getAdminPageData:GetAdminPageDataType = async () => {
+    try {
+        const categories = await getDBCategories();
+        const products = await getDBProducts();
+        
+        return ['success', {
+            pageInfo: {
+                id: 'admin',
+                title: 'Admin',
+                description: 'Admin',
+            },
+            categories,
+            products,
+            aboutHtmlText: '',
+        }];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
