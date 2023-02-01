@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }: AppPropsCustomized) {
 
   const response:ResponseType<HomePageDataType|AboutPageDataType|ShopPageDataType|AdminPageDataType|CategoryPageDataType> = pageProps.response;
 
+  
   return (
     <>
       {/* 1. Check for error first */}
