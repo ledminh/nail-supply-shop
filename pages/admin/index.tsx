@@ -1,13 +1,13 @@
-import Category from '../admin_components/Category';
-import Product from '../admin_components/Product';
-import Subtitles from '../admin_components/Subtitles';
-import About from '../admin_components/About';
+import Category from '../../components/admin_components/Category';
+import Product from '../../components/admin_components/Product';
+import Subtitles from '../../components/admin_components/Subtitles';
+import About from '../../components/admin_components/About';
 
 import styles from '../../styles/admin.module.scss';
 
 import {getAdminPageData, AdminPageDataType } from '../../database';
 
-import { NextPageCustomized } from '../../pages/_app';
+import { NextPageCustomized } from '../_app';
 import { pageConfigs } from '../../config';
 
 
