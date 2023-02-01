@@ -19,7 +19,7 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
 
   return (
     <div className={styles.wrapper}>
-      {/* <section className={styles.section}>
+      <section className={styles.section}>
         <Category
           categories={categories}  
           />
@@ -39,7 +39,7 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
         <About
           htmlText={aboutHtmlText}
           />
-      </section> */}
+      </section>
     </div>
   ); 
 }
