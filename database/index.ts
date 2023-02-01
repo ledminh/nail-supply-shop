@@ -278,7 +278,6 @@ export const getAdminPageData:GetAdminPageDataType = async () => {
             pageInfo: {
                 id: 'admin',
                 title: 'Admin',
-                description: 'Admin',
             },
             categories,
             products,

@@ -44,7 +44,6 @@ export default function App({ Component, pageProps }: AppPropsCustomized) {
                 description={response[1].pageInfo.description}
                 >
                   {
-                    // TODO: check pageConfig of category.
                     response[1].pageInfo.heroImage ?
                       <HeroImage 
                         subtitle={response[1].pageInfo.subtitle}

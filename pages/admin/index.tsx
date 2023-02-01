@@ -5,7 +5,7 @@ import About from '../../components/admin_components/About';
 
 import styles from '../../styles/admin.module.scss';
 
-import { CategoryType, ProductType, PageInfoType, ResponseType, getAdminPageData, AdminPageDataType } from '../../database';
+import {getAdminPageData, AdminPageDataType } from '../../database';
 
 import { NextPageCustomized } from '../_app';
 import { pageConfigs } from '../../config';
@@ -13,21 +13,21 @@ import { pageConfigs } from '../../config';
 
 type AdminProps = AdminPageDataType; 
 
-const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlText}) => {
+const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlText} ) => {
 
   
 
   return (
     <div className={styles.wrapper}>
-      <section className={styles.section}>
+      {/* <section className={styles.section}>
         <Category
-          categories={categories as CategoryType[]}  
+          categories={categories}  
           />
       </section>
       <section className={styles.section}>
         <Product
-          categories={categories as CategoryType[]}
-          products={products as ProductType[]}
+          categories={categories}
+          products={products}
           />
       </section>
       <section className={styles.section + ' ' + styles.full}>
@@ -39,7 +39,7 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
         <About
           htmlText={aboutHtmlText}
           />
-      </section>
+      </section> */}
     </div>
   ); 
 }
@@ -60,8 +60,6 @@ Admin.pageConfig = pageConfigs.admin;
  */
 export const getServerSideProps = async () => {
   const response = await getAdminPageData();
-
-
 
 
   return {
