@@ -21,6 +21,7 @@ type HomeType = NextPageCustomized<HomePageDataType>;
 
 const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
   
+
   return (
     <>
       <div className={styles.wrapper}>

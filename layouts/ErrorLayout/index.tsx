@@ -1,36 +1,43 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
+import ErrorBoundary from '../../components/ErrorBoundary';
 import styles from './ErrorLayout.module.scss';
-import { ResponseType } from '../../database';
 
-import ErrorScreen from '../../components/ErrorScreen';
-
-import getErrMessages from '../../utils/getErrMessages';
 
 interface ErrorLayoutProps {
-  responses: ResponseType<any>[];
-  children: ReactNode;
+  statusCode?: number;
+  errorMessage?: string;
+  children?: React.ReactNode;
 }
 
-const ErrorLayout: FC<ErrorLayoutProps> = ({responses, children}) => {
-  
-  const errMsgs = getErrMessages(...responses);
-  
-  if(errMsgs.length > 0) {
+const ErrorLayout: FC<ErrorLayoutProps> = ({statusCode, errorMessage, children}) => {
+
+  if(statusCode) {
     return (
-      <ErrorScreen
-        errMessages={errMsgs}
-      />
-    )
+      <div className={styles.wrapper}>
+        <p>Error code: {statusCode}</p>
+      </div>
+    );
   }
 
 
+  if(errorMessage) {
+    return (
+      <div className={styles.wrapper}>
+        <p>Error message: {errorMessage}</p>
+      </div>
+    );
+  }
+
+  
+
 
   return (
-    <>
-     {children}
-    </>
+    <div className={styles.wrapper}>
+      <ErrorBoundary>
+        {children? children : null}
+      </ErrorBoundary>
+    </div>
   )
-
 
 }
 

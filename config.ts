@@ -4,6 +4,7 @@ import homeHeroImage from './assets/images/homeHeroImage.jpg';
 import aboutHeroImage from './assets/images/aboutHeroImage.jpg';
 import shopHeroImage from './assets/images/shopHeroImage.jpg';
 
+import _errorHeroImage from './assets/images/errorHeroImage.jpg';
 
 export type SlugType = 'home' | 'shop' | 'about' | 'category' | 'product'| 'admin';
 
@@ -90,4 +91,9 @@ export const pageConfigs: PageConfigsType = {
     },
 
 
+};
+
+export const errorHeroImage = {
+    image: _errorHeroImage,
+    alt: 'Error'
 };
