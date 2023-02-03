@@ -1,0 +1,37 @@
+@use '../../../styles/base';
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    color: rgb(196, 196, 196);
+
+    padding-left: 10px;
+    padding-bottom: 20px;
+
+    // linear gradient from transparent to black from left to right
+    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 100%);
+
+    
+
+
+    &:hover {
+        background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+}
+
+@media (min-width: base.$breakpointMobile) {
+    .wrapper {
+        background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 100%);
+
+        &:hover {
+            background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+    }
+
+}

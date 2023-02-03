@@ -6,6 +6,8 @@ import { pageConfigs } from '../../config';
 import { ShopPageDataType, getShopPageData } from '../../database';
 
 import Link from 'next/link';
+import ListLayout from '../../layouts/ListLayout';
+import CategoryItem from '../../components/shop_components/CategoryItem';
 
 
 // TODO: style this page
@@ -16,18 +18,19 @@ const Shop: NextPageCustomized<ShopPageDataType> = ({categories}) => {
     return (
         <>
             <h2>Category List</h2>
-            {
-                categories.map((cat) => {
-                    return (
-                        <Link key={cat.id}
-                            href={`/shop/category/${cat.slug}`}
-                            >
-                            <h3>{cat.name}</h3>
-                            <p>{cat.description}</p>
-                        </Link>
-                    )
-                })
-            }
+            <ListLayout
+                renderItemBody={(category) => (
+                    <CategoryItem
+                        category={category}
+                        />
+                )}
+                keyExtractor={(category) => category.id}
+                data={categories.map((category) => ({
+                    ...category,
+                    url: `/shop/category/${category.slug}`,
+                    }))
+                }
+                />
         </>
     )
 };
