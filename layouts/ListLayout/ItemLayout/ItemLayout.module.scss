@@ -9,6 +9,8 @@
 
     border-radius: 15px;
     overflow: hidden;
+
+    
 }
 
 .image {
@@ -25,49 +27,19 @@
     right: 0;
     bottom: 0;
 
-    display: flex;
-    flex-direction: column;
-
-    justify-content: flex-end;
-
-    color: rgb(196, 196, 196);
-
-    padding-left: 10px;
-    padding-bottom: 20px;
-
-    // linear gradient from transparent to black from left to right
-    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 100%);
-
-    
-
-    &:hover {
-        background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    }
 }
 
 // responsive mobile first
-
-@media (min-width: 768px) {
-    .wrapper {
-        height: 200px;
-    }
-
-    .body {
-        background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.3) 100%);
-
-        &:hover {
-            background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-        }
-    }
-}
-
-@media (min-width: 992px) {
+@media (min-width: base.$breakpointMobile) {
     .wrapper {
         height: 250px;
     }
+
+    
 }
 
-@media (min-width: 1200px) {
+
+@media (min-width: base.$breakpointTablet) {
     .wrapper {
         height: 300px;
     }

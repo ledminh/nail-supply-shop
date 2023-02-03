@@ -1,11 +1,12 @@
 import { GetServerSidePropsContext } from 'next';
 
 import { NextPageCustomized } from '../../_app';
-import { ResponseType, CategoryPageDataType, getCategoryPageData } from '../../../database';
+import { CategoryPageDataType, getCategoryPageData } from '../../../database';
 
 import CategoryLayout from '../../../layouts/CategoryLayout';
 
-import ProductList from '../../../components/category_components/ProductList';
+import ListLayout from '../../../layouts/ListLayout';
+import ProductItem from '../../../components/category_components/ProductItem';
 
 import { pageConfigs } from '../../../config';
 
@@ -21,7 +22,14 @@ const CategoryPage:CategoryPageType = ({categories, currentCategoryID, products}
             categories={categories}
             selectedCategoryID={currentCategoryID} 
             >
-                <ProductList products={products} />
+                <ListLayout
+                    renderItemBody={(product) => <ProductItem product={product}/>}
+                    keyExtractor={(product) => product.id}
+                    data={products.map((product) => ({
+                        ...product,
+                        url: `/product/${product.id}`,
+                        }))}
+                    />
         </CategoryLayout>
 
     );

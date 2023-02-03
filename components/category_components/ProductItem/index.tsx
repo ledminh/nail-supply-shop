@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import styles from './ItemBody.module.scss';
+import styles from './ProductItem.module.scss';
 
 import { ProductType } from '../../../database';
 
@@ -22,14 +22,14 @@ type ProductItemType = FunctionComponent<ProductItemPropsType>
 const ProductItem:ProductItemType = ({product}) => {
 
     return (
-        <>
+        <div className={styles.wrapper}>
             <h4>{product.name}</h4>
             <p>{product.shortDescription}</p>
             <div className={styles.price}>
                 <span>Price: </span>
                 <span>${product.price}</span>
             </div>
-        </>
+        </div>
     )
 }
 
