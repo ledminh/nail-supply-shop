@@ -30,18 +30,14 @@ const LargeScreen:LargeScreenType = ({currentPageSlug, pageConfigs}) => {
             <ul className={styles.ul}>
                 {
                     pageConfigs.map((pCF) => (
-                        <>
-                            {   
-                                pCF.onNav && (
-                                    <li key={pCF.slug}>
-                                        <Link className={currentPageSlug === pCF.slug? styles.current : ""} 
-                                            href={pCF.path}>
-                                            {pCF.name}
-                                        </Link>
-                                    </li>
-                                )
-                            }
-                        </>
+                        pCF.onNav && (
+                            <li key={pCF.slug}>
+                                <Link className={currentPageSlug === pCF.slug? styles.current : ""} 
+                                    href={pCF.path}>
+                                    {pCF.name}
+                                </Link>
+                            </li>
+                        )
                     ))
                 }
             </ul>

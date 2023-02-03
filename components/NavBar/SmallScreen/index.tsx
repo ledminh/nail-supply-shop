@@ -57,9 +57,7 @@ const SmallScreen:SmallScreenType = ({currentPageSlug, pageConfigs}) => {
                 <nav className={styles.nav}>
                     <ul>
                         {
-                            pageConfigs.map((pCF, index) => (
-                                <>
-                                    {
+                            pageConfigs.map((pCF, index) => (                                
                                         pCF.onNav &&
                                         <li key={index}>
                                             <Link href={pCF.path}
@@ -67,11 +65,7 @@ const SmallScreen:SmallScreenType = ({currentPageSlug, pageConfigs}) => {
                                             >
                                                 {pCF.name}
                                             </Link>
-                                        </li>
-
-                                    }
-                                </>
-                            ))
+                                        </li>))
                         }
                     </ul>
                 </nav>  

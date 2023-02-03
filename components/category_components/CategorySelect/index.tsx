@@ -26,12 +26,12 @@ const CategorySelect:CategorySelectType = ({categories, selectedCategoryID, onCh
 
     return (
         <div className={styles.wrapper}>
-            <select className={styles.select} 
+            <select className={styles.select}
                     onChange={(e) => {
                         onChange(e.target.value === ''? null : categories[+e.target.value]);
                     }}
                     value={index}>
-                <option key='all' value={''} selected>All</option>
+                <option key='all' value={''}>All</option>
                 {categories.map((category, index) => (
                     <option key={category.id} value={index}>{category.name}</option>
                 ))}

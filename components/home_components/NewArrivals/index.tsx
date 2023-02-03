@@ -42,6 +42,7 @@ const NewArrivals:NewArrivalsType = ({products}) => {
                                     src={product.imageUrl} 
                                     alt={product.name}
                                     fill
+                                    sizes="100%"
                                     style={{objectFit: 'cover'}}
                                     />
                                 <div className={styles.text}>

@@ -21,7 +21,7 @@ const PageHead:PageHeadType = ({title, description}) => {
 
     return (
         <Head>
-            <title>{title + " :: "}Nail Supply Shop</title>
+            <title>{`${title} :: Nail Supply Shop`}</title>
             <meta name="description" content={description} />
             <link rel="icon" href="/favicon.ico" />
         </Head>
