@@ -1,11 +1,11 @@
 import { FunctionComponent } from "react";
 
-import styles from './ProductList.module.scss';
-
 
 import { ProductType } from '../../../database';
 
-import Item from './Item';
+import ListLayout from "../../../layouts/ListLayout";
+import ItemBody from "./ItemBody";
+
 
 
 /***************************
@@ -25,15 +25,15 @@ type ProductListType = FunctionComponent<ProductListPropsType>
 const ProductList:ProductListType = ({products}) => {
 
     return (
-        <ul className={styles.wrapper}>
-        {
-            products.map((product) => (
-                <li key={product.id}>
-                    <Item product={product}/>
-                </li>
-            ))
-        }
-        </ul>
+        <ListLayout
+            renderItemBody={(product) => <ItemBody product={product}/>}
+            keyExtractor={(product) => product.id}
+            data={products.map((product) => ({
+                ...product,
+                url: `/product/${product.id}`,
+                }))}
+            />
+        
     )
 }
 

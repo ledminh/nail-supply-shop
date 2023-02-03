@@ -1,4 +1,4 @@
-@use '../../../../styles/base';
+@use '../../../styles/base';
 
 .wrapper {
     position: relative;
@@ -16,6 +16,7 @@
 
 
 }
+
 .body {
     z-index: 1;
     position: absolute;
