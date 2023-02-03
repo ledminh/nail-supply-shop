@@ -2,24 +2,24 @@ import { FunctionComponent } from "react";
 
 import styles from './ItemBody.module.scss';
 
-import { ProductType } from '../../../../database';
+import { ProductType } from '../../../database';
 
 
 /***************************
  *  Types
  */
-interface ItemBodyPropsType {
+interface ProductItemPropsType {
     product: ProductType;
 } 
 
-type ItemBodyType = FunctionComponent<ItemBodyPropsType>
+type ProductItemType = FunctionComponent<ProductItemPropsType>
 
 
 
 /***************************
  *  Main Component
  */
-const ItemBody:ItemBodyType = ({product}) => {
+const ProductItem:ProductItemType = ({product}) => {
 
     return (
         <>
@@ -33,4 +33,4 @@ const ItemBody:ItemBodyType = ({product}) => {
     )
 }
 
-export default ItemBody;
+export default ProductItem;
