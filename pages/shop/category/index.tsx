@@ -55,7 +55,7 @@ CategoryIndexPage.pageConfig = pageConfigs.category;
 export const getServerSideProps = async () => {
     
     const response = await getCategoryPageData();
-
+    
     return {
         props: {
             response

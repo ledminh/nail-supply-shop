@@ -192,19 +192,14 @@ export const getShopPageData:GetShopPageDataType = async () => {
 export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) => {
 
     try {       
-
+        const pageInfo = await getDBPageInfo('Shop');
         const categories = await getDBCategories();
 
         if(!categorySlug) {
             const products = await getDBProducts();
 
             return ['success', {
-                pageInfo: {
-                    id: 'category/all-products',
-                    title: 'All Products',
-                    description: 'All Products',
-                },
-                
+                pageInfo,
                 categories, 
                 selectedCategoryID: '', 
                 products
@@ -221,16 +216,7 @@ export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) 
         const products = await getDBProducts({categoryID: category.id});
 
         return ['success', {
-            pageInfo: {
-                id: category.id,
-                title: category.name,
-                description: category.description,
-                subtitle: category.description,
-                heroImage: {
-                    image: category.imageUrl,
-                    alt: category.name
-                }
-            },
+            pageInfo,
             categories, 
             selectedCategoryID: category.id, 
             products
@@ -256,10 +242,6 @@ export const getProductPageData:GetProductPageDataType = async (productID) => {
                 title: product.name,
                 description: product.shortDescription,
                 subtitle: product.shortDescription,
-                heroImage: {
-                    image: product.imageUrl,
-                    alt: product.name
-                }
             },
             product
         }];

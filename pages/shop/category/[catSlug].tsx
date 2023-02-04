@@ -59,7 +59,7 @@ const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, products
 export default CategoryPage;
 
 
-CategoryPage.pageConfig = pageConfigs.shop;
+CategoryPage.pageConfig = pageConfigs.category;
 
 
 
@@ -85,6 +85,8 @@ export const getServerSideProps = async (context:GetServerSidePropsContext) => {
 
     const response = await getCategoryPageData(catSlug);
 
+    console.log(response);
+    
     return {
         props: {
             response

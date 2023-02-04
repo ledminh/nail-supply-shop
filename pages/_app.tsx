@@ -27,9 +27,6 @@ type AppPropsCustomized = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsCustomized) {
   
-
-
-  
   
   if(pageProps.statusCode) {
 
