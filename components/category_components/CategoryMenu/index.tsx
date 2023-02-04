@@ -42,7 +42,8 @@ const CategoryMenu:CategoryMenuType = ({selectedCategoryID, handleCategoryChange
                                 onClick={() => {
                                     handleCategoryChange(category);
                                 }}>
-                                {category.name}
+                                <p className={styles.name}>{category.name}</p>
+                                <p className={styles.description}>{category.description}</p>
                             </button>
                         </li>
                     ))

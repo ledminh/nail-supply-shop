@@ -35,14 +35,41 @@
 
         margin-bottom: 10px;
 
+        .name {
+            border-bottom: 1px solid transparent;
+            margin-bottom: 5px;
+        }
+
+        .description {
+            font-size: .7rem;  
+            font-weight: 700;          
+            opacity: 0;
+        }
+
+
         &:hover {
             background-color: adjust-color($color: base.$backgroundColor, $lightness: -5%);
+
+            .name {
+                border-bottom: 1px solid #000;
+            }
+
+            .description {
+                opacity: 1;
+            }
         }
 
         
         &.selected {
             background-color: adjust-color($color: base.$backgroundColor, $lightness: -5%);
-
+            
+            .name {
+                border-bottom: 1px solid #000;
+            }
+            
+            .description {
+                opacity: 1;
+            }
 
         }
     }

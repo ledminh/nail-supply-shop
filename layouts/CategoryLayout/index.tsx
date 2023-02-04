@@ -6,7 +6,7 @@ import { CategoryType } from '../../database';
 import { useRouter } from 'next/router';
 
 import CategorySelect from '../../components/category_components/CategorySelect';
-import CategoryList from '../../components/category_components/CategoryMenu';
+import CategoryMenu from '../../components/category_components/CategoryMenu';
 
 import PriceFilter from '../../components/category_components/PriceFilter';
 import Sort from '../../components/category_components/Sort';
@@ -46,7 +46,7 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
         </Section>
       {/* 'SideBar' is only visible on desktop devices */}
       <Section type='SideBar'>
-        <CategoryList
+        <CategoryMenu
           categories={categories}
           selectedCategoryID={selectedCategoryID}
           handleCategoryChange={handleCategoryChange}
