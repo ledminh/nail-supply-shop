@@ -23,7 +23,7 @@ type CategoryIndexPageType = NextPageCustomized<CategoryIndexProps>;
 
 const CategoryIndexPage:CategoryIndexPageType = ({categories, products}) => {
     
-    const {handleCategoryChange} = useCategoryPage();
+    const {handleCategoryChange, _products} = useCategoryPage(products, '');
 
     return (
         <CategoryLayout 
@@ -34,11 +34,11 @@ const CategoryIndexPage:CategoryIndexPageType = ({categories, products}) => {
                 <ListLayout
                     wrapperClassName={styles.ul}
                     liClassName={styles.li}
-                    renderItemBody={(product) => <ProductItem product={product}/>}
-                    keyExtractor={(product) => product.id}
-                    data={products.map((product) => ({
-                        ...product,
-                        url: `/product/${product.id}`,
+                    renderItemBody={(_product) => <ProductItem product={_product}/>}
+                    keyExtractor={(_product) => _product.id}
+                    data={_products.map((_product) => ({
+                        ..._product,
+                        url: `/product/${_product.id}`,
                         }))}
                     />
         </CategoryLayout>

@@ -69,7 +69,7 @@ export type HomePageDataType = PageDataType & {
 export type AboutPageDataType = PageDataType;
 
 export type CategoryPageDataType = PageDataType & {
-    currentCategoryID: string;
+    selectedCategoryID: string;
     categories: CategoryType[];
     products: ProductType[];
 };

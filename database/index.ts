@@ -206,7 +206,7 @@ export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) 
                 },
                 
                 categories, 
-                currentCategoryID: '', 
+                selectedCategoryID: '', 
                 products
                 
             }];
@@ -232,7 +232,7 @@ export const getCategoryPageData:GetCategoryPageDataType = async (categorySlug) 
                 }
             },
             categories, 
-            currentCategoryID: category.id, 
+            selectedCategoryID: category.id, 
             products
 
         }];

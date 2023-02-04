@@ -13,32 +13,42 @@ import ProductItem from '../../../components/category_components/ProductItem';
 import { pageConfigs } from '../../../config';
 
 
-import { CategoryType } from '../../../database';
 import useCategoryPage from '../../../utils/category_page/hooks';
 
 type CategoryDetailProps = CategoryPageDataType;
 
 type CategoryPageType = NextPageCustomized<CategoryDetailProps>;
 
-const CategoryPage:CategoryPageType = ({categories, currentCategoryID, products}) => {
+
+
+/**********************************
+There are 2 paths to populate data for this page:
+    1. If the page is rendered on the server, the data comes from the getServerSideProps function, goes through the useCategoryPage and is passed as it is to the rest of the page.
+    2. If the user is already on the page and navigates to another category, the useCategoryPage hook will manipulate the data and pass it to the rest of the page.
+It is kind of messy because I want the page's scroll position to be preserved when the user navigates to another category
+************************************/
+
+
+
+const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, products}) => {
    
-    const {handleCategoryChange} = useCategoryPage();
+    const {handleCategoryChange, _products, _selectedCategoryID} = useCategoryPage(products, selectedCategoryID);
 
 
     return (
         <CategoryLayout 
             categories={categories}
-            selectedCategoryID={currentCategoryID} 
+            selectedCategoryID={_selectedCategoryID} 
             handleCategoryChange={handleCategoryChange}
             >
                 <ListLayout
                     wrapperClassName={styles.ul}
                     liClassName={styles.li}
-                    renderItemBody={(product) => <ProductItem product={product}/>}
-                    keyExtractor={(product) => product.id}
-                    data={products.map((product) => ({
-                        ...product,
-                        url: `/product/${product.id}`,
+                    renderItemBody={(_product) => <ProductItem product={_product}/>}
+                    keyExtractor={(_product) => _product.id}
+                    data={_products.map((_product) => ({
+                        ..._product,
+                        url: `/product/${_product.id}`,
                         }))}
                     />
         </CategoryLayout>
