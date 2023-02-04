@@ -6,13 +6,14 @@ import styles from './CategoryMenu.module.scss';
 import { CategoryType } from '../../../database';
 
 
+
 /***************************
  *  Types
  */
 interface CategoryMenuPropsType {
     categories: CategoryType[];
     selectedCategoryID: string|null;
-    handleCategoryChange: (currentCategory:CategoryType|null) => void;
+    onChange: (currentCategory: CategoryType|null) => void;
 } 
 
 type CategoryMenuType = FunctionComponent<CategoryMenuPropsType>
@@ -22,7 +23,12 @@ type CategoryMenuType = FunctionComponent<CategoryMenuPropsType>
 /***************************
  *  Main Component
  */
-const CategoryMenu:CategoryMenuType = ({selectedCategoryID, handleCategoryChange, categories}) => {
+const CategoryMenu:CategoryMenuType = ({selectedCategoryID, categories, onChange}) => {
+
+    
+
+
+    
 
     return (
         <div className={styles.wrapper}>
@@ -30,18 +36,17 @@ const CategoryMenu:CategoryMenuType = ({selectedCategoryID, handleCategoryChange
             <ul className={styles.list}>
                 <li className={styles.item}>
                     <button
-                        className={selectedCategoryID === null ? styles.selected : ''}
-                        onClick={() => handleCategoryChange(null)}
+                        className={`${styles.link}${selectedCategoryID === null ? ' ' + styles.selected : ''}`}
+                        onClick={() => onChange(null)}
                     >All</button>
                 </li>
                 {
                     categories.map((category) => (
                         <li key={category.id} className={styles.item}>
                             <button
-                                className={selectedCategoryID === category.id ? styles.selected : ''} 
-                                onClick={() => {
-                                    handleCategoryChange(category);
-                                }}>
+                                className={`${styles.link}${selectedCategoryID === category.id ? ' ' + styles.selected : ''}`} 
+                                onClick={() => onChange(category)}
+                                >
                                 <p className={styles.name}>{category.name}</p>
                                 <p className={styles.description}>{category.description}</p>
                             </button>

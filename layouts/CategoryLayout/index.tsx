@@ -3,7 +3,6 @@ import styles from './CategoryLayout.module.scss';
 
 import { CategoryType } from '../../database';
 
-import { useRouter } from 'next/router';
 
 import CategorySelect from '../../components/category_components/CategorySelect';
 import CategoryMenu from '../../components/category_components/CategoryMenu';
@@ -16,21 +15,12 @@ interface CategoryLayoutProps {
     children: ReactNode;
     categories: CategoryType[];
     selectedCategoryID: string|null;
+    handleCategoryChange: (currentCat: CategoryType|null) => void;
 }
 
-const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategoryID}) => {
+const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategoryID, handleCategoryChange}) => {
 
-  const router = useRouter();
-
-
-  const handleCategoryChange = (currentCat: CategoryType|null) => {
-    if(!currentCat) {
-      router.push('/shop/category');
-    }
-    else {
-      router.push(`/shop/category/${currentCat.slug}`);
-    }
-  }
+  
 
 
   return (
@@ -49,8 +39,8 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
         <CategoryMenu
           categories={categories}
           selectedCategoryID={selectedCategoryID}
-          handleCategoryChange={handleCategoryChange}
-        />
+          onChange={handleCategoryChange}
+          />
       </Section>
         
       <div className={styles.main}>

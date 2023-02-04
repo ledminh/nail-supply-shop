@@ -24,6 +24,8 @@ const CategorySelect:CategorySelectType = ({categories, selectedCategoryID, onCh
     
     const index = selectedCategoryID === null? '' : categories.findIndex((category) => category.id === selectedCategoryID);
 
+    
+
     return (
         <div className={styles.wrapper}>
             <select className={styles.select}

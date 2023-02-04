@@ -21,6 +21,7 @@
 
 .list {
     button {
+        display: block;
         width: 100%;
         text-align: left;
         padding: 10px;
@@ -34,6 +35,7 @@
         transition: all 0.2s ease-in-out;
 
         margin-bottom: 10px;
+
 
         .name {
             border-bottom: 1px solid transparent;

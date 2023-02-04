@@ -10,6 +10,9 @@ import HeroImage from '../components/HeroImage';
 import ErrorLayout from '../layouts/ErrorLayout';
 
 import { errorHeroImage } from '../config';
+import { useEffect, useState } from 'react';
+
+
 
 
 
@@ -24,14 +27,17 @@ type AppPropsCustomized = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsCustomized) {
   
+
+
+  
   
   if(pageProps.statusCode) {
 
     return (
       <MainLayout 
-      title={'Error'}
-      description={'Sorry, there is something wrong.'}
-      >
+        title={'Error'}
+        description={'Sorry, there is something wrong.'}
+        >
           <HeroImage 
             title='Error'
             image={

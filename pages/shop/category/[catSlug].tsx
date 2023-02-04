@@ -1,5 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 
+import styles from '../../../styles/Category.module.scss'
+
 import { NextPageCustomized } from '../../_app';
 import { CategoryPageDataType, getCategoryPageData } from '../../../database';
 
@@ -10,19 +12,28 @@ import ProductItem from '../../../components/category_components/ProductItem';
 
 import { pageConfigs } from '../../../config';
 
+
+import { CategoryType } from '../../../database';
+import useCategoryPage from '../../../utils/category_page/hooks';
+
 type CategoryDetailProps = CategoryPageDataType;
 
 type CategoryPageType = NextPageCustomized<CategoryDetailProps>;
 
 const CategoryPage:CategoryPageType = ({categories, currentCategoryID, products}) => {
    
+    const {handleCategoryChange} = useCategoryPage();
+
 
     return (
         <CategoryLayout 
             categories={categories}
             selectedCategoryID={currentCategoryID} 
+            handleCategoryChange={handleCategoryChange}
             >
                 <ListLayout
+                    wrapperClassName={styles.ul}
+                    liClassName={styles.li}
                     renderItemBody={(product) => <ProductItem product={product}/>}
                     keyExtractor={(product) => product.id}
                     data={products.map((product) => ({
@@ -31,7 +42,6 @@ const CategoryPage:CategoryPageType = ({categories, currentCategoryID, products}
                         }))}
                     />
         </CategoryLayout>
-
     );
 }
 

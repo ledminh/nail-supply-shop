@@ -10,6 +10,7 @@ import { CategoryPageDataType, getCategoryPageData } from '../../../database';
 import ListLayout from '../../../layouts/ListLayout';
 import ProductItem from '../../../components/category_components/ProductItem';
 
+import useCategoryPage from '../../../utils/category_page/hooks';
 
 type CategoryIndexProps = CategoryPageDataType;
 
@@ -20,10 +21,13 @@ type CategoryIndexPageType = NextPageCustomized<CategoryIndexProps>;
 
 const CategoryIndexPage:CategoryIndexPageType = ({categories, products}) => {
     
+    const {handleCategoryChange} = useCategoryPage();
+
     return (
         <CategoryLayout 
             categories={categories}
             selectedCategoryID={null}
+            handleCategoryChange={handleCategoryChange}
             >
                 <ListLayout
                     renderItemBody={(product) => <ProductItem product={product}/>}

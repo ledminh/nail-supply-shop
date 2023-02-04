@@ -1,0 +1,23 @@
+@use './base';
+
+.ul {
+    gap: 15px;
+}
+
+
+.li {
+
+    transition: all 0.3s;
+
+    &:hover {
+        transform: translateY(-5px);
+        
+
+    }
+}
+
+@media (min-width: base.$breakpointTablet) {
+    .li {
+        width: 20%;
+    }
+}
