@@ -8,7 +8,7 @@ import styles from './Section.module.scss';
 
 interface SectionPropsType {
     children: ReactNode;
-    type: 'MainBar' | 'SideBar' | 'MobileBar';
+    type: 'MainBar' | 'SideBar' | 'MobileBar' | 'IntroBar';
 } 
 
 type SectionType = FunctionComponent<SectionPropsType>

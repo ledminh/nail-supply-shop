@@ -23,7 +23,7 @@ type CategoryIndexPageType = NextPageCustomized<CategoryIndexProps>;
 
 const CategoryIndexPage:CategoryIndexPageType = ({categories, products}) => {
     
-    const {handleCategoryChange, _products} = useCategoryPage(products, '');
+    const {handleCategoryChange, _products, _selectedCategory} = useCategoryPage(categories, products, '');
 
     return (
         <CategoryLayout 

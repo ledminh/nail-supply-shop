@@ -21,24 +21,24 @@ type CategoryPageType = NextPageCustomized<CategoryDetailProps>;
 
 
 
-/**********************************
+/*
 There are 2 paths to populate data for this page:
     1. If the page is rendered on the server, the data comes from the getServerSideProps function, goes through the useCategoryPage and is passed as it is to the rest of the page.
     2. If the user is already on the page and navigates to another category, the useCategoryPage hook will manipulate the data and pass it to the rest of the page.
 It is kind of messy because I want the page's scroll position to be preserved when the user navigates to another category
-************************************/
+*/
 
 
 
 const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, products}) => {
    
-    const {handleCategoryChange, _products, _selectedCategoryID} = useCategoryPage(products, selectedCategoryID);
+    const {handleCategoryChange, _products, _selectedCategory} = useCategoryPage(categories, products, '');
 
 
     return (
         <CategoryLayout 
             categories={categories}
-            selectedCategoryID={_selectedCategoryID} 
+            selectedCategoryID={_selectedCategory? _selectedCategory.id : null} 
             handleCategoryChange={handleCategoryChange}
             >
                 <ListLayout

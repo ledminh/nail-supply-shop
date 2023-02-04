@@ -4,12 +4,12 @@ import { useState } from 'react';
 
 import { getProducts } from '../../database';
 
-const useCategoryPage = (initProducts: ProductType[], selectedCategoryID: string) => {
+const useCategoryPage = (categories:CategoryType[], initProducts: ProductType[], selectedCategoryID: string) => {
 
     const router = useRouter();
 
     const [_products, set_Products] = useState(initProducts);
-    const [_selectedCategoryID, set_SelectedCategoryID] = useState(selectedCategoryID);
+    const [_selectedCategory, set_SelectedCategory] = useState(getSelectedCategory(categories, selectedCategoryID));
 
     const handleCategoryChange = (destCat: CategoryType|null) => {
         if(!destCat) {
@@ -19,7 +19,7 @@ const useCategoryPage = (initProducts: ProductType[], selectedCategoryID: string
                 }
                 else {
                     set_Products(res[1]);
-                    set_SelectedCategoryID('');
+                    set_SelectedCategory(null);
                     changeUrl('/shop/category', router);
                 }
             }); 
@@ -32,7 +32,7 @@ const useCategoryPage = (initProducts: ProductType[], selectedCategoryID: string
                 }
                 else {
                     set_Products(res[1]);
-                    set_SelectedCategoryID(destCat.id);
+                    set_SelectedCategory(getSelectedCategory(categories, destCat.id));
                     changeUrl(`/shop/category/${destCat.slug}`, router);
                 }
             }); 
@@ -43,7 +43,7 @@ const useCategoryPage = (initProducts: ProductType[], selectedCategoryID: string
     return {
         handleCategoryChange,
         _products,
-        _selectedCategoryID
+        _selectedCategory
     }
 
 }
@@ -62,4 +62,18 @@ const changeUrl = (url: string, router:NextRouter) => {
         }, 
         undefined, { shallow: true }
     );
+}
+
+const getSelectedCategory = (categories:CategoryType[], selectedCategoryID: string) => {
+    if(selectedCategoryID === '') {
+        return null;
+    }
+
+    const selectedCategory = categories.find((cat) => cat.id === selectedCategoryID);
+    
+    if(!selectedCategory) {
+        throw new Error('Category not found');
+    }
+
+    return selectedCategory;
 }

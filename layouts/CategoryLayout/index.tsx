@@ -44,6 +44,9 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
       </Section>
         
       <div className={styles.main}>
+          <Section type='IntroBar'>
+            
+          </Section>
           {/* 'MainBar' is visible on both desktop and mobile devices */}
           <Section type='MainBar'>
               <div className={styles.subSection}>
