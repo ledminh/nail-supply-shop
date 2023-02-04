@@ -2,6 +2,8 @@ import { NextPageCustomized } from '../../_app';
 
 
 import { pageConfigs } from '../../../config';
+import styles from '../../../styles/Category.module.scss'
+
 
 import CategoryLayout from '../../../layouts/CategoryLayout';
 
@@ -30,6 +32,8 @@ const CategoryIndexPage:CategoryIndexPageType = ({categories, products}) => {
             handleCategoryChange={handleCategoryChange}
             >
                 <ListLayout
+                    wrapperClassName={styles.ul}
+                    liClassName={styles.li}
                     renderItemBody={(product) => <ProductItem product={product}/>}
                     keyExtractor={(product) => product.id}
                     data={products.map((product) => ({
