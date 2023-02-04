@@ -22,9 +22,6 @@
 
     padding: 8px;
 
-    &:first-child {
-        border-bottom: 5px double #000000;
-    }
 }
 
 @media (min-width: base.$breakpointMobile) {
@@ -46,9 +43,5 @@
     .subSection {
         flex-basis: 50%;
     
-        &:first-child {
-            border-bottom: none;
-            border-right: 5px double #000000;
-        }
     }
 }
