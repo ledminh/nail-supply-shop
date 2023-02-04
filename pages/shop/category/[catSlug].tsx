@@ -32,13 +32,13 @@ It is kind of messy because I want the page's scroll position to be preserved wh
 
 const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, products}) => {
    
-    const {handleCategoryChange, _products, _selectedCategory} = useCategoryPage(categories, products, '');
+    const {handleCategoryChange, _products, _selectedCategory} = useCategoryPage(categories, products, selectedCategoryID);
 
 
     return (
         <CategoryLayout 
             categories={categories}
-            selectedCategoryID={_selectedCategory? _selectedCategory.id : null} 
+            selectedCategory={_selectedCategory} 
             handleCategoryChange={handleCategoryChange}
             >
                 <ListLayout

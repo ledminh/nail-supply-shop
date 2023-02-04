@@ -3,6 +3,7 @@ import styles from './CategoryLayout.module.scss';
 
 import { CategoryType } from '../../database';
 
+import Image from 'next/image';
 
 import CategorySelect from '../../components/category_components/CategorySelect';
 import CategoryMenu from '../../components/category_components/CategoryMenu';
@@ -14,11 +15,11 @@ import Section from './Section';
 interface CategoryLayoutProps {
     children: ReactNode;
     categories: CategoryType[];
-    selectedCategoryID: string|null;
+    selectedCategory: CategoryType|null;
     handleCategoryChange: (destCat: CategoryType|null) => void;
 }
 
-const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategoryID, handleCategoryChange}) => {
+const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handleCategoryChange}) => {
 
   
 
@@ -30,7 +31,7 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
         <Section type='MobileBar'>        
           <CategorySelect
               categories={categories}
-              selectedCategoryID={selectedCategoryID}
+              selectedCategoryID={selectedCategory? selectedCategory.id: null}
               onChange={handleCategoryChange}
           />
         </Section>
@@ -38,15 +39,31 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
       <Section type='SideBar'>
         <CategoryMenu
           categories={categories}
-          selectedCategoryID={selectedCategoryID}
+          selectedCategoryID={selectedCategory? selectedCategory.id: null}
           onChange={handleCategoryChange}
           />
       </Section>
         
       <div className={styles.main}>
-          <Section type='IntroBar'>
-            
-          </Section>
+          {
+              selectedCategory && (
+                <Section type='IntroBar'>
+                  <Image
+                    src={selectedCategory.imageUrl}
+                    alt={selectedCategory.name}
+                    fill
+                    style={{
+                      objectFit: 'cover',
+                    }}
+                    />
+                    <div className={styles.introBar}>
+                      <h4 className={styles.name}>{selectedCategory.name}</h4>
+                      <p className={styles.description}>{selectedCategory.description}</p>
+                    </div>
+                </Section>
+              )
+          }
+
           {/* 'MainBar' is visible on both desktop and mobile devices */}
           <Section type='MainBar'>
               <div className={styles.subSection}>

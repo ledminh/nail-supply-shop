@@ -28,7 +28,7 @@ const CategoryIndexPage:CategoryIndexPageType = ({categories, products}) => {
     return (
         <CategoryLayout 
             categories={categories}
-            selectedCategoryID={null}
+            selectedCategory={null}
             handleCategoryChange={handleCategoryChange}
             >
                 <ListLayout

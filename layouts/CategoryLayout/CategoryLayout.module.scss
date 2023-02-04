@@ -24,6 +24,33 @@
 
 }
 
+.introBar {
+    height: 100%;
+    background: linear-gradient(to right, base.$backgroundColor 5%, rgba(0, 0, 0, 0) 50%, base.$backgroundColor 95%),linear-gradient(to bottom, base.$backgroundColor 5%, rgba(0, 0, 0, 0) 50%, base.$backgroundColor 95%);
+    padding-left: 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    .name {
+        color: white;
+        background-color: rgba(0, 0, 0, .8);
+        padding: 5px;
+
+        margin-bottom: 4px;
+    }
+
+    .description {
+        font-weight: 700;
+        color: black;
+    }
+
+
+}
+
 @media (min-width: base.$breakpointMobile) {
     .wrapper {
         flex-direction: row;
