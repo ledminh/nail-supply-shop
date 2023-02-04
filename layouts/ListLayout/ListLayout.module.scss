@@ -9,6 +9,10 @@
 
     gap: 10px;
 
+    &::after {
+        content: '';
+        flex-basis: 100%;
+    }
 
 
 }
@@ -18,13 +22,15 @@
 }
 
 @media (min-width: base.$breakpointMobile) {
-    .li {
+    .li,
+    .wrapper::after {
         flex-basis: 45%;
     }
 }
 
 @media (min-width: base.$breakpointTablet) {
-    .li {
+    .li,
+    .wrapper::after {
         flex-basis: 32%;
     }
 }
