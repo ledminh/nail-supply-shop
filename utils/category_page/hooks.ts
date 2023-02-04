@@ -6,8 +6,8 @@ const useCategoryPage = () => {
     const router = useRouter();
 
 
-    const handleCategoryChange = (currentCat: CategoryType|null) => {
-        if(!currentCat) {
+    const handleCategoryChange = (destCat: CategoryType|null) => {
+        if(!destCat) {
         router.push(
             {
             pathname: '/shop/category'
@@ -18,7 +18,7 @@ const useCategoryPage = () => {
         else {
         router.push(
             {
-            pathname: `/shop/category/${currentCat.slug}`
+            pathname: `/shop/category/${destCat.slug}`
             }, 
             undefined, { shallow: true }
         );

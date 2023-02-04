@@ -13,7 +13,7 @@ import { CategoryType } from '../../../database';
 interface CategoryMenuPropsType {
     categories: CategoryType[];
     selectedCategoryID: string|null;
-    onChange: (currentCategory: CategoryType|null) => void;
+    onChange: (destCat: CategoryType|null) => void;
 } 
 
 type CategoryMenuType = FunctionComponent<CategoryMenuPropsType>

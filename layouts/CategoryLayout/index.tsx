@@ -15,7 +15,7 @@ interface CategoryLayoutProps {
     children: ReactNode;
     categories: CategoryType[];
     selectedCategoryID: string|null;
-    handleCategoryChange: (currentCat: CategoryType|null) => void;
+    handleCategoryChange: (destCat: CategoryType|null) => void;
 }
 
 const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategoryID, handleCategoryChange}) => {

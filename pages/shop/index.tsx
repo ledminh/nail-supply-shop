@@ -10,7 +10,6 @@ import ListLayout from '../../layouts/ListLayout';
 import CategoryItem from '../../components/shop_components/CategoryItem';
 
 
-// TODO: style this page
 
 const Shop: NextPageCustomized<ShopPageDataType> = ({categories}) => {
     

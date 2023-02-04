@@ -10,7 +10,7 @@ import { CategoryType } from '../../../database';
 interface CategorySelectPropsType {
     categories: CategoryType[];
     selectedCategoryID: string|null;
-    onChange: (currentCategory: CategoryType|null) => void;
+    onChange: (destCat: CategoryType|null) => void;
 } 
 
 type CategorySelectType = FunctionComponent<CategorySelectPropsType>
