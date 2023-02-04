@@ -1,0 +1,26 @@
+@use './base';
+
+.listWrapper {
+    padding: 10px;
+}
+
+.li {
+    .image {
+        transition: all .3s;
+    }
+
+    &:hover {
+        .image {
+            transform: scale(1.2);
+        }
+    }
+
+}
+
+@media (min-width: base.$breakpointTablet) {
+    .listWrapper {
+        .li {
+            flex-basis: 23%;    
+        }
+    }
+}

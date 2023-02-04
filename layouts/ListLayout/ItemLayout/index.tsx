@@ -15,6 +15,7 @@ interface ItemLayoutPropsType {
     name: string;
     url: string;
     imageUrl: string;
+    imageClassName?: string;
 } 
 
 export type ItemLayoutType = FunctionComponent<ItemLayoutPropsType>
@@ -24,13 +25,13 @@ export type ItemLayoutType = FunctionComponent<ItemLayoutPropsType>
 /***************************
  *  Main Component
  */
-const ItemLayout:ItemLayoutType = ({children, name, url, imageUrl}) => {
+const ItemLayout:ItemLayoutType = ({children, name, url, imageUrl, imageClassName}) => {
 
     return (
         <div className={styles.wrapper}>
             <Link href={url}>
                 <Image
-                    className={styles.image}
+                    className={`${styles.image}${imageClassName? ' ' + imageClassName: ''}`}
                     src={imageUrl}
                     alt={name}
                     fill

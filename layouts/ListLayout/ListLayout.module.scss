@@ -1,3 +1,5 @@
+@use '../../styles/base';
+
 .wrapper {
     display: flex;
 
@@ -5,23 +7,24 @@
 
     justify-content: space-between;
 
-    li {
-        flex-basis: 100%;
+    gap: 10px;
+
+
+
+}
+
+.li {
+    flex-basis: 100%;
+}
+
+@media (min-width: base.$breakpointMobile) {
+    .li {
+        flex-basis: 45%;
     }
 }
 
-@media (min-width: 768px) {
-    .wrapper {
-        li {
-            flex-basis: 45%;
-        }
-    }
-}
-
-@media (min-width: 992px) {
-    .wrapper {
-        li {
-            flex-basis: 32%;
-        }
+@media (min-width: base.$breakpointTablet) {
+    .li {
+        flex-basis: 32%;
     }
 }

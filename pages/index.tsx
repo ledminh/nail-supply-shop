@@ -1,7 +1,6 @@
 import styles from '../styles/Home.module.scss'
 
 import Section from '../layouts/Section';
-import NewArrivals from '../components/home_components/NewArrivals';
 
 
 import BestSellers from '../components/home_components/BestSellers';
@@ -9,6 +8,8 @@ import { NextPageCustomized } from './_app';
 import { pageConfigs } from '../config';
 
 import { getHomePageData, HomePageDataType } from '../database';
+import ListLayout from '../layouts/ListLayout';
+import ProductItem from '../components/home_components/ProductItem';
 
 
 /***************************
@@ -25,16 +26,41 @@ const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
   return (
     <>
       <div className={styles.wrapper}>
-        <Section className={styles.newArrivals}>
-          <NewArrivals
-            products={newArrivalProducts}
-          />
-        </Section>
-    
-        <Section className={styles.bestSellers}>
-          <BestSellers
-            products={bestSellerProducts}
-          />
+        <Section 
+            className={styles.newArrivals}
+            title="New Arrivals"
+            >
+            <ListLayout
+                wrapperClassName={styles.listWrapper}
+                liClassName={styles.li}
+                imageClassName={styles.image}
+                renderItemBody={(product) => (
+                  <ProductItem product={product} />
+                )}
+                keyExtractor={(product) => product.id}
+                data={newArrivalProducts.map(product => ({
+                  ...product,
+                  url: `/product/${product.id}`
+                  }))}
+              />              
+        </Section>    
+        <Section 
+            className={styles.bestSellers}
+            title="BestSellers"
+            >
+            <ListLayout
+                wrapperClassName={styles.listWrapper}
+                liClassName={styles.li}
+                imageClassName={styles.image}
+                renderItemBody={(product) => (
+                  <ProductItem product={product} />
+                )}
+                keyExtractor={(product) => product.id}
+                data={bestSellerProducts.map(product => ({
+                  ...product,
+                  url: `/product/${product.id}`
+                  }))}
+              />              
         </Section>
       </div>
     </>

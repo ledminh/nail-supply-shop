@@ -1,10 +1,33 @@
 @use '../../../styles/base';
 
-.h3 {
-    background-color: adjust-color($color: base.$backgroundColor, $lightness: -20%);
+.wrapper {
+    background-color: adjust-color($color: #000000, $alpha: -0.2);
 
-    padding-left: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: #ffffff;
+
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: adjust-color($color: #000000, $alpha: -0.6);
+    }
 }
+
+
 
 .ul {
     padding: 10px;
@@ -25,34 +48,11 @@
 
         .image {
             z-index: -1;
-
             
             transition: all 0.3s;
         }
         
-        .text {
-            background-color: adjust-color($color: #000000, $alpha: -0.2);
         
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        
-            padding: 20px;
-        
-            text-align: center;
-        
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        
-            color: #ffffff;
-
-            transition: all 0.3s;
-
-        }
         
     
         &:hover {
@@ -60,9 +60,6 @@
                 transform: scale(1.2);
             }
     
-            .text {
-                background-color: adjust-color($color: #000000, $alpha: -0.6);
-            }
         }
     }
 

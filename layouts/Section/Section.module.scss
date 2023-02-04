@@ -10,5 +10,10 @@
     overflow: hidden;
 
 
+}
 
+.title {
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: -20%);
+
+    padding-left: 10px;
 }
