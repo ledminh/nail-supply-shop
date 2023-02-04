@@ -16,6 +16,17 @@
 }
 
 
+
+.subSection {
+    flex-basis: 100%;
+
+    padding: 10px;
+
+    &:first-child {
+        border-bottom: 5px double #000000;
+    }
+}
+
 @media (min-width: base.$breakpointMobile) {
     .wrapper {
         flex-direction: row;
@@ -26,5 +37,18 @@
 
     .main {
         flex-basis: 70%;
+    }
+
+
+}
+
+@media (min-width: base.$breakpointTablet) {
+    .subSection {
+        flex-basis: 50%;
+    
+        &:first-child {
+            border-bottom: none;
+            border-right: 5px double #000000;
+        }
     }
 }

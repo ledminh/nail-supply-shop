@@ -1,8 +1,7 @@
 import { FC, ReactNode } from 'react';
 import styles from './CategoryLayout.module.scss';
 
-import ErrorLayout from '../ErrorLayout';
-import { ResponseType, CategoryType } from '../../database';
+import { CategoryType } from '../../database';
 
 import { useRouter } from 'next/router';
 
@@ -57,8 +56,12 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
       <div className={styles.main}>
           {/* 'MainBar' is visible on both desktop and mobile devices */}
           <Section type='MainBar'>
-              <PriceFilter/>
-              <Sort/>
+              <div className={styles.subSection}>
+                <PriceFilter/>
+              </div>
+              <div className={styles.subSection}>
+                <Sort/>
+              </div>
           </Section>
           {children}
       </div>

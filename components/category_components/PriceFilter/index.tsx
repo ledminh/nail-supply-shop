@@ -26,15 +26,17 @@ const PriceFilter:PriceFilterType = () => {
     return (
         <div className={styles.wrapper}>
             <h4 className={styles.title}>PRICE</h4>
-            <div className={styles.slider}>
-                <label>Less than ${value}</label>
-                <input className="slider" 
-                        id="priceRange"
-                        type="range" 
-                        min="0" max="50"
-                        step={5}
-                        onChange = {(e) => setValue(parseInt(e.target.value))}
-                        />
+            <div className={styles.select}>
+                <select name="price" id="price" value={value} onChange={(e) => setValue(parseInt(e.target.value))}>
+                    <option value="0">All</option>
+                    <option value="1">Under $2</option>
+                    <option value="2">$2 - $5</option>
+                    <option value="3">$5 - $10</option>
+                    <option value="4">$10 - $20</option>
+                    <option value="5">$20 - $30</option>
+                    <option value="6">$30 - $40</option>
+                    <option value="7">$40 - $50</option>
+                </select>
             </div>
         </div>
     )
