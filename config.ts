@@ -97,3 +97,20 @@ export const errorHeroImage = {
     image: _errorHeroImage,
     alt: 'Error'
 };
+
+
+// being used in PriceFilter component
+export type PriceRangeType = {
+    min: number;
+    max: number;
+};
+
+export const priceRanges:PriceRangeType[] = [
+    { min: 0, max: 2 },
+    { min: 2, max: 5 },
+    { min: 5, max: 10 },
+    { min: 10, max: 20 },
+    { min: 20, max: 30 },
+    { min: 30, max: 40 },
+    { min: 40, max: 50 }
+];

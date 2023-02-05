@@ -11,15 +11,18 @@ import CategoryMenu from '../../components/category_components/CategoryMenu';
 import PriceFilter from '../../components/category_components/PriceFilter';
 import Sort from '../../components/category_components/Sort';
 import Section from './Section';
+import { handlePriceChangeOption } from '../../utils/category_page/hooks';
+import { PriceRangeType } from '../../config';
 
 interface CategoryLayoutProps {
     children: ReactNode;
     categories: CategoryType[];
     selectedCategory: CategoryType|null;
     handleCategoryChange: (destCat: CategoryType|null) => void;
+    handlePriceChange: (op:PriceRangeType|null) => void;
 }
 
-const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handleCategoryChange}) => {
+const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handlePriceChange, handleCategoryChange}) => {
 
   
 
@@ -67,7 +70,9 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
           {/* 'MainBar' is visible on both desktop and mobile devices */}
           <Section type='MainBar'>
               <div className={styles.subSection}>
-                <PriceFilter/>
+                <PriceFilter 
+                  handlePriceChange={handlePriceChange}
+                  />
               </div>
               <div className={styles.subSection}>
                 <Sort/>

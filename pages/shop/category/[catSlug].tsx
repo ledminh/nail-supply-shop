@@ -32,7 +32,7 @@ It is kind of messy because I want the page's scroll position to be preserved wh
 
 const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, products}) => {
    
-    const {handleCategoryChange, _products, _selectedCategory} = useCategoryPage(categories, products, selectedCategoryID);
+    const {handleCategoryChange, handlePriceChange, _products, _selectedCategory} = useCategoryPage(categories, products, selectedCategoryID);
 
 
     return (
@@ -40,6 +40,7 @@ const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, products
             categories={categories}
             selectedCategory={_selectedCategory} 
             handleCategoryChange={handleCategoryChange}
+            handlePriceChange={handlePriceChange}
             >
                 <ListLayout
                     wrapperClassName={styles.ul}
@@ -67,6 +68,7 @@ CategoryPage.pageConfig = pageConfigs.category;
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     const { catSlug } = context.query;
 
+
     
     if(!catSlug) {
         return {
@@ -81,11 +83,10 @@ export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     }
 
 
-    
+    console.log(context.query);
 
     const response = await getCategoryPageData(catSlug);
 
-    console.log(response);
     
     return {
         props: {

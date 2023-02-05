@@ -99,11 +99,17 @@ export type AdminPageDataType = PageDataType & {
 
 export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
 
-export type GetDBProductsType = (options?:{
+type ProductOptionsType = {
     limit?: number;
     offset?: number;
-    categoryID?: string;    
-}) => Promise<DBProductType[]>;
+    categoryID: string|null;
+    price: {
+        min: number;
+        max: number;
+    }|null;
+};
+
+export type GetDBProductsType = (options?:ProductOptionsType) => Promise<DBProductType[]>;
 
 export type GetDBProductType = (id: string) => Promise<DBProductType>;
 
@@ -121,12 +127,7 @@ export type GetDBPageInfoType = (title: 'Home' | 'About' | 'Shop') => Promise<DB
 
 export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
-export type GetProductsType = (options?: {
-    limit?: number;
-    offset?: number;
-    categoryID?: string;    
-}) => Promise<ResponseType<ProductType[]>>;
-
+export type GetProductsType = (options?: ProductOptionsType) => Promise<ResponseType<ProductType[]>>;
 
 export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
 

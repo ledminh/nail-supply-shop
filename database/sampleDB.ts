@@ -18,12 +18,16 @@ export const getDBProducts:GetDBProductsType = async (options) => {
       return;
     }
 
-    const { limit, offset, categoryID } = options;
+    const { limit, offset, categoryID, price } = options;
 
     let returnedProducts = products;
 
     if(categoryID) {
       returnedProducts = returnedProducts.filter((product) => product.categoryID === categoryID);
+    }
+
+    if(price) {
+      returnedProducts = returnedProducts.filter((product) => product.price >= price.min && product.price <= price.max);
     }
 
     let start = offset ?? 0;

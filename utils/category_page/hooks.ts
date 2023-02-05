@@ -1,8 +1,14 @@
 import { NextRouter, useRouter } from 'next/router';
 import { CategoryType, ProductType } from '../../database';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { getProducts } from '../../database';
+import { PriceRangeType } from '../../config';
+
+
+
+export type handlePriceChangeOption = PriceRangeType | null;
+
 
 const useCategoryPage = (categories:CategoryType[], initProducts: ProductType[], selectedCategoryID: string) => {
 
@@ -10,38 +16,52 @@ const useCategoryPage = (categories:CategoryType[], initProducts: ProductType[],
 
     const [_products, set_Products] = useState(initProducts);
     const [_selectedCategory, set_SelectedCategory] = useState(getSelectedCategory(categories, selectedCategoryID));
+    const [_currentPriceRange, set_CurrentPriceRange] = useState<handlePriceChangeOption>(null);
 
-    const handleCategoryChange = (destCat: CategoryType|null) => {
-        if(!destCat) {
-            getProducts().then((res) => {
-                if(res[0] === 'error') {
-                    throw new Error(res[1]);
-                }
-                else {
-                    set_Products(res[1]);
-                    set_SelectedCategory(null);
-                    changeUrl('/shop/category', router);
-                }
-            }); 
-            
-        }
-        else {
-            getProducts({categoryID:destCat.id}).then((res) => {
-                if(res[0] === 'error') {
-                    throw new Error(res[1]);
-                }
-                else {
-                    set_Products(res[1]);
-                    set_SelectedCategory(getSelectedCategory(categories, destCat.id));
-                    changeUrl(`/shop/category/${destCat.slug}`, router);
-                }
-            }); 
-            
-        }
-    }
+
+    useEffect(() => {
+        getProducts({
+            categoryID: _selectedCategory?.id || null,
+            price: _currentPriceRange
+        }).then((res) => {
+
+            if(res[0] === 'error') {
+                throw new Error(res[1]);
+            }
+
+            const products = res[1];            
+
+            set_Products(products);
+
+            let url = '/shop';
+
+            if(_selectedCategory) {
+                url += `/category/${_selectedCategory.slug}`;
+            }
+
+
+            changeUrl(url, router, _currentPriceRange ? {
+                priceMin: _currentPriceRange.min.toString(),
+                priceMax: _currentPriceRange.max.toString()
+                } : undefined);
+        });
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [_selectedCategory, _currentPriceRange]);
+    
+
+    /*************************************
+     * Functions
+     */
+    
+    const handleCategoryChange = (destCat: CategoryType|null) => set_SelectedCategory(destCat);   
+
+    const handlePriceChange = (op:handlePriceChangeOption) =>    set_CurrentPriceRange(op);
+
 
     return {
         handleCategoryChange,
+        handlePriceChange,
         _products,
         _selectedCategory
     }
@@ -55,10 +75,12 @@ export default useCategoryPage;
  * Helper functions
  */
 
-const changeUrl = (url: string, router:NextRouter) => {
-    router.push(
-        {
-        pathname: url
+const changeUrl = (url: string, router:NextRouter, query?: {
+    [key: string]: string | string[];
+}) => {
+    router.push({
+        pathname: url,
+        query: query
         }, 
         undefined, { shallow: true }
     );
