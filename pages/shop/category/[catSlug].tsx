@@ -30,9 +30,11 @@ It is kind of messy because I want the page's scroll position to be preserved wh
 
 
 
-const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, products, priceRange}) => {
-   
-    const {handleCategoryChange, handlePriceChange, _products, _selectedCategory, _priceRange} = useCategoryPage(categories, products, selectedCategoryID, priceRange);
+const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID, priceRange}) => {
+
+    const {handleCategoryChange, handlePriceChange, 
+            _products, _selectedCategory, _priceRange} 
+                = useCategoryPage(categories, products, selectedCategoryID, priceRange);
 
 
     return (
@@ -68,20 +70,12 @@ CategoryPage.pageConfig = pageConfigs.category;
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
     const { catSlug, priceMin, priceMax } = context.query;
 
-
     
-    if(!catSlug) {
-        return {
-            response: ['error', 'No category slug found']
-        }
-    }
-
     if(Array.isArray(catSlug)) {
         return {
             response: ['error', 'Multiple category slug found']
         }
     }
-
 
 
     const response = await getCategoryPageData({

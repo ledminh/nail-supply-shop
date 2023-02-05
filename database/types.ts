@@ -67,13 +67,13 @@ export type HomePageDataType = PageDataType & {
 export type AboutPageDataType = PageDataType;
 
 export type CategoryPageDataType = PageDataType & {
-    selectedCategoryID: string;
+    selectedCategoryID: string | null; 
     categories: CategoryType[];
     products: ProductType[];
-    priceRange?: {
+    priceRange: {
         min: number;
         max: number;
-    }
+    } | null
 };
 
 export type ShopPageDataType =  PageDataType &{

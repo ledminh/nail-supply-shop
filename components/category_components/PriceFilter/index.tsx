@@ -6,13 +6,12 @@ import styles from './PriceFilter.module.scss';
 
 import { priceRanges, PriceRangeType } from "../../../config";
 
-import { handlePriceChangeOption } from "../../../utils/category_page/hooks";
 
 /***************************
  *  Types
  */
 interface PriceFilterPropsType {
-    handlePriceChange: (op?:PriceRangeType) => void;
+    handlePriceChange: (priceRange:PriceRangeType|null) => void;
 } 
 
 type PriceFilterType = FunctionComponent<PriceFilterPropsType>
@@ -28,7 +27,7 @@ const PriceFilter:PriceFilterType = ({handlePriceChange}) => {
 
     useEffect(() => {
         if (value === 'All') {
-            handlePriceChange();    
+            handlePriceChange(null);    
         } else {
             const range = priceRanges[parseInt(value)];
             handlePriceChange(range);

@@ -7,25 +7,29 @@ import { PriceRangeType } from '../../config';
 
 
 
-export type handlePriceChangeOption = PriceRangeType | undefined;
+export type handlePriceChangeParam = PriceRangeType | 'all';
+export type handleCategoryChangeParam = CategoryType | 'all';
 
 
-const useCategoryPage = (categories:CategoryType[], products: ProductType[], selectedCategoryID: string, priceRange?:{
+const useCategoryPage = (categories:CategoryType[], products: ProductType[], selectedCategoryID: string|null, priceRange:{
     min: number;
     max: number;
-}) => {
+}|null) => {
 
     const router = useRouter();
 
     const [_products, set_Products] = useState(products);
     const [_selectedCategory, set_SelectedCategory] = useState(getSelectedCategory(categories, selectedCategoryID));
-    const [_priceRange, set_PriceRange] = useState<handlePriceChangeOption>(priceRange);
+    const [_priceRange, set_PriceRange] = useState(priceRange);
 
 
     useEffect(() => {
         getProducts({
             categoryID: _selectedCategory?.id,
-            price: _priceRange
+            price: _priceRange? {
+                min: _priceRange.min,
+                max: _priceRange.max
+            } : undefined
         }).then((res) => {
 
             if(res[0] === 'error') {
@@ -37,16 +41,20 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
             set_Products(products);
 
             let url = '/shop';
+            let query;
 
             if(_selectedCategory) {
                 url += `/category/${_selectedCategory.slug}`;
             }
 
+            if(_priceRange) {
+                query = {
+                    priceMin: _priceRange.min.toString(),
+                    priceMax: _priceRange.max.toString()
+                }
+            }
 
-            changeUrl(url, router, _priceRange ? {
-                priceMin: _priceRange.min.toString(),
-                priceMax: _priceRange.max.toString()
-                } : undefined);
+            changeUrl(url, router, query);
         });
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -57,9 +65,8 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
      * Functions
      */
     
-    const handleCategoryChange = (destCat: CategoryType|null) => set_SelectedCategory(destCat);   
-
-    const handlePriceChange = (op:handlePriceChangeOption) =>    set_PriceRange(op);
+    const handleCategoryChange = (cat: CategoryType|null) => set_SelectedCategory(cat);  
+    const handlePriceChange = (priceRange:PriceRangeType|null) =>  set_PriceRange(priceRange);
 
 
     return {
@@ -90,8 +97,8 @@ const changeUrl = (url: string, router:NextRouter, query?: {
     );
 }
 
-const getSelectedCategory = (categories:CategoryType[], selectedCategoryID: string) => {
-    if(selectedCategoryID === '') {
+const getSelectedCategory = (categories:CategoryType[], selectedCategoryID: string|null) => {
+    if(selectedCategoryID === null) {
         return null;
     }
 

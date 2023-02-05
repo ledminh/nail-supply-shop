@@ -11,7 +11,6 @@ import CategoryMenu from '../../components/category_components/CategoryMenu';
 import PriceFilter from '../../components/category_components/PriceFilter';
 import Sort from '../../components/category_components/Sort';
 import Section from './Section';
-import { handlePriceChangeOption } from '../../utils/category_page/hooks';
 import { PriceRangeType } from '../../config';
 
 interface CategoryLayoutProps {
@@ -19,7 +18,7 @@ interface CategoryLayoutProps {
     categories: CategoryType[];
     selectedCategory: CategoryType|null;
     handleCategoryChange: (destCat: CategoryType|null) => void;
-    handlePriceChange: (op?:PriceRangeType) => void;
+    handlePriceChange: (priceRange:PriceRangeType|null) => void;
 }
 
 const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handlePriceChange, handleCategoryChange}) => {

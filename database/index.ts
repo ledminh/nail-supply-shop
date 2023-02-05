@@ -203,10 +203,9 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
             return ['success', {
                 pageInfo,
                 categories, 
-                selectedCategoryID: '', 
                 products,
-                priceRange: price
-                
+                selectedCategoryID: null, 
+                priceRange: price? price : null         
             }];
         }
 
@@ -224,9 +223,9 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
         return ['success', {
             pageInfo,
             categories, 
-            selectedCategoryID: category.id, 
             products,
-            priceRange: price
+            selectedCategoryID: category.id, 
+            priceRange: price? price : null
 
         }];
     }
