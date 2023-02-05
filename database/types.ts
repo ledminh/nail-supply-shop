@@ -70,6 +70,10 @@ export type CategoryPageDataType = PageDataType & {
     selectedCategoryID: string;
     categories: CategoryType[];
     products: ProductType[];
+    priceRange?: {
+        min: number;
+        max: number;
+    }
 };
 
 export type ShopPageDataType =  PageDataType &{
@@ -102,14 +106,14 @@ export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
 type ProductOptionsType = {
     limit?: number;
     offset?: number;
-    categoryID: string|null;
-    price: {
+    price?: {
         min: number;
         max: number;
-    }|null;
+    };
+    categoryID?: string;
 };
 
-export type GetDBProductsType = (options?:ProductOptionsType) => Promise<DBProductType[]>;
+export type GetDBProductsType = (options:ProductOptionsType) => Promise<DBProductType[]>;
 
 export type GetDBProductType = (id: string) => Promise<DBProductType>;
 
@@ -127,7 +131,7 @@ export type GetDBPageInfoType = (title: 'Home' | 'About' | 'Shop') => Promise<DB
 
 export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
-export type GetProductsType = (options?: ProductOptionsType) => Promise<ResponseType<ProductType[]>>;
+export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<ProductType[]>>;
 
 export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
 
@@ -145,7 +149,14 @@ export type GetHomePageDataType = () => Promise<ResponseType<HomePageDataType>>;
 export type GetAboutPageDataType = () => Promise<ResponseType<AboutPageDataType>>;
 
     // fetches data for category pages
-export type GetCategoryPageDataType = (categorySlug?: string) => Promise<ResponseType<CategoryPageDataType>>;
+type GetCategoryPageOptionsType = {
+    categorySlug?: string;
+    price?: {
+        min: number;
+        max: number;
+    };
+}
+export type GetCategoryPageDataType = (options:GetCategoryPageOptionsType) => Promise<ResponseType<CategoryPageDataType>>;
 
     // fetches data for shop page
 export type GetShopPageDataType = () => Promise<ResponseType<ShopPageDataType>>;

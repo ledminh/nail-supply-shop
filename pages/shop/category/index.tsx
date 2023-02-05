@@ -1,5 +1,6 @@
 import { NextPageCustomized } from '../../_app';
 
+import { GetServerSidePropsContext } from 'next';
 
 import { pageConfigs } from '../../../config';
 import styles from '../../../styles/Category.module.scss'
@@ -27,9 +28,9 @@ It is kind of messy because I want the page's scroll position to be preserved wh
 */
 
 
-const CategoryIndexPage:CategoryIndexPageType = ({categories, products}) => {
+const CategoryIndexPage:CategoryIndexPageType = ({categories, products, priceRange}) => {
     
-    const {handleCategoryChange, handlePriceChange, _products} = useCategoryPage(categories, products, '');
+    const {handleCategoryChange, handlePriceChange, _products, _priceRange} = useCategoryPage(categories, products, '', priceRange);
 
     return (
         <CategoryLayout 
@@ -59,10 +60,18 @@ export default CategoryIndexPage;
 CategoryIndexPage.pageConfig = pageConfigs.category;
 
 
-export const getServerSideProps = async () => {
-    
-    const response = await getCategoryPageData();
-    
+export const getServerSideProps = async (context:GetServerSidePropsContext) => {
+    const { priceMin, priceMax } = context.query;
+
+    const response = await getCategoryPageData({
+        price: priceMin && priceMax ? {
+            min: Number(priceMin),
+            max: Number(priceMax),
+        } : undefined,
+    });
+
+
+
     return {
         props: {
             response

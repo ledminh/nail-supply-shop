@@ -7,22 +7,25 @@ import { PriceRangeType } from '../../config';
 
 
 
-export type handlePriceChangeOption = PriceRangeType | null;
+export type handlePriceChangeOption = PriceRangeType | undefined;
 
 
-const useCategoryPage = (categories:CategoryType[], initProducts: ProductType[], selectedCategoryID: string) => {
+const useCategoryPage = (categories:CategoryType[], products: ProductType[], selectedCategoryID: string, priceRange?:{
+    min: number;
+    max: number;
+}) => {
 
     const router = useRouter();
 
-    const [_products, set_Products] = useState(initProducts);
+    const [_products, set_Products] = useState(products);
     const [_selectedCategory, set_SelectedCategory] = useState(getSelectedCategory(categories, selectedCategoryID));
-    const [_currentPriceRange, set_CurrentPriceRange] = useState<handlePriceChangeOption>(null);
+    const [_priceRange, set_PriceRange] = useState<handlePriceChangeOption>(priceRange);
 
 
     useEffect(() => {
         getProducts({
-            categoryID: _selectedCategory?.id || null,
-            price: _currentPriceRange
+            categoryID: _selectedCategory?.id,
+            price: _priceRange
         }).then((res) => {
 
             if(res[0] === 'error') {
@@ -40,14 +43,14 @@ const useCategoryPage = (categories:CategoryType[], initProducts: ProductType[],
             }
 
 
-            changeUrl(url, router, _currentPriceRange ? {
-                priceMin: _currentPriceRange.min.toString(),
-                priceMax: _currentPriceRange.max.toString()
+            changeUrl(url, router, _priceRange ? {
+                priceMin: _priceRange.min.toString(),
+                priceMax: _priceRange.max.toString()
                 } : undefined);
         });
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [_selectedCategory, _currentPriceRange]);
+    }, [_selectedCategory, _priceRange]);
     
 
     /*************************************
@@ -56,12 +59,13 @@ const useCategoryPage = (categories:CategoryType[], initProducts: ProductType[],
     
     const handleCategoryChange = (destCat: CategoryType|null) => set_SelectedCategory(destCat);   
 
-    const handlePriceChange = (op:handlePriceChangeOption) =>    set_CurrentPriceRange(op);
+    const handlePriceChange = (op:handlePriceChangeOption) =>    set_PriceRange(op);
 
 
     return {
         handleCategoryChange,
         handlePriceChange,
+        _priceRange,
         _products,
         _selectedCategory
     }

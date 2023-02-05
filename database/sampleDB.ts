@@ -13,10 +13,7 @@ export const getDBCategories:GetDBCategoriesType = async () => {
 export const getDBProducts:GetDBProductsType = async (options) => {
 
   return new Promise((resolve, rejects) => {
-    if(!options) {
-      resolve(products);
-      return;
-    }
+    
 
     const { limit, offset, categoryID, price } = options;
 

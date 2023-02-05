@@ -19,7 +19,7 @@ interface CategoryLayoutProps {
     categories: CategoryType[];
     selectedCategory: CategoryType|null;
     handleCategoryChange: (destCat: CategoryType|null) => void;
-    handlePriceChange: (op:PriceRangeType|null) => void;
+    handlePriceChange: (op?:PriceRangeType) => void;
 }
 
 const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handlePriceChange, handleCategoryChange}) => {
