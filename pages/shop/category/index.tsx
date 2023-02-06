@@ -14,6 +14,7 @@ import { pageConfigs } from '../../../config';
 
 
 import useCategoryPage from '../../../utils/category_page/hooks';
+import { SortOrderType, SortType } from '../../../database/types';
 
 type CategoryDetailProps = CategoryPageDataType;
 
@@ -30,11 +31,12 @@ It is kind of messy because I want the page's scroll position to be preserved wh
 
 
 
-const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID, priceRange}) => {
+const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID, priceRange, currentSort}) => {
 
-    const {handleCategoryChange, handlePriceChange, 
+    const {handleCategoryChange, handlePriceChange,
+            handleSortChange, _currentSort,
             _products, _selectedCategory, _priceRange} 
-                = useCategoryPage(categories, products, selectedCategoryID, priceRange);
+                = useCategoryPage(categories, products, selectedCategoryID, priceRange, currentSort);
 
 
     return (
@@ -44,6 +46,8 @@ const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID
             handleCategoryChange={handleCategoryChange}
             handlePriceChange={handlePriceChange}
             currentPriceRange={_priceRange}
+            handleSortChange={handleSortChange}
+            currentSort={_currentSort}
             >
                 <ListLayout
                     wrapperClassName={styles.ul}
@@ -69,15 +73,18 @@ CategoryPage.pageConfig = pageConfigs.category;
 
 
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
-    const { priceMin, priceMax } = context.query;
+    const { priceMin, priceMax, sortType, sortOrder } = context.query;
 
-    
 
 
     const response = await getCategoryPageData({
         price: priceMin && priceMax ? {
             min: Number(priceMin),
             max: Number(priceMax),
+        } : undefined,
+        sort: sortType && sortOrder ? {
+            type: sortType as SortType,
+            order: sortOrder as SortOrderType,
         } : undefined,
     });
 

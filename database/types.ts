@@ -73,7 +73,8 @@ export type CategoryPageDataType = PageDataType & {
     priceRange: {
         min: number;
         max: number;
-    } | null
+    } | null;
+    currentSort: SortConfigType|null;
 };
 
 export type ShopPageDataType =  PageDataType &{
@@ -111,6 +112,7 @@ type ProductOptionsType = {
         max: number;
     };
     categoryID?: string;
+    sort?: SortConfigType;
 };
 
 export type GetDBProductsType = (options:ProductOptionsType) => Promise<DBProductType[]>;
@@ -155,6 +157,7 @@ type GetCategoryPageOptionsType = {
         min: number;
         max: number;
     };
+    sort?: SortConfigType;
 }
 export type GetCategoryPageDataType = (options:GetCategoryPageOptionsType) => Promise<ResponseType<CategoryPageDataType>>;
 
@@ -168,4 +171,21 @@ export type GetProductPageDataType = (productID: string) => Promise<ResponseType
 export type GetAdminPageDataType = () => Promise<ResponseType<AdminPageDataType>>;
 
 
+/*********************************************
+ *  Other types
+ * ------------------------------------------- 
+ */
 
+    //-------------------------------------
+    // Types for sorting products, which is 
+    // used in components/category_components/Sort.
+    // They are put here because they are also used
+    // in database.
+
+export type SortType = 'price' | 'name';
+export type SortOrderType = 'asc' | 'desc';
+
+export type SortConfigType = {
+    type: SortType;
+    order: SortOrderType;
+};

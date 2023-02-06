@@ -12,17 +12,22 @@ import PriceFilter from '../../components/category_components/PriceFilter';
 import Sort from '../../components/category_components/Sort';
 import Section from './Section';
 import { PriceRangeType } from '../../config';
+import { SortConfigType } from '../../database/types';
+import { handlePriceChangeParam } from '../../utils/category_page/hooks';
 
 interface CategoryLayoutProps {
     children: ReactNode;
     categories: CategoryType[];
     selectedCategory: CategoryType|null;
     handleCategoryChange: (destCat: CategoryType|null) => void;
-    handlePriceChange: (priceRange:PriceRangeType|null) => void;
+    handlePriceChange: (priceRange:handlePriceChangeParam) => void;
     currentPriceRange: PriceRangeType|null;
+    handleSortChange: handleSortChangeType;
+    currentSort: SortConfigType
+
 }
 
-const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handlePriceChange, handleCategoryChange, currentPriceRange}) => {
+const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handlePriceChange, handleCategoryChange, currentPriceRange, handleSortChange, currentSort}) => {
 
   
 
@@ -76,7 +81,10 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
                   />
               </div>
               <div className={styles.subSection}>
-                <Sort/>
+                <Sort
+                  handleSortChange={handleSortChange}
+                  currentSort={currentSort}
+                />
               </div>
           </Section>
           {children}

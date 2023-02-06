@@ -5,14 +5,15 @@ import { useState } from 'react';
 import styles from './PriceFilter.module.scss';
 
 import { priceRanges, PriceRangeType } from "../../../config";
+import { handlePriceChangeParam } from "../../../utils/category_page/hooks";
 
 
 /***************************
  *  Types
  */
 interface PriceFilterPropsType {
-    handlePriceChange: (priceRange:PriceRangeType|null) => void;
-    currentPriceRange: PriceRangeType|null;
+    handlePriceChange: (priceRange:handlePriceChangeParam) => void;
+    currentPriceRange: handlePriceChangeParam;
 } 
 
 type PriceFilterType = FunctionComponent<PriceFilterPropsType>

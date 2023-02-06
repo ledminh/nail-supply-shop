@@ -15,7 +15,7 @@ export const getDBProducts:GetDBProductsType = async (options) => {
   return new Promise((resolve, rejects) => {
     
 
-    const { limit, offset, categoryID, price } = options;
+    const { limit, offset, categoryID, price, sort } = options;
 
     let returnedProducts = products;
 
@@ -34,6 +34,27 @@ export const getDBProducts:GetDBProductsType = async (options) => {
       returnedProducts = returnedProducts.slice(start, start + limit);
     }
 
+    if(sort) {
+      const { type, order } = sort;
+
+      if(type === 'price') {
+        returnedProducts = returnedProducts.sort((a, b) => {
+          if(order === 'asc') {
+            return a.price - b.price;
+          } else {
+            return b.price - a.price;
+          }
+        });
+      } else if(type === 'name') {
+        returnedProducts = returnedProducts.sort((a, b) => {
+          if(order === 'asc') {
+            return a.name.localeCompare(b.name);
+          } else {
+            return b.name.localeCompare(a.name);
+          }
+        });
+      }
+    }
 
     // rejects(new Error("Test Error from getProductsFromDB"));
 

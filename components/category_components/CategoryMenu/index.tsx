@@ -4,6 +4,7 @@ import styles from './CategoryMenu.module.scss';
 
 
 import { CategoryType } from '../../../database';
+import { handleCategoryChangeParam } from "../../../utils/category_page/hooks";
 
 
 
@@ -13,7 +14,7 @@ import { CategoryType } from '../../../database';
 interface CategoryMenuPropsType {
     categories: CategoryType[];
     selectedCategoryID: string|null;
-    onChange: (destCat: CategoryType|null) => void;
+    onChange: (destCat: handleCategoryChangeParam) => void;
 } 
 
 type CategoryMenuType = FunctionComponent<CategoryMenuPropsType>

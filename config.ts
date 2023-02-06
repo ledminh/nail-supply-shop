@@ -114,3 +114,4 @@ export const priceRanges:PriceRangeType[] = [
     { min: 30, max: 40 },
     { min: 40, max: 50 }
 ];
+

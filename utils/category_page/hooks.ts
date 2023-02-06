@@ -4,23 +4,26 @@ import { useEffect, useState } from 'react';
 
 import { getProducts } from '../../database';
 import { PriceRangeType } from '../../config';
+import { SortConfigType } from '../../database/types';
 
 
 
-export type handlePriceChangeParam = PriceRangeType | 'all';
-export type handleCategoryChangeParam = CategoryType | 'all';
+export type handlePriceChangeParam = PriceRangeType | null;
+export type handleCategoryChangeParam = CategoryType | null;
+export type handleSortChangeParam = SortConfigType;
 
 
 const useCategoryPage = (categories:CategoryType[], products: ProductType[], selectedCategoryID: string|null, priceRange:{
     min: number;
     max: number;
-}|null) => {
+}|null, currentSort:SortConfigType|null) => {
 
     const router = useRouter();
 
     const [_products, set_Products] = useState(products);
     const [_selectedCategory, set_SelectedCategory] = useState(getSelectedCategory(categories, selectedCategoryID));
     const [_priceRange, set_PriceRange] = useState(priceRange);
+    const [_currentSort, set_CurrentSort] = useState(currentSort);
 
 
     useEffect(() => {
@@ -30,7 +33,8 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
             price: _priceRange? {
                 min: _priceRange.min,
                 max: _priceRange.max
-            } : undefined
+            } : undefined,
+            sort: _currentSort? _currentSort : undefined
         }).then((res) => {
 
             if(res[0] === 'error') {
@@ -58,6 +62,14 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
                 }
             }
 
+            if(_currentSort) {
+                query = {
+                    ...query,
+                    sortType: _currentSort.type,
+                    sortOrder: _currentSort.order
+                }
+            }
+
             
             changeUrl(url, router, query);
 
@@ -72,16 +84,19 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
      * Functions
      */
     
-    const handleCategoryChange = (cat: CategoryType|null) => set_SelectedCategory(cat);  
-    const handlePriceChange = (pR:PriceRangeType|null) =>  set_PriceRange(pR);
+    const handleCategoryChange = (cat: handleCategoryChangeParam) => set_SelectedCategory(cat);  
+    const handlePriceChange = (pR: handlePriceChangeParam) =>  set_PriceRange(pR);
+    const handleSortChange = (sort:handleSortChangeParam) => set_CurrentSort(sort);
 
 
     return {
         handleCategoryChange,
         handlePriceChange,
+        handleSortChange,
         _priceRange,
         _products,
-        _selectedCategory
+        _selectedCategory,
+        _currentSort
     }
 
 }

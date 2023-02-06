@@ -189,7 +189,7 @@ export const getShopPageData:GetShopPageDataType = async () => {
 }
 
 
-export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug, price}) => {
+export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug, price, sort}) => {
 
     try {       
         const pageInfo = await getDBPageInfo('Shop');
@@ -197,7 +197,8 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
 
         if(!categorySlug) {
             const products = await getDBProducts({
-                price
+                price,
+                sort
             });
 
             return ['success', {
@@ -205,7 +206,8 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
                 categories, 
                 products,
                 selectedCategoryID: null, 
-                priceRange: price? price : null         
+                priceRange: price? price : null,
+                currentSort: sort? sort : null         
             }];
         }
 
@@ -217,7 +219,8 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
 
         const products = await getDBProducts({
             categoryID: category.id,
-            price
+            price,
+            sort
         });
 
         return ['success', {
@@ -225,7 +228,8 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
             categories, 
             products,
             selectedCategoryID: category.id, 
-            priceRange: price? price : null
+            priceRange: price? price : null,
+            currentSort: sort? sort : null
 
         }];
     }
