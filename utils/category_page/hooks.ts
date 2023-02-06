@@ -10,7 +10,7 @@ import { SortConfigType } from '../../database/types';
 
 export type handlePriceChangeParam = PriceRangeType | null;
 export type handleCategoryChangeParam = CategoryType | null;
-export type handleSortChangeParam = SortConfigType;
+export type handleSortChangeParam = SortConfigType | null;
 
 
 const useCategoryPage = (categories:CategoryType[], products: ProductType[], selectedCategoryID: string|null, priceRange:{
@@ -47,7 +47,7 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
 
             let url = '/shop/category';
 
-            let query;
+            let query = {};
 
             if(_selectedCategory) {
                 url += `/${_selectedCategory.slug}`;
@@ -57,6 +57,7 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
         
             if(_priceRange) {
                 query = {
+                    ...query,
                     priceMin: _priceRange.min.toString(),
                     priceMax: _priceRange.max.toString()
                 }
@@ -77,7 +78,7 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
         });
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [_selectedCategory, _priceRange]);
+    }, [_selectedCategory, _priceRange, _currentSort]);
     
 
     /*************************************

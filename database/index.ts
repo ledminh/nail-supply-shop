@@ -13,6 +13,7 @@ import {getDBCategories, getDBProducts, getDBProduct, getDBPageInfo} from './sam
 
 // types for API functions implemented in this file
 import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
+import { defaultSortConfig } from '../config';
 
 
 
@@ -48,6 +49,10 @@ export const getCategories:GetCategoriesType = async () => {
 
 export const getProducts:GetProductsType = async (options) => {
     try {
+
+        if(!options.sort) {
+            options.sort = defaultSortConfig
+        }
         
         const products = await getDBProducts(options);
 

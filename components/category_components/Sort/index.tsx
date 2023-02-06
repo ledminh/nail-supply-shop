@@ -1,4 +1,5 @@
 import { FunctionComponent, useState, useEffect } from "react";
+import { defaultSortConfig } from "../../../config";
 import { SortConfigType, SortOrderType, SortType } from "../../../database/types";
 import { handleSortChangeParam } from "../../../utils/category_page/hooks";
 
@@ -24,12 +25,12 @@ type SortComponentType = FunctionComponent<SortPropsType>
  *  Main Component
  */
 const Sort:SortComponentType = ({handleSortChange, currentSort}) => {
-    const [type, setType] = useState<SortType>(currentSort? currentSort.type: 'price');
-    const [order, setOrder] = useState<SortOrderType>(currentSort? currentSort.order: 'asc');
+    const [type, setType] = useState<SortType>(currentSort? currentSort.type: defaultSortConfig.type);
+    const [order, setOrder] = useState<SortOrderType>(currentSort? currentSort.order: defaultSortConfig.order);
 
 
     useEffect(() => {
-        handleSortChange(type, order);
+        handleSortChange({type, order});
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [type, order]);
 

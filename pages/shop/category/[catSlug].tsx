@@ -13,6 +13,8 @@ import ProductItem from '../../../components/category_components/ProductItem';
 import { pageConfigs } from '../../../config';
 
 
+import { SortOrderType, SortType } from '../../../database/types';
+
 import useCategoryPage from '../../../utils/category_page/hooks';
 
 type CategoryDetailProps = CategoryPageDataType;
@@ -30,11 +32,12 @@ It is kind of messy because I want the page's scroll position to be preserved wh
 
 
 
-const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID, priceRange}) => {
+const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID, priceRange, currentSort}) => {
 
-    const {handleCategoryChange, handlePriceChange, 
-            _products, _selectedCategory, _priceRange} 
-                = useCategoryPage(categories, products, selectedCategoryID, priceRange);
+    const {handleCategoryChange, handlePriceChange,
+            handleSortChange,
+            _products, _selectedCategory, _priceRange, _currentSort} 
+                = useCategoryPage(categories, products, selectedCategoryID, priceRange, currentSort);
 
     
     return (
@@ -43,7 +46,9 @@ const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID
             selectedCategory={_selectedCategory} 
             handleCategoryChange={handleCategoryChange}
             handlePriceChange={handlePriceChange}
+            handleSortChange={handleSortChange}
             currentPriceRange={_priceRange}
+            currentSort={_currentSort}
             >
                 <ListLayout
                     wrapperClassName={styles.ul}
@@ -69,7 +74,7 @@ CategoryPage.pageConfig = pageConfigs.category;
 
 
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
-    const { catSlug, priceMin, priceMax } = context.query;
+    const { catSlug, priceMin, priceMax, sortType, sortOrder } = context.query;
 
     
     if(Array.isArray(catSlug)) {
@@ -84,6 +89,10 @@ export const getServerSideProps = async (context:GetServerSidePropsContext) => {
         price: priceMin && priceMax ? {
             min: Number(priceMin),
             max: Number(priceMax),
+        } : undefined,
+        sort: sortType && sortOrder ? {
+            type: sortType as SortType,
+            order: sortOrder as SortOrderType,
         } : undefined,
     });
 

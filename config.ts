@@ -5,6 +5,7 @@ import aboutHeroImage from './assets/images/aboutHeroImage.jpg';
 import shopHeroImage from './assets/images/shopHeroImage.jpg';
 
 import _errorHeroImage from './assets/images/errorHeroImage.jpg';
+import { SortConfigType } from "./database/types";
 
 export type SlugType = 'home' | 'shop' | 'about' | 'category' | 'product'| 'admin';
 
@@ -115,3 +116,8 @@ export const priceRanges:PriceRangeType[] = [
     { min: 40, max: 50 }
 ];
 
+// being used in Sort component
+export const defaultSortConfig:SortConfigType = {
+    type: 'price',
+    order: 'asc'
+};

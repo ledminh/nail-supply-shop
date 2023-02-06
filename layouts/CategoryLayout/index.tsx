@@ -13,17 +13,17 @@ import Sort from '../../components/category_components/Sort';
 import Section from './Section';
 import { PriceRangeType } from '../../config';
 import { SortConfigType } from '../../database/types';
-import { handlePriceChangeParam } from '../../utils/category_page/hooks';
+import { handlePriceChangeParam, handleSortChangeParam, handleCategoryChangeParam } from '../../utils/category_page/hooks';
 
 interface CategoryLayoutProps {
     children: ReactNode;
     categories: CategoryType[];
-    selectedCategory: CategoryType|null;
-    handleCategoryChange: (destCat: CategoryType|null) => void;
+    handleCategoryChange: (destCat: handleCategoryChangeParam) => void;
     handlePriceChange: (priceRange:handlePriceChangeParam) => void;
+    handleSortChange: (sort: handleSortChangeParam) => void;
+    selectedCategory: CategoryType|null;
     currentPriceRange: PriceRangeType|null;
-    handleSortChange: handleSortChangeType;
-    currentSort: SortConfigType
+    currentSort: SortConfigType | null;
 
 }
 
