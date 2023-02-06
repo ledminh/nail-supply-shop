@@ -12,6 +12,7 @@ import { priceRanges, PriceRangeType } from "../../../config";
  */
 interface PriceFilterPropsType {
     handlePriceChange: (priceRange:PriceRangeType|null) => void;
+    currentPriceRange: PriceRangeType|null;
 } 
 
 type PriceFilterType = FunctionComponent<PriceFilterPropsType>
@@ -21,8 +22,8 @@ type PriceFilterType = FunctionComponent<PriceFilterPropsType>
 /***************************
  *  Main Component
  */
-const PriceFilter:PriceFilterType = ({handlePriceChange}) => {
-    const [value, setValue] = useState<string>('All');
+const PriceFilter:PriceFilterType = ({handlePriceChange, currentPriceRange}) => {
+    const [value, setValue] = useState<string>(currentPriceRange? priceRanges.indexOf(currentPriceRange).toString(): 'All');
 
 
     useEffect(() => {

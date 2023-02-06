@@ -36,7 +36,7 @@ const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID
             _products, _selectedCategory, _priceRange} 
                 = useCategoryPage(categories, products, selectedCategoryID, priceRange);
 
-    
+
     return (
         <CategoryLayout 
             categories={categories}
@@ -69,18 +69,12 @@ CategoryPage.pageConfig = pageConfigs.category;
 
 
 export const getServerSideProps = async (context:GetServerSidePropsContext) => {
-    const { catSlug, priceMin, priceMax } = context.query;
+    const { priceMin, priceMax } = context.query;
 
     
-    if(Array.isArray(catSlug)) {
-        return {
-            response: ['error', 'Multiple category slug found']
-        }
-    }
 
 
     const response = await getCategoryPageData({
-        categorySlug: catSlug,
         price: priceMin && priceMax ? {
             min: Number(priceMin),
             max: Number(priceMax),

@@ -19,9 +19,10 @@ interface CategoryLayoutProps {
     selectedCategory: CategoryType|null;
     handleCategoryChange: (destCat: CategoryType|null) => void;
     handlePriceChange: (priceRange:PriceRangeType|null) => void;
+    currentPriceRange: PriceRangeType|null;
 }
 
-const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handlePriceChange, handleCategoryChange}) => {
+const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selectedCategory, handlePriceChange, handleCategoryChange, currentPriceRange}) => {
 
   
 
@@ -71,6 +72,7 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({children, categories, selected
               <div className={styles.subSection}>
                 <PriceFilter 
                   handlePriceChange={handlePriceChange}
+                  currentPriceRange={currentPriceRange}
                   />
               </div>
               <div className={styles.subSection}>

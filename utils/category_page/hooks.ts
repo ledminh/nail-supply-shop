@@ -24,6 +24,7 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
 
 
     useEffect(() => {
+
         getProducts({
             categoryID: _selectedCategory?.id,
             price: _priceRange? {
@@ -40,11 +41,11 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
 
             set_Products(products);
 
-            let url = '/shop';
+            let url = '/shop/category';
             let query;
 
             if(_selectedCategory) {
-                url += `/category/${_selectedCategory.slug}`;
+                url += `/${_selectedCategory.slug}`;
             }
 
             if(_priceRange) {
