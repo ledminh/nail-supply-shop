@@ -25,10 +25,9 @@ type CategoryMenuType = FunctionComponent<CategoryMenuPropsType>
  */
 const CategoryMenu:CategoryMenuType = ({selectedCategoryID, categories, onChange}) => {
 
-    
-
-
-    
+    const handleClick = (category: CategoryType|null) => {
+        onChange(category);
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -37,7 +36,7 @@ const CategoryMenu:CategoryMenuType = ({selectedCategoryID, categories, onChange
                 <li className={styles.item}>
                     <button
                         className={`${styles.link}${selectedCategoryID === null ? ' ' + styles.selected : ''}`}
-                        onClick={() => onChange(null)}
+                        onClick={() => handleClick(null)}
                     >All</button>
                 </li>
                 {
@@ -45,7 +44,7 @@ const CategoryMenu:CategoryMenuType = ({selectedCategoryID, categories, onChange
                         <li key={category.id} className={styles.item}>
                             <button
                                 className={`${styles.link}${selectedCategoryID === category.id ? ' ' + styles.selected : ''}`} 
-                                onClick={() => onChange(category)}
+                                onClick={() => handleClick(category)}
                                 >
                                 <p className={styles.name}>{category.name}</p>
                                 <p className={styles.description}>{category.description}</p>

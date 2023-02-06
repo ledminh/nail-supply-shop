@@ -42,12 +42,15 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
             set_Products(products);
 
             let url = '/shop/category';
+
             let query;
 
             if(_selectedCategory) {
                 url += `/${_selectedCategory.slug}`;
             }
 
+            
+        
             if(_priceRange) {
                 query = {
                     priceMin: _priceRange.min.toString(),
@@ -55,7 +58,10 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
                 }
             }
 
+            
             changeUrl(url, router, query);
+
+            
         });
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,7 +73,7 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
      */
     
     const handleCategoryChange = (cat: CategoryType|null) => set_SelectedCategory(cat);  
-    const handlePriceChange = (priceRange:PriceRangeType|null) =>  set_PriceRange(priceRange);
+    const handlePriceChange = (pR:PriceRangeType|null) =>  set_PriceRange(pR);
 
 
     return {

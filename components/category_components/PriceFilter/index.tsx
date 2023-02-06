@@ -23,7 +23,8 @@ type PriceFilterType = FunctionComponent<PriceFilterPropsType>
  *  Main Component
  */
 const PriceFilter:PriceFilterType = ({handlePriceChange, currentPriceRange}) => {
-    const [value, setValue] = useState<string>(currentPriceRange? priceRanges.indexOf(currentPriceRange).toString(): 'All');
+    const [value, setValue] = useState<string>(currentPriceRange? priceRanges.findIndex(pR => JSON.stringify(pR) === JSON.stringify(currentPriceRange)).toString(): 'All');
+
 
 
     useEffect(() => {
