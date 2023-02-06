@@ -6,25 +6,21 @@ import ItemLayout from './ItemLayout';
 /***************************
  *  Types
  */
+
+type ItemType<T> = T& {
+    name: string;
+    url: string;
+    imageUrl: string;
+};
+
+
 interface Props<T> {
     wrapperClassName?: string;
     liClassName?: string;
     imageClassName?: string;
-    renderItemBody: (item:T & {
-        name: string;
-        url: string;
-        imageUrl: string;
-    }) => React.ReactNode;
-    keyExtractor: (item:T & {
-        name: string;
-        url: string;
-        imageUrl: string;
-    }) => string;
-    data: (T & {
-        name: string;
-        url: string;
-        imageUrl: string; 
-    })[];
+    renderItemBody: (item:ItemType<T>) => React.ReactNode;
+    keyExtractor: (item:ItemType<T>) => string;
+    data: ItemType<T>[];
 }
 
 
@@ -36,21 +32,21 @@ const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClas
 
     return (
         <ul className={`${styles.wrapper}${wrapperClassName? ' ' + wrapperClassName: ''}`}>
-        {
-            data.map((item) => (
-                <li key={keyExtractor(item)} 
-                    className={`${styles.li}${liClassName? ' ' + liClassName: ''}`}>
-                    <ItemLayout
-                        name={item.name}
-                        url={item.url}
-                        imageUrl={item.imageUrl}
-                        imageClassName={imageClassName}
-                        >
-                        {renderItemBody(item)}
-                    </ItemLayout>
-                </li>
-            ))
-        }
+            {
+                data.map((item) => (
+                    <li key={keyExtractor(item)} 
+                        className={`${styles.li}${liClassName? ' ' + liClassName: ''}`}>
+                        <ItemLayout
+                            name={item.name}
+                            url={item.url}
+                            imageUrl={item.imageUrl}
+                            imageClassName={imageClassName}
+                            >
+                            {renderItemBody(item)}
+                        </ItemLayout>
+                    </li>
+                ))
+            }
         </ul>
     )
 }

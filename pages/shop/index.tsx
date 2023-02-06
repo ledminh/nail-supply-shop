@@ -5,7 +5,6 @@ import { pageConfigs } from '../../config';
 
 import { ShopPageDataType, getShopPageData } from '../../database';
 
-import Link from 'next/link';
 import ListLayout from '../../layouts/ListLayout';
 import CategoryItem from '../../components/shop_components/CategoryItem';
 
@@ -24,9 +23,16 @@ const Shop: NextPageCustomized<ShopPageDataType> = ({categories}) => {
                         />
                 )}
                 keyExtractor={(category) => category.id}
-                data={categories.map((category) => ({
+                data={[{
+                    id: 'all',
+                    name: 'All',
+                    description: 'All products',
+                    slug: '',
+                    imageUrl: '/images/all-product-bground.jpg'
+                },
+                    ...categories].map((category) => ({
                     ...category,
-                    url: `/shop/category/${category.slug}`,
+                    url: category.name === 'All'? `shop/category` : `/shop/category/${category.slug}`,
                     }))
                 }
                 />
