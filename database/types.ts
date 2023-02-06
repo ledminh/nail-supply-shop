@@ -21,6 +21,8 @@ export type DBProductType = {
     fullDescription: string;
     price: number;
     imageUrl: string;
+    date: string;
+    sellCount: number
 };
 
 
@@ -182,7 +184,7 @@ export type GetAdminPageDataType = () => Promise<ResponseType<AdminPageDataType>
     // They are put here because they are also used
     // in database.
 
-export type SortType = 'price' | 'name';
+export type SortType = 'price' | 'name' | 'date' | 'sellCount';
 export type SortOrderType = 'asc' | 'desc';
 
 export type SortConfigType = {

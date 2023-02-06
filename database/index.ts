@@ -81,85 +81,10 @@ export const getHomePageData:GetHomePageDataType = async () => {
     try {
         const pageInfo = await getDBPageInfo('Home');
 
-        return ['success', {pageInfo, ...{
-            newArrivalProducts: [
-                {
-                    id: '1',
-                    categoryID: '1',
-                    name: 'Red Nail Polish',
-                    shortDescription: 'Classic red nail polish',
-                    fullDescription: 'This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.',
-                    price: 5.99,
-                    imageUrl: '/images/001.jpg'
-                },
-                {
-                    id: '2',
-                    categoryID: '1',
-                    name: 'Glitter Nail Polish',
-                    shortDescription: 'Glitter nail polish for adding sparkle to your nails',
-                    fullDescription: 'This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.',
-                    price: 6.99,
-                    imageUrl: '/images/002.jpg'
-                },
-                {
-                    id: '3',
-                    categoryID: '2',
-                    name: 'Nail Clipper',
-                    shortDescription: 'Stainless steel nail clipper for trimming nails',
-                    fullDescription: 'This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.',
-                    price: 3.99,
-                    imageUrl: '/images/003.jpg'
-                },
-                {
-                    id: '4',
-                    categoryID: '3',
-                    name: 'Nail Art Stickers',
-                    shortDescription: 'Nail art stickers for decorating nails',
-                    fullDescription: 'This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.',
-                    price: 4.99,
-                    imageUrl: '/images/004.jpg'
-                }
-            ],
-    
-            bestSellerProducts: [
-                {
-                    id: '1',
-                    categoryID: '1',
-                    name: 'Red Nail Polish',
-                    shortDescription: 'Classic red nail polish',
-                    fullDescription: 'This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.',
-                    price: 5.99,
-                    imageUrl: '/images/001.jpg'
-                },
-                {
-                    id: '2',
-                    categoryID: '1',
-                    name: 'Glitter Nail Polish',
-                    shortDescription: 'Glitter nail polish for adding sparkle to your nails',
-                    fullDescription: 'This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.',
-                    price: 6.99,
-                    imageUrl: '/images/002.jpg'
-                },
-                {
-                    id: '3',
-                    categoryID: '2',
-                    name: 'Nail Clipper',
-                    shortDescription: 'Stainless steel nail clipper for trimming nails',
-                    fullDescription: 'This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.',
-                    price: 3.99,
-                    imageUrl: '/images/003.jpg'
-                },
-                {
-                    id: '4',
-                    categoryID: '3',
-                    name: 'Nail Art Stickers',
-                    shortDescription: 'Nail art stickers for decorating nails',
-                    fullDescription: 'This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.',
-                    price: 4.99,
-                    imageUrl: '/images/004.jpg'
-                }
-            ]
-        }}];
+        const newArrivalProducts = await getDBProducts({sort: {type: 'date', order: 'desc'}, limit: 4});
+        const bestSellerProducts = await getDBProducts({sort: {type: 'sellCount', order: 'desc'}, limit: 4});
+
+        return ['success', {pageInfo, newArrivalProducts, bestSellerProducts}];
     }
     catch(err) {
         return ['error', (err as Error).message];
