@@ -4,6 +4,8 @@
     border-radius: 20px;
     height: 100%;
 
+    border: none;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,6 +13,13 @@
     cursor: pointer;
 
     transition: all 0.2s ease-in-out;  
+
+    button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
 
     .title {
         font-weight: 600;

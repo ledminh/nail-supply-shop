@@ -73,7 +73,6 @@ export type AboutPageDataType = PageDataType & {
 export type CategoryPageDataType = PageDataType & {
     selectedCategoryID: string | null; 
     categories: CategoryType[];
-    products: ProductType[];
     priceRange: {
         min: number;
         max: number;
@@ -119,7 +118,12 @@ type ProductOptionsType = {
     sort?: SortConfigType;
 };
 
-export type GetDBProductsType = (options:ProductOptionsType) => Promise<DBProductType[]>;
+type DBProductsResponseType = {
+    products: DBProductType[];
+    total: number;
+}
+
+export type GetDBProductsType = (options:ProductOptionsType) => Promise<DBProductsResponseType>;
 
 export type GetDBProductType = (id: string) => Promise<DBProductType>;
 
@@ -137,7 +141,7 @@ export type GetDBAboutHtmlTextType = () => Promise<string>;
 
 export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
-export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<ProductType[]>>;
+export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<DBProductsResponseType>>;
 
 export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
 

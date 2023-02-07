@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import styles from './ListLayout.module.scss';
 
 import ItemLayout from './ItemLayout';
@@ -18,10 +20,15 @@ interface Props<T> {
     wrapperClassName?: string;
     liClassName?: string;
     imageClassName?: string;
-    renderItemBody: (item:ItemType<T>) => React.ReactNode;
+    renderItemBody: (item:ItemType<T>) => ReactNode;
     keyExtractor: (item:ItemType<T>) => string;
     data: ItemType<T>[];
-    LastItem?: React.ReactNode;
+    LastItem?: {
+        name?: string;
+        url?: string;
+        imageUrl?: string;
+        component: ReactNode;
+    };
 }
 
 
@@ -51,7 +58,14 @@ const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClas
             {
                 LastItem? (
                     <li className={`${styles.li}${liClassName? ' ' + liClassName: ''}`}>
-                        {LastItem}
+                        <ItemLayout
+                            name={LastItem.name? LastItem.name : 'Last Item'}
+                            url={LastItem?.url}
+                            imageUrl={LastItem?.imageUrl}
+                            imageClassName={imageClassName}
+                            >
+                        {LastItem.component}
+                        </ItemLayout>
                     </li>
                 ) : null
             }

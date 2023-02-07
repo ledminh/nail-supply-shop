@@ -33,14 +33,14 @@ It is kind of messy because I want the page's scroll position to be preserved wh
 
 
 
-const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID, priceRange, currentSort}) => {
+const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, priceRange, currentSort}) => {
 
     const {handleCategoryChange, handlePriceChange,
             handleSortChange, _currentSort,
-            _products, _selectedCategory, _priceRange} 
-                = useCategoryPage(categories, products, selectedCategoryID, priceRange, currentSort);
+            _products, _selectedCategory, _priceRange, moreButtonOnClick, hasMore} 
+                = useCategoryPage(categories, selectedCategoryID, priceRange, currentSort);
 
-    const LastItem = <MoreButton />;
+    const MoreBtn = <MoreButton onClick={moreButtonOnClick}/>;
 
     return (
         <CategoryLayout 
@@ -55,7 +55,10 @@ const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID
                 <ListLayout
                     wrapperClassName={styles.ul}
                     liClassName={styles.li}
-                    LastItem={LastItem}
+                    LastItem={hasMore? {
+                        component: MoreBtn,
+                        name: 'More Button'
+                    }: undefined}
                     renderItemBody={(_product) => <ProductItem product={_product}/>}
                     keyExtractor={(_product) => _product.id}
                     data={_products.map((_product) => ({

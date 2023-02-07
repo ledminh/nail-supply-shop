@@ -69,6 +69,8 @@ export const getDBProducts:GetDBProductsType = async (options) => {
     
     }
 
+    const total = returnedProducts.length;
+
     let start = offset ?? 0;
     
     
@@ -77,7 +79,7 @@ export const getDBProducts:GetDBProductsType = async (options) => {
     }
     // rejects(new Error("Test Error from getProductsFromDB"));
 
-    resolve(returnedProducts);
+    resolve({products: returnedProducts, total});
     
     
   });

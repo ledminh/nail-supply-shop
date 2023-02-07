@@ -55,9 +55,9 @@ export const getProducts:GetProductsType = async (options) => {
         }
         
         
-        const products = await getDBProducts(options);
+        const {products, total} = await getDBProducts(options);
 
-        return ['success', products];
+        return ['success', {products, total}];
     }
     catch(err) {
         return ['error', (err as Error).message];
@@ -82,8 +82,8 @@ export const getHomePageData:GetHomePageDataType = async () => {
     try {
         const pageInfo = await getDBPageInfo('Home');
 
-        const newArrivalProducts = await getDBProducts({sort: {type: 'date', order: 'desc'}, limit: 4});
-        const bestSellerProducts = await getDBProducts({sort: {type: 'sellCount', order: 'desc'}, limit: 4});
+        const {products: newArrivalProducts} = await getDBProducts({sort: {type: 'date', order: 'desc'}, limit: 4});
+        const {products: bestSellerProducts} = await getDBProducts({sort: {type: 'sellCount', order: 'desc'}, limit: 4});
 
         return ['success', {pageInfo, newArrivalProducts, bestSellerProducts}];
     }
@@ -131,15 +131,10 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
         const categories = await getDBCategories();
 
         if(!categorySlug) {
-            const products = await getDBProducts({
-                price,
-                sort,
-            });
 
             return ['success', {
                 pageInfo,
                 categories, 
-                products,
                 selectedCategoryID: null, 
                 priceRange: price? price : null,
                 currentSort: sort? sort : null         
@@ -152,16 +147,10 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
             return ['error', 'Category not found'];
         }
 
-        const products = await getDBProducts({
-            categoryID: category.id,
-            price,
-            sort,
-        });
 
         return ['success', {
             pageInfo,
             categories, 
-            products,
             selectedCategoryID: category.id, 
             priceRange: price? price : null,
             currentSort: sort? sort : null
@@ -199,7 +188,7 @@ export const getProductPageData:GetProductPageDataType = async (productID) => {
 export const getAdminPageData:GetAdminPageDataType = async () => {
     try {
         const categories = await getDBCategories();
-        const products = await getDBProducts({});
+        const {products} = await getDBProducts({});
         
         return ['success', {
             pageInfo: {
