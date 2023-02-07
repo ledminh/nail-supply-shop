@@ -54,6 +54,7 @@ export const getProducts:GetProductsType = async (options) => {
             options.sort = defaultSortConfig
         }
         
+        
         const products = await getDBProducts(options);
 
         return ['success', products];
@@ -132,7 +133,7 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
         if(!categorySlug) {
             const products = await getDBProducts({
                 price,
-                sort
+                sort,
             });
 
             return ['success', {
@@ -154,7 +155,7 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
         const products = await getDBProducts({
             categoryID: category.id,
             price,
-            sort
+            sort,
         });
 
         return ['success', {

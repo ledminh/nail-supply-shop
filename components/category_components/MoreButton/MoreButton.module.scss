@@ -1,0 +1,32 @@
+.wrapper {
+    background-color: rgba(0, 0, 0, 0.5);
+
+    border-radius: 20px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease-in-out;  
+
+    .title {
+        font-weight: 600;
+
+        color: rgb(148, 148, 148);
+
+        transition: all 0.2s ease-in-out;
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+
+
+        .title {
+            transform: scale(1.2);
+            color: white;
+        }
+    }
+}

@@ -21,6 +21,7 @@ interface Props<T> {
     renderItemBody: (item:ItemType<T>) => React.ReactNode;
     keyExtractor: (item:ItemType<T>) => string;
     data: ItemType<T>[];
+    LastItem?: React.ReactNode;
 }
 
 
@@ -28,7 +29,7 @@ interface Props<T> {
 /***************************
  *  Main Component
  */
-const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClassName, renderItemBody, keyExtractor, data}:Props<T>) => {
+const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClassName, renderItemBody, keyExtractor, data, LastItem}:Props<T>) => {
 
     return (
         <ul className={`${styles.wrapper}${wrapperClassName? ' ' + wrapperClassName: ''}`}>
@@ -46,6 +47,13 @@ const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClas
                         </ItemLayout>
                     </li>
                 ))
+            }
+            {
+                LastItem? (
+                    <li className={`${styles.li}${liClassName? ' ' + liClassName: ''}`}>
+                        {LastItem}
+                    </li>
+                ) : null
             }
         </ul>
     )

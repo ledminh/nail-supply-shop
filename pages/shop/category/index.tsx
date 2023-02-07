@@ -10,6 +10,8 @@ import CategoryLayout from '../../../layouts/CategoryLayout';
 import ListLayout from '../../../layouts/ListLayout';
 import ProductItem from '../../../components/category_components/ProductItem';
 
+import MoreButton from '../../../components/category_components/MoreButton';
+
 import { pageConfigs } from '../../../config';
 
 
@@ -38,6 +40,7 @@ const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID
             _products, _selectedCategory, _priceRange} 
                 = useCategoryPage(categories, products, selectedCategoryID, priceRange, currentSort);
 
+    const LastItem = <MoreButton />;
 
     return (
         <CategoryLayout 
@@ -52,6 +55,7 @@ const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID
                 <ListLayout
                     wrapperClassName={styles.ul}
                     liClassName={styles.li}
+                    LastItem={LastItem}
                     renderItemBody={(_product) => <ProductItem product={_product}/>}
                     keyExtractor={(_product) => _product.id}
                     data={_products.map((_product) => ({

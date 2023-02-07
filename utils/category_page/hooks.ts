@@ -24,6 +24,7 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
     const [_selectedCategory, set_SelectedCategory] = useState(getSelectedCategory(categories, selectedCategoryID));
     const [_priceRange, set_PriceRange] = useState(priceRange);
     const [_currentSort, set_CurrentSort] = useState(currentSort);
+    
 
 
     useEffect(() => {
@@ -34,7 +35,7 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
                 min: _priceRange.min,
                 max: _priceRange.max
             } : undefined,
-            sort: _currentSort? _currentSort : undefined
+            sort: _currentSort? _currentSort : undefined,
         }).then((res) => {
 
             if(res[0] === 'error') {
