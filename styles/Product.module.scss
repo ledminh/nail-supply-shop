@@ -23,9 +23,14 @@
 }
 
 .description {
-    h4 {
-        margin-bottom: 10px;
+    .title {
+        margin-bottom: 1rem;
+        padding-bottom: .5rem;
         border-bottom: 1.5px solid adjust-color($color: base.$backgroundColor,  $lightness: -15%);
+    }
+
+    .content {
+        margin-bottom: 1rem;
     }
 
     border-bottom: 1.5px solid adjust-color($color: base.$backgroundColor,  $lightness: -15%);

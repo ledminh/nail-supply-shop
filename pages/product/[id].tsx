@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
 import Image from 'next/image';
-import Head from 'next/head';
 
 import styles from '../../styles/Product.module.scss';
 import { getProductPageData, ProductPageDataType } from '../../database';
@@ -26,8 +25,10 @@ const Product:ProductPageType = ({ product }) => {
                 />
             </div>
             <div className={styles.description}>
-                <h4>Description</h4>
-                <p>{product.fullDescription}</p>
+                <h4 className={styles.title}>Description</h4>
+                <div className={styles.content}>
+                    <p>{product.fullDescription}</p>
+                </div>
             </div>
             <div className={styles.price}>
                 <span className={styles.text}>Price:</span>
