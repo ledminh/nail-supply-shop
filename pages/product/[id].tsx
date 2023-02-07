@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 
-import Image from 'next/image';
-
+import Images  from '../../components/product_components/Images';
 import styles from '../../styles/Product.module.scss';
 import { getProductPageData, ProductPageDataType } from '../../database';
 import { NextPageCustomized } from '../_app';
@@ -16,13 +15,12 @@ const Product:ProductPageType = ({ product }) => {
     return (
         <div className={styles.wrapper}>
             <h2 className={styles.name}>{product.name}</h2>
-            <div className={styles.image}>
-                <Image 
-                    src={product.imageUrl}
-                    alt="Product Image"
-                    fill
-                    style={{objectFit: 'cover'}}
-                />
+            <div className={styles.images}>
+                <Images 
+                    images={product.images}
+                    productName={product.name}
+                    
+                    />
             </div>
             <div className={styles.description}>
                 <h4 className={styles.title}>Description</h4>

@@ -64,6 +64,7 @@ const CategoryPage:CategoryPageType = ({categories,  selectedCategoryID, priceRa
                     data={_products.map((_product) => ({
                         ..._product,
                         url: `/product/${_product.id}`,
+                        imageUrl: _product.images[_product.images.findIndex(img => img.default)].url,
                         }))}
                     />
         </CategoryLayout>

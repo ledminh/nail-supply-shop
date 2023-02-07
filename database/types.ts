@@ -13,6 +13,12 @@ export type DBCategoryType = {
     imageUrl: string;
 };
 
+export type DBProductImageType = {
+    url: string;
+    alt?: string;
+    default?: boolean;
+};
+
 export type DBProductType = {
     categoryID: string;
     id: string;
@@ -20,7 +26,7 @@ export type DBProductType = {
     shortDescription: string;
     fullDescription: string;
     price: number;
-    imageUrl: string;
+    images: DBProductImageType[];
     date: string;
     sellCount: number
 };
