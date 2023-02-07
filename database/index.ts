@@ -9,7 +9,7 @@
 import { CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
-import {getDBCategories, getDBProducts, getDBProduct, getDBPageInfo} from './sampleDB';
+import {getDBCategories, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
 
 // types for API functions implemented in this file
 import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
@@ -94,8 +94,12 @@ export const getHomePageData:GetHomePageDataType = async () => {
 export const getAboutPageData:GetAboutPageDataType = async () => {
     try {
         const pageInfo = await getDBPageInfo('About');
+        const aboutHtmlText = await getDBAboutHtmlText();
 
-        return ['success', {pageInfo}];
+        return ['success', {
+            pageInfo,
+            aboutHtmlText
+        }];
     }
     catch(err) {
         return ['error', (err as Error).message];

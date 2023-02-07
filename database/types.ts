@@ -66,7 +66,9 @@ export type HomePageDataType = PageDataType & {
     bestSellerProducts: ProductType[];
 };
 
-export type AboutPageDataType = PageDataType;
+export type AboutPageDataType = PageDataType & {
+    aboutHtmlText: string;
+};
 
 export type CategoryPageDataType = PageDataType & {
     selectedCategoryID: string | null; 
@@ -123,7 +125,7 @@ export type GetDBProductType = (id: string) => Promise<DBProductType>;
 
 export type GetDBPageInfoType = (title: 'Home' | 'About' | 'Shop') => Promise<DBPageInfoType>;
 
-
+export type GetDBAboutHtmlTextType = () => Promise<string>;
 
 /*********************************************
  *  API functions

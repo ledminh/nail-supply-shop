@@ -1,4 +1,4 @@
-import { GetDBCategoriesType, GetDBProductsType, GetDBProductType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType } from "./types";
+import { GetDBCategoriesType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType } from "./types";
 
 
 export const getDBCategories:GetDBCategoriesType = async () => {
@@ -113,6 +113,15 @@ export const getDBPageInfo:GetDBPageInfoType = async (title) => {
   });
 
 }
+
+export const getDBAboutHtmlText:GetDBAboutHtmlTextType = async () => {
+    
+  return new Promise((resolve) => {
+    resolve(aboutHtmlText);
+  });
+}
+
+
 
 /************************************
  *  Data
@@ -636,3 +645,18 @@ const pageInfos:DBPageInfoType[]  = [
     subtitle: "Transform your nails with our top-notch nail supplies."
   }
 ]
+
+const aboutHtmlText = `
+    <p>At our Nail Supply Shop, we&apos;ve been providing top-quality nail products and services for over 20 years. We take pride in offering a wide range of products to meet the needs of both professional nail technicians and at-home enthusiasts.</p>
+
+    <p>Our staff is highly trained and knowledgeable about all of the products we carry, and we&apos;re always happy to help you find exactly what you need. We strive to provide excellent customer service, and work hard to ensure that our prices are competitive and fair.</p>
+
+    <p>We offer a wide range of products including:</p>
+
+    <ul>
+      <li>Nail polish</li>
+      <li>Nail art supplies</li>
+      <li>Acrylics, gels, and other sculpting products</li>
+      <li>Tools and equipment</li>
+    </ul>
+    `
