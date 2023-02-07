@@ -26,6 +26,27 @@ const doSomething = (data) => {
     let result = data.map((item) => ({
         ...item,
         sellCount: Math.floor(Math.random() * 1000),
+        imageUrl: undefined,
+        images: ((numImgs) => (
+          Array(numImgs).fill(0).map((_, i) => {
+            const imageNum = Math.floor(Math.random() * 4) + 1;
+            
+            if(Math.random() > 0.5) {
+              return {
+                url: `/images/00${imageNum}.jpg`,
+                alt: `Image ${imageNum}`,
+                default: (i === 0)? true : undefined
+              }
+            }
+            
+            return {
+              url: `/images/00${imageNum}.jpg`,
+              default: (i === 0)? true : undefined
+            }  
+          
+          })
+        ))(Math.floor(Math.random() * 4) + 1)        
+        
     }));            
     
     
