@@ -7,10 +7,12 @@ import { ShopPageDataType, getShopPageData } from '../../database';
 
 import ListLayout from '../../layouts/ListLayout';
 import CategoryItem from '../../components/shop_components/CategoryItem';
+import AllCategories from '../../components/shop_components/AllCategories';
 
 
 
 const Shop: NextPageCustomized<ShopPageDataType> = ({categories}) => {
+    
     
     
     return (
@@ -23,18 +25,16 @@ const Shop: NextPageCustomized<ShopPageDataType> = ({categories}) => {
                         />
                 )}
                 keyExtractor={(category) => category.id}
-                data={[{
-                    id: 'all',
-                    name: 'All',
-                    description: 'All products',
-                    slug: '',
-                    imageUrl: '/images/all-product-bground.jpg'
-                },
-                    ...categories].map((category) => ({
-                    ...category,
-                    url: category.name === 'All'? `shop/category` : `/shop/category/${category.slug}`,
-                    }))
-                }
+                getItemName={(category) => category.name}
+                getItemUrl={(category) => `/shop/category/${category.id}`}
+                getItemImageUrl={(category) => category.imageUrl}
+                FirstItem= {{
+                    name: 'All Products',
+                    url: '/shop/category',
+                    imageUrl: '/images/all-product-bground.jpg',
+                    component: <AllCategories/>
+                }}
+                data={categories}
                 />
         </>
     )

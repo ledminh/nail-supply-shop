@@ -22,6 +22,13 @@ interface Props<T> {
     getItemUrl: (item:T) => string;
     getItemImageUrl: (item:T) => string;
     data: T[];
+
+    FirstItem?: {
+        name?: string;
+        url?: string;
+        imageUrl?: string;
+        component: ReactNode;
+    };
     
     LastItem?: {
         name?: string;
@@ -29,6 +36,9 @@ interface Props<T> {
         imageUrl?: string;
         component: ReactNode;
     };
+
+
+
 }
 
 
@@ -36,10 +46,24 @@ interface Props<T> {
 /***************************
  *  Main Component
  */
-const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClassName, renderItemBody, keyExtractor, getItemName, getItemUrl, getItemImageUrl, data, LastItem}:Props<T>) => {
+const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClassName, renderItemBody, keyExtractor, getItemName, getItemUrl, getItemImageUrl, data, FirstItem, LastItem}:Props<T>) => {
 
     return (
         <ul className={`${styles.wrapper}${wrapperClassName? ' ' + wrapperClassName: ''}`}>
+            {
+                FirstItem? (
+                    <li className={`${styles.li}${liClassName? ' ' + liClassName: ''}`}>
+                        <ItemLayout
+                            name={FirstItem.name? FirstItem.name : 'FirstItem'}
+                            url={FirstItem?.url}
+                            imageUrl={FirstItem?.imageUrl}
+                            imageClassName={imageClassName}
+                            >
+                        {FirstItem.component}
+                        </ItemLayout>
+                    </li>
+                ) : null
+            }
             {
                 data.map((item) => (
                     <li key={keyExtractor(item)} 
