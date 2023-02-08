@@ -6,31 +6,55 @@ import { getProductPageData, ProductPageDataType } from '../../database';
 import { NextPageCustomized } from '../_app';
 import { pageConfigs } from '../../config';
 
+import { useEffect, useState } from 'react';
+
 type ProductDetailProps = ProductPageDataType;
 
 type ProductPageType = NextPageCustomized<ProductDetailProps>;
 
 const Product:ProductPageType = ({ product }) => {
     
+    const [currentProduct, setCurrentProduct] = useState(Array.isArray(product)? product[product.findIndex(p => p.mainProduct)] : product);
+
+
+    useEffect(() => {
+        console.log('product', product);
+
+    }, [product]);
+
     return (
         <div className={styles.wrapper}>
-            <h2 className={styles.name}>{product.name}</h2>
+            <h2 className={styles.name}>{currentProduct.name}</h2>
             <div className={styles.images}>
                 <Images 
-                    images={product.images}
-                    productName={product.name}
+                    images={currentProduct.images}
+                    productName={currentProduct.name}
                     
                     />
             </div>
             <div className={styles.description}>
                 <h4 className={styles.title}>Description</h4>
                 <div className={styles.content}>
-                    <p>{product.fullDescription}</p>
+                    <p>{currentProduct.fullDescription}</p>
+                    {
+                        Array.isArray(product) && (
+                            <form>
+                                <label htmlFor="variations">Variation:</label>
+                                <select name="variations" id="variations">
+                                    {
+                                        product.map(p => (
+                                            <option key={p.id} value={p.id}>{p.name}</option>
+                                        ))
+                                    }
+                                </select>
+                            </form>
+                        ) 
+                    }
                 </div>
             </div>
             <div className={styles.price}>
                 <span className={styles.text}>Price:</span>
-                <span className={styles.value}>${product.price}</span>
+                <span className={styles.value}>${currentProduct.price}</span>
             </div>
             <div className={styles.checkout}>
                 <button>Add to Cart</button>

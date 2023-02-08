@@ -14,6 +14,8 @@ import MoreButton from '../../../components/category_components/MoreButton';
 
 import { pageConfigs } from '../../../config';
 
+import getMainProduct from '../../../utils/category_page/getMainProduct';
+
 
 import useCategoryPage from '../../../utils/category_page/hooks';
 import { SortOrderType, SortType } from '../../../database/types';
@@ -59,13 +61,19 @@ const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, priceRan
                         component: MoreBtn,
                         name: 'More Button'
                     }: undefined}
-                    renderItemBody={(_product) => <ProductItem product={_product}/>}
-                    keyExtractor={(_product) => _product.id}
-                    data={_products.map((_product) => ({
-                        ..._product,
-                        url: `/product/${_product.id}`,
-                        imageUrl: _product.images[_product.images.findIndex(img => img.default)].url,
-                        }))}
+                    renderItemBody={(_product) => <ProductItem product={getMainProduct(_product)}/>}
+                    keyExtractor={(_product) => getMainProduct(_product).id}
+                    getItemName={(_product) => getMainProduct(_product).name}
+                    getItemUrl={(_product) => `/product/${getMainProduct(_product).id}`}
+                    getItemImageUrl={(_product) => {
+                        const mainProduct = getMainProduct(_product);
+                        
+                        return mainProduct.images[mainProduct.images.findIndex(p => p.default)].url;
+                    }}
+
+
+
+                    data={_products}
                     />
         </CategoryLayout>
     );

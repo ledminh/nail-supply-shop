@@ -6,7 +6,7 @@
 
 
 // return types for API functions
-import { CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType, DBProductImageType } from './types';
+import { CategoryType, ProductType, ProductGroupType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType, DBProductImageType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
 import {getDBCategories, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
@@ -30,7 +30,7 @@ import { defaultSortConfig } from '../config';
 
 type ProductImageType = DBProductImageType;
 
-export type {CategoryType, ProductType, ProductImageType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ProductPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
+export type {CategoryType, ProductType, ProductGroupType, ProductImageType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ProductPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
 
 
 /*****************************
@@ -166,11 +166,23 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
 
 export const getProductPageData:GetProductPageDataType = async (productID) => {
     try {
-        const product = await getDBProduct(productID);
+        let product = await getDBProduct(productID);
 
         if(!product) {
             return ['error', 'Product not found'];
         }
+
+        if(Array.isArray(product)) {
+            const mainProduct = product.find(p => p.mainProduct);
+
+            if(!mainProduct) {
+                return ['error', 'Main product not found'];
+            }
+
+
+            product = mainProduct;
+        }
+
 
         return ['success', {
             pageInfo: {

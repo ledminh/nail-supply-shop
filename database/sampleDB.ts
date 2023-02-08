@@ -1,4 +1,4 @@
-import { GetDBCategoriesType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType } from "./types";
+import { GetDBCategoriesType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
 
 
 export const getDBCategories:GetDBCategoriesType = async () => {
@@ -20,11 +20,39 @@ export const getDBProducts:GetDBProductsType = async (options) => {
     let returnedProducts = products;
 
     if(categoryID) {
-      returnedProducts = returnedProducts.filter((product) => product.categoryID === categoryID);
+      returnedProducts = returnedProducts.filter((product) => {
+        if(Array.isArray(product)) {
+          const mainProduct = product.find((p) => p.mainProduct);
+
+          if(!mainProduct) {
+            throw new Error(`Product group "${product[0].name}" does not have a main product`);
+          }
+
+          return product.find((p) => p.mainProduct)?.categoryID === categoryID;
+        }
+        else {
+          return product.categoryID === categoryID;
+        }
+
+      });
     }
 
     if(price) {
-      returnedProducts = returnedProducts.filter((product) => product.price >= price.min && product.price <= price.max);
+      returnedProducts = returnedProducts.filter((product) => {
+        if(Array.isArray(product)) {
+          const mainProduct = product.find((p) => p.mainProduct);
+
+          if(!mainProduct) {
+            throw new Error(`Product group "${product[0].name}" does not have a main product`);
+          }
+
+          return mainProduct.price >= price.min && mainProduct.price <= price.max;
+
+        }
+        else {
+          return product.price >= price.min && product.price <= price.max
+        }
+      });
     }
 
     
@@ -34,6 +62,29 @@ export const getDBProducts:GetDBProductsType = async (options) => {
 
       if(type === 'price') {
         returnedProducts = returnedProducts.sort((a, b) => {
+
+          if(Array.isArray(a)) {
+            const mainProductA = a.find((p) => p.mainProduct);
+
+            if(!mainProductA) {
+              throw new Error(`Product group "${a[0].name}" does not have a main product`);
+            }
+
+            a = mainProductA;
+          }
+
+          if(Array.isArray(b)) {
+            const mainProductB = b.find((p) => p.mainProduct);
+
+            if(!mainProductB) {
+              throw new Error(`Product group "${b[0].name}" does not have a main product`);
+            }
+
+            b = mainProductB;
+          }
+
+
+
           if(order === 'asc') {
             return a.price - b.price;
           } else {
@@ -42,6 +93,26 @@ export const getDBProducts:GetDBProductsType = async (options) => {
         });
       } else if(type === 'name') {
         returnedProducts = returnedProducts.sort((a, b) => {
+          if(Array.isArray(a)) {
+            const mainProductA = a.find((p) => p.mainProduct);
+
+            if(!mainProductA) {
+              throw new Error(`Product group "${a[0].name}" does not have a main product`);
+            }
+
+            a = mainProductA;
+          }
+
+          if(Array.isArray(b)) {
+            const mainProductB:DBProductType|undefined = b.find((p) => p.mainProduct);
+
+            if(!mainProductB) {
+              throw new Error(`Product group "${b[0].name}" does not have a main product`);
+            }
+
+            b = mainProductB;
+          }
+
           if(order === 'asc') {
             return a.name.localeCompare(b.name);
           } else {
@@ -50,6 +121,28 @@ export const getDBProducts:GetDBProductsType = async (options) => {
         });
       } else if(type === 'date') {
         returnedProducts = returnedProducts.sort((a, b) => {
+
+          if(Array.isArray(a)) {
+            const mainProductA = a.find((p) => p.mainProduct);
+
+            if(!mainProductA) {
+              throw new Error(`Product group "${a[0].name}" does not have a main product`);
+            }
+
+            a = mainProductA;
+          }
+
+          if(Array.isArray(b)) {
+            const mainProductB = b.find((p) => p.mainProduct);
+
+            if(!mainProductB) {
+              throw new Error(`Product group "${b[0].name}" does not have a main product`);
+            }
+
+            b = mainProductB;
+          }
+
+
           if(order === 'asc') {
             return new Date(a.date).getTime() - new Date(b.date).getTime();
           } else {
@@ -58,6 +151,27 @@ export const getDBProducts:GetDBProductsType = async (options) => {
         });
       } else if(type === 'sellCount') {
         returnedProducts = returnedProducts.sort((a, b) => {
+
+          if(Array.isArray(a)) {
+            const mainProductA = a.find((p) => p.mainProduct);
+
+            if(!mainProductA) {
+              throw new Error(`Product group "${a[0].name}" does not have a main product`);
+            }
+
+            a = mainProductA;
+          }
+
+          if(Array.isArray(b)) {
+            const mainProductB = b.find((p) => p.mainProduct);
+
+            if(!mainProductB) {
+              throw new Error(`Product group "${b[0].name}" does not have a main product`);
+            }
+
+            b = mainProductB;
+          }
+
           if(order === 'asc') {
             return a.sellCount - b.sellCount;
           } else {
@@ -90,7 +204,23 @@ export const getDBProduct:GetDBProductType = async (id) => {
   
   return new Promise((resolve) => {
     
-  const product = products.find((product) => product.id === id);
+  const product = products.find((product) => {
+    if(Array.isArray(product)) {
+      
+      const mainProduct = product.find((p) => p.mainProduct);
+
+      if(!mainProduct) {
+        throw new Error(`Product group "${product[0].name}" does not have a main product`);
+      }
+
+      return mainProduct.id === id;
+    }
+
+    
+    
+    return product.id === id;
+
+  });
 
   if (!product) {
     throw new Error("Product not found on DB Server");
@@ -129,99 +259,102 @@ export const getDBAboutHtmlText:GetDBAboutHtmlTextType = async () => {
  *  Data
  */
 
-const products:DBProductType[] = [
-  {
-    "id": "1",
-    "categoryID": "1",
-    "name": "Red Nail Polish",
-    "shortDescription": "Classic red nail polish",
-    "fullDescription": "This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.",
-    "price": 5.99,
-    "date": "2023-02-06",
-    "sellCount": 945,
-    "images": [
-      {
-        "url": "/images/003.jpg",
-        "alt": "Image 3",
-        "default": true
-      },
-      {
-        "url": "/images/001.jpg",
-        "alt": "Image 1"
-      }
-    ]
-  },
-  {
-    "id": "2",
-    "categoryID": "1",
-    "name": "Glitter Nail Polish",
-    "shortDescription": "Glitter nail polish for adding sparkle to your nails",
-    "fullDescription": "This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.",
-    "price": 6.99,
-    "date": "2023-02-05",
-    "sellCount": 657,
-    "images": [
-      {
-        "url": "/images/002.jpg",
-        "default": true
-      }
-    ]
-  },
-  {
-    "id": "3",
-    "categoryID": "2",
-    "name": "Nail Clipper",
-    "shortDescription": "Stainless steel nail clipper for trimming nails",
-    "fullDescription": "This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.",
-    "price": 3.99,
-    "date": "2019-11-01",
-    "sellCount": 326,
-    "images": [
-      {
-        "url": "/images/001.jpg",
-        "alt": "Image 1",
-        "default": true
-      }
-    ]
-  },
-  {
-    "id": "4",
-    "categoryID": "3",
-    "name": "Nail Art Stickers",
-    "shortDescription": "Nail art stickers for decorating nails",
-    "fullDescription": "This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.",
-    "price": 4.99,
-    "date": "2023-02-05",
-    "sellCount": 663,
-    "images": [
-      {
-        "url": "/images/004.jpg",
-        "alt": "Image 4",
-        "default": true
-      },
-      {
-        "url": "/images/001.jpg",
-        "alt": "Image 1"
-      }
-    ]
-  },
-  {
-    "id": "5",
-    "categoryID": "4",
-    "name": "Acrylic Nail Kit",
-    "shortDescription": "Kit for sculpting and extending nails with acrylic",
-    "fullDescription": "This acrylic nail kit is perfect for sculpting and extending nails. It includes a liquid monomer, a powder polymer, and a nail brush for creating a perfect acrylic overlay. It also includes a file and buffer for shaping and smoothing nails.",
-    "price": 19.99,
-    "date": "2023-02-04",
-    "sellCount": 58,
-    "images": [
-      {
-        "url": "/images/001.jpg",
-        "alt": "Image 1",
-        "default": true
-      }
-    ]
-  },
+const products:(DBProductType|DBProductGroupType)[] = [
+  [
+    {
+      "id": "1",
+      "categoryID": "1",
+      "name": "Red Nail Polish",
+      "shortDescription": "Classic red nail polish",
+      "fullDescription": "This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.",
+      "price": 5.99,
+      "date": "2023-02-06",
+      "sellCount": 945,
+      "images": [
+        {
+          "url": "/images/003.jpg",
+          "alt": "Image 3",
+          "default": true
+        },
+        {
+          "url": "/images/001.jpg",
+          "alt": "Image 1"
+        }
+      ],
+      "mainProduct": true
+    },
+    {
+      "id": "2",
+      "categoryID": "1",
+      "name": "Glitter Nail Polish",
+      "shortDescription": "Glitter nail polish for adding sparkle to your nails",
+      "fullDescription": "This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.",
+      "price": 6.99,
+      "date": "2023-02-05",
+      "sellCount": 657,
+      "images": [
+        {
+          "url": "/images/002.jpg",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "categoryID": "2",
+      "name": "Nail Clipper",
+      "shortDescription": "Stainless steel nail clipper for trimming nails",
+      "fullDescription": "This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.",
+      "price": 3.99,
+      "date": "2019-11-01",
+      "sellCount": 326,
+      "images": [
+        {
+          "url": "/images/001.jpg",
+          "alt": "Image 1",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "categoryID": "3",
+      "name": "Nail Art Stickers",
+      "shortDescription": "Nail art stickers for decorating nails",
+      "fullDescription": "This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.",
+      "price": 4.99,
+      "date": "2023-02-05",
+      "sellCount": 663,
+      "images": [
+        {
+          "url": "/images/004.jpg",
+          "alt": "Image 4",
+          "default": true
+        },
+        {
+          "url": "/images/001.jpg",
+          "alt": "Image 1"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "categoryID": "4",
+      "name": "Acrylic Nail Kit",
+      "shortDescription": "Kit for sculpting and extending nails with acrylic",
+      "fullDescription": "This acrylic nail kit is perfect for sculpting and extending nails. It includes a liquid monomer, a powder polymer, and a nail brush for creating a perfect acrylic overlay. It also includes a file and buffer for shaping and smoothing nails.",
+      "price": 19.99,
+      "date": "2023-02-04",
+      "sellCount": 58,
+      "images": [
+        {
+          "url": "/images/001.jpg",
+          "alt": "Image 1",
+          "default": true
+        }
+      ]
+    }
+  ],
   {
     "id": "6",
     "categoryID": "5",

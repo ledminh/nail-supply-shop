@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { getProducts } from '../../database';
 import { PriceRangeType, itemsPerPage } from '../../config';
-import { SortConfigType } from '../../database/types';
+import { ProductGroupType, SortConfigType } from '../../database/types';
 
 
 
@@ -20,7 +20,7 @@ const useCategoryPage = (categories:CategoryType[], selectedCategoryID: string|n
 
     const router = useRouter();
 
-    const [_products, set_Products] = useState([] as ProductType[]);
+    const [_products, set_Products] = useState([] as (ProductType|ProductGroupType)[]);
     const [_selectedCategory, set_SelectedCategory] = useState(getSelectedCategory(categories, selectedCategoryID));
     const [_priceRange, set_PriceRange] = useState(priceRange);
     const [_currentSort, set_CurrentSort] = useState(currentSort);

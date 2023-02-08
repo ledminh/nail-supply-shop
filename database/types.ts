@@ -28,9 +28,11 @@ export type DBProductType = {
     price: number;
     images: DBProductImageType[];
     date: string;
-    sellCount: number
+    sellCount: number;
+    mainProduct?: boolean;
 };
 
+export type DBProductGroupType = DBProductType[];
 
 export type DBPageInfoType = {
     id: string,
@@ -57,6 +59,7 @@ export type ResponseType<T> = ['success', T ]
     // Specific types for response from API functions
 export type CategoryType = DBCategoryType;
 export type ProductType = DBProductType;
+export type ProductGroupType = DBProductGroupType;
 export type PageInfoType = DBPageInfoType;
 
     // Data types for pages
@@ -68,8 +71,8 @@ type PageDataType = {
 
 
 export type HomePageDataType = PageDataType & {
-    newArrivalProducts: ProductType[];
-    bestSellerProducts: ProductType[];
+    newArrivalProducts: (ProductType|ProductGroupType)[];
+    bestSellerProducts: (ProductType|ProductGroupType)[];
 };
 
 export type AboutPageDataType = PageDataType & {
@@ -91,12 +94,12 @@ export type ShopPageDataType =  PageDataType &{
 }
 
 export type ProductPageDataType = PageDataType & {
-    product: ProductType;
+    product: ProductType|ProductGroupType;
 }
 
 export type AdminPageDataType = PageDataType & {
     categories: CategoryType[];
-    products: ProductType[];
+    products: (ProductType|ProductGroupType)[];
     aboutHtmlText: string;
 }; 
 
@@ -125,13 +128,13 @@ type ProductOptionsType = {
 };
 
 type DBProductsResponseType = {
-    products: DBProductType[];
+    products: (DBProductType|DBProductGroupType)[];
     total: number;
 }
 
 export type GetDBProductsType = (options:ProductOptionsType) => Promise<DBProductsResponseType>;
 
-export type GetDBProductType = (id: string) => Promise<DBProductType>;
+export type GetDBProductType = (id: string) => Promise<DBProductType|DBProductGroupType>;
 
 export type GetDBPageInfoType = (title: 'Home' | 'About' | 'Shop') => Promise<DBPageInfoType>;
 
@@ -149,7 +152,7 @@ export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
 export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<DBProductsResponseType>>;
 
-export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
+export type GetProductType = (id: string) => Promise<ResponseType<ProductType|ProductGroupType>>;
 
 
     //------------------------------------------------

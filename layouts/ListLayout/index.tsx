@@ -9,20 +9,20 @@ import ItemLayout from './ItemLayout';
  *  Types
  */
 
-type ItemType<T> = T& {
-    name: string;
-    url: string;
-    imageUrl: string;
-};
+
 
 
 interface Props<T> {
     wrapperClassName?: string;
     liClassName?: string;
     imageClassName?: string;
-    renderItemBody: (item:ItemType<T>) => ReactNode;
-    keyExtractor: (item:ItemType<T>) => string;
-    data: ItemType<T>[];
+    renderItemBody: (item:T) => ReactNode;
+    keyExtractor: (item:T) => string;
+    getItemName: (item:T) => string;
+    getItemUrl: (item:T) => string;
+    getItemImageUrl: (item:T) => string;
+    data: T[];
+    
     LastItem?: {
         name?: string;
         url?: string;
@@ -36,7 +36,7 @@ interface Props<T> {
 /***************************
  *  Main Component
  */
-const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClassName, renderItemBody, keyExtractor, data, LastItem}:Props<T>) => {
+const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClassName, renderItemBody, keyExtractor, getItemName, getItemUrl, getItemImageUrl, data, LastItem}:Props<T>) => {
 
     return (
         <ul className={`${styles.wrapper}${wrapperClassName? ' ' + wrapperClassName: ''}`}>
@@ -45,9 +45,9 @@ const ListLayout = <T extends unknown>({wrapperClassName, liClassName, imageClas
                     <li key={keyExtractor(item)} 
                         className={`${styles.li}${liClassName? ' ' + liClassName: ''}`}>
                         <ItemLayout
-                            name={item.name}
-                            url={item.url}
-                            imageUrl={item.imageUrl}
+                            name={getItemName(item)}
+                            url={getItemUrl(item)}
+                            imageUrl={getItemImageUrl(item)}
                             imageClassName={imageClassName}
                             >
                             {renderItemBody(item)}
