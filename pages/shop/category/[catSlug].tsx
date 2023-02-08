@@ -13,7 +13,7 @@ import MoreButton from '../../../components/category_components/MoreButton';
 
 import { pageConfigs } from '../../../config';
 
-import getMainProduct from '../../../utils/category_page/getMainProduct';
+import getMainProduct from '../../../utils/getMainProduct';
 
 import { SortOrderType, SortType } from '../../../database/types';
 

@@ -1,4 +1,4 @@
-import { ProductType, ProductGroupType } from '../../database';
+import { ProductType, ProductGroupType } from '../database';
 
 
 const getMainProduct = (_product:ProductType | ProductGroupType) => {
