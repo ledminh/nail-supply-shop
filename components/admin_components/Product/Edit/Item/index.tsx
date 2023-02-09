@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { ProductType } from "../../../../../database";
+import { ProductGroupType, ProductType } from "../../../../../database";
 
 import styles from './Item.module.scss';
 
@@ -7,7 +7,7 @@ import styles from './Item.module.scss';
  *  Types
  */
 interface ItemPropsType {
-    product: ProductType
+    product: ProductType|ProductGroupType
 } 
 
 type ItemType = FunctionComponent<ItemPropsType>
@@ -21,12 +21,12 @@ const Item:ItemType = ({product}) => {
 
     return (
         <div className={styles.wrapper}>
-            <h5>{product.name}</h5>
+            {/* <h5>{product.name}</h5>
             <p>{product.fullDescription}</p>
             <div className={styles.buttons}>
                 <button className={styles.button}>Edit</button>
                 <button className={styles.button}>Delete</button>
-            </div>
+            </div> */}
         </div>
     )
 }

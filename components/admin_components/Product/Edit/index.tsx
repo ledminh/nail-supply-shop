@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { CategoryType, ProductType } from "../../../../database";
+import { CategoryType, ProductGroupType, ProductType } from "../../../../database";
 
 import Item from "./Item";
 
@@ -12,7 +12,7 @@ import AdminSubSection from "../../../../layouts/AdminSubSection";
  *  Types
  */
 interface EditPropsType {
-    products: ProductType[];
+    products: (ProductType|ProductGroupType)[];
     categories: CategoryType[];
 } 
 
