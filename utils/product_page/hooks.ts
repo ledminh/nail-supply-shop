@@ -18,16 +18,7 @@ const useProduct = (product:ProductType|ProductGroupType) => {
         }
     }, [product]);
 
-    const variationOnChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
-        if(!Array.isArray(product)) return;
-
-        const selectedProduct = product.find(p => p.id === e.target.value);
-
-        if (selectedProduct) {
-            set_Product(selectedProduct);
-        }
-    };
-
+    
     useEffect(()=>{
         if (Array.isArray(product)) {
             const variantName = product.find(p => p.id === _product.id)?.variantName;
@@ -37,6 +28,21 @@ const useProduct = (product:ProductType|ProductGroupType) => {
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [_product]);
+
+
+    /***********************************
+     * public methods
+     */
+
+    const variationOnChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
+        if(!Array.isArray(product)) return;
+
+        const selectedProduct = product.find(p => p.id === e.target.value);
+
+        if (selectedProduct) {
+            set_Product(selectedProduct);
+        }
+    };
 
     return {
         _product,

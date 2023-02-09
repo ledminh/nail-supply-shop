@@ -35,7 +35,7 @@ const Product:ProductPageType = ({ product }) => {
                     {
                         Array.isArray(product) && (
                             <form>
-                                <label htmlFor="variations">Variation:</label>
+                                <label htmlFor="variations">Variations:</label>
                                 <select name="variations" 
                                         id="variations"
                                         onChange={variationOnChange}
