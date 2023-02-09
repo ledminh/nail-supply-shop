@@ -7,6 +7,7 @@ import { NextPageCustomized } from '../_app';
 import { pageConfigs } from '../../config';
 
 import { useEffect, useState } from 'react';
+import { DBProductType } from '../../database/types';
 
 type ProductDetailProps = ProductPageDataType;
 
@@ -14,36 +15,62 @@ type ProductPageType = NextPageCustomized<ProductDetailProps>;
 
 const Product:ProductPageType = ({ product }) => {
     
-    const [currentProduct, setCurrentProduct] = useState(Array.isArray(product)? product[product.findIndex(p => p.mainProduct)] : product);
+    const [_product, set_Product] = useState<DBProductType|DBProductType&{
+        mainProduct?: boolean;
+        variantName: string;
+    }>(Array.isArray(product)? product[product.findIndex(p => p.mainProduct)] : product);
 
+    const [currentVariantName, setCurrentVariantName] = useState<string|null>(null);
 
     useEffect(() => {
-        console.log('product', product);
-
+        if (Array.isArray(product)) {
+            const mainProduct = product[product.findIndex(p => p.mainProduct)];
+            set_Product(mainProduct);
+        }
     }, [product]);
+
+
+    useEffect(()=>{
+        if (Array.isArray(product)) {
+            const variantName = product.find(p => p.id === _product.id)?.variantName;
+            if (variantName) {
+                setCurrentVariantName(variantName);
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [_product]);
 
     return (
         <div className={styles.wrapper}>
-            <h2 className={styles.name}>{currentProduct.name}</h2>
+            <h2 className={styles.name}>{_product.name + (currentVariantName? ' :: ' + currentVariantName: '')}</h2>
             <div className={styles.images}>
                 <Images 
-                    images={currentProduct.images}
-                    productName={currentProduct.name}
+                    images={_product.images}
+                    productName={_product.name}
                     
                     />
             </div>
             <div className={styles.description}>
                 <h4 className={styles.title}>Description</h4>
                 <div className={styles.content}>
-                    <p>{currentProduct.fullDescription}</p>
+                    <p>{_product.fullDescription}</p>
                     {
                         Array.isArray(product) && (
                             <form>
                                 <label htmlFor="variations">Variation:</label>
-                                <select name="variations" id="variations">
+                                <select name="variations" 
+                                        id="variations"
+                                        onChange={(e) => {
+                                            const selectedProduct = product.find(p => p.id === e.target.value);
+
+                                            if (selectedProduct) {
+                                                set_Product(selectedProduct);
+                                            }
+                                        }}
+                                        >
                                     {
                                         product.map(p => (
-                                            <option key={p.id} value={p.id}>{p.name}</option>
+                                            <option key={p.id} value={p.id}>{p.variantName}</option>
                                         ))
                                     }
                                 </select>
@@ -54,7 +81,7 @@ const Product:ProductPageType = ({ product }) => {
             </div>
             <div className={styles.price}>
                 <span className={styles.text}>Price:</span>
-                <span className={styles.value}>${currentProduct.price}</span>
+                <span className={styles.value}>${_product.price}</span>
             </div>
             <div className={styles.checkout}>
                 <button>Add to Cart</button>

@@ -264,7 +264,7 @@ const products:(DBProductType|DBProductGroupType)[] = [
     {
       "id": "1",
       "categoryID": "1",
-      "name": "Red Nail Polish",
+      "name": "Nail Polish",
       "shortDescription": "Classic red nail polish",
       "fullDescription": "This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.",
       "price": 5.99,
@@ -272,21 +272,23 @@ const products:(DBProductType|DBProductGroupType)[] = [
       "sellCount": 945,
       "images": [
         {
-          "url": "/images/003.jpg",
-          "alt": "Image 3",
-          "default": true
+        "url": "/images/003.jpg",
+        "alt": "Image 3",
+        "default": true
         },
         {
-          "url": "/images/001.jpg",
-          "alt": "Image 1"
+        "url": "/images/001.jpg",
+        "alt": "Image 1"
         }
       ],
-      "mainProduct": true
+      "mainProduct": true,
+      "variantName": 'Red'
     },
+    
     {
       "id": "2",
       "categoryID": "1",
-      "name": "Glitter Nail Polish",
+      "name": "Nail Polish",
       "shortDescription": "Glitter nail polish for adding sparkle to your nails",
       "fullDescription": "This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.",
       "price": 6.99,
@@ -294,67 +296,80 @@ const products:(DBProductType|DBProductGroupType)[] = [
       "sellCount": 657,
       "images": [
         {
-          "url": "/images/002.jpg",
-          "default": true
-        }
-      ]
+        "url": "/images/002.jpg",
+        "default": true
+        },
+      ],
+      "variantName": 'Glitter'
     },
     {
       "id": "3",
-      "categoryID": "2",
-      "name": "Nail Clipper",
-      "shortDescription": "Stainless steel nail clipper for trimming nails",
-      "fullDescription": "This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.",
-      "price": 3.99,
-      "date": "2019-11-01",
-      "sellCount": 326,
+      "categoryID": "1",
+      "name": "Nail Polish",
+      "shortDescription": "Bright pink nail polish",
+      "fullDescription": "This bright pink nail polish is perfect for adding a pop of color to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The color is vibrant and perfect for spring and summer.",
+      "price": 5.99,
+      "date": "2023-02-04",
+      "sellCount": 812,
       "images": [
         {
-          "url": "/images/001.jpg",
-          "alt": "Image 1",
-          "default": true
+        "url": "/images/004.jpg",
+        "alt": "Image 4",
+        "default": true
+        },
+        {
+        "url": "/images/004.jpg",
+        "alt": "Image 5"
         }
-      ]
+      ],
+      "variantName": 'Pink'
     },
     {
       "id": "4",
-      "categoryID": "3",
-      "name": "Nail Art Stickers",
-      "shortDescription": "Nail art stickers for decorating nails",
-      "fullDescription": "This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.",
-      "price": 4.99,
-      "date": "2023-02-05",
-      "sellCount": 663,
-      "images": [
-        {
-          "url": "/images/004.jpg",
-          "alt": "Image 4",
-          "default": true
-        },
-        {
-          "url": "/images/001.jpg",
-          "alt": "Image 1"
-        }
-      ]
-    },
-    {
-      "id": "5",
-      "categoryID": "4",
-      "name": "Acrylic Nail Kit",
-      "shortDescription": "Kit for sculpting and extending nails with acrylic",
-      "fullDescription": "This acrylic nail kit is perfect for sculpting and extending nails. It includes a liquid monomer, a powder polymer, and a nail brush for creating a perfect acrylic overlay. It also includes a file and buffer for shaping and smoothing nails.",
-      "price": 19.99,
-      "date": "2023-02-04",
-      "sellCount": 58,
+      "categoryID": "1",
+      "name": "Nail Polish",
+      "shortDescription": "Vibrant orange nail polish",
+      "fullDescription": "This vibrant orange nail polish is perfect for adding a pop of color to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The color is perfect for summer and will give your nails a fun, playful look.",
+      "price": 5.99,
+      "date": "2023-02-03",
+      "sellCount": 729,
       "images": [
         {
           "url": "/images/001.jpg",
           "alt": "Image 1",
           "default": true
+        },
+        {
+          "url": "/images/003.jpg",
+          "alt": "Image 3"
         }
-      ]
-    }
-  ],
+      ],
+      "variantName": 'Orange'
+    },
+    {
+      "id": "5",
+      "categoryID": "1",
+      "name": "Nail Polish",
+      "shortDescription": "Electric blue nail polish",
+      "fullDescription": "This electric blue nail polish is perfect for adding a pop of color to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The color is bright and perfect for making a statement.",
+      "price": 5.99,
+      "date": "2023-02-02",
+      "sellCount": 646,
+      "images": [
+        {
+          "url": "/images/002.jpg",
+          "alt": "Image 2",
+          "default": true
+        },
+        {
+          "url": "/images/004.jpg",
+          "alt": "Image 4"
+        }
+      ],
+      "variantName": 'Blue'
+    },
+
+  ],  
   {
     "id": "6",
     "categoryID": "5",

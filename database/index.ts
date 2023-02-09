@@ -70,6 +70,7 @@ export const getProduct:GetProductType = async (id) => {
     try {
         const product = await getDBProduct(id);
 
+
         return ['success', product];
     }
     catch(err) {
@@ -172,24 +173,28 @@ export const getProductPageData:GetProductPageDataType = async (productID) => {
             return ['error', 'Product not found'];
         }
 
+        let mainProduct;
         if(Array.isArray(product)) {
-            const mainProduct = product.find(p => p.mainProduct);
-
+            mainProduct = product.find(product => product.mainProduct);
+            
             if(!mainProduct) {
                 return ['error', 'Main product not found'];
             }
 
-
-            product = mainProduct;
         }
+        else {
+            mainProduct = product;
+        }
+
+        console.log(mainProduct);
 
 
         return ['success', {
             pageInfo: {
-                id: product.id,
-                title: product.name,
-                description: product.shortDescription,
-                subtitle: product.shortDescription,
+                id: mainProduct.id,
+                title: mainProduct.name,
+                description: mainProduct.shortDescription,
+                subtitle: mainProduct.shortDescription,
             },
             product
         }];

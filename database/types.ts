@@ -29,10 +29,12 @@ export type DBProductType = {
     images: DBProductImageType[];
     date: string;
     sellCount: number;
-    mainProduct?: boolean;
 };
 
-export type DBProductGroupType = DBProductType[];
+export type DBProductGroupType = (DBProductType & {
+    mainProduct?: boolean;
+    variantName: string;
+})[];
 
 export type DBPageInfoType = {
     id: string,

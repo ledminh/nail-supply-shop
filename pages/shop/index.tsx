@@ -17,7 +17,6 @@ const Shop: NextPageCustomized<ShopPageDataType> = ({categories}) => {
     
     return (
         <>
-            <h2>Category List</h2>
             <ListLayout
                 renderItemBody={(category) => (
                     <CategoryItem
@@ -26,7 +25,7 @@ const Shop: NextPageCustomized<ShopPageDataType> = ({categories}) => {
                 )}
                 keyExtractor={(category) => category.id}
                 getItemName={(category) => category.name}
-                getItemUrl={(category) => `/shop/category/${category.id}`}
+                getItemUrl={(category) => `/shop/category/${category.slug}`}
                 getItemImageUrl={(category) => category.imageUrl}
                 FirstItem= {{
                     name: 'All Products',
