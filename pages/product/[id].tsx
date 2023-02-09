@@ -8,6 +8,7 @@ import { pageConfigs } from '../../config';
 
 import { useEffect, useState } from 'react';
 import { DBProductType } from '../../database/types';
+import useProduct from '../../utils/product_page/hooks';
 
 type ProductDetailProps = ProductPageDataType;
 
@@ -15,30 +16,7 @@ type ProductPageType = NextPageCustomized<ProductDetailProps>;
 
 const Product:ProductPageType = ({ product }) => {
     
-    const [_product, set_Product] = useState<DBProductType|DBProductType&{
-        mainProduct?: boolean;
-        variantName: string;
-    }>(Array.isArray(product)? product[product.findIndex(p => p.mainProduct)] : product);
-
-    const [currentVariantName, setCurrentVariantName] = useState<string|null>(null);
-
-    useEffect(() => {
-        if (Array.isArray(product)) {
-            const mainProduct = product[product.findIndex(p => p.mainProduct)];
-            set_Product(mainProduct);
-        }
-    }, [product]);
-
-
-    useEffect(()=>{
-        if (Array.isArray(product)) {
-            const variantName = product.find(p => p.id === _product.id)?.variantName;
-            if (variantName) {
-                setCurrentVariantName(variantName);
-            }
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [_product]);
+    const {_product, currentVariantName, variationOnChange} = useProduct(product);
 
     return (
         <div className={styles.wrapper}>
@@ -60,13 +38,7 @@ const Product:ProductPageType = ({ product }) => {
                                 <label htmlFor="variations">Variation:</label>
                                 <select name="variations" 
                                         id="variations"
-                                        onChange={(e) => {
-                                            const selectedProduct = product.find(p => p.id === e.target.value);
-
-                                            if (selectedProduct) {
-                                                set_Product(selectedProduct);
-                                            }
-                                        }}
+                                        onChange={variationOnChange}
                                         >
                                     {
                                         product.map(p => (
