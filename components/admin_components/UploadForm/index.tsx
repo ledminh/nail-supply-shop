@@ -3,6 +3,8 @@ import { FunctionComponent, ChangeEvent, useState } from "react";
 import styles from './UploadForm.module.scss';
 
 import axios from 'axios';
+import { DeleteFileOptions } from "../../../types";
+import useUpload from "./hooks";
 
 /***************************
  *  Types
@@ -21,46 +23,46 @@ type UploadFormType = FunctionComponent<UploadFormPropsType>
  *  Main Component
  */
 const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles}) => {
+    const {currentProgress, fileName, onFileChangeHandler, onDeleteFileHandler} = useUpload();
 
-    const [currentProgress, setCurrentProgress] = useState(0);
-
-    const onChangeHandler = (event:ChangeEvent<HTMLInputElement>) => {
-        if (!event.target.files) {
-            return;
-        }
-
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' },
-            onUploadProgress: (event:any) => {
-
-                setCurrentProgress(Math.round((event.loaded * 100) / event.total));
-            },
-        };
-
-        const formData = new FormData();
-        formData.append('cat-image', event.target.files[0]);
-    
-        axios.post('/api/upload', formData, config)
-            .then(res => {
-                console.log(res.data.path);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    };
+    // Show progress bar if there is a progress
+    if (currentProgress) {
+        return (
+            <div className={styles.wrapper + ' '  + inputClassName}>
+                <div className={styles.progressBar} style={{
+                    padding: '0',
+                    position: 'relative',
+                    overflow: 'hidden'
+                    
+                }}>
+                    <div className={styles.progress} style={{
+                        width: `${currentProgress}%`
+                    }}/>
+                    <div className={styles.fileName}>{fileName}</div>
+                </div>
+                <button className={styles.cancelButton} 
+                    onClick={(e) => {
+                        e.preventDefault();
+                        onDeleteFileHandler()
+                    }}
+                    disabled={currentProgress < 100}
+                    >
+                    Delete
+                </button>
+            </div>
+        );
+    }
 
     return (
-        <>
-            <input type="file" 
-                name="cat-image"
-                id={id}
-                className={inputClassName}
-                onChange={onChangeHandler}
-                multiple={allowMultipleFiles}
-            />
-            {currentProgress > 0 && <div className={styles.progress}>{currentProgress}%</div>}
-        </>
-    )
+        <input type="file" 
+            name="cat-image"
+            id={id}
+            className={inputClassName}
+            onChange={onFileChangeHandler}
+            multiple={allowMultipleFiles}
+        />
+    );
 }
 
 export default UploadForm;
+

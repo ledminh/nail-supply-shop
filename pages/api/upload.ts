@@ -23,8 +23,12 @@ const apiRoute = nextConnect({
   },
 });
 
+
+// get file from components/admin_components/UploadForm/index.tsx
 apiRoute.use(catImageUpload.single('cat-image'), (req, res, next) => {
-  req.body = {path: req.file?.path};
+  req.body = {
+    path: req.file?.path
+  };
   next();
 });
 
@@ -32,10 +36,10 @@ apiRoute.post((req: IncomingMessage &{body: {path: string}}, res) => {
   res.statusCode = 200;
 
   res.end(JSON.stringify({
-    message: 'File uploaded successfully!',
-    path: req.body.path,   
+    path: req.body.path,
   }));
 });
+
 
 export default apiRoute;
 

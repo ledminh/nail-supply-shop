@@ -10,7 +10,6 @@ import HeroImage from '../components/HeroImage';
 import ErrorLayout from '../layouts/ErrorLayout';
 
 import { errorHeroImage } from '../config';
-import { useEffect, useState } from 'react';
 
 
 
