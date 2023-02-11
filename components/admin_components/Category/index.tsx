@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { CategoryType } from "../../../database";
 
-import styles from './Category.module.scss';
+import useCategory from "./hooks";
 
 import Add from './Add';
 import Edit from "./Edit";
@@ -18,20 +18,19 @@ interface CategoryPropsType {
 type CategoryComponentType = FunctionComponent<CategoryPropsType>
 
 
-
 /***************************
  *  Main Component
  */
 const CategoryComponent:CategoryComponentType = ({categories}) => {
+
+    const {handleAdd} = useCategory(categories);
 
     return (
         <AdminSection
             title="Category"
         >   
             <Add 
-                onClick={(data) => {
-                    console.log(data);
-                }}
+                onClick={handleAdd}
             />
             <Edit 
                 categories={categories}

@@ -1,0 +1,2 @@
+- Tutorial for create upload api: https://betterprogramming.pub/upload-files-to-next-js-with-api-routes-839ce9f28430
+- React form: https://retool.com/blog/how-to-build-a-react-form-component/
