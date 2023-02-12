@@ -27,13 +27,15 @@ const useCategory = (categories:CategoryType[]) => {
             const { success } = data;
 
             if(success) {
-                const { categories } = data;
-                _setCategories(categories);
+                const { newCategory } = data;
+                _setCategories([newCategory, ...categories]);
             }
             else {
                 const { message } = data;
                 throw new Error(message);
             }
+
+            
         });
     }
 

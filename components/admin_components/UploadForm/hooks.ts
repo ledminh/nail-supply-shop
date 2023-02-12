@@ -1,16 +1,23 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 
 import axios from 'axios';
 import { DeleteFileOptions } from '../../../types';
 
-type useUploadParamsType = {onFileChange: (fileName:string|null) => void}; 
+type useUploadParamsType = {onFileChange: (fileName:string|null) => void, isReset:boolean}; 
 
-const useUpload= ({onFileChange}:useUploadParamsType) => {
+const useUpload= ({onFileChange, isReset}:useUploadParamsType) => {
     
     const [currentProgress, _setCurrentProgress] = useState<null|number>(null);
     const [fileName, _setFileName] = useState<string|null>(null);
 
 
+    useEffect(() => {
+        if(isReset) {
+            _setCurrentProgress(null);
+            _setFileName(null);
+        }
+    }, [isReset]);
+    
     
     /***************************
      *  Public functions

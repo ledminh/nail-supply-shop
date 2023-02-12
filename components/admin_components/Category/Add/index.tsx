@@ -33,8 +33,16 @@ const Add:AddType = ({handleAdd}) => {
     const [errors, setErrors] = useState<string[]>([]);
     
     const [imgPath, setImgPath] = useState<string|null>(null);
-    
 
+    const [isReset, setIsReset] = useState(false);
+
+    const reset = () => {
+        setName('');
+        setDescription('');
+        setImgPath(null);
+
+        setIsReset(true);
+    }
 
 
     const _onClick:MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -52,7 +60,7 @@ const Add:AddType = ({handleAdd}) => {
         });
 
 
-    
+        reset();
     }
 
     return (
@@ -104,6 +112,8 @@ const Add:AddType = ({handleAdd}) => {
                             if(fileName) setImgPath(`/images/category/${fileName}`);
                             else setImgPath(null);
                         }}
+                        isReset={isReset}
+
                         />
                 </fieldset>
 

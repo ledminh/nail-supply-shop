@@ -16,15 +16,15 @@ export const addDBCategory:AddDBCategoryType = async (newCategory) => {
 
     const newCategoryID = categories.length + 1;
 
-    const newCategoryWithID = {
+    const newCategoryInDB = {
       ...newCategory,
       id: newCategoryID + '',
       slug: newCategory.name.toLowerCase().replace(/ /g, '-'),
     }
 
-    categories.push(newCategoryWithID);
+    categories.push(newCategoryInDB);
     
-    resolve(categories);
+    resolve(newCategoryInDB);
   });
 }
 

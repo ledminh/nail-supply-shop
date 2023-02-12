@@ -51,9 +51,9 @@ export const getCategories:GetCategoriesType = async () => {
 
 export const addCategory:AddCategoryType = async (newCategory) => {
     try {
-        const categories = await addDBCategory(newCategory);
+        const newCategoryDB = await addDBCategory(newCategory);
 
-        return ['success', categories];
+        return ['success', newCategoryDB];
     }
     catch(err) {
         return ['error', (err as Error).message];

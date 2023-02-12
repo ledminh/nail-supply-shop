@@ -9,7 +9,7 @@ type Data = {
 } |
 {
   success: true,
-  categories: CategoryType[]
+  newCategory: CategoryType
 }
 
 export default function handler(
@@ -32,7 +32,7 @@ export default function handler(
         if(dbRes[0] === 'success') {
           res.status(200).json({
             success: true, 
-            categories: dbRes[1]
+            newCategory: dbRes[1]
           })
         }
         else {

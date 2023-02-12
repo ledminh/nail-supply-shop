@@ -14,6 +14,7 @@ interface UploadFormPropsType {
     inputClassName?: string;
     allowMultipleFiles?: boolean;
     onFileChange: (fileName: string|null) => void;
+    isReset: boolean;
 } 
 
 type UploadFormType = FunctionComponent<UploadFormPropsType>
@@ -23,8 +24,8 @@ type UploadFormType = FunctionComponent<UploadFormPropsType>
 /***************************
  *  Main Component
  */
-const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onFileChange}) => {
-    const {currentProgress, fileName, _onFileChangeHandler, _onDeleteFileHandler} = useUpload({onFileChange});
+const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onFileChange, isReset}) => {
+    const {currentProgress, fileName, _onFileChangeHandler, _onDeleteFileHandler} = useUpload({onFileChange, isReset});
 
     // Show progress bar if there is a progress
     if (currentProgress) {
