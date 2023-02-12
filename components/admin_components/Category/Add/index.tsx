@@ -7,20 +7,15 @@ import UploadForm from "../../UploadForm";
 
 import styles from './Add.module.scss';
 
-
+import { NewCategoryType } from "../../../../database/types";
 
 /***************************
  *  Types
  */
 
-export type NewCategoryType = {
-    name: string,
-    description: string,
-    image: File
-}
 
 interface AddPropsType {
-    onClick: (formData: FormData) => void
+    handleAdd: (data: NewCategoryType) => void
 } 
 
 type AddType = FunctionComponent<AddPropsType>
@@ -30,7 +25,7 @@ type AddType = FunctionComponent<AddPropsType>
 /***************************
  *  Main Component
  */
-const Add:AddType = ({onClick}) => {
+const Add:AddType = ({handleAdd}) => {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -40,9 +35,6 @@ const Add:AddType = ({onClick}) => {
     const [imgPath, setImgPath] = useState<string|null>(null);
     
 
-    useEffect(() => {
-        if(imgPath) console.log(imgPath);
-    }, [imgPath]);
 
 
     const _onClick:MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -50,23 +42,16 @@ const Add:AddType = ({onClick}) => {
 
         setErrors([]); 
 
-        if(name === '' || description === '') {
-            if(name === '') setErrors(prev => [...prev, 'Name is required']);
+        // validate all fields then add to errors array
 
-            if(description === '') setErrors(prev => [...prev, 'Description is required']);
-
-
-            return;
-        }
-
-        const formData = new FormData();
-
-        formData.append('name', name);
-        formData.append('description', description);
+        // all thing ok, add to database
+        handleAdd({
+            name,
+            description,
+            imageUrl: imgPath || ''
+        });
 
 
-
-        onClick(formData);
     
     }
 
@@ -145,6 +130,7 @@ const Add:AddType = ({onClick}) => {
             
                 <button className={styles.button}
                     onClick={_onClick}
+                    disabled={name.length === 0 || description.length === 0 || imgPath === null}
                     >
                     Add
                 </button>

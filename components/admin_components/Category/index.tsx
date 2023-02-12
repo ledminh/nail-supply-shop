@@ -23,17 +23,17 @@ type CategoryComponentType = FunctionComponent<CategoryPropsType>
  */
 const CategoryComponent:CategoryComponentType = ({categories}) => {
 
-    const {handleAdd} = useCategory(categories);
+    const {handleAdd, _categories} = useCategory(categories);
 
     return (
         <AdminSection
             title="Category"
         >   
             <Add 
-                onClick={handleAdd}
+                handleAdd={handleAdd}
             />
             <Edit 
-                categories={categories}
+                categories={_categories}
                 />
         </AdminSection>
     )

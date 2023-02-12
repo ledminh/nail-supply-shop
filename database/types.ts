@@ -1,4 +1,3 @@
-
 /*********************************************
  *  Database schema
  * -------------------------------------------
@@ -118,6 +117,8 @@ export type AdminPageDataType = PageDataType & {
 
 export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
 
+export type AddDBCategoryType = (newCategory: NewCategoryType) => Promise<DBCategoryType[]>;
+
 type ProductOptionsType = {
     limit?: number;
     offset?: number;
@@ -151,6 +152,14 @@ export type GetDBAboutHtmlTextType = () => Promise<string>;
 
 
 export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
+
+export type NewCategoryType = {
+    name: string,
+    description: string,
+    imageUrl: string
+}
+
+export type AddCategoryType = (category: NewCategoryType) => Promise<ResponseType<CategoryType[]>>;
 
 export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<DBProductsResponseType>>;
 

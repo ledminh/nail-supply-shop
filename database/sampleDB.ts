@@ -1,4 +1,4 @@
-import { GetDBCategoriesType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
+import { GetDBCategoriesType, AddDBCategoryType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
 
 
 export const getDBCategories:GetDBCategoriesType = async () => {
@@ -9,6 +9,25 @@ export const getDBCategories:GetDBCategoriesType = async () => {
   });
 
 }
+
+export const addDBCategory:AddDBCategoryType = async (newCategory) => {
+  return new Promise((resolve, rejects) => {
+    // rejects(new Error("Test Error from addCategoryToDB"));
+
+    const newCategoryID = categories.length + 1;
+
+    const newCategoryWithID = {
+      ...newCategory,
+      id: newCategoryID + '',
+      slug: newCategory.name.toLowerCase().replace(/ /g, '-'),
+    }
+
+    categories.push(newCategoryWithID);
+    
+    resolve(categories);
+  });
+}
+
 
 export const getDBProducts:GetDBProductsType = async (options) => {
 

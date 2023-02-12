@@ -9,10 +9,10 @@
 import { CategoryType, ProductType, ProductGroupType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType, DBProductImageType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
-import {getDBCategories, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
+import {getDBCategories, addDBCategory, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
 
 // types for API functions implemented in this file
-import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
+import {GetCategoriesType, AddCategoryType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
 import { defaultSortConfig } from '../config';
 
 
@@ -48,6 +48,18 @@ export const getCategories:GetCategoriesType = async () => {
     }   
 
 };
+
+export const addCategory:AddCategoryType = async (newCategory) => {
+    try {
+        const categories = await addDBCategory(newCategory);
+
+        return ['success', categories];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
 
 export const getProducts:GetProductsType = async (options) => {
     try {
@@ -186,7 +198,6 @@ export const getProductPageData:GetProductPageDataType = async (productID) => {
             mainProduct = product;
         }
 
-        console.log(mainProduct);
 
 
         return ['success', {

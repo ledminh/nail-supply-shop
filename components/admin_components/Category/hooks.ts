@@ -1,30 +1,46 @@
+import { useState } from 'react';
 import { CategoryType } from '../../../database';
-import { NewCategoryType } from './Add';
+import { CategoryRequestBody} from '../../../types';
+import { NewCategoryType } from '../../../database/types';
 
 import axios from 'axios';
 
 
 const useCategory = (categories:CategoryType[]) => {
 
+    const [_categories, _setCategories] = useState<CategoryType[]>(categories);
     
-    const handleAdd = (formData:FormData) => {
-        axios.post('/api/category', formData,
+    const handleAdd = (newCat: NewCategoryType) => {
+
+        const reqBody:CategoryRequestBody = {
+            type: 'add',
+            data: newCat
+        } 
+
+        axios.post('/api/category', reqBody,
         {
             headers: {
-              "Content-Type": "multipart/form-data"
+                'Content-Type': 'application/json'
             }
         })
-        .then(res => {
-            console.log(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        .then(({data}) => {
+            const { success } = data;
+
+            if(success) {
+                const { categories } = data;
+                _setCategories(categories);
+            }
+            else {
+                const { message } = data;
+                throw new Error(message);
+            }
+        });
     }
 
 
     return {
-        handleAdd
+        handleAdd,
+        _categories
     }
 
 }

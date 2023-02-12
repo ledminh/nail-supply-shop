@@ -35,9 +35,6 @@ export default function handler(
         
         fs.unlink(filePath, (err: Error) => {
 
-
-
-
             if (err) {
                 res.statusCode = 501;
                 console.log(err)
