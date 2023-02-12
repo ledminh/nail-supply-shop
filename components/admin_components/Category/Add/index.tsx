@@ -1,5 +1,7 @@
-import { useState, FunctionComponent, MouseEventHandler } from "react";
-import { CategoryType } from "../../../../database";
+import { useState, FunctionComponent, MouseEventHandler, useEffect } from "react";
+
+import Image from "next/image";
+
 import AdminSubSection from "../../../../layouts/AdminSubSection";
 import UploadForm from "../../UploadForm";
 
@@ -35,6 +37,13 @@ const Add:AddType = ({onClick}) => {
 
     const [errors, setErrors] = useState<string[]>([]);
     
+    const [imgPath, setImgPath] = useState<string|null>(null);
+    
+
+    useEffect(() => {
+        if(imgPath) console.log(imgPath);
+    }, [imgPath]);
+
 
     const _onClick:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
@@ -105,8 +114,29 @@ const Add:AddType = ({onClick}) => {
                     <UploadForm 
                         id="image" 
                         inputClassName={styles.input}
-                    />
+                        allowMultipleFiles={false}
+                        onFileChange={(fileName) => {
+                            if(fileName) setImgPath(`/images/category/${fileName}`);
+                            else setImgPath(null);
+                        }}
+                        />
                 </fieldset>
+
+                {
+                    imgPath && (
+                        <div className={styles.imgWrapper}>
+                            <Image
+                                src={imgPath}
+                                alt={`Category ${name}`}
+                                fill
+                                style={{
+                                    objectFit: 'cover'
+                                }}                             
+                            />
+                        </div>
+                    )
+                }
+                
                 {
                     errors.map((error, index) => (
                         <p key={index} className={styles.error}>{error}</p>

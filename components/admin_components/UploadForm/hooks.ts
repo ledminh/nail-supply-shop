@@ -3,19 +3,19 @@ import { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import { DeleteFileOptions } from '../../../types';
 
-const useUpload = () => {
+type useUploadParamsType = {onFileChange: (fileName:string|null) => void}; 
+
+const useUpload= ({onFileChange}:useUploadParamsType) => {
     
-    const [currentProgress, setCurrentProgress] = useState<null|number>(null);
-    const [fileName, setFileName] = useState<string|null>(null);
-
-
+    const [currentProgress, _setCurrentProgress] = useState<null|number>(null);
+    const [fileName, _setFileName] = useState<string|null>(null);
 
 
     
     /***************************
      *  Public functions
      */
-    const onFileChangeHandler = (event:ChangeEvent<HTMLInputElement>) => {
+    const _onFileChangeHandler = (event:ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) {
             return;
         }
@@ -24,25 +24,26 @@ const useUpload = () => {
             headers: { 'content-type': 'multipart/form-data' },
             onUploadProgress: (event:any) => {
 
-                setCurrentProgress(Math.round((event.loaded * 100) / event.total));
+                _setCurrentProgress(Math.round((event.loaded * 100) / event.total));
             },
         };
 
         const formData = new FormData();
         formData.append('cat-image', event.target.files[0]);
 
-        setFileName(event.target.files[0].name);
+        _setFileName(event.target.files[0].name);
 
         axios.post('/api/upload', formData, config)
-            .then(res => {
-                console.log(res.data.path);
+            .then((res) => {
+                // display uploaded image
+                onFileChange(res.data.filename);
             })
             .catch(err => {
-                console.log(err);
+                throw err;
             })
     };
 
-    const onDeleteFileHandler = () => {
+    const _onDeleteFileHandler = () => {
         if(currentProgress === 100 && fileName) {
             const option:DeleteFileOptions = {
                 fileName,
@@ -55,8 +56,9 @@ const useUpload = () => {
                     { headers: {'content-type': 'application/json'}}
                     )
                     .then((res) => {
-                        setCurrentProgress(null);
-                        setFileName(null);
+                        _setCurrentProgress(null);
+                        _setFileName(null);
+                        onFileChange(null);
                     })
                     .catch((err:Error) => {
                         throw err;
@@ -67,8 +69,8 @@ const useUpload = () => {
     return {
         currentProgress,
         fileName,
-        onFileChangeHandler,
-        onDeleteFileHandler,
+        _onFileChangeHandler,
+        _onDeleteFileHandler,
     }
 }
 

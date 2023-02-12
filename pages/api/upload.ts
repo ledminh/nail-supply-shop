@@ -27,16 +27,16 @@ const apiRoute = nextConnect({
 // get file from components/admin_components/UploadForm/index.tsx
 apiRoute.use(catImageUpload.single('cat-image'), (req, res, next) => {
   req.body = {
-    path: req.file?.path
+    filename: req.file?.filename
   };
   next();
 });
 
-apiRoute.post((req: IncomingMessage &{body: {path: string}}, res) => {
+apiRoute.post((req: IncomingMessage &{body: {filename: string}}, res) => {
   res.statusCode = 200;
 
   res.end(JSON.stringify({
-    path: req.body.path,
+    filename: req.body.filename,
   }));
 });
 

@@ -13,6 +13,7 @@ interface UploadFormPropsType {
     id: string;
     inputClassName?: string;
     allowMultipleFiles?: boolean;
+    onFileChange: (fileName: string|null) => void;
 } 
 
 type UploadFormType = FunctionComponent<UploadFormPropsType>
@@ -22,8 +23,8 @@ type UploadFormType = FunctionComponent<UploadFormPropsType>
 /***************************
  *  Main Component
  */
-const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles}) => {
-    const {currentProgress, fileName, onFileChangeHandler, onDeleteFileHandler} = useUpload();
+const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onFileChange}) => {
+    const {currentProgress, fileName, _onFileChangeHandler, _onDeleteFileHandler} = useUpload({onFileChange});
 
     // Show progress bar if there is a progress
     if (currentProgress) {
@@ -38,12 +39,15 @@ const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles}) => 
                     <div className={styles.progress} style={{
                         width: `${currentProgress}%`
                     }}/>
-                    <div className={styles.fileName}>{fileName}</div>
+                    {
+                        fileName? <div className={styles.fileName}>{fileName.length < 20? fileName: "... " + fileName.substring(fileName.length - 20)}</div>: null 
+                    }
+                    
                 </div>
                 <button className={styles.cancelButton} 
                     onClick={(e) => {
                         e.preventDefault();
-                        onDeleteFileHandler()
+                        _onDeleteFileHandler()
                     }}
                     disabled={currentProgress < 100}
                     >
@@ -58,7 +62,7 @@ const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles}) => 
             name="cat-image"
             id={id}
             className={inputClassName}
-            onChange={onFileChangeHandler}
+            onChange={_onFileChangeHandler}
             multiple={allowMultipleFiles}
         />
     );
