@@ -2,8 +2,6 @@ import { FunctionComponent, ChangeEvent, useState } from "react";
 
 import styles from './UploadForm.module.scss';
 
-import axios from 'axios';
-import { DeleteFileOptions } from "../../../types";
 import useUpload from "./hooks";
 
 /***************************
@@ -13,8 +11,9 @@ interface UploadFormPropsType {
     id: string;
     inputClassName?: string;
     allowMultipleFiles?: boolean;
-    onFileChange: (fileName: string|null) => void;
-    isReset: boolean;
+    setImgPath: (imgPath: string|null) => void;
+    setFileName: (fileName: string|null) => void;
+    fileName: string|null;
 } 
 
 type UploadFormType = FunctionComponent<UploadFormPropsType>
@@ -24,8 +23,8 @@ type UploadFormType = FunctionComponent<UploadFormPropsType>
 /***************************
  *  Main Component
  */
-const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onFileChange, isReset}) => {
-    const {currentProgress, fileName, _onFileChangeHandler, _onDeleteFileHandler} = useUpload({onFileChange, isReset});
+const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, setImgPath, fileName, setFileName}) => {
+    const {currentProgress, _onFileChangeHandler, _onDeleteFileHandler} = useUpload({fileName, setImgPath, setFileName});
 
     // Show progress bar if there is a progress
     if (currentProgress) {

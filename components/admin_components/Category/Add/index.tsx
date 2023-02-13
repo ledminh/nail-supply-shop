@@ -33,15 +33,17 @@ const Add:AddType = ({handleAdd}) => {
     const [errors, setErrors] = useState<string[]>([]);
     
     const [imgPath, setImgPath] = useState<string|null>(null);
+    const [fileName, setFileName] = useState<string|null>(null);
 
-    const [isReset, setIsReset] = useState(false);
+
+
 
     const reset = () => {
         setName('');
         setDescription('');
         setImgPath(null);
+        setFileName(null);
 
-        setIsReset(true);
     }
 
 
@@ -108,11 +110,9 @@ const Add:AddType = ({handleAdd}) => {
                         id="image" 
                         inputClassName={styles.input}
                         allowMultipleFiles={false}
-                        onFileChange={(fileName) => {
-                            if(fileName) setImgPath(`/images/category/${fileName}`);
-                            else setImgPath(null);
-                        }}
-                        isReset={isReset}
+                        setImgPath={setImgPath}
+                        setFileName={setFileName}
+                        fileName={fileName}
 
                         />
                 </fieldset>

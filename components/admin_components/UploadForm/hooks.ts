@@ -3,27 +3,27 @@ import { useState, ChangeEvent, useEffect } from 'react';
 import axios from 'axios';
 import { DeleteFileOptions } from '../../../types';
 
-type useUploadParamsType = {onFileChange: (fileName:string|null) => void, isReset:boolean}; 
 
-const useUpload= ({onFileChange, isReset}:useUploadParamsType) => {
+
+type useUploadParamsType = {fileName: string|null, setImgPath: (imgPath:string|null) => void, setFileName: (fileName:string|null) => void}; 
+
+const useUpload= ({fileName, setImgPath, setFileName}:useUploadParamsType) => {
     
     const [currentProgress, _setCurrentProgress] = useState<null|number>(null);
-    const [fileName, _setFileName] = useState<string|null>(null);
-
-
+    
+    
     useEffect(() => {
-        if(isReset) {
+        if(fileName === null) {
             _setCurrentProgress(null);
-            _setFileName(null);
         }
-    }, [isReset]);
-    
-    
+    }, [fileName]);
+
     /***************************
      *  Public functions
      */
     const _onFileChangeHandler = (event:ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) {
+            setImgPath(null);
             return;
         }
 
@@ -38,12 +38,12 @@ const useUpload= ({onFileChange, isReset}:useUploadParamsType) => {
         const formData = new FormData();
         formData.append('cat-image', event.target.files[0]);
 
-        _setFileName(event.target.files[0].name);
+        setFileName(event.target.files[0].name);
 
         axios.post('/api/upload', formData, config)
             .then((res) => {
                 // display uploaded image
-                onFileChange(res.data.filename);
+                setImgPath(`/images/category/${res.data.filename}`);
             })
             .catch(err => {
                 throw err;
@@ -64,8 +64,8 @@ const useUpload= ({onFileChange, isReset}:useUploadParamsType) => {
                     )
                     .then((res) => {
                         _setCurrentProgress(null);
-                        _setFileName(null);
-                        onFileChange(null);
+                        setFileName(null);
+                        setImgPath(null);
                     })
                     .catch((err:Error) => {
                         throw err;
@@ -74,8 +74,8 @@ const useUpload= ({onFileChange, isReset}:useUploadParamsType) => {
     };
 
     return {
-        currentProgress,
         fileName,
+        currentProgress,
         _onFileChangeHandler,
         _onDeleteFileHandler,
     }
