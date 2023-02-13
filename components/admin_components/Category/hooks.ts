@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { CategoryType } from '../../../database';
+import { _CategoryType } from './types';
 import { CategoryRequestBody} from '../../../types';
 import { NewCategoryType } from '../../../database/types';
 
 import axios from 'axios';
 
 
-const useCategory = (categories:CategoryType[]) => {
+const useCategory = (categories:_CategoryType[]) => {
 
-    const [_categories, _setCategories] = useState<CategoryType[]>(categories);
+    const [_categories, _setCategories] = useState<_CategoryType[]>(categories);
     
     const handleAdd = (newCat: NewCategoryType) => {
 
@@ -28,6 +28,8 @@ const useCategory = (categories:CategoryType[]) => {
 
             if(success) {
                 const { newCategory } = data;
+                newCategory.new = true;
+                
                 _setCategories([newCategory, ...categories]);
             }
             else {

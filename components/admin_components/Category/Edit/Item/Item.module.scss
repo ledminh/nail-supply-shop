@@ -1,3 +1,6 @@
+@use '../../../../../styles/base';
+
+
 .wrapper {
     border: 1px solid adjust-color($color: #000000, $lightness: 10%);
 
@@ -13,6 +16,21 @@
         font-size: .9rem;
     }
 }
+
+
+
+.wrapper.new {
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: -10%);
+
+    border: 2px solid adjust-color($color: #000000, $lightness: 10%);
+
+    box-shadow: 0 0 4px 0px #000000;
+
+
+}
+
+
+
 
 .buttons {
     display: flex;

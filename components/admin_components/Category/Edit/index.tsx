@@ -5,14 +5,17 @@ import Item from "./Item";
 
 import styles from './Edit.module.scss';
 import AdminSubSection from "../../../../layouts/AdminSubSection";
+import { _CategoryType } from "../types";
 
 
 
 /***************************
  *  Types
  */
+
+
 interface EditPropsType {
-    categories: CategoryType[]
+    categories: _CategoryType[]
 } 
 
 type EditType = FunctionComponent<EditPropsType>

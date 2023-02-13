@@ -1,17 +1,17 @@
 import { FunctionComponent } from "react";
-import { CategoryType } from "../../../database";
 
 import useCategory from "./hooks";
 
 import Add from './Add';
 import Edit from "./Edit";
 import AdminSection from "../../../layouts/AdminSection";
+import { _CategoryType } from "./types";
 
 /***************************
  *  Types
  */
 interface CategoryPropsType {
-    categories: CategoryType[]
+    categories: _CategoryType[]
 
 } 
 
