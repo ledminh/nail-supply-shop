@@ -30,9 +30,6 @@ export default function handler(
     addCategory(data)
       .then((dbRes) => {
         if(dbRes[0] === 'success') {
-
-          console.log(dbRes[1]);
-
           res.status(200).json({
             success: true, 
             newCategory: dbRes[1]

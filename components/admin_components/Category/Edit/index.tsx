@@ -37,7 +37,7 @@ const Edit:EditType = ({categories}) => {
             >
             <div className={styles.categories}>
                 {
-                    categories.map((category, index) => (
+                    categories.map((category) => (
                         <Item 
                             key={category.id}
                             category={category}
