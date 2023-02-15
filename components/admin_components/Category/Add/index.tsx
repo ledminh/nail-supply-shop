@@ -139,7 +139,7 @@ const Add:AddType = ({handleAdd}) => {
                 }
             
                 <button className={styles.button}
-                    onClick={_onClick}
+                    onClick={_onClick}    
                     disabled={name.length === 0 || description.length === 0 || imgPath === null}
                     >
                     Add
@@ -149,4 +149,4 @@ const Add:AddType = ({handleAdd}) => {
     )
 }
 
-export default Add;
+export default Add; 

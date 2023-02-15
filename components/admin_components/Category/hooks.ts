@@ -28,9 +28,19 @@ const useCategory = (categories:_CategoryType[]) => {
 
             if(success) {
                 const { newCategory } = data;
+
+                const cats = _categories.map(cat => {
+                    if(cat.newest)
+                        cat.newest = false;
+                    
+                    return cat;
+                });
+
                 newCategory.new = true;
-                
-                _setCategories([newCategory, ...categories]);
+                newCategory.newest = true;
+
+
+                _setCategories([newCategory, ...cats]);
             }
             else {
                 const { message } = data;

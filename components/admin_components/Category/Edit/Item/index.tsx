@@ -22,7 +22,7 @@ type ItemType = FunctionComponent<ItemPropsType>
 const Item:ItemType = ({category}) => {
 
     return (
-        <div className={styles.wrapper + (category.new? ' ' + styles.new: '')}>
+        <div className={styles.wrapper + (category.new? ' ' + styles.new: '') + (category.newest? ' ' + styles.newest: '')}>
             <h5>{category.name}</h5>
             <p>{category.description}</p>
             <div className={styles.buttons}>
