@@ -27,7 +27,6 @@ const Add:AddType = ({categories, onClick}) => {
     const [name, setName] = useState<string>('');
     const [shortDescription, setShortDescription] = useState<string>('');
     const [fullDescription, setFullDescription] = useState<string>('');
-    const [imageUrl, setImageUrl] = useState<string>('');
 
     
 
