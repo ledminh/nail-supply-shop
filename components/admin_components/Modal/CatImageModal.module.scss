@@ -39,6 +39,20 @@
 
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, .6);
 
+    background: linear-gradient(0deg, rgba(54, 45, 45, 0.5), rgba(66, 22, 22, 0.5));
+
+    &::before {
+        content: "No Image";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+
+    }
+
 
 }
 
@@ -51,8 +65,37 @@
 
     display: flex;
 
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+        padding: .5rem 1rem;
+        border-radius: 10px;
+        border: none;
+        background-color: #b1b1b1;
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: .2s;
+
+        &:hover {
+            background-color: #a1a1a1;
+        }
+
+        &.save {
+            @include base.button("primary");
+        }
+
+        &.cancel {
+            @include base.button("secondary");
+        }
+    }
+
 
 }
+
+
 
 .buttons {
     display: flex;

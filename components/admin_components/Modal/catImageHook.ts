@@ -7,8 +7,9 @@ const useCatImage = () => {
     const {isCatImageShown, setCatImageShow} = useContext(ModalContext);
 
     const [imageUrl, setImageUrl] = useState<string|null>(null);
+    const [fileName, setFileName] = useState<string|null>(null);
 
-
+    
 
     /**************************
      * Public API
@@ -16,11 +17,15 @@ const useCatImage = () => {
     const shown = isCatImageShown;
     const setShown = setCatImageShow;
 
-
+    const reset = () => {
+        setImageUrl(null);
+        setFileName(null);
+    }
 
     const handleOnFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         if(!event.target.files) {
-            setImageUrl(null);
+            
+            reset();
             return;
         };
         
@@ -32,6 +37,8 @@ const useCatImage = () => {
             reader.onload = (e) => {
                 const image = e.target?.result;
                 if (image) {
+                    // these two functions are always called together
+                    setFileName(file.name);
                     setImageUrl(image.toString());
                 }
             }
@@ -42,6 +49,8 @@ const useCatImage = () => {
     return {
         shown,
         setShown,
+        reset,
+        fileName,
         imageUrl,
         handleOnFileChange
     } 

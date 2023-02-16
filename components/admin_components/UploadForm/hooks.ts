@@ -27,6 +27,7 @@ const useUpload= ({fileName, setImgPath, setFileName}:useUploadParamsType) => {
             return;
         }
 
+        
         const config = {
             headers: { 'content-type': 'multipart/form-data' },
             onUploadProgress: (event:any) => {
@@ -43,7 +44,7 @@ const useUpload= ({fileName, setImgPath, setFileName}:useUploadParamsType) => {
         axios.post('/api/upload', formData, config)
             .then((res) => {
                 // display uploaded image
-                setImgPath(`/images/category/${res.data.filename}`);
+                setImgPath(`/images/category/${res.data.filename}`);   
             })
             .catch(err => {
                 throw err;

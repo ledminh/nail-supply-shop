@@ -17,7 +17,7 @@ type CatImageModalComponent = FunctionComponent<CatImageModalProps>;
 
 const CatImageModal:CatImageModalComponent = ({}) => {
     
-    const {shown, setShown, imageUrl, handleOnFileChange} = useCatImage();
+    const {shown, setShown, reset, fileName, imageUrl, handleOnFileChange} = useCatImage();
     
     return (
         <Modal show={shown}
@@ -29,21 +29,38 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                 </div>
                 <div className={styles.body}>
                     <div className={styles.image}>
-                        <Image
-                            src={imageUrl? imageUrl : '/images/001.jpg'}
-                            alt={"placeholder"}
-                            fill
-                            style={{objectFit: 'cover'}}
-                            />
+                        {
+                            imageUrl && <Image
+                                src={imageUrl}
+                                alt={"placeholder"}
+                                fill
+                                style={{objectFit: 'cover'}}
+                                />
+                        }
+                        
                     </div>
                     <form className={styles.form} encType="multipart/form-data" method="post">
-                    <input type="file" 
-                        name="cat-image"
-                        accept="image/*"
-                        onChange={handleOnFileChange}
-                        />
-                    </form>
-                    
+                        {
+                            imageUrl?
+                                (
+                                    <>
+                                        <span className={styles.filePath}>{fileName}</span>
+                                        <button className={styles.cancel}
+                                            onClick={reset}
+                                            >
+                                            Delete
+                                        </button>    
+                                    </>
+                                )                                
+                                :<input type="file" 
+                                    name="cat-image"
+                                    accept="image/*"
+                                    onChange={handleOnFileChange}
+                                    />
+
+                        }
+
+                    </form>                    
                 </div>
                 <div className={styles.buttons}>
                         <button className={styles.button + ' ' + styles.save}
