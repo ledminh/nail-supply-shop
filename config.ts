@@ -121,3 +121,6 @@ export const defaultSortConfig:SortConfigType = {
     type: 'price',
     order: 'asc'
 };
+
+
+export const itemsPerPage = 10;

@@ -21,6 +21,9 @@ type ProductItemType = FunctionComponent<ProductItemPropsType>
  */
 const ProductItem:ProductItemType = ({product}) => {
 
+
+
+ 
     return (
         <div className={styles.wrapper}>
             <h4>{product.name}</h4>

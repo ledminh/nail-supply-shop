@@ -3,8 +3,8 @@ import { CategoryType, ProductType } from '../../database';
 import { useEffect, useState } from 'react';
 
 import { getProducts } from '../../database';
-import { PriceRangeType } from '../../config';
-import { SortConfigType } from '../../database/types';
+import { PriceRangeType, itemsPerPage } from '../../config';
+import { ProductGroupType, SortConfigType } from '../../database/types';
 
 
 
@@ -13,20 +13,58 @@ export type handleCategoryChangeParam = CategoryType | null;
 export type handleSortChangeParam = SortConfigType | null;
 
 
-const useCategoryPage = (categories:CategoryType[], products: ProductType[], selectedCategoryID: string|null, priceRange:{
+const useCategoryPage = (categories:CategoryType[], selectedCategoryID: string|null, priceRange:{
     min: number;
     max: number;
 }|null, currentSort:SortConfigType|null) => {
 
     const router = useRouter();
 
-    const [_products, set_Products] = useState(products);
+    const [_products, set_Products] = useState([] as (ProductType|ProductGroupType)[]);
     const [_selectedCategory, set_SelectedCategory] = useState(getSelectedCategory(categories, selectedCategoryID));
     const [_priceRange, set_PriceRange] = useState(priceRange);
     const [_currentSort, set_CurrentSort] = useState(currentSort);
+    
+    const [_currentPage, set_CurrentPage] = useState(1);
+    const [total, setTotal] = useState(0);
 
 
     useEffect(() => {
+
+        if(_products.length < _currentPage * itemsPerPage) {
+            getProducts({
+                categoryID: _selectedCategory?.id,
+                price: _priceRange? {
+                    min: _priceRange.min,
+                    max: _priceRange.max
+                } : undefined,
+                sort: _currentSort? _currentSort : undefined,
+                limit: itemsPerPage,
+                offset: (_currentPage - 1) * itemsPerPage
+            }).then((res) => {
+                    
+                    if(res[0] === 'error') {
+                        throw new Error(res[1]);
+                    }
+    
+                    const {products} = res[1];            
+    
+                    set_Products([..._products, ...products]);
+
+
+            });
+
+        }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [_currentPage]);
+
+
+
+
+    useEffect(() => {
+        set_CurrentPage(1);
+        set_Products([]);
 
         getProducts({
             categoryID: _selectedCategory?.id,
@@ -34,16 +72,19 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
                 min: _priceRange.min,
                 max: _priceRange.max
             } : undefined,
-            sort: _currentSort? _currentSort : undefined
+            sort: _currentSort? _currentSort : undefined,
+            limit: itemsPerPage,
+            offset: (_currentPage - 1) * itemsPerPage
         }).then((res) => {
 
             if(res[0] === 'error') {
                 throw new Error(res[1]);
             }
 
-            const products = res[1];            
+            const {products, total} = res[1];            
 
             set_Products(products);
+            setTotal(total);
 
             let url = '/shop/category';
 
@@ -89,6 +130,10 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
     const handlePriceChange = (pR: handlePriceChangeParam) =>  set_PriceRange(pR);
     const handleSortChange = (sort:handleSortChangeParam) => set_CurrentSort(sort);
 
+    const moreButtonOnClick = () => {
+        set_CurrentPage(_currentPage + 1);
+    }
+
 
     return {
         handleCategoryChange,
@@ -97,7 +142,9 @@ const useCategoryPage = (categories:CategoryType[], products: ProductType[], sel
         _priceRange,
         _products,
         _selectedCategory,
-        _currentSort
+        _currentSort,
+        moreButtonOnClick,
+        hasMore: _products.length < total
     }
 
 }

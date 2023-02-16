@@ -5,14 +5,17 @@ import Item from "./Item";
 
 import styles from './Edit.module.scss';
 import AdminSubSection from "../../../../layouts/AdminSubSection";
+import { _CategoryType } from "../types";
 
 
 
 /***************************
  *  Types
  */
+
+
 interface EditPropsType {
-    categories: CategoryType[]
+    categories: _CategoryType[]
 } 
 
 type EditType = FunctionComponent<EditPropsType>
@@ -34,9 +37,9 @@ const Edit:EditType = ({categories}) => {
             >
             <div className={styles.categories}>
                 {
-                    categories.map((category, index) => (
+                    categories.map((category) => (
                         <Item 
-                            key={index}
+                            key={category.id}
                             category={category}
                             />
                     ))

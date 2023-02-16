@@ -10,7 +10,11 @@ import CategoryLayout from '../../../layouts/CategoryLayout';
 import ListLayout from '../../../layouts/ListLayout';
 import ProductItem from '../../../components/category_components/ProductItem';
 
+import MoreButton from '../../../components/category_components/MoreButton';
+
 import { pageConfigs } from '../../../config';
+
+import getMainProduct from '../../../utils/getMainProduct';
 
 
 import useCategoryPage from '../../../utils/category_page/hooks';
@@ -31,13 +35,14 @@ It is kind of messy because I want the page's scroll position to be preserved wh
 
 
 
-const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID, priceRange, currentSort}) => {
+const CategoryPage:CategoryPageType = ({categories, selectedCategoryID, priceRange, currentSort}) => {
 
     const {handleCategoryChange, handlePriceChange,
             handleSortChange, _currentSort,
-            _products, _selectedCategory, _priceRange} 
-                = useCategoryPage(categories, products, selectedCategoryID, priceRange, currentSort);
+            _products, _selectedCategory, _priceRange, moreButtonOnClick, hasMore} 
+                = useCategoryPage(categories, selectedCategoryID, priceRange, currentSort);
 
+    const MoreBtn = <MoreButton onClick={moreButtonOnClick}/>;
 
     return (
         <CategoryLayout 
@@ -52,12 +57,23 @@ const CategoryPage:CategoryPageType = ({categories, products, selectedCategoryID
                 <ListLayout
                     wrapperClassName={styles.ul}
                     liClassName={styles.li}
-                    renderItemBody={(_product) => <ProductItem product={_product}/>}
-                    keyExtractor={(_product) => _product.id}
-                    data={_products.map((_product) => ({
-                        ..._product,
-                        url: `/product/${_product.id}`,
-                        }))}
+                    LastItem={hasMore? {
+                        component: MoreBtn,
+                        name: 'More Button'
+                    }: undefined}
+                    renderItemBody={(_product) => <ProductItem product={getMainProduct(_product)}/>}
+                    keyExtractor={(_product) => getMainProduct(_product).id}
+                    getItemName={(_product) => getMainProduct(_product).name}
+                    getItemUrl={(_product) => `/product/${getMainProduct(_product).id}`}
+                    getItemImageUrl={(_product) => {
+                        const mainProduct = getMainProduct(_product);
+                        
+                        return mainProduct.images[mainProduct.images.findIndex(p => p.default)].url;
+                    }}
+
+
+
+                    data={_products}
                     />
         </CategoryLayout>
     );

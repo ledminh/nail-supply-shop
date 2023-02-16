@@ -1,4 +1,15 @@
+@use '../../../../../styles/base';
+
+
 .wrapper {
+
+    display: grid;
+
+    grid-template-columns: 1fr 3fr;
+
+    row-gap: .5rem;
+    column-gap: 1rem;
+
     border: 1px solid adjust-color($color: #000000, $lightness: 10%);
 
     padding: .5rem;
@@ -14,11 +25,57 @@
     }
 }
 
+
+
+.wrapper.new {
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: -10%);
+
+    border: 2px solid adjust-color($color: #000000, $lightness: 10%);
+
+    box-shadow: 0 0 4px 0px #000000;
+
+
+}
+
+.wrapper.new.newest {
+    animation: fadeIn .3s ease-in-out;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image {
+    position: relative;
+    grid-column: 1/2;
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.text {
+    grid-column: 2/3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+
 .buttons {
+    grid-column: 1/3;
     display: flex;
     justify-content: space-between;
 
-    margin-top: 1rem;
 
     button {
 

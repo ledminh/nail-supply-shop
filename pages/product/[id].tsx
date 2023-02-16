@@ -1,12 +1,14 @@
 import { GetServerSidePropsContext } from 'next';
 
-import Image from 'next/image';
-import Head from 'next/head';
-
+import Images  from '../../components/product_components/Images';
 import styles from '../../styles/Product.module.scss';
 import { getProductPageData, ProductPageDataType } from '../../database';
 import { NextPageCustomized } from '../_app';
 import { pageConfigs } from '../../config';
+
+import { useEffect, useState } from 'react';
+import { DBProductType } from '../../database/types';
+import useProduct from '../../utils/product_page/hooks';
 
 type ProductDetailProps = ProductPageDataType;
 
@@ -14,24 +16,44 @@ type ProductPageType = NextPageCustomized<ProductDetailProps>;
 
 const Product:ProductPageType = ({ product }) => {
     
+    const {_product, currentVariantName, variationOnChange} = useProduct(product);
+
     return (
         <div className={styles.wrapper}>
-            <h2 className={styles.name}>{product.name}</h2>
-            <div className={styles.image}>
-                <Image 
-                    src={product.imageUrl}
-                    alt="Product Image"
-                    fill
-                    style={{objectFit: 'cover'}}
-                />
+            <h2 className={styles.name}>{_product.name + (currentVariantName? ' :: ' + currentVariantName: '')}</h2>
+            <div className={styles.images}>
+                <Images 
+                    images={_product.images}
+                    productName={_product.name}
+                    
+                    />
             </div>
             <div className={styles.description}>
-                <h4>Description</h4>
-                <p>{product.fullDescription}</p>
+                <h4 className={styles.title}>Description</h4>
+                <div className={styles.content}>
+                    <p>{_product.fullDescription}</p>
+                    {
+                        Array.isArray(product) && (
+                            <form>
+                                <label htmlFor="variations">Variations:</label>
+                                <select name="variations" 
+                                        id="variations"
+                                        onChange={variationOnChange}
+                                        >
+                                    {
+                                        product.map(p => (
+                                            <option key={p.id} value={p.id}>{p.variantName}</option>
+                                        ))
+                                    }
+                                </select>
+                            </form>
+                        ) 
+                    }
+                </div>
             </div>
             <div className={styles.price}>
                 <span className={styles.text}>Price:</span>
-                <span className={styles.value}>${product.price}</span>
+                <span className={styles.value}>${_product.price}</span>
             </div>
             <div className={styles.checkout}>
                 <button>Add to Cart</button>

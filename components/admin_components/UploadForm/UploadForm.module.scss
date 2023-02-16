@@ -1,0 +1,45 @@
+.wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+.progressBar {
+    position: relative;
+    flex-basis: 75%;
+}
+
+
+.progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgba(57, 34, 34, 0.5);
+    margin-bottom: 10px;
+
+
+}
+
+.fileName {
+    padding: 5px;
+}
+
+.cancelButton {
+    flex-basis: 25%;
+    
+    padding: 5px;
+    background-color: #000;
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+
+    &:disabled {
+        background-color: #797979;
+        color: #b5b5b5;
+        cursor: not-allowed;
+    }
+
+}

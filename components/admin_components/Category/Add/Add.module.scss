@@ -7,56 +7,71 @@
     gap: 10px;
 
     font-size: .8rem;
+}
 
-    .field {
-        flex-basis: 100%;
+.field {
+    flex-basis: 100%;
 
-        display: flex;
-        justify-content: space-between;
-        
-        gap: 10px;
+    display: flex;
+    flex-flow: row wrap;
 
+    justify-content: space-between;
 
+    gap: 10px;
 
-        label {
-            flex-basis: 20%;
-            
-            font-weight: 700;
-        }
+    border: none;
 
-
-        input {
-            flex-basis: 75%;
-            
-            padding: 5px;
-
-            border: 1px solid #000;
-
-            border-radius: 5px;
-        
-            &:focus {
-                outline: none;
-            }
-        }
+    .label {
+        flex-basis: 20%;        
+        font-weight: 700;
     }
 
-
-
-    button {
-        width: 100%;
-
+    .input {
+        flex-basis: 75%;
+        
         padding: 5px;
 
         border: 1px solid #000;
 
         border-radius: 5px;
 
-        background-color: rgb(55, 55, 55);
+        &:focus {
+            outline: none;
+        }
+    }
 
-        color: #fff;
+}
 
-        font-size: medium;
+.imgWrapper {
+    position: relative;
+    
+    width: 100%;
+    height: 200px;
 
-        font-weight: 700;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.button {
+    width: 100%;
+
+    padding: 5px;
+
+    border: 1px solid #000;
+
+    border-radius: 5px;
+
+    background-color: rgb(55, 55, 55);
+
+    color: #fff;
+
+    font-size: medium;
+
+    font-weight: 700;
+
+    &:disabled {
+        background-color: rgb(55, 55, 55, .3);
+        border: none;
+        cursor: not-allowed;
     }
 }

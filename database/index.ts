@@ -6,13 +6,13 @@
 
 
 // return types for API functions
-import { CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType } from './types';
+import { CategoryType, ProductType, ProductGroupType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType, DBProductImageType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
-import {getDBCategories, getDBProducts, getDBProduct, getDBPageInfo} from './sampleDB';
+import {getDBCategories, addDBCategory, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
 
 // types for API functions implemented in this file
-import {GetCategoriesType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
+import {GetCategoriesType, AddCategoryType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
 import { defaultSortConfig } from '../config';
 
 
@@ -28,7 +28,9 @@ import { defaultSortConfig } from '../config';
  * but it may change in the future. 
  */
 
-export type {CategoryType, ProductType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ProductPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
+type ProductImageType = DBProductImageType;
+
+export type {CategoryType, ProductType, ProductGroupType, ProductImageType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ProductPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
 
 
 /*****************************
@@ -47,6 +49,18 @@ export const getCategories:GetCategoriesType = async () => {
 
 };
 
+export const addCategory:AddCategoryType = async (newCategory) => {
+    try {
+        const newCategoryDB = await addDBCategory(newCategory);
+
+        return ['success', newCategoryDB];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
+
 export const getProducts:GetProductsType = async (options) => {
     try {
 
@@ -54,9 +68,10 @@ export const getProducts:GetProductsType = async (options) => {
             options.sort = defaultSortConfig
         }
         
-        const products = await getDBProducts(options);
+        
+        const {products, total} = await getDBProducts(options);
 
-        return ['success', products];
+        return ['success', {products, total}];
     }
     catch(err) {
         return ['error', (err as Error).message];
@@ -66,6 +81,7 @@ export const getProducts:GetProductsType = async (options) => {
 export const getProduct:GetProductType = async (id) => {
     try {
         const product = await getDBProduct(id);
+
 
         return ['success', product];
     }
@@ -81,85 +97,10 @@ export const getHomePageData:GetHomePageDataType = async () => {
     try {
         const pageInfo = await getDBPageInfo('Home');
 
-        return ['success', {pageInfo, ...{
-            newArrivalProducts: [
-                {
-                    id: '1',
-                    categoryID: '1',
-                    name: 'Red Nail Polish',
-                    shortDescription: 'Classic red nail polish',
-                    fullDescription: 'This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.',
-                    price: 5.99,
-                    imageUrl: '/images/001.jpg'
-                },
-                {
-                    id: '2',
-                    categoryID: '1',
-                    name: 'Glitter Nail Polish',
-                    shortDescription: 'Glitter nail polish for adding sparkle to your nails',
-                    fullDescription: 'This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.',
-                    price: 6.99,
-                    imageUrl: '/images/002.jpg'
-                },
-                {
-                    id: '3',
-                    categoryID: '2',
-                    name: 'Nail Clipper',
-                    shortDescription: 'Stainless steel nail clipper for trimming nails',
-                    fullDescription: 'This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.',
-                    price: 3.99,
-                    imageUrl: '/images/003.jpg'
-                },
-                {
-                    id: '4',
-                    categoryID: '3',
-                    name: 'Nail Art Stickers',
-                    shortDescription: 'Nail art stickers for decorating nails',
-                    fullDescription: 'This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.',
-                    price: 4.99,
-                    imageUrl: '/images/004.jpg'
-                }
-            ],
-    
-            bestSellerProducts: [
-                {
-                    id: '1',
-                    categoryID: '1',
-                    name: 'Red Nail Polish',
-                    shortDescription: 'Classic red nail polish',
-                    fullDescription: 'This classic red nail polish is a must-have for any nail collection. The long-lasting, chip-resistant formula will leave your nails looking beautiful and shiny. This shade is perfect for any occasion, from casual to formal.',
-                    price: 5.99,
-                    imageUrl: '/images/001.jpg'
-                },
-                {
-                    id: '2',
-                    categoryID: '1',
-                    name: 'Glitter Nail Polish',
-                    shortDescription: 'Glitter nail polish for adding sparkle to your nails',
-                    fullDescription: 'This glitter nail polish is perfect for adding some sparkle to your nails. The long-lasting, chip-resistant formula will keep your nails looking beautiful and shiny. The glitter particles are fine and will not fall off easily.',
-                    price: 6.99,
-                    imageUrl: '/images/002.jpg'
-                },
-                {
-                    id: '3',
-                    categoryID: '2',
-                    name: 'Nail Clipper',
-                    shortDescription: 'Stainless steel nail clipper for trimming nails',
-                    fullDescription: 'This stainless steel nail clipper is perfect for trimming nails. It features a sharp and precise cutting edge for a clean cut every time. It also has a built-in file for shaping and smoothing nails.',
-                    price: 3.99,
-                    imageUrl: '/images/003.jpg'
-                },
-                {
-                    id: '4',
-                    categoryID: '3',
-                    name: 'Nail Art Stickers',
-                    shortDescription: 'Nail art stickers for decorating nails',
-                    fullDescription: 'This set of nail art stickers includes a variety of designs and patterns, perfect for decorating nails. The stickers are easy to apply and can be used to add a pop of color and interest to any manicure.',
-                    price: 4.99,
-                    imageUrl: '/images/004.jpg'
-                }
-            ]
-        }}];
+        const {products: newArrivalProducts} = await getDBProducts({sort: {type: 'date', order: 'desc'}, limit: 4});
+        const {products: bestSellerProducts} = await getDBProducts({sort: {type: 'sellCount', order: 'desc'}, limit: 4});
+
+        return ['success', {pageInfo, newArrivalProducts, bestSellerProducts}];
     }
     catch(err) {
         return ['error', (err as Error).message];
@@ -169,8 +110,12 @@ export const getHomePageData:GetHomePageDataType = async () => {
 export const getAboutPageData:GetAboutPageDataType = async () => {
     try {
         const pageInfo = await getDBPageInfo('About');
+        const aboutHtmlText = await getDBAboutHtmlText();
 
-        return ['success', {pageInfo}];
+        return ['success', {
+            pageInfo,
+            aboutHtmlText
+        }];
     }
     catch(err) {
         return ['error', (err as Error).message];
@@ -201,15 +146,10 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
         const categories = await getDBCategories();
 
         if(!categorySlug) {
-            const products = await getDBProducts({
-                price,
-                sort
-            });
 
             return ['success', {
                 pageInfo,
                 categories, 
-                products,
                 selectedCategoryID: null, 
                 priceRange: price? price : null,
                 currentSort: sort? sort : null         
@@ -222,16 +162,10 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
             return ['error', 'Category not found'];
         }
 
-        const products = await getDBProducts({
-            categoryID: category.id,
-            price,
-            sort
-        });
 
         return ['success', {
             pageInfo,
             categories, 
-            products,
             selectedCategoryID: category.id, 
             priceRange: price? price : null,
             currentSort: sort? sort : null
@@ -245,18 +179,33 @@ export const getCategoryPageData:GetCategoryPageDataType = async ({categorySlug,
 
 export const getProductPageData:GetProductPageDataType = async (productID) => {
     try {
-        const product = await getDBProduct(productID);
+        let product = await getDBProduct(productID);
 
         if(!product) {
             return ['error', 'Product not found'];
         }
 
+        let mainProduct;
+        if(Array.isArray(product)) {
+            mainProduct = product.find(product => product.mainProduct);
+            
+            if(!mainProduct) {
+                return ['error', 'Main product not found'];
+            }
+
+        }
+        else {
+            mainProduct = product;
+        }
+
+
+
         return ['success', {
             pageInfo: {
-                id: product.id,
-                title: product.name,
-                description: product.shortDescription,
-                subtitle: product.shortDescription,
+                id: mainProduct.id,
+                title: mainProduct.name,
+                description: mainProduct.shortDescription,
+                subtitle: mainProduct.shortDescription,
             },
             product
         }];
@@ -269,7 +218,7 @@ export const getProductPageData:GetProductPageDataType = async (productID) => {
 export const getAdminPageData:GetAdminPageDataType = async () => {
     try {
         const categories = await getDBCategories();
-        const products = await getDBProducts({});
+        const {products} = await getDBProducts({});
         
         return ['success', {
             pageInfo: {

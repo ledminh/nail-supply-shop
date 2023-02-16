@@ -2,8 +2,8 @@ import styles from '../styles/Home.module.scss'
 
 import Section from '../layouts/Section';
 
+import getMainProduct from '../utils/getMainProduct';
 
-import BestSellers from '../components/home_components/BestSellers';
 import { NextPageCustomized } from './_app';
 import { pageConfigs } from '../config';
 
@@ -35,13 +35,21 @@ const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
                 liClassName={styles.li}
                 imageClassName={styles.image}
                 renderItemBody={(product) => (
-                  <ProductItem product={product} />
+                  <ProductItem product={getMainProduct(product)} />
                 )}
-                keyExtractor={(product) => product.id}
-                data={newArrivalProducts.map(product => ({
-                  ...product,
-                  url: `/product/${product.id}`
-                  }))}
+                keyExtractor={(product) => getMainProduct(product).id}
+                getItemName={(product) => getMainProduct(product).name}
+                getItemUrl={(product) => `/product/${getMainProduct(product).id}`}
+                getItemImageUrl={(product) => {
+                  const mainProduct = getMainProduct(product);
+                  const defaultImage = mainProduct.images.find(image => image.default);
+
+                  if (!defaultImage) throw new Error('No default image found');
+
+                  return defaultImage.url;
+                  
+                }}
+                data={newArrivalProducts}
               />              
         </Section>    
         <Section 
@@ -53,13 +61,21 @@ const Home:HomeType = ({newArrivalProducts, bestSellerProducts}) => {
                 liClassName={styles.li}
                 imageClassName={styles.image}
                 renderItemBody={(product) => (
-                  <ProductItem product={product} />
+                  <ProductItem product={getMainProduct(product)} />
                 )}
-                keyExtractor={(product) => product.id}
-                data={bestSellerProducts.map(product => ({
-                  ...product,
-                  url: `/product/${product.id}`
-                  }))}
+                keyExtractor={(product) => getMainProduct(product).id}
+                getItemName={(product) => getMainProduct(product).name}
+                getItemUrl={(product) => `/product/${getMainProduct(product).id}`}
+                getItemImageUrl={(product) => {
+                  const mainProduct = getMainProduct(product);
+                  const defaultImage = mainProduct.images.find(image => image.default);
+
+                  if (!defaultImage) throw new Error('No default image found');
+
+                  return defaultImage.url;
+                  
+                }}
+                data={bestSellerProducts}
               />              
         </Section>
       </div>

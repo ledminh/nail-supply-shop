@@ -1,4 +1,3 @@
-
 /*********************************************
  *  Database schema
  * -------------------------------------------
@@ -13,6 +12,12 @@ export type DBCategoryType = {
     imageUrl: string;
 };
 
+export type DBProductImageType = {
+    url: string;
+    alt?: string;
+    default?: boolean;
+};
+
 export type DBProductType = {
     categoryID: string;
     id: string;
@@ -20,9 +25,15 @@ export type DBProductType = {
     shortDescription: string;
     fullDescription: string;
     price: number;
-    imageUrl: string;
+    images: DBProductImageType[];
+    date: string;
+    sellCount: number;
 };
 
+export type DBProductGroupType = (DBProductType & {
+    mainProduct?: boolean;
+    variantName: string;
+})[];
 
 export type DBPageInfoType = {
     id: string,
@@ -49,6 +60,7 @@ export type ResponseType<T> = ['success', T ]
     // Specific types for response from API functions
 export type CategoryType = DBCategoryType;
 export type ProductType = DBProductType;
+export type ProductGroupType = DBProductGroupType;
 export type PageInfoType = DBPageInfoType;
 
     // Data types for pages
@@ -60,16 +72,17 @@ type PageDataType = {
 
 
 export type HomePageDataType = PageDataType & {
-    newArrivalProducts: ProductType[];
-    bestSellerProducts: ProductType[];
+    newArrivalProducts: (ProductType|ProductGroupType)[];
+    bestSellerProducts: (ProductType|ProductGroupType)[];
 };
 
-export type AboutPageDataType = PageDataType;
+export type AboutPageDataType = PageDataType & {
+    aboutHtmlText: string;
+};
 
 export type CategoryPageDataType = PageDataType & {
     selectedCategoryID: string | null; 
     categories: CategoryType[];
-    products: ProductType[];
     priceRange: {
         min: number;
         max: number;
@@ -82,12 +95,12 @@ export type ShopPageDataType =  PageDataType &{
 }
 
 export type ProductPageDataType = PageDataType & {
-    product: ProductType;
+    product: ProductType|ProductGroupType;
 }
 
 export type AdminPageDataType = PageDataType & {
     categories: CategoryType[];
-    products: ProductType[];
+    products: (ProductType|ProductGroupType)[];
     aboutHtmlText: string;
 }; 
 
@@ -104,6 +117,8 @@ export type AdminPageDataType = PageDataType & {
 
 export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
 
+export type AddDBCategoryType = (newCategory: NewCategoryType) => Promise<DBCategoryType>;
+
 type ProductOptionsType = {
     limit?: number;
     offset?: number;
@@ -115,13 +130,18 @@ type ProductOptionsType = {
     sort?: SortConfigType;
 };
 
-export type GetDBProductsType = (options:ProductOptionsType) => Promise<DBProductType[]>;
+type DBProductsResponseType = {
+    products: (DBProductType|DBProductGroupType)[];
+    total: number;
+}
 
-export type GetDBProductType = (id: string) => Promise<DBProductType>;
+export type GetDBProductsType = (options:ProductOptionsType) => Promise<DBProductsResponseType>;
+
+export type GetDBProductType = (id: string) => Promise<DBProductType|DBProductGroupType>;
 
 export type GetDBPageInfoType = (title: 'Home' | 'About' | 'Shop') => Promise<DBPageInfoType>;
 
-
+export type GetDBAboutHtmlTextType = () => Promise<string>;
 
 /*********************************************
  *  API functions
@@ -133,9 +153,17 @@ export type GetDBPageInfoType = (title: 'Home' | 'About' | 'Shop') => Promise<DB
 
 export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
-export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<ProductType[]>>;
+export type NewCategoryType = {
+    name: string,
+    description: string,
+    imageUrl: string
+}
 
-export type GetProductType = (id: string) => Promise<ResponseType<ProductType>>;
+export type AddCategoryType = (category: NewCategoryType) => Promise<ResponseType<CategoryType>>;
+
+export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<DBProductsResponseType>>;
+
+export type GetProductType = (id: string) => Promise<ResponseType<ProductType|ProductGroupType>>;
 
 
     //------------------------------------------------
@@ -182,7 +210,7 @@ export type GetAdminPageDataType = () => Promise<ResponseType<AdminPageDataType>
     // They are put here because they are also used
     // in database.
 
-export type SortType = 'price' | 'name';
+export type SortType = 'price' | 'name' | 'date' | 'sellCount';
 export type SortOrderType = 'asc' | 'desc';
 
 export type SortConfigType = {

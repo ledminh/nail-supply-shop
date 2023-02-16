@@ -4,11 +4,11 @@
     display: grid;
 
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+    grid-gap: 40px;
 
 }
 
-.name, .image, .description, .price, .checkout {
+.name, .images, .description, .price, .checkout {
     grid-column: 1/3;
 }
 
@@ -23,9 +23,52 @@
 }
 
 .description {
-    h4 {
-        margin-bottom: 10px;
+    .title {
+        margin-bottom: 1rem;
+        padding-bottom: .5rem;
         border-bottom: 1.5px solid adjust-color($color: base.$backgroundColor,  $lightness: -15%);
+    }
+
+    .content {
+        margin-bottom: 1rem;
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            gap: 2rem;
+
+            margin-bottom: 1rem;
+
+            label {
+                font-weight: 900;
+            }
+
+            select {
+                padding: 7px 15px;
+                border-radius: 10px;
+                border: 3px solid adjust-color($color: base.$backgroundColor,  $lightness: -15%);
+                background-color: base.$backgroundColor;
+                color: base.$textColor;
+                font-weight: 600;
+                cursor: pointer;
+
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: adjust-color($color: base.$backgroundColor, $lightness: -10%);
+                }
+
+                &:active {
+                    background-color: adjust-color($color: base.$backgroundColor, $lightness: -30%);
+                }
+            }
+        }
     }
 
     border-bottom: 1.5px solid adjust-color($color: base.$backgroundColor,  $lightness: -15%);
@@ -68,7 +111,7 @@
 }
 
 @media screen and (min-width: base.$breakpointMobile) {
-    .image {
+    .images {
         grid-column: 1/2;
     }
 
