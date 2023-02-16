@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 import Modal from "./Modal";
-import styles from './TemplatNameModal.module.scss';
+import styles from './TemplateNameModal.module.scss';
 
 
 interface TemplateNameModalProps  {
