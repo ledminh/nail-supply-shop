@@ -4,10 +4,9 @@ import AdminContext from '../Context/AdminContext';
 import {useState} from 'react';
 
 type useCatImageParamsType = {
-    setFileForm: (file:FormData|null) => void;
 };
 
-const useCatImage = ({setFileForm}:useCatImageParamsType) => {
+const useCatImage = () => {
     const {isCatImageModalShown, setCatImageModalShow} = useContext(AdminContext);
 
     const [imageUrl, setImageUrl] = useState<string|null>(null);
@@ -23,7 +22,6 @@ const useCatImage = ({setFileForm}:useCatImageParamsType) => {
     const reset = () => {
         setImageUrl(null);
         setFile(null);
-        setFileForm(null);
     }
 
     const onCancel = () => {
@@ -34,12 +32,7 @@ const useCatImage = ({setFileForm}:useCatImageParamsType) => {
     const onSave = () => {
         setShown(false);
 
-        if(file) {
-            const formData = new FormData();
-            formData.append('cat-image', file);
-
-            setFileForm(formData);
-        }
+   
 
     }
 

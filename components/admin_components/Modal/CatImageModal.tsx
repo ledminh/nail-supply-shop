@@ -9,15 +9,15 @@ import useCatImage from "./catImageHook";
 
 
 interface CatImageModalProps  {
-    setFileForm: (file:FormData|null) => void;
+    
 };
 
 type CatImageModalComponent = FunctionComponent<CatImageModalProps>;
 
 
-const CatImageModal:CatImageModalComponent = ({setFileForm}) => {
+const CatImageModal:CatImageModalComponent = () => {
     
-    const {shown, reset, file, imageUrl, onFileChange, onCancel, onSave} = useCatImage({setFileForm});
+    const {shown, reset, file, imageUrl, onFileChange, onCancel, onSave} = useCatImage();
     
     return (
         <Modal show={shown}>

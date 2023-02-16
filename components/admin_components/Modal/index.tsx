@@ -18,11 +18,11 @@ type ModalsType = FunctionComponent<ModalsProps>;
 
 const Modals:ModalsType = ({}) => {
 
-    const {setCatImageFileForm} = useContext(AdminContext);
+    
 
     return (
         <>
-            <CatImageModal setFileForm={setCatImageFileForm}/>
+            <CatImageModal />
             <div className="modal-root"></div>
         </>
     );

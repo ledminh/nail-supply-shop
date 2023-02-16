@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { _CategoryType } from '../../../types';
 import { useContext } from 'react';
 
-import ModalContext from '../../../../Context/AdminContext';
+import AdminContext from '../../../../Context/AdminContext';
 
 type useEditScreenParams = {
     category: _CategoryType;
@@ -10,7 +10,7 @@ type useEditScreenParams = {
 
 const useEditScreen = ({category}: useEditScreenParams) => {
     // from Contexts
-    const {setCatImageShow} = useContext(ModalContext);
+    const {setCatImageModalShow} = useContext(AdminContext);
     
     
     
@@ -32,7 +32,7 @@ const useEditScreen = ({category}: useEditScreenParams) => {
     }
 
     const handleImageClick = () => {
-        setCatImageShow(true);
+        setCatImageModalShow(true);
     }
 
     return {
