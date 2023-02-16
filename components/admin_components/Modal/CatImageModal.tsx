@@ -42,8 +42,10 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                         accept="image/*"
                         />
                     </form>
-                    <div className={styles.buttons}>
-                        <button className={styles.button}
+                    
+                </div>
+                <div className={styles.buttons}>
+                        <button className={styles.button + ' ' + styles.save}
                             onClick={() => {
                                 setCatImageShow(false)
                             }}
@@ -56,7 +58,6 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                             }}
                         >Cancel</button>
                     </div>
-                </div>
             </div>
         </Modal>
     )

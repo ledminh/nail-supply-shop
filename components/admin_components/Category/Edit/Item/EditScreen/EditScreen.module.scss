@@ -116,6 +116,19 @@ button.image {
         }
     }
 
+    button.save {
+        background-color: #3b8c3b;
+        color: white;
+
+        &:hover {
+            background-color: #2e6a2e;
+        }
+
+        &:active {
+            background-color: #1f4a1f;
+        }
+    }
+    
     button.cancel {
         background-color: #b15621;
         color: #ffffff;
