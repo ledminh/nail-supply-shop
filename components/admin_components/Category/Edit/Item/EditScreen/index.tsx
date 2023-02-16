@@ -30,14 +30,14 @@ const EditScreen:EditScreenType = ({category, setEditMode}) => {
 
     return (
         <>
-            <div className={styles.image}>
+            <button className={styles.image}>
                 <Image
                     src={category.imageUrl}
                     alt={category.name}
                     fill
                     style={{objectFit: 'cover'}}
                     />
-            </div>
+            </button>
             <div className={styles.text}>
                 <input type="text" value={categoryName} onChange={handleCategoryNameChange} />
                 <textarea value={categoryDescription} onChange={handleCategoryDescriptionChange} />
@@ -51,7 +51,11 @@ const EditScreen:EditScreenType = ({category, setEditMode}) => {
                 >
                     Save
                 </button>
-                <button className={styles.button}>Delete</button>
+                <button className={styles.button + ' ' + styles.cancel}
+                    onClick={() => {
+                        setEditMode(false)
+                    }}
+                >Cancel</button>
             </div>
         </>
     )

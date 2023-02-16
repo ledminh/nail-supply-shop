@@ -60,6 +60,7 @@ const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, setI
     return (
         <input type="file" 
             name="cat-image"
+            accept="image/*"
             id={id}
             className={inputClassName}
             onChange={_onFileChangeHandler}
