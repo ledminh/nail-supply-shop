@@ -43,7 +43,6 @@ const EditScreen:EditScreenType = ({category, setEditMode}) => {
             <div className={styles.text}>
                 <input type="text" value={categoryName} onChange={handleCategoryNameChange} />
                 <textarea value={categoryDescription} onChange={handleCategoryDescriptionChange} />
-
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button}
