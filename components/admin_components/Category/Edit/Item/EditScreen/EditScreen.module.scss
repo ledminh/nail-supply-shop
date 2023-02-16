@@ -1,4 +1,4 @@
-@use '../../../../../styles/base';
+@use '../../../../../../styles/base';
 
 
 .wrapper {
@@ -70,7 +70,14 @@
     flex-direction: column;
     justify-content: space-between;
 
+    gap: 1rem;
 
+    textarea {
+        resize: none;
+        border: none;
+        outline: none;
+        font-size: .9rem;
+    }
 }
 
 

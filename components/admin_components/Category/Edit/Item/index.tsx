@@ -5,6 +5,9 @@ import styles from './Item.module.scss';
 
 import Image from 'next/image';
 
+import { useState } from "react";
+import EditScreen from "./EditScreen";
+
 /***************************
  *  Types
  */
@@ -23,10 +26,17 @@ type ItemType = FunctionComponent<ItemPropsType>
  */
 const Item:ItemType = ({category}) => {
 
-    return (
-        <div className={styles.wrapper + (category.new? ' ' + styles.new: '') + (category.newest? ' ' + styles.newest: '')}>
+    const [editMode, setEditMode] = useState(false);    
+
+    const content = editMode ? (
+        <EditScreen
+            category={category}
+            setEditMode={setEditMode}
+            />
+    ) : (
+        <>
             <div className={styles.image}>
-                <Image 
+                <Image
                     src={category.imageUrl}
                     alt={category.name}
                     fill
@@ -38,9 +48,22 @@ const Item:ItemType = ({category}) => {
                 <p>{category.description}</p>
             </div>
             <div className={styles.buttons}>
-                <button className={styles.button}>Edit</button>
+                <button className={styles.button}
+                    onClick={() => {
+                        setEditMode(true)
+                    }}
+                >
+                    Edit
+                </button>
                 <button className={styles.button}>Delete</button>
-            </div>            
+            </div>
+        </>
+    )
+
+
+    return (
+        <div className={styles.wrapper + (category.new? ' ' + styles.new: '') + (category.newest? ' ' + styles.newest: '')}>
+            {content}            
         </div>
     )
 }
