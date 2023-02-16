@@ -1,4 +1,4 @@
-import { GetDBCategoriesType, AddDBCategoryType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
+import { GetDBCategoriesType, AddDBCategoryType, UpdateDBCategoryType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
 
 
 export const getDBCategories:GetDBCategoriesType = async () => {
@@ -14,6 +14,7 @@ export const addDBCategory:AddDBCategoryType = async (newCategory) => {
   return new Promise((resolve, rejects) => {
     // rejects(new Error("Test Error from addCategoryToDB"));
 
+    
     const newCategoryID = categories.length + 1;
 
     const newCategoryInDB = {
@@ -27,6 +28,30 @@ export const addDBCategory:AddDBCategoryType = async (newCategory) => {
     resolve(newCategoryInDB);
   });
 }
+
+export const updateDBCategory:UpdateDBCategoryType = async (category) => {
+  return new Promise((resolve, rejects) => {
+    // rejects(new Error("Test Error from updateCategoryInDB"));
+
+    const categoryIndex = categories.findIndex((c) => c.id === category.id);
+
+    if(categoryIndex === -1) {
+      rejects(new Error(`Category with id "${category.id}" not found`));
+    }
+
+    const updatedCategory = {
+      ...categories[categoryIndex],
+      ...category,
+      slug: category.name.toLowerCase().replace(/ /g, '-'),
+    }
+
+    categories[categoryIndex] = updatedCategory;
+
+    resolve(updatedCategory);
+  });
+}
+
+
 
 
 export const getDBProducts:GetDBProductsType = async (options) => {

@@ -1,4 +1,4 @@
-import { NewCategoryType } from './database/types';
+import { NewCategoryType, CategoryToUpdateType } from './database/types';
 
 // for api/delete.ts
 export type DeleteFileOptions = {
@@ -12,5 +12,9 @@ export type DeleteFileOptions = {
 export type CategoryRequestBody = {
     type: 'add',
     data: NewCategoryType,
-}
+} | {
+    type: 'edit',
+    data: CategoryToUpdateType
+};
+
 

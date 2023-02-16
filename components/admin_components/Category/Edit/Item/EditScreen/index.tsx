@@ -13,6 +13,7 @@ import  useEditScreen  from "./hooks";
  */
 interface EditScreenPropsType {
     category: _CategoryType;
+    setCategory: (value: _CategoryType) => void;
     setEditMode: (value: boolean) => void;
 } 
 
@@ -23,39 +24,35 @@ type EditScreenType = FunctionComponent<EditScreenPropsType>
 /***************************
  *  Main Component
  */
-const EditScreen:EditScreenType = ({category, setEditMode}) => {
+const EditScreen:EditScreenType = ({category, setCategory, setEditMode}) => {
 
-    const {categoryName, categoryDescription, handleCategoryNameChange, handleCategoryDescriptionChange, handleImageClick} = useEditScreen({category});
+    const {categoryName, categoryDescription, currentCatImageFile, onCategoryNameChange, onCategoryDescriptionChange, onImageClick, onSave, onCancel} = useEditScreen({category, setCategory, setEditMode});
 
 
     return (
         <>
             <button className={styles.image}
-                onClick={handleImageClick}
+                onClick={onImageClick}
             >
                 <Image
-                    src={category.imageUrl}
+                    src={currentCatImageFile? URL.createObjectURL(currentCatImageFile): category.imageUrl}
                     alt={category.name}
                     fill
                     style={{objectFit: 'cover'}}
                     />
             </button>
             <div className={styles.text}>
-                <input type="text" value={categoryName} onChange={handleCategoryNameChange} />
-                <textarea value={categoryDescription} onChange={handleCategoryDescriptionChange} />
+                <input type="text" value={categoryName} onChange={onCategoryNameChange} />
+                <textarea value={categoryDescription} onChange={onCategoryDescriptionChange} />
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button + ' ' + styles.save}
-                    onClick={() => {
-                        setEditMode(false)
-                    }}
+                    onClick={onSave}
                 >
                     Save
                 </button>
                 <button className={styles.button + ' ' + styles.cancel}
-                    onClick={() => {
-                        setEditMode(false)
-                    }}
+                    onClick={onCancel}
                 >Cancel</button>
             </div>
         </>

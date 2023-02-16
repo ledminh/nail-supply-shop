@@ -3,15 +3,11 @@ import AdminContext from '../Context/AdminContext';
 
 import {useState} from 'react';
 
-type useCatImageParamsType = {
-};
 
 const useCatImage = () => {
-    const {isCatImageModalShown, setCatImageModalShow} = useContext(AdminContext);
+    const {isCatImageModalShown, setCatImageModalShow, onCatImageModalSaved} = useContext(AdminContext);
 
-    const [imageUrl, setImageUrl] = useState<string|null>(null);
     const [file, setFile] = useState<File|null>(null);
-    
 
     /**************************
      * Public API
@@ -19,56 +15,38 @@ const useCatImage = () => {
     const shown = isCatImageModalShown;
     const setShown = setCatImageModalShow;
 
-    const reset = () => {
-        setImageUrl(null);
+    const onDelete = () => {
         setFile(null);
     }
 
     const onCancel = () => {
         setShown(false);
-        reset();
+        setFile(null);
     }
 
     const onSave = () => {
         setShown(false);
 
-   
+        
+        if(file) {
+            // do something with the file ...
+            onCatImageModalSaved(file);
+        }
 
+        // ... before clearing it
+        setFile(null);
     }
 
-    const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        if(!event.target.files) {
-            
-            reset();
-            return;
-        };
-        
-        const file = event.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();        
-            reader.readAsDataURL(file);
-
-            reader.onload = (e) => {
-                const image = e.target?.result;
-                if (image) {
-                    setImageUrl(image.toString());
-                    setFile(file);
-
-                }
-            }
-        }
-    };
-
+    const onFileChange = (event: ChangeEvent<HTMLInputElement>) => event.target.files?[0]? setFile(event.target.files[0]): null: null;
 
     return {
         shown,
         setShown,
-        reset,
         file,
-        imageUrl,
         onFileChange,
         onCancel,
         onSave,
+        onDelete
     } 
 
 }

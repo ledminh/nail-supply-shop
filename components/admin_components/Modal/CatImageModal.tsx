@@ -9,7 +9,6 @@ import useCatImage from "./catImageHook";
 
 
 interface CatImageModalProps  {
-    
 };
 
 type CatImageModalComponent = FunctionComponent<CatImageModalProps>;
@@ -17,7 +16,7 @@ type CatImageModalComponent = FunctionComponent<CatImageModalProps>;
 
 const CatImageModal:CatImageModalComponent = () => {
     
-    const {shown, reset, file, imageUrl, onFileChange, onCancel, onSave} = useCatImage();
+    const {shown, file, onDelete, onFileChange, onCancel, onSave} = useCatImage();
     
     return (
         <Modal show={shown}>
@@ -28,8 +27,8 @@ const CatImageModal:CatImageModalComponent = () => {
                 <div className={styles.body}>
                     <div className={styles.image}>
                         {
-                            imageUrl && <Image
-                                src={imageUrl}
+                            file && <Image
+                                src={URL.createObjectURL(file)}
                                 alt={"placeholder"}
                                 fill
                                 style={{objectFit: 'cover'}}
@@ -44,7 +43,7 @@ const CatImageModal:CatImageModalComponent = () => {
                                     <>
                                         <span className={styles.filePath}>{file.name}</span>
                                         <button className={styles.cancel}
-                                            onClick={reset}
+                                            onClick={onDelete}
                                             >
                                             Delete
                                         </button>    

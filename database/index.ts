@@ -9,10 +9,10 @@
 import { CategoryType, ProductType, ProductGroupType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType, DBProductImageType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
-import {getDBCategories, addDBCategory, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
+import {getDBCategories, addDBCategory, updateDBCategory, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
 
 // types for API functions implemented in this file
-import {GetCategoriesType, AddCategoryType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
+import {GetCategoriesType, AddCategoryType, UpdateCategoryType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
 import { defaultSortConfig } from '../config';
 
 
@@ -54,6 +54,18 @@ export const addCategory:AddCategoryType = async (newCategory) => {
         const newCategoryDB = await addDBCategory(newCategory);
 
         return ['success', newCategoryDB];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
+
+export const updateCategory:UpdateCategoryType = async (category) => {
+    try {
+        const updatedCategory = await updateDBCategory(category);
+
+        return ['success', updatedCategory];
     }
     catch(err) {
         return ['error', (err as Error).message];

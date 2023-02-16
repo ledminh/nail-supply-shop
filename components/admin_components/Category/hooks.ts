@@ -27,7 +27,7 @@ const useCategory = (categories:_CategoryType[]) => {
             const { success } = data;
 
             if(success) {
-                const { newCategory } = data;
+                const newCategory = data.category;
 
                 const cats = _categories.map(cat => {
                     if(cat.newest)

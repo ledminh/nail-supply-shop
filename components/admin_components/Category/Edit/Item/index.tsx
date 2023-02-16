@@ -26,26 +26,28 @@ type ItemType = FunctionComponent<ItemPropsType>
  */
 const Item:ItemType = ({category}) => {
 
-    const [editMode, setEditMode] = useState(false);    
+    const [editMode, setEditMode] = useState(false);
+    const [_category, _setCategory] = useState<_CategoryType>(category)    
 
     const content = editMode ? (
         <EditScreen
-            category={category}
+            category={_category}
             setEditMode={setEditMode}
+            setCategory={_setCategory}
             />
     ) : (
         <>
             <div className={styles.image}>
                 <Image
-                    src={category.imageUrl}
-                    alt={category.name}
+                    src={_category.imageUrl}
+                    alt={_category.name}
                     fill
                     style={{objectFit: 'cover'}}
                     />
             </div>
             <div className={styles.text}>
-                <h5>{category.name}</h5>
-                <p>{category.description}</p>
+                <h5>{_category.name}</h5>
+                <p>{_category.description}</p>
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button + ' ' + styles.edit}
