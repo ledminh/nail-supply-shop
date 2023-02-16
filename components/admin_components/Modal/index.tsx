@@ -5,8 +5,6 @@ import CatImageModal from "./CatImageModal";
  *  Types
  */
 interface ModalsProps {
-    isCatImageShown: boolean;
-    setCatImageShow: (show:boolean) => void;
 }
 
 type ModalsType = FunctionComponent<ModalsProps>;
@@ -16,15 +14,12 @@ type ModalsType = FunctionComponent<ModalsProps>;
  *  Main Component
  */
 
-const Modals:ModalsType = ({isCatImageShown, setCatImageShow}) => {
+const Modals:ModalsType = ({}) => {
 
 
     return (
         <>
-            <CatImageModal
-                show={isCatImageShown}
-                setShow={setCatImageShow}
-            />
+            <CatImageModal/>
             <div className="modal-root"></div>
         </>
     );

@@ -12,16 +12,16 @@ import {getAdminPageData, AdminPageDataType } from '../../database';
 import { NextPageCustomized } from '../_app';
 import { pageConfigs } from '../../config';
 import Modals from '../../components/admin_components/Modal';
+import Contexts from '../../components/admin_components/Context';
 
 
 type AdminProps = AdminPageDataType; 
 
 const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlText} ) => {
 
-  const [isCatImageShown, setCatImageShow] = useState(false);
 
   return (
-    <>
+    <Contexts>
       <div className={styles.wrapper}>
         <section className={styles.section}>
           <Category
@@ -45,11 +45,8 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
             />
         </section>
       </div>
-      <Modals 
-        isCatImageShown={isCatImageShown}
-        setCatImageShow={setCatImageShow}
-        />
-    </>
+      <Modals />
+    </Contexts>
   ); 
 }
 

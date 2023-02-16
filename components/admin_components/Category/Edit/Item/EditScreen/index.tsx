@@ -25,12 +25,14 @@ type EditScreenType = FunctionComponent<EditScreenPropsType>
  */
 const EditScreen:EditScreenType = ({category, setEditMode}) => {
 
-    const {categoryName, categoryDescription, handleCategoryNameChange, handleCategoryDescriptionChange} = useEditScreen({category});
+    const {categoryName, categoryDescription, handleCategoryNameChange, handleCategoryDescriptionChange, handleImageClick} = useEditScreen({category});
 
 
     return (
         <>
-            <button className={styles.image}>
+            <button className={styles.image}
+                onClick={handleImageClick}
+            >
                 <Image
                     src={category.imageUrl}
                     alt={category.name}

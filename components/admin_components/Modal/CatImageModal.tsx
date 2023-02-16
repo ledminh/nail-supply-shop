@@ -1,23 +1,24 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 
 import Modal from "./Modal";
 import styles from './CatImageModal.module.scss';
+import ModalContext from './../Context/ModalContext';
 
 
 interface CatImageModalProps  {
-    show: boolean;
-    setShow: (show:boolean) => void;
+
 };
 
 type CatImageModalComponent = FunctionComponent<CatImageModalProps>;
 
 
-const CatImageModal:CatImageModalComponent = ({show, setShow}) => {
+const CatImageModal:CatImageModalComponent = ({}) => {
     
+    const {isCatImageShown, setCatImageShow} = useContext(ModalContext);
     
     return (
-        <Modal show={show}
-            onClose={() => setShow(false)}
+        <Modal show={isCatImageShown}
+            onClose={() => setCatImageShow(false)}
         >
             CatImage Modal
         </Modal>
