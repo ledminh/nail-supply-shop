@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode } from "react";
 
-import ModalContext, {useModalContext} from "./ModalContext";
+import AdminContext, {useAdminContext} from "./AdminContext";
 
 
 
@@ -10,12 +10,12 @@ type ContextComponent = FunctionComponent<{children:ReactNode}>;
 
 const Contexts:ContextComponent = ({children}) => {
     
-    const modalContextData = useModalContext();
+    const adminContextData = useAdminContext();
     
     return (
-        <ModalContext.Provider value={modalContextData}>
+        <AdminContext.Provider value={adminContextData}>
             {children}   
-        </ModalContext.Provider>
+        </AdminContext.Provider>
     )
 }
 

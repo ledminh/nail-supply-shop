@@ -9,20 +9,18 @@ import useCatImage from "./catImageHook";
 
 
 interface CatImageModalProps  {
-
+    setFileForm: (file:FormData|null) => void;
 };
 
 type CatImageModalComponent = FunctionComponent<CatImageModalProps>;
 
 
-const CatImageModal:CatImageModalComponent = ({}) => {
+const CatImageModal:CatImageModalComponent = ({setFileForm}) => {
     
-    const {shown, setShown, reset, fileName, imageUrl, handleOnFileChange} = useCatImage();
+    const {shown, reset, file, imageUrl, onFileChange, onCancel, onSave} = useCatImage({setFileForm});
     
     return (
-        <Modal show={shown}
-            onClose={() => {}}
-        >
+        <Modal show={shown}>
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <h4>Category Image</h4>
@@ -41,21 +39,21 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                     </div>
                     <form className={styles.form} encType="multipart/form-data" method="post">
                         {
-                            imageUrl?
+                            file?
                                 (
                                     <>
-                                        <span className={styles.filePath}>{fileName}</span>
+                                        <span className={styles.filePath}>{file.name}</span>
                                         <button className={styles.cancel}
                                             onClick={reset}
                                             >
                                             Delete
                                         </button>    
                                     </>
-                                )                                
+                                )                  
                                 :<input type="file" 
                                     name="cat-image"
                                     accept="image/*"
-                                    onChange={handleOnFileChange}
+                                    onChange={onFileChange}
                                     />
 
                         }
@@ -64,16 +62,12 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                 </div>
                 <div className={styles.buttons}>
                         <button className={styles.button + ' ' + styles.save}
-                            onClick={() => {
-                                setShown(false)
-                            }}
+                            onClick={onSave}
                         >
                             Save
                         </button>
                         <button className={styles.button + ' ' + styles.cancel}
-                            onClick={() => {
-                                setShown(false)
-                            }}
+                            onClick={onCancel}
                         >Cancel</button>
                     </div>
             </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { _CategoryType } from '../../../types';
 import { useContext } from 'react';
 
-import ModalContext from '../../../../Context/ModalContext';
+import ModalContext from '../../../../Context/AdminContext';
 
 type useEditScreenParams = {
     category: _CategoryType;

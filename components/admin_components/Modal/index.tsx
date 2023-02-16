@@ -1,5 +1,7 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import CatImageModal from "./CatImageModal";
+
+import AdminContext from "../Context/AdminContext";
 
 /****************************
  *  Types
@@ -16,10 +18,11 @@ type ModalsType = FunctionComponent<ModalsProps>;
 
 const Modals:ModalsType = ({}) => {
 
+    const {setCatImageFileForm} = useContext(AdminContext);
 
     return (
         <>
-            <CatImageModal/>
+            <CatImageModal setFileForm={setCatImageFileForm}/>
             <div className="modal-root"></div>
         </>
     );

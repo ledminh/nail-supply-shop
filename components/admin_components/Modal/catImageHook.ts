@@ -1,28 +1,49 @@
 import {useContext, ChangeEvent} from 'react';
-import ModalContext from './../Context/ModalContext';
+import AdminContext from '../Context/AdminContext';
 
 import {useState} from 'react';
 
-const useCatImage = () => {
-    const {isCatImageShown, setCatImageShow} = useContext(ModalContext);
+type useCatImageParamsType = {
+    setFileForm: (file:FormData|null) => void;
+};
+
+const useCatImage = ({setFileForm}:useCatImageParamsType) => {
+    const {isCatImageModalShown, setCatImageModalShow} = useContext(AdminContext);
 
     const [imageUrl, setImageUrl] = useState<string|null>(null);
-    const [fileName, setFileName] = useState<string|null>(null);
-
+    const [file, setFile] = useState<File|null>(null);
     
 
     /**************************
      * Public API
      */
-    const shown = isCatImageShown;
-    const setShown = setCatImageShow;
+    const shown = isCatImageModalShown;
+    const setShown = setCatImageModalShow;
 
     const reset = () => {
         setImageUrl(null);
-        setFileName(null);
+        setFile(null);
+        setFileForm(null);
     }
 
-    const handleOnFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const onCancel = () => {
+        setShown(false);
+        reset();
+    }
+
+    const onSave = () => {
+        setShown(false);
+
+        if(file) {
+            const formData = new FormData();
+            formData.append('cat-image', file);
+
+            setFileForm(formData);
+        }
+
+    }
+
+    const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         if(!event.target.files) {
             
             reset();
@@ -37,9 +58,9 @@ const useCatImage = () => {
             reader.onload = (e) => {
                 const image = e.target?.result;
                 if (image) {
-                    // these two functions are always called together
-                    setFileName(file.name);
                     setImageUrl(image.toString());
+                    setFile(file);
+
                 }
             }
         }
@@ -50,9 +71,11 @@ const useCatImage = () => {
         shown,
         setShown,
         reset,
-        fileName,
+        file,
         imageUrl,
-        handleOnFileChange
+        onFileChange,
+        onCancel,
+        onSave,
     } 
 
 }

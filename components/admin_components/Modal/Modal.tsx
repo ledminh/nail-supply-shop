@@ -15,7 +15,7 @@ const Modal:ModalComponent = ({ show, onClose, children }) => {
 
     const modalContent = show ? (
         <div className={styles.modalOverlay}
-                onClick={onClose !== undefined? onClose : () => {}}
+                onClick={onClose}
             >
             <div className={styles.modal}
                 onClick={(e) => {
