@@ -48,14 +48,14 @@ const Item:ItemType = ({category}) => {
                 <p>{category.description}</p>
             </div>
             <div className={styles.buttons}>
-                <button className={styles.button}
+                <button className={styles.button + ' ' + styles.edit}
                     onClick={() => {
                         setEditMode(true)
                     }}
                 >
                     Edit
                 </button>
-                <button className={styles.button}>Delete</button>
+                <button className={styles.button + ' ' + styles.delete}>Delete</button>
             </div>
         </>
     )

@@ -93,4 +93,12 @@
             outline: none;
         }
     }
+
+    button.edit {
+        @include base.button("primary");
+    }
+
+    button.delete {
+        @include base.button("secondary");
+    }
 }

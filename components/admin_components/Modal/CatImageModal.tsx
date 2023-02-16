@@ -21,7 +21,7 @@ const CatImageModal:CatImageModalComponent = ({}) => {
     
     return (
         <Modal show={isCatImageShown}
-            onClose={() => setCatImageShow(false)}
+            onClose={() => {}}
         >
             <div className={styles.wrapper}>
                 <div className={styles.header}>

@@ -117,29 +117,11 @@ button.image {
     }
 
     button.save {
-        background-color: #3b8c3b;
-        color: white;
-
-        &:hover {
-            background-color: #2e6a2e;
-        }
-
-        &:active {
-            background-color: #1f4a1f;
-        }
+        @include base.button("primary");
     }
     
     button.cancel {
-        background-color: #b15621;
-        color: #ffffff;
-
-        &:hover {
-            background-color: #723616;
-        }
-
-        &:active {
-            background-color: #4a1f0e;
-        }
+        @include base.button("secondary");
     }
 
 

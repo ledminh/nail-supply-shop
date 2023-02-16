@@ -6,3 +6,23 @@ $textColor: #433232;
 
 $breakpointMobile: 768px;
 $breakpointTablet: 1024px;
+
+@mixin button($type) {
+    @if $type == "primary" {
+        background-color: #797979;
+        color: white;
+        font-weight: 600;
+
+        &:hover {
+            background-color: #5a5a5a;
+        }
+    } @else if $type == "secondary" {
+        background-color: #b97a7a;
+        color: rgb(255, 255, 255);
+        font-weight: 600;
+
+        &:hover {
+            background-color: #a55a5a;
+        }
+    }
+}
