@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import Modal from "./Modal";
 import styles from './CatImageModal.module.scss';
-import ModalContext from './../Context/ModalContext';
+import useCatImage from "./catImageHook";
 
 
 
@@ -17,10 +17,10 @@ type CatImageModalComponent = FunctionComponent<CatImageModalProps>;
 
 const CatImageModal:CatImageModalComponent = ({}) => {
     
-    const {isCatImageShown, setCatImageShow} = useContext(ModalContext);
+    const {shown, setShown, imageUrl, handleOnFileChange} = useCatImage();
     
     return (
-        <Modal show={isCatImageShown}
+        <Modal show={shown}
             onClose={() => {}}
         >
             <div className={styles.wrapper}>
@@ -30,7 +30,7 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                 <div className={styles.body}>
                     <div className={styles.image}>
                         <Image
-                            src={'/images/001.jpg'}
+                            src={imageUrl? imageUrl : '/images/001.jpg'}
                             alt={"placeholder"}
                             fill
                             style={{objectFit: 'cover'}}
@@ -40,6 +40,7 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                     <input type="file" 
                         name="cat-image"
                         accept="image/*"
+                        onChange={handleOnFileChange}
                         />
                     </form>
                     
@@ -47,14 +48,14 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                 <div className={styles.buttons}>
                         <button className={styles.button + ' ' + styles.save}
                             onClick={() => {
-                                setCatImageShow(false)
+                                setShown(false)
                             }}
                         >
                             Save
                         </button>
                         <button className={styles.button + ' ' + styles.cancel}
                             onClick={() => {
-                                setCatImageShow(false)
+                                setShown(false)
                             }}
                         >Cancel</button>
                     </div>
