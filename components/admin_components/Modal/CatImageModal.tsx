@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Modal from "./Modal";
 import styles from './CatImageModal.module.scss';
 import ModalContext from './../Context/ModalContext';
-import UploadForm from "../UploadForm";
 
 
 
@@ -38,15 +37,25 @@ const CatImageModal:CatImageModalComponent = ({}) => {
                             />
                     </div>
                     <form className={styles.form} encType="multipart/form-data" method="post">
-                        <UploadForm
-                            id="image"
-                            inputClassName={styles.input}
-                            allowMultipleFiles={false}
-                            setImgPath={() => {}}
-                            setFileName={() => {}}
-                            fileName={''}
+                    <input type="file" 
+                        name="cat-image"
+                        accept="image/*"
                         />
                     </form>
+                    <div className={styles.buttons}>
+                        <button className={styles.button}
+                            onClick={() => {
+                                setCatImageShow(false)
+                            }}
+                        >
+                            Save
+                        </button>
+                        <button className={styles.button + ' ' + styles.cancel}
+                            onClick={() => {
+                                setCatImageShow(false)
+                            }}
+                        >Cancel</button>
+                    </div>
                 </div>
             </div>
         </Modal>
