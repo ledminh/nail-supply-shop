@@ -26,7 +26,7 @@ type EditScreenType = FunctionComponent<EditScreenPropsType>
  */
 const EditScreen:EditScreenType = ({category, setCategory, setEditMode}) => {
 
-    const {categoryName, categoryDescription, currentCatImageFile, onCategoryNameChange, onCategoryDescriptionChange, onImageClick, onSave, onCancel} = useEditScreen({category, setCategory, setEditMode});
+    const {categoryName, categoryDescription, imageFile, onCategoryNameChange, onCategoryDescriptionChange, onImageClick, onSave, onCancel} = useEditScreen({category, setCategory, setEditMode});
 
 
     return (
@@ -35,7 +35,7 @@ const EditScreen:EditScreenType = ({category, setCategory, setEditMode}) => {
                 onClick={onImageClick}
             >
                 <Image
-                    src={currentCatImageFile? URL.createObjectURL(currentCatImageFile): category.imageUrl}
+                    src={imageFile? URL.createObjectURL(imageFile): category.imageUrl}
                     alt={category.name}
                     fill
                     style={{objectFit: 'cover'}}

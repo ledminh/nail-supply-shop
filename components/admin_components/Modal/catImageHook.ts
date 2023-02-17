@@ -5,7 +5,7 @@ import {useState} from 'react';
 
 
 const useCatImage = () => {
-    const {isCatImageModalShown, closeCatImageModal, onCatImageModalSaved} = useContext(AdminContext);
+    const {isCatImageModalShown, closeCatImageModal, saveImage} = useContext(AdminContext);
 
     const [file, setFile] = useState<File|null>(null);
 
@@ -29,7 +29,7 @@ const useCatImage = () => {
         
         if(file) {
             // do something with the file ...
-            onCatImageModalSaved(file);
+            saveImage(file);
         }
 
         // ... before clearing it

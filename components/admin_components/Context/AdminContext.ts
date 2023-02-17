@@ -5,9 +5,10 @@ export type AdminContextType = {
     isCatImageModalShown: boolean;
     openCatImageModal: (catID: string) => void;
     closeCatImageModal: () => void;
-    onCatImageModalSaved: (file:File) => void;
+    saveImage: (file:File) => void;
     currentCatImageFile: File|null;
     setCurrentCatImageFile: (file:File|null) => void;
+    currentCatID: string|null;
     
 }
 
@@ -18,9 +19,10 @@ const adminContextDefaultValues: AdminContextType = {
     isCatImageModalShown: false,
     openCatImageModal: () => {},
     closeCatImageModal: () => {},
-    onCatImageModalSaved: () => {},
+    saveImage: () => {},
     currentCatImageFile: null,
-    setCurrentCatImageFile: () => {}
+    setCurrentCatImageFile: () => {},
+    currentCatID: null
 };
 
 
@@ -37,7 +39,7 @@ export const useAdminContext:useAdminContextType = () => {
      * Public API   
      */
 
-    const onCatImageModalSaved = (file:File) => {
+    const saveImage = (file:File) => {
         setCurrentCatImageFile(file);
     }    
 
@@ -47,20 +49,17 @@ export const useAdminContext:useAdminContextType = () => {
     }
 
     const closeCatImageModal = () => {
-        setCatImageModalShow(false);
-
-        
-
-        setCurrentCatID(null);
+        setCatImageModalShow(false); 
     }
 
     return {
         isCatImageModalShown,
         openCatImageModal,
         closeCatImageModal,
-        onCatImageModalSaved,
+        saveImage,
         currentCatImageFile,
-        setCurrentCatImageFile
+        setCurrentCatImageFile,
+        currentCatID
     };
 }
 

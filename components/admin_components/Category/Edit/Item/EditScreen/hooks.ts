@@ -16,7 +16,7 @@ type useEditScreenParams = {
 
 const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams) => {
     // from Contexts
-    const {openCatImageModal, currentCatImageFile, setCurrentCatImageFile} = useContext(AdminContext);
+    const {openCatImageModal, currentCatImageFile, currentCatID, setCurrentCatImageFile} = useContext(AdminContext);
     
     
     
@@ -24,8 +24,17 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
     const [categoryName, setCategoryName] = useState(category.name);
     const [categoryDescription, setCategoryDescription] = useState(category.description);
 
+    const [imageFile, setImageFile] = useState<File|null>(null);
+
+    useEffect(() => {
+        console.log(currentCatID, category.id, currentCatImageFile);
 
 
+        if(currentCatID === category.id) {
+            setImageFile(currentCatImageFile);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentCatImageFile])
    
 
     
@@ -38,8 +47,8 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
                 imageUrl: category.imageUrl
             }
     
-            if(currentCatImageFile) {
-                const imageUrl = await uploadImage(currentCatImageFile);
+            if(imageFile) {
+                const imageUrl = await uploadImage(imageFile);
     
                 data = {
                     ...data,
@@ -86,7 +95,6 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
             });
 
             setEditMode(false);
-            setCurrentCatImageFile(null);    
         })
         
         
@@ -103,7 +111,7 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
     return {
         categoryName,
         categoryDescription,
-        currentCatImageFile,
+        imageFile,
         onCategoryNameChange,
         onCategoryDescriptionChange,
         onImageClick,
