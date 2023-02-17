@@ -24,7 +24,7 @@ type UploadFormType = FunctionComponent<UploadFormPropsType>
  *  Main Component
  */
 const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, setImgPath, fileName, setFileName}) => {
-    const {currentProgress, _onFileChangeHandler, _onDeleteFileHandler} = useUpload({fileName, setImgPath, setFileName});
+    const {currentProgress, onFileChange, onDelete} = useUpload({fileName, setImgPath, setFileName});
 
     // Show progress bar if there is a progress
     if (currentProgress) {
@@ -45,10 +45,7 @@ const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, setI
                     
                 </div>
                 <button className={styles.cancelButton} 
-                    onClick={(e) => {
-                        e.preventDefault();
-                        _onDeleteFileHandler()
-                    }}
+                    onClick={onDelete}
                     disabled={currentProgress < 100}
                     >
                     Delete
@@ -63,7 +60,7 @@ const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, setI
             accept="image/*"
             id={id}
             className={inputClassName}
-            onChange={_onFileChangeHandler}
+            onChange={onFileChange}
             multiple={allowMultipleFiles}
         />
     );

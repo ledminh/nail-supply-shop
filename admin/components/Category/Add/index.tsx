@@ -7,7 +7,7 @@ import UploadForm from "../../UploadForm";
 
 import styles from './Add.module.scss';
 
-import { NewCategoryType } from "../../../../database/types";
+import { NewCategoryType } from "../../../types";
 
 /***************************
  *  Types

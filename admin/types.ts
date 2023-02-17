@@ -23,3 +23,8 @@ export type CategoryRequestBody = {
         id: string
     }
 };
+
+export type DeleteFileRequestBody = {
+    type: 'cat-image' | 'product-image',
+    fileName: string,
+}

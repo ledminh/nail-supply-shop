@@ -1,84 +1,65 @@
-import { useState, ChangeEvent, useEffect } from 'react';
-
-import axios from 'axios';
-import { DeleteFileOptions } from '../../../types';
+import {MouseEvent} from 'react';
 
 
+import { useState, ChangeEvent } from 'react';
+
+import upload from '../../tools/upload';
+import deleteFile from '../../tools/deleteFile';
 
 type useUploadParamsType = {fileName: string|null, setImgPath: (imgPath:string|null) => void, setFileName: (fileName:string|null) => void}; 
 
 const useUpload= ({fileName, setImgPath, setFileName}:useUploadParamsType) => {
     
-    const [currentProgress, _setCurrentProgress] = useState<null|number>(null);
+    const [currentProgress, setCurrentProgress] = useState<null|number>(null);
     
     
-    useEffect(() => {
-        if(fileName === null) {
-            _setCurrentProgress(null);
-        }
-    }, [fileName]);
+
+    /***************************
+     *  Private functions
+     */
+    const onUploadProgress = (event:any) => {
+        setCurrentProgress(Math.round((event.loaded * 100) / event.total));
+    };
+
 
     /***************************
      *  Public functions
      */
-    const _onFileChangeHandler = (event:ChangeEvent<HTMLInputElement>) => {
+    const onFileChange = (event:ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) {
             setImgPath(null);
             return;
         }
 
+        const file = event.target.files[0];
         
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' },
-            onUploadProgress: (event:any) => {
+        setFileName(file.name);
 
-                _setCurrentProgress(Math.round((event.loaded * 100) / event.total));
-            },
-        };
-
-        const formData = new FormData();
-        formData.append('cat-image', event.target.files[0]);
-
-        setFileName(event.target.files[0].name);
-
-        axios.post('/api/upload', formData, config)
-            .then((res) => {
-                // display uploaded image
-                setImgPath(`/images/category/${res.data.filename}`);   
-            })
-            .catch(err => {
-                throw err;
-            })
+        upload({type: 'cat-image', file, onUploadProgress})
+            .then((res:any) => {
+                setImgPath(`/images/category/${res.data.filename}`);
+            });
+        
     };
 
-    const _onDeleteFileHandler = () => {
-        if(currentProgress === 100 && fileName) {
-            const option:DeleteFileOptions = {
-                fileName,
-                type: 'cat-image',
-            } 
+    const onDelete = (e: MouseEvent) => {
+        e.preventDefault();
 
-            
-            axios.post('/api/delete', 
-                    option,
-                    { headers: {'content-type': 'application/json'}}
-                    )
-                    .then((res) => {
-                        _setCurrentProgress(null);
-                        setFileName(null);
-                        setImgPath(null);
-                    })
-                    .catch((err:Error) => {
-                        throw err;
-                    });
+        if(fileName) {
+            deleteFile({type: 'cat-image', fileName})
+                .then(() => {
+                    setCurrentProgress(null);
+                    setFileName(null);
+                    setImgPath(null);
+                })
         }
     };
 
     return {
         fileName,
         currentProgress,
-        _onFileChangeHandler,
-        _onDeleteFileHandler,
+        onFileChange,
+        onDelete,
     }
 }
 

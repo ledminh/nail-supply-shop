@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { DeleteFileOptions } from '../../types';
 
+import { DeleteFileRequestBody } from '../../admin/types';
 
 type Data = {
     success: boolean,
@@ -21,7 +21,7 @@ export default function handler(
         res.end(JSON.stringify({ error: `Method '${req.method}' Not Allowed` }));
     }
 
-    const { fileName, type } = req.body;
+    const { fileName, type } = req.body as DeleteFileRequestBody;
 
 
     if (type === 'cat-image') {
