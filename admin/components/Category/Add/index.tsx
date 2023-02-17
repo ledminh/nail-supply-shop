@@ -1,4 +1,4 @@
-import { useState, FunctionComponent, MouseEventHandler, useEffect } from "react";
+import { useState, FunctionComponent, MouseEventHandler } from "react";
 
 import Image from "next/image";
 

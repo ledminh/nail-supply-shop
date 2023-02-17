@@ -1,21 +1,35 @@
-import { useState } from 'react';
-import Category from '../../components/admin_components/Category';
-import Product from '../../components/admin_components/Product';
-import Subtitles from '../../components/admin_components/Subtitles';
-import About from '../../components/admin_components/About';
+// config
+import { NextPageCustomized } from '../_app';
+import { pageConfigs } from '../../config';
 
+
+// components
+import { About, Category, Product, Subtitles } from '../../admin/components';
+
+import Modals from '../../admin/Modal';
+import Contexts from '../../admin/Context';
+
+// styles
 import styles from '../../styles/admin.module.scss';
 
 
+
+// server
 import {getAdminPageData, AdminPageDataType } from '../../database';
 
-import { NextPageCustomized } from '../_app';
-import { pageConfigs } from '../../config';
-import Modals from '../../components/admin_components/Modal';
-import Contexts from '../../components/admin_components/Context';
 
+
+/***********************************************************/
+// Types
+/***********************************************************/
 
 type AdminProps = AdminPageDataType; 
+
+
+
+/***********************************************************/
+// Page
+/***********************************************************/
 
 const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlText} ) => {
 
@@ -53,10 +67,12 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
 export default Admin;
 
 
+
+
+
 /****************************
  * Customized page
  */
-
 
 Admin.pageConfig = pageConfigs.admin;
 

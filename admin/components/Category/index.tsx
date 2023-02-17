@@ -1,3 +1,4 @@
+
 import { FunctionComponent } from "react";
 
 import useCategory from "./hooks";
