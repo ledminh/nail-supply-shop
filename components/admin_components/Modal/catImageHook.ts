@@ -5,7 +5,7 @@ import {useState} from 'react';
 
 
 const useCatImage = () => {
-    const {isCatImageModalShown, setCatImageModalShow, onCatImageModalSaved} = useContext(AdminContext);
+    const {isCatImageModalShown, closeCatImageModal, onCatImageModalSaved} = useContext(AdminContext);
 
     const [file, setFile] = useState<File|null>(null);
 
@@ -13,19 +13,18 @@ const useCatImage = () => {
      * Public API
      */
     const shown = isCatImageModalShown;
-    const setShown = setCatImageModalShow;
 
     const onDelete = () => {
         setFile(null);
     }
 
     const onCancel = () => {
-        setShown(false);
+        closeCatImageModal();
         setFile(null);
     }
 
     const onSave = () => {
-        setShown(false);
+        closeCatImageModal();
 
         
         if(file) {
@@ -41,7 +40,6 @@ const useCatImage = () => {
 
     return {
         shown,
-        setShown,
         file,
         onFileChange,
         onCancel,

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { _CategoryType } from '../../../types';
 import { useContext } from 'react';
 
@@ -16,7 +16,7 @@ type useEditScreenParams = {
 
 const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams) => {
     // from Contexts
-    const {setCatImageModalShow, currentCatImageFile, setCurrentCatImageFile} = useContext(AdminContext);
+    const {openCatImageModal, currentCatImageFile, setCurrentCatImageFile} = useContext(AdminContext);
     
     
     
@@ -24,6 +24,9 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
     const [categoryName, setCategoryName] = useState(category.name);
     const [categoryDescription, setCategoryDescription] = useState(category.description);
 
+
+
+   
 
     
     const updateCategory = async () => {
@@ -71,7 +74,7 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
     }
 
     const onImageClick = () => {
-        setCatImageModalShow(true);
+        openCatImageModal(category.id);
     }
 
     const onSave = () => {
