@@ -27,9 +27,7 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
     const [imageFile, setImageFile] = useState<File|null>(null);
 
     useEffect(() => {
-        console.log(currentCatID, category.id, currentCatImageFile);
-
-
+        
         if(currentCatID === category.id) {
             setImageFile(currentCatImageFile);
         }
@@ -106,6 +104,7 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
 
     const onCancel = () => {
         setEditMode(false);
+        setImageFile(null);
     }
 
     return {
