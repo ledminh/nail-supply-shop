@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { addCategory, updateCategory, CategoryType } from '../../database';
+import { addCategory, updateCategory, deleteCategory, CategoryType } from '../../database';
 import { CategoryRequestBody } from '../../types';
 
 type Data = {
@@ -9,7 +9,7 @@ type Data = {
 } |
 {
   success: true,
-  category: CategoryType
+  category: CategoryType | null
 }
 
 export default function handler(
@@ -60,6 +60,24 @@ export default function handler(
         }
       });
 
+  }
+  else if(type === 'delete') {
+    deleteCategory(data.id)
+      .then((dbRes) => {
+        
+        if(dbRes[0] === 'success') {
+          res.status(200).json({
+            success: true, 
+            category: null
+          })
+        }
+        else {
+          res.status(200).json({
+            success: false,
+            message: dbRes[1]
+          })
+        }
+      });
   }
 
 }

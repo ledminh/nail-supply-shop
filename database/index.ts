@@ -9,10 +9,11 @@
 import { CategoryType, ProductType, ProductGroupType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType, DBProductImageType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
-import {getDBCategories, addDBCategory, updateDBCategory, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
+import {getDBCategories, addDBCategory, updateDBCategory, deleteDBCategory, getDBProducts, getDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
 
 // types for API functions implemented in this file
-import {GetCategoriesType, AddCategoryType, UpdateCategoryType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
+import {GetCategoriesType, AddCategoryType, UpdateCategoryType, DeleteCategoryType, GetProductsType, GetProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
+
 import { defaultSortConfig } from '../config';
 
 
@@ -71,6 +72,18 @@ export const updateCategory:UpdateCategoryType = async (category) => {
         return ['error', (err as Error).message];
     }
 }
+
+export const deleteCategory:DeleteCategoryType = async (id) => {
+    try {
+        const deletedCatID = await deleteDBCategory(id);
+        
+        return ['success', deletedCatID];
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
 
 
 export const getProducts:GetProductsType = async (options) => {

@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react";
-import { CategoryType } from "../../../../database";
+import { FunctionComponent, useContext, useState, useEffect } from "react";
+
 
 import Item from "./Item";
 
@@ -7,7 +7,7 @@ import styles from './Edit.module.scss';
 import AdminSubSection from "../../../../layouts/AdminSubSection";
 import { _CategoryType } from "../types";
 
-
+import AdminContext from "../../Context/AdminContext";
 
 /***************************
  *  Types
@@ -27,8 +27,20 @@ type EditType = FunctionComponent<EditPropsType>
  */
 const Edit:EditType = ({categories}) => {
 
+    const {deletedCatID} = useContext(AdminContext);
+    const [_categories, _setCategories] = useState<_CategoryType[]>(categories);
     
+    useEffect(() => {
+        console.log('deletedCatID: ', deletedCatID);
 
+        if(deletedCatID) {
+            setTimeout(() => {
+                _setCategories(_categories.filter((category) => category.id !== deletedCatID));
+            }, 300);
+        
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [deletedCatID]);
 
     return (
         <AdminSubSection
@@ -37,10 +49,11 @@ const Edit:EditType = ({categories}) => {
             >
             <div className={styles.categories}>
                 {
-                    categories.map((category) => (
+                    _categories.map((category) => (
                         <Item 
                             key={category.id}
                             category={category}
+                            toBeDeleted={deletedCatID === category.id}
                             />
                     ))
                 }

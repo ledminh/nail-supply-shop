@@ -1,5 +1,8 @@
-import { useState, createContext, Dispatch, SetStateAction } from 'react';
+import { useState, createContext } from 'react';
 
+import axios from 'axios';
+
+import { CategoryRequestBody } from '../../../types';
 
 export type AdminContextType = {
     isCatImageModalShown: boolean;
@@ -9,6 +12,8 @@ export type AdminContextType = {
     currentCatImageFile: File|null;
     setCurrentCatImageFile: (file:File|null) => void;
     currentCatID: string|null;
+    deleteCat: (catID:string) => void;
+    deletedCatID: string|null;
     
 }
 
@@ -22,7 +27,9 @@ const adminContextDefaultValues: AdminContextType = {
     saveImage: () => {},
     currentCatImageFile: null,
     setCurrentCatImageFile: () => {},
-    currentCatID: null
+    currentCatID: null,
+    deleteCat: () => {},
+    deletedCatID: null
 };
 
 
@@ -33,7 +40,7 @@ export const useAdminContext:useAdminContextType = () => {
     const [currentCatImageFile, setCurrentCatImageFile] = useState<File|null>(null);
     const [currentCatID, setCurrentCatID] = useState<string|null>(null);
 
-
+    const [deletedCatID, setDeletedCatID] = useState<string|null>(null);
 
     /**************************
      * Public API   
@@ -52,6 +59,40 @@ export const useAdminContext:useAdminContextType = () => {
         setCatImageModalShow(false); 
     }
 
+    const deleteCat = (catID:string) => {
+        const reqBody:CategoryRequestBody = {
+            type: 'delete',
+            data: {
+                id: catID
+            }
+        }
+
+        axios.post('/api/category', reqBody,
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(({data}) => {
+            const { success } = data;
+
+            if(success) {
+                // delete the category from screen
+                setDeletedCatID(catID);
+            }
+            else {
+                const { message } = data;
+                throw new Error(message);
+            }
+        }
+        ).catch(err => {
+            throw err;
+        });
+
+
+
+    }
+
     return {
         isCatImageModalShown,
         openCatImageModal,
@@ -59,7 +100,9 @@ export const useAdminContext:useAdminContextType = () => {
         saveImage,
         currentCatImageFile,
         setCurrentCatImageFile,
-        currentCatID
+        currentCatID,
+        deleteCat,
+        deletedCatID
     };
 }
 

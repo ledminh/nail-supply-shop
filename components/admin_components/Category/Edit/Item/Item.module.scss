@@ -53,6 +53,21 @@
     }
 }
 
+.wrapper.toBeDeleted {
+    animation: fadeOut .3s ease-in-out;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(.5);
+    }
+}
+
 .image {
     position: relative;
     grid-column: 1/2;

@@ -1,4 +1,4 @@
-import { GetDBCategoriesType, AddDBCategoryType, UpdateDBCategoryType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
+import { GetDBCategoriesType, AddDBCategoryType, UpdateDBCategoryType, DeleteDBCategoryType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
 
 
 export const getDBCategories:GetDBCategoriesType = async () => {
@@ -50,6 +50,25 @@ export const updateDBCategory:UpdateDBCategoryType = async (category) => {
     resolve(updatedCategory);
   });
 }
+
+
+export const deleteDBCategory:DeleteDBCategoryType = async (id:string) => {
+  return new Promise((resolve, rejects) => {
+    // rejects(new Error("Test Error from deleteCategoryFromDB"));
+
+    const categoryIndex = categories.findIndex((c) => c.id === id);
+
+    if(categoryIndex === -1) {
+      rejects(new Error(`Category with id "${id}" not found`));
+    }
+
+    categories.splice(categoryIndex, 1);
+
+    resolve(id);
+
+  });
+}
+
 
 
 

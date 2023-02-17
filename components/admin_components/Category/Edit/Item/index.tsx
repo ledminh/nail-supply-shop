@@ -5,15 +5,16 @@ import styles from './Item.module.scss';
 
 import Image from 'next/image';
 
-import { useState } from "react";
 import EditScreen from "./EditScreen";
+import useItem from "./useItem";
 
 /***************************
  *  Types
  */
 
 interface ItemPropsType {
-    category: _CategoryType
+    category: _CategoryType,
+    toBeDeleted: boolean
    
 } 
 
@@ -24,10 +25,10 @@ type ItemType = FunctionComponent<ItemPropsType>
 /***************************
  *  Main Component
  */
-const Item:ItemType = ({category}) => {
+const Item:ItemType = ({category, toBeDeleted}) => {
 
-    const [editMode, setEditMode] = useState(false);
-    const [_category, _setCategory] = useState<_CategoryType>(category)    
+    const {editMode, _category, setEditMode, _setCategory, onDelete} = useItem({category});
+
 
     const content = editMode ? (
         <EditScreen
@@ -57,14 +58,16 @@ const Item:ItemType = ({category}) => {
                 >
                     Edit
                 </button>
-                <button className={styles.button + ' ' + styles.delete}>Delete</button>
+                <button className={styles.button + ' ' + styles.delete}
+                    onClick={onDelete}
+                    >Delete</button>
             </div>
         </>
     )
 
 
     return (
-        <div className={styles.wrapper + (category.new? ' ' + styles.new: '') + (category.newest? ' ' + styles.newest: '')}>
+        <div className={styles.wrapper + (category.new? ' ' + styles.new: '') + (category.newest? ' ' + styles.newest: '') + (toBeDeleted? ' ' + styles.toBeDeleted: '' )}>
             {content}            
         </div>
     )

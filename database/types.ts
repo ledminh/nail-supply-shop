@@ -119,6 +119,8 @@ export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
 
 export type AddDBCategoryType = (newCategory: NewCategoryType) => Promise<DBCategoryType>;
 
+export type DeleteDBCategoryType = (id: string) => Promise<string>;
+
 export type UpdateDBCategoryType = (category: CategoryToUpdateType) => Promise<DBCategoryType>;
 
 type ProductOptionsType = {
@@ -163,6 +165,7 @@ export type NewCategoryType = {
 
 export type AddCategoryType = (category: NewCategoryType) => Promise<ResponseType<CategoryType>>;
 
+export type DeleteCategoryType = (id: string) => Promise<ResponseType<string>>;
 
 export type CategoryToUpdateType = {
     id: string,

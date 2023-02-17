@@ -15,6 +15,11 @@ export type CategoryRequestBody = {
 } | {
     type: 'edit',
     data: CategoryToUpdateType
+} | {
+    type: 'delete',
+    data: {
+        id: string
+    }
 };
 
 
