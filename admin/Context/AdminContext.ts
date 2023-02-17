@@ -2,7 +2,8 @@ import { useState, createContext } from 'react';
 
 import axios from 'axios';
 
-import { CategoryRequestBody } from '../../../types';
+import { CategoryRequestBody } from '../types';
+
 
 export type AdminContextType = {
     isCatImageModalShown: boolean;

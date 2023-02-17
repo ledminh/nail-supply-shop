@@ -1,3 +1,5 @@
+import { NewCategoryType, CategoryToUpdateType } from "../admin/types";
+
 /*********************************************
  *  Database schema
  * -------------------------------------------
@@ -157,22 +159,9 @@ export type GetDBAboutHtmlTextType = () => Promise<string>;
 
 export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
-export type NewCategoryType = {
-    name: string,
-    description: string,
-    imageUrl: string
-}
-
 export type AddCategoryType = (category: NewCategoryType) => Promise<ResponseType<CategoryType>>;
 
 export type DeleteCategoryType = (id: string) => Promise<ResponseType<string>>;
-
-export type CategoryToUpdateType = {
-    id: string,
-    name: string,
-    description: string,
-    imageUrl: string
-}
 
 export type UpdateCategoryType = (category: CategoryToUpdateType) => Promise<ResponseType<CategoryType>>;
 
