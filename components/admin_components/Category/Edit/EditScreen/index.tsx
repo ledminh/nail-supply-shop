@@ -4,7 +4,7 @@ import styles from './EditScreen.module.scss';
 
 import Image from 'next/image';
 
-import { _CategoryType } from "../../../types";
+import { _CategoryType } from "../../types";
 
 import  useEditScreen  from "./hooks";
 

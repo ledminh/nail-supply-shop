@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { _CategoryType } from '../../../types';
+import { _CategoryType } from '../../types';
 import { useContext } from 'react';
 
-import { CategoryType } from '../../../../../../database';
-import AdminContext from '../../../../Context/AdminContext';
+import { CategoryType } from '../../../../../database';
+import AdminContext from '../../../Context/AdminContext';
 
 import axios from 'axios';
-import { CategoryRequestBody } from '../../../../../../types';
+import { CategoryRequestBody } from '../../../../../types';
 
 type useEditScreenParams = {
     category: _CategoryType;

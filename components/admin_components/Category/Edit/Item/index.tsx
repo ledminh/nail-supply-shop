@@ -5,7 +5,7 @@ import styles from './Item.module.scss';
 
 import Image from 'next/image';
 
-import EditScreen from "./EditScreen";
+import EditScreen from "../EditScreen";
 import useItem from "./useItem";
 
 /***************************
