@@ -62,6 +62,11 @@ const useAdd = () => {
     
     }
 
+    const onCancel = (e:React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        reset();
+    }
+
     return {
         name,
         onNameChange,
@@ -69,7 +74,8 @@ const useAdd = () => {
         onDescriptionChange,
         imgPath,
         onImgPathChange,
-        onAdd
+        onAdd,
+        onCancel
     }
 
 

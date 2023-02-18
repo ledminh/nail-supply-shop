@@ -26,7 +26,16 @@ type AddType = FunctionComponent<AddPropsType>
  */
 const Add:AddType = () => {
 
-    const {name, onNameChange, description, onDescriptionChange, imgPath, onImgPathChange, onAdd } = useAdd();
+    const {
+        name, 
+        onNameChange, 
+        description, 
+        onDescriptionChange, 
+        imgPath, 
+        onImgPathChange, 
+        onAdd,
+        onCancel 
+    } = useAdd();
 
     return (
         <AdminSubSection
@@ -92,13 +101,19 @@ const Add:AddType = () => {
                     )
                 }
                 
-            
-                <button className={styles.button}
-                    onClick={onAdd}    
-                    disabled={name.length === 0 || description.length === 0 || imgPath === null}
-                    >
-                    Add
-                </button>
+                <div className={styles.buttons}>
+                    <button className={styles.add}
+                        onClick={onAdd}    
+                        disabled={name.length === 0 || description.length === 0 || imgPath === null}
+                        >
+                        Add
+                    </button>
+                    <button className={styles.cancel}
+                        onClick={onCancel}
+                        >
+                        Cancel
+                    </button>
+                </div>
             </form>
         </AdminSubSection>
     )

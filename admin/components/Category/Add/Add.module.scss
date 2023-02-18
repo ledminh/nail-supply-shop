@@ -52,26 +52,31 @@
     overflow: hidden;
 }
 
-.button {
+.buttons {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 
-    padding: 5px;
 
-    border: 1px solid #000;
+    button {
 
-    border-radius: 5px;
+        flex-basis: 48%;
+        padding: .5rem 1rem;
 
-    background-color: rgb(55, 55, 55);
+        border: 1px solid #000000;
 
-    color: #fff;
+        border-radius: 5px;
 
-    font-size: medium;
+        &:focus {
+            outline: none;
+        }
+    }
 
-    font-weight: 700;
+    button.add {
+        @include base.button("primary");
+    }
 
-    &:disabled {
-        background-color: rgb(55, 55, 55, .3);
-        border: none;
-        cursor: not-allowed;
+    button.cancel {
+        @include base.button("secondary");
     }
 }
