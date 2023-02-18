@@ -1,18 +1,17 @@
 import { CategoryType, ProductType, ProductGroupType } from '../../database';
-
-
+import { _CategoryType } from '../types';
 
 
 
 export type StateType = {
-    categories: CategoryType[];
+    categories: _CategoryType[];
     products:(ProductType|ProductGroupType)[];
     aboutHtmlText:string;
 }
 
 export type ActionType = {
     type:'SET_CATEGORIES';
-    payload:CategoryType[];
+    payload: _CategoryType[];
 } | {
     type:'SET_PRODUCTS';
     payload:(ProductType|ProductGroupType)[];

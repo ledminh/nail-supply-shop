@@ -1,3 +1,9 @@
+import { CategoryType } from "../database";
+
+/************************************
+ *  These types are used for sending
+ *  data to the server
+ */
 export type CategoryToAdd = {
     name: string,
     description: string,
@@ -23,6 +29,22 @@ export type CategoryRequestBody = {
         id: string
     }
 };
+
+/*********************************
+ *  These types are used for
+ *  local state management
+ */
+export type _CategoryType = CategoryType & {
+    new: boolean,
+    newest: boolean,
+}
+
+
+
+
+
+
+
 
 export type DeleteFileRequestBody = {
     type: 'cat-image' | 'product-image',

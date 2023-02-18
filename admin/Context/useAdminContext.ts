@@ -9,6 +9,7 @@ import {setProducts} from '../reducer/actions.Products';
 import {setAboutHtmlText} from '../reducer/actions.AboutHtmlText';
 
 import {StateType, ActionType} from '../reducer/types';
+import { _CategoryType } from '../types';
 
 
 export type AdminContextType = {
@@ -34,7 +35,17 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
 
     
     useEffect(() => {
-        setCategories(categories, dispatch);
+        const _categories:_CategoryType[] = categories.map(category => {
+            return {
+                ...category,
+                new: false,
+                newest: false
+            }
+        });
+            
+
+
+        setCategories(_categories, dispatch);
         setProducts(products, dispatch);
         setAboutHtmlText(aboutHtmlText, dispatch);
     }, [categories, products, aboutHtmlText]);
