@@ -1,4 +1,4 @@
-import { useState, FunctionComponent, MouseEventHandler } from "react";
+import { FunctionComponent } from "react";
 
 import Image from "next/image";
 
@@ -7,7 +7,7 @@ import UploadForm from "../../UploadForm";
 
 import styles from './Add.module.scss';
 
-import { NewCategoryType } from "../../../types";
+import useHooks from "./hooks";
 
 /***************************
  *  Types
@@ -15,7 +15,6 @@ import { NewCategoryType } from "../../../types";
 
 
 interface AddPropsType {
-    handleAdd: (data: NewCategoryType) => void
 } 
 
 type AddType = FunctionComponent<AddPropsType>
@@ -25,45 +24,9 @@ type AddType = FunctionComponent<AddPropsType>
 /***************************
  *  Main Component
  */
-const Add:AddType = ({handleAdd}) => {
+const Add:AddType = () => {
 
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-
-    const [errors, setErrors] = useState<string[]>([]);
-    
-    const [imgPath, setImgPath] = useState<string|null>(null);
-    const [fileName, setFileName] = useState<string|null>(null);
-
-
-
-
-    const reset = () => {
-        setName('');
-        setDescription('');
-        setImgPath(null);
-        setFileName(null);
-
-    }
-
-
-    const _onClick:MouseEventHandler<HTMLButtonElement> = (e) => {
-        e.preventDefault();
-
-        setErrors([]); 
-
-        // validate all fields then add to errors array
-
-        // all thing ok, add to database
-        handleAdd({
-            name,
-            description,
-            imageUrl: imgPath || ''
-        });
-
-
-        reset();
-    }
+    const {name, onNameChange, description, onDescriptionChange, imgPath, onImgPathChange, onAdd } = useHooks();
 
     return (
         <AdminSubSection
@@ -84,7 +47,7 @@ const Add:AddType = ({handleAdd}) => {
                         name="Name" 
                         id="name"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={onNameChange}
                         />
                 
                     <label className={styles.label}
@@ -97,7 +60,7 @@ const Add:AddType = ({handleAdd}) => {
                         name="Description" 
                         id="description"
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        onChange={onDescriptionChange}
                     />
                 </fieldset>
                 <fieldset className={styles.field}>
@@ -110,10 +73,7 @@ const Add:AddType = ({handleAdd}) => {
                         id="image" 
                         inputClassName={styles.input}
                         allowMultipleFiles={false}
-                        setImgPath={setImgPath}
-                        setFileName={setFileName}
-                        fileName={fileName}
-
+                        onImgPathChange={onImgPathChange}
                         />
                 </fieldset>
 
@@ -132,14 +92,9 @@ const Add:AddType = ({handleAdd}) => {
                     )
                 }
                 
-                {
-                    errors.map((error, index) => (
-                        <p key={index} className={styles.error}>{error}</p>
-                    ))
-                }
             
                 <button className={styles.button}
-                    onClick={_onClick}    
+                    onClick={onAdd}    
                     disabled={name.length === 0 || description.length === 0 || imgPath === null}
                     >
                     Add

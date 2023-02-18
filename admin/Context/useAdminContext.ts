@@ -35,17 +35,7 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
 
     
     useEffect(() => {
-        const _categories:_CategoryType[] = categories.map(category => {
-            return {
-                ...category,
-                new: false,
-                newest: false
-            }
-        });
-            
-
-
-        setCategories(_categories, dispatch);
+        setCategories(categories, dispatch);
         setProducts(products, dispatch);
         setAboutHtmlText(aboutHtmlText, dispatch);
     }, [categories, products, aboutHtmlText]);
