@@ -23,7 +23,7 @@ type UploadFormType = FunctionComponent<UploadFormPropsType>
  *  Main Component
  */
 const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onImgPathChange}) => {
-    const {currentProgress, onFileChange, onDelete, fileName} = useUpload({onImgPathChange});
+    const { onFileChange, onDelete, fileName} = useUpload({onImgPathChange});
 
     // Show progress bar if there is a progress
     if (fileName) {

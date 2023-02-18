@@ -12,20 +12,15 @@ type useUploadParamsType = {
 
 const useUpload= ({onImgPathChange}:useUploadParamsType) => {
     
-    const [currentProgress, setCurrentProgress] = useState<null|number>(null);
     const [fileName, setFileName] = useState<null|string>(null);
     
 
     /***************************
      *  Private functions
      */
-    const onUploadProgress = (event:any) => {
-        setCurrentProgress(Math.round((event.loaded * 100) / event.total));
-    };
 
 
     const reset = () => {
-        setCurrentProgress(null);
         setFileName(null);
         onImgPathChange(null);
     }
@@ -43,7 +38,7 @@ const useUpload= ({onImgPathChange}:useUploadParamsType) => {
         
         setFileName(file.name);
 
-        upload({type: 'cat-image', file, onUploadProgress})
+        upload({type: 'cat-image', file})
             .then((res:any) => {
                 onImgPathChange(`/images/category/${res.data.filename}`);
             });
@@ -61,7 +56,6 @@ const useUpload= ({onImgPathChange}:useUploadParamsType) => {
 
     return {
         fileName,
-        currentProgress,
         onFileChange,
         onDelete,
     }
