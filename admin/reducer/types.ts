@@ -4,6 +4,7 @@ import { _CategoryType } from '../types';
 
 export type CacheType = {
     catImageFile: File | null;
+    newCatImageFile: File | null;
 }
 
 export type StateType = {

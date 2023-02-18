@@ -1,8 +1,9 @@
 import { ActionType, StateType } from "./types";
 
 import { CategoryType } from "../../database";
-import { _CategoryType } from "../types";
+import { CategoryToAdd, _CategoryType } from "../types";
 import convertCategory from "../tools/convertCategory";
+import postCategory from "../tools/postCategory";
 
 export const setCategories = (
     categories:CategoryType[], 
@@ -15,13 +16,23 @@ export const setCategories = (
 }
 
 export const addCategory = (
-    category:CategoryType, 
+    categoryToAdd: CategoryToAdd, 
     dispatch: React.Dispatch<ActionType>) => {
-    
-        dispatch({
-            type: 'CAT/ADD',
-            payload: convertCategory(category)
+        
+        postCategory({
+            type: 'add',
+            data: categoryToAdd,
+            onSuccess: (newCategory) => {
+                if(newCategory){
+                    dispatch({
+                        type: 'CAT/ADD',
+                        payload: convertCategory(newCategory)
+                    });
+                }
+            }
         });
+
+
 }
 
 export const updateCategory = (

@@ -1,8 +1,6 @@
 import { ActionType, StateType } from "./types";
 
 
-
-
 export const setCatImgFileOnCache = (
     file:File|null,
     dispatch: React.Dispatch<ActionType>) => {

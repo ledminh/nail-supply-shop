@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { addCategory } from '../../../reducer/actions.Categories';
-import postCategory from '../../../tools/postCategory';
+
 import { CategoryToAdd } from '../../../types';
 
 import { AdminContext } from '../../../Context';
@@ -48,15 +48,7 @@ const useAdd = () => {
             imageUrl: imgPath || ''
         };
 
-        postCategory({
-            type: 'add',
-            data: categoryToAdd,
-            onSuccess: (newCategory) => {
-                if(newCategory){
-                    addCategory(newCategory, dispatch);
-                }
-            }
-        });       
+        addCategory(categoryToAdd, dispatch);
 
         reset();
     
