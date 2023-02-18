@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { _CategoryType } from '../../types';
 import { useContext } from 'react';
 
-import AdminContext from '../../../Context/AdminContext';
+import { AdminContext } from '../../../../Context';
 
 type Props = {
     category: _CategoryType;
@@ -11,7 +11,7 @@ type Props = {
 
 
 
-const useItem = ({category}:Props) => {
+const useHooks = ({category}:Props) => {
     const [editMode, setEditMode] = useState(false);
     const [_category, _setCategory] = useState<_CategoryType>(category);
     
@@ -30,4 +30,4 @@ const useItem = ({category}:Props) => {
     };
 }
 
-export default useItem;
+export default useHooks;

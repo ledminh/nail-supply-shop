@@ -1,4 +1,4 @@
-import { ActionType } from "./types";
+import { ActionType, StateType } from "./types";
 
 import { CategoryType } from "../../database";
 import { _CategoryType } from "../types";
@@ -22,4 +22,9 @@ export const addCategory = (
             type: 'ADD_CATEGORY',
             payload: convertCategory(category)
         });
+}
+
+export const getCategories = (
+    state:StateType) => {
+        return state.categories;
 }

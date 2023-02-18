@@ -7,7 +7,7 @@ import UploadForm from "../../UploadForm";
 
 import styles from './Add.module.scss';
 
-import useHooks from "./hooks";
+import useAdd from "./useAdd";
 
 /***************************
  *  Types
@@ -26,7 +26,7 @@ type AddType = FunctionComponent<AddPropsType>
  */
 const Add:AddType = () => {
 
-    const {name, onNameChange, description, onDescriptionChange, imgPath, onImgPathChange, onAdd } = useHooks();
+    const {name, onNameChange, description, onDescriptionChange, imgPath, onImgPathChange, onAdd } = useAdd();
 
     return (
         <AdminSubSection

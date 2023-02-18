@@ -5,16 +5,13 @@ import { CategoryToAdd } from '../../../types';
 
 import { AdminContext } from '../../../Context';
 
-const useHooks = () => {
+const useAdd = () => {
 
     const {dispatch} = useContext(AdminContext);
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [imgPath, setImgPath] = useState<string|null>(null);
-
-
-
 
 
     const reset = () => {
@@ -74,4 +71,4 @@ const useHooks = () => {
 
 }
 
-export default useHooks
+export default useAdd;

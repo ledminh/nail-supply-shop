@@ -26,9 +26,7 @@ const CategoryComponent:CategoryComponentType = () => {
             title="Category"
         >   
             <Add />
-            <Edit 
-                categories={_categories}
-                />
+            <Edit />
         </AdminSection>
     )
 }
