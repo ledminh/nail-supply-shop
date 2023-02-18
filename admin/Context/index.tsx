@@ -7,7 +7,16 @@ import { CategoryType, ProductType, ProductGroupType } from "../../database";
  * Create a context
  */
 
-const AdminContext = createContext<AdminContextType>(null);
+const initialAdminContext:AdminContextType = {
+    state: {
+        categories: [],
+        products: [],
+        aboutHtmlText: ""
+    },
+    dispatch: () => {}
+}
+
+export const AdminContext = createContext<AdminContextType>(initialAdminContext);
 
 
 
@@ -21,7 +30,7 @@ type Props = {
 type ContextComponent = FunctionComponent<Props>;
 
 
-const Wrapper:ContextComponent = ({children, categories, products, aboutHtmlText}) => {
+const Context:ContextComponent = ({children, categories, products, aboutHtmlText}) => {
     
     const adminContextData = useAdminContext({categories, products, aboutHtmlText});
     
@@ -32,7 +41,7 @@ const Wrapper:ContextComponent = ({children, categories, products, aboutHtmlText
     )
 }
 
-export default Wrapper;
+export default Context;
 
 
 

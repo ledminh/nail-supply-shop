@@ -1,4 +1,4 @@
-import { CategoryType, ProductType, ProductGroupType } from '../../database';
+import { ProductType, ProductGroupType } from '../../database';
 import { _CategoryType } from '../types';
 
 
@@ -12,6 +12,9 @@ export type StateType = {
 export type ActionType = {
     type:'SET_CATEGORIES';
     payload: _CategoryType[];
+} | {
+    type:'ADD_CATEGORY';
+    payload: _CategoryType;
 } | {
     type:'SET_PRODUCTS';
     payload:(ProductType|ProductGroupType)[];

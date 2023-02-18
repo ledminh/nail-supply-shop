@@ -16,7 +16,7 @@ export type AdminContextType = {
     state: StateType;
     dispatch: React.Dispatch<ActionType>;
     
-} | null;
+};
 
 
 

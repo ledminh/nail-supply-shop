@@ -38,9 +38,7 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
     <Context categories={categories} products={products} aboutHtmlText={aboutHtmlText}>
       <div className={styles.wrapper}>
         <section className={styles.section}>
-          <Category
-            categories={categories}  
-            />
+          <Category />
         </section>
         <section className={styles.section}>
           <Product

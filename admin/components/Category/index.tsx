@@ -6,15 +6,12 @@ import useCategory from "./hooks";
 import Add from './Add';
 import Edit from "./Edit";
 import AdminSection from "../../../layouts/AdminSection";
-import { _CategoryType } from "./types";
+import { _CategoryType } from "../../types";
 
 /***************************
  *  Types
  */
-interface CategoryPropsType {
-    categories: _CategoryType[]
-
-} 
+interface CategoryPropsType {}; 
 
 type CategoryComponentType = FunctionComponent<CategoryPropsType>
 
@@ -22,9 +19,9 @@ type CategoryComponentType = FunctionComponent<CategoryPropsType>
 /***************************
  *  Main Component
  */
-const CategoryComponent:CategoryComponentType = ({categories}) => {
+const CategoryComponent:CategoryComponentType = () => {
 
-    const {handleAdd, _categories} = useCategory(categories);
+    const {handleAdd} = useCategory();
 
     return (
         <AdminSection
