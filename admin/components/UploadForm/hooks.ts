@@ -6,12 +6,14 @@ import { useState, ChangeEvent } from 'react';
 import upload from '../../tools/upload';
 import deleteFile from '../../tools/deleteFile';
 
-type useUploadParamsType = {fileName: string|null, setImgPath: (imgPath:string|null) => void, setFileName: (fileName:string|null) => void}; 
+type useUploadParamsType = {
+    onImgPathChange: (imgPath:string|null) => void, 
+}; 
 
-const useUpload= ({fileName, setImgPath, setFileName}:useUploadParamsType) => {
+const useUpload= ({onImgPathChange}:useUploadParamsType) => {
     
     const [currentProgress, setCurrentProgress] = useState<null|number>(null);
-    
+    const [fileName, setFileName] = useState<null|string>(null);
     
 
     /***************************
@@ -22,12 +24,18 @@ const useUpload= ({fileName, setImgPath, setFileName}:useUploadParamsType) => {
     };
 
 
+    const reset = () => {
+        setCurrentProgress(null);
+        setFileName(null);
+        onImgPathChange(null);
+    }
+
     /***************************
      *  Public functions
      */
     const onFileChange = (event:ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) {
-            setImgPath(null);
+            reset();
             return;
         }
 
@@ -37,7 +45,7 @@ const useUpload= ({fileName, setImgPath, setFileName}:useUploadParamsType) => {
 
         upload({type: 'cat-image', file, onUploadProgress})
             .then((res:any) => {
-                setImgPath(`/images/category/${res.data.filename}`);
+                onImgPathChange(`/images/category/${res.data.filename}`);
             });
         
     };
@@ -47,11 +55,7 @@ const useUpload= ({fileName, setImgPath, setFileName}:useUploadParamsType) => {
 
         if(fileName) {
             deleteFile({type: 'cat-image', fileName})
-                .then(() => {
-                    setCurrentProgress(null);
-                    setFileName(null);
-                    setImgPath(null);
-                })
+                .then(reset);
         }
     };
 

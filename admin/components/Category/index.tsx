@@ -1,7 +1,6 @@
 
 import { FunctionComponent } from "react";
 
-import useCategory from "./hooks";
 
 import Add from './Add';
 import Edit from "./Edit";
