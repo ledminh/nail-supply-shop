@@ -2,9 +2,9 @@ import { FunctionComponent, useContext } from "react";
 
 import Image from 'next/image';
 
-import Modal from "./Modal";
+import Modal from "../Modal";
 import styles from './CatImageModal.module.scss';
-import useCatImage from "./catImageHook";
+import useCatImageModal from "./useCatImageModal";
 
 
 
@@ -16,7 +16,14 @@ type CatImageModalComponent = FunctionComponent<CatImageModalProps>;
 
 const CatImageModal:CatImageModalComponent = () => {
     
-    const {shown, file, onDelete, onFileChange, onCancel, onSave} = useCatImage();
+    const {
+        shown, 
+        onFileChange, 
+        file, 
+        onDelete, 
+        onSave,
+        onCancel, 
+    } = useCatImageModal();
     
     return (
         <Modal show={shown}>
@@ -34,7 +41,6 @@ const CatImageModal:CatImageModalComponent = () => {
                                 style={{objectFit: 'cover'}}
                                 />
                         }
-                        
                     </div>
                     <form className={styles.form} encType="multipart/form-data" method="post">
                         {

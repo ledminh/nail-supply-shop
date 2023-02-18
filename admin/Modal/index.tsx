@@ -1,7 +1,6 @@
 import { FunctionComponent, useContext } from "react";
-import CatImageModal from "./CatImageModal";
+import CatImageModal from "./CatImage";
 
-import AdminContext from "../Context/useAdminContext";
 
 /****************************
  *  Types

@@ -1,20 +1,13 @@
 import { FunctionComponent, ReactNode, createContext } from "react";
 
-import useAdminContext, {AdminContextType} from "./useAdminContext";
+import useAdminContext, {AdminContextType, initialAdminContext} from "./useAdminContext";
 import { CategoryType, ProductType, ProductGroupType } from "../../database";
 
 /***************************************
  * Create a context
  */
 
-const initialAdminContext:AdminContextType = {
-    state: {
-        categories: [],
-        products: [],
-        aboutHtmlText: ""
-    },
-    dispatch: () => {}
-}
+
 
 export const AdminContext = createContext<AdminContextType>(initialAdminContext);
 

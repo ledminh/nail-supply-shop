@@ -16,10 +16,26 @@ export type AdminContextType = {
     state: StateType;
     dispatch: React.Dispatch<ActionType>;
     openCatImageModal: () => void;
+    closeCatImageModal: () => void;
+    isCatImageModalOpened: boolean;
     
 };
 
+export const initialAdminContext:AdminContextType = {
+    state: {
+        categories: [],
+        products: [],
+        aboutHtmlText: "",
+        cache: {
+            catImageFile: null
+        }
+    },
+    dispatch: () => {},
+    openCatImageModal: () => {},
+    closeCatImageModal: () => {},
+    isCatImageModalOpened: false,
 
+}
 
 type Props = {
     categories: CategoryType[];
@@ -34,7 +50,7 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const [isCatImageModalOpen, setIsCatImageModalOpen] = useState(false);
+    const [isCatImageModalOpened, setIsCatImageModalOpened] = useState(false);
     
     useEffect(() => {
         setCategories(categories, dispatch);
@@ -47,13 +63,19 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
      *  Public functions
      */
     const openCatImageModal = () => {
-        setIsCatImageModalOpen(true);
+        setIsCatImageModalOpened(true);
+    }
+
+    const closeCatImageModal = () => {
+        setIsCatImageModalOpened(false);
     }
 
     return {
         state,
         dispatch,
         openCatImageModal,
+        closeCatImageModal,
+        isCatImageModalOpened,
     };
 }
 

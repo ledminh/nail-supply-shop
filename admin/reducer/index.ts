@@ -4,11 +4,16 @@ import categoriesReducer from './reducer.Categories';
 import productsReducer from './reducer.Products';
 import aboutHtmlTextReducer from './reducer.AboutHtmlText';
 
+import cacheReducer from './reducer.Cache';
 
 export const initialState:StateType = {
     categories: [],
     products: [],
-    aboutHtmlText: ''
+    aboutHtmlText: '',
+    cache: {
+        catImageFile: null
+    }
+
 };
 
 
@@ -18,6 +23,7 @@ const reducer = (state:StateType, action:ActionType) => {
         categories: categoriesReducer(state.categories, action),
         products: productsReducer(state.products, action),
         aboutHtmlText: aboutHtmlTextReducer(state.aboutHtmlText, action),
+        cache: cacheReducer(state.cache, action)
     };
 
 }
