@@ -24,6 +24,19 @@ const categoriesReducer = (state:_CategoryType[], action:ActionType) => {
             });
 
             return [newestCategory, ...newState];
+
+        case 'CAT/UPDATE':
+            return state.map(category => {
+                if(category.id === action.payload.id) {
+                    return {
+                        ...category,
+                        ...action.payload
+                    }
+                } else {
+                    return category;
+                }
+            });
+
         
         case 'CAT/SET_TO_BE_DELETED':
             return state.map(category => {
@@ -42,10 +55,10 @@ const categoriesReducer = (state:_CategoryType[], action:ActionType) => {
 
         case 'CAT/SET_IS_EDITING_IMAGE':
             return state.map(category => {
-                if(category.id === action.payload) {
+                if(category.id === action.payload.categoryID) {
                     return {
                         ...category,
-                        isEditingImage: true
+                        isEditingImage: action.payload.isEditingImage
                     }
                 } else {
                     return {
@@ -54,6 +67,15 @@ const categoriesReducer = (state:_CategoryType[], action:ActionType) => {
                     }
                 }
             });
+
+        case 'CAT/RESET_IS_EDITING_IMAGE':
+            return state.map(category => {
+                return {
+                    ...category,
+                    isEditingImage: false
+                }
+            });
+
             
             
 

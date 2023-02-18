@@ -2,6 +2,7 @@ import {useContext, ChangeEvent} from 'react';
 import {AdminContext} from '../../Context';
 
 import {getCatImgFileFromCache, setCatImgFileOnCache} from '../../reducer/actions.Cache';
+import { resetIsEditingImageCategory } from '../../reducer/actions.Categories';
 
 
 const useCatImage = () => {
@@ -26,12 +27,12 @@ const useCatImage = () => {
     const onCancel = () => {
         closeCatImageModal();
         setCatImgFileOnCache(null, dispatch);
+        resetIsEditingImageCategory(dispatch);
     }
 
-    const onSave = () => {
+    const onOK = () => {
         closeCatImageModal();
-
-        
+        resetIsEditingImageCategory(dispatch);    
     }
 
     const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +53,7 @@ const useCatImage = () => {
         onFileChange,
         file: getCatImgFileFromCache(state),
         onDelete,
-        onSave,
+        onOK,
         onCancel,
     } 
 

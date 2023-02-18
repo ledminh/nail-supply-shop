@@ -21,7 +21,7 @@ export type CategoryRequestBody = {
     type: 'add',
     data: CategoryToAdd,
 } | {
-    type: 'edit',
+    type: 'update',
     data: CategoryToUpdate
 } | {
     type: 'delete',

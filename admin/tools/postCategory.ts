@@ -27,6 +27,11 @@ const postCategory = async ({type, data, onSuccess}: Props) => {
 
                 onSuccess(newCategory);
             }
+            else if (type === 'update') {
+                const updatedCategory:CategoryType = res.data.category;
+
+                onSuccess(updatedCategory);
+            }
             else if (type === 'delete') {
                 onSuccess(null);
             }

@@ -22,6 +22,9 @@ export type ActionType =
     type:'CAT/ADD';
     payload: _CategoryType;
 } | {
+    type:'CAT/UPDATE';
+    payload: _CategoryType;
+} | {
     type:'CAT/SET_TO_BE_DELETED';
     payload: string;
 } | {
@@ -29,7 +32,12 @@ export type ActionType =
     payload: string;
 } | {
     type:'CAT/SET_IS_EDITING_IMAGE';
-    payload: string;
+    payload: {
+        categoryID: string;
+        isEditingImage: boolean;
+    };
+} | {
+    type: 'CAT/RESET_IS_EDITING_IMAGE';
 } | 
 
 // Cache

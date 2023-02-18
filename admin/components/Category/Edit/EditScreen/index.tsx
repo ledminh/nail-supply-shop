@@ -4,8 +4,7 @@ import styles from './EditScreen.module.scss';
 
 import Image from 'next/image';
 
-import { _CategoryType } from "../../types";
-
+import { _CategoryType } from "../../../../types";
 import  useEditScreen  from "./useEditScreen";
 
 /***************************
@@ -13,8 +12,7 @@ import  useEditScreen  from "./useEditScreen";
  */
 interface EditScreenPropsType {
     category: _CategoryType;
-    setCategory: (value: _CategoryType) => void;
-    setEditMode: (value: boolean) => void;
+    toggleEditMode: () => void;
 } 
 
 type EditScreenType = FunctionComponent<EditScreenPropsType>
@@ -24,7 +22,7 @@ type EditScreenType = FunctionComponent<EditScreenPropsType>
 /***************************
  *  Main Component
  */
-const EditScreen:EditScreenType = ({category, setCategory, setEditMode}) => {
+const EditScreen:EditScreenType = ({category, toggleEditMode}) => {
 
     const {
         categoryName, 
@@ -32,13 +30,14 @@ const EditScreen:EditScreenType = ({category, setCategory, setEditMode}) => {
         categoryDescription, 
         onCategoryDescriptionChange, 
         onImageClick, 
-        // imageFile, 
-        // onSave, 
-        onCancel} = useEditScreen({
-                                category, 
-                                setCategory, 
-                                setEditMode
-                            });
+        onCancel,
+        imageUrl, 
+        isSaveButtonDisabled,
+        onSave, 
+    } = useEditScreen({
+                    category,  
+                    toggleEditMode
+                });
 
 
     return (
@@ -47,7 +46,7 @@ const EditScreen:EditScreenType = ({category, setCategory, setEditMode}) => {
                 onClick={onImageClick}
             >
                 <Image
-                    src={imageFile? URL.createObjectURL(imageFile): category.imageUrl}
+                    src={imageUrl}
                     alt={category.name}
                     fill
                     style={{objectFit: 'cover'}}
@@ -58,7 +57,9 @@ const EditScreen:EditScreenType = ({category, setCategory, setEditMode}) => {
                 <textarea value={categoryDescription} onChange={onCategoryDescriptionChange} />
             </div>
             <div className={styles.buttons}>
-                <button className={styles.button + ' ' + styles.save}
+                <button 
+                    className={styles.button + ' ' + styles.save}
+                    disabled={isSaveButtonDisabled}
                     onClick={onSave}
                 >
                     Save

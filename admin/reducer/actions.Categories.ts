@@ -24,6 +24,17 @@ export const addCategory = (
         });
 }
 
+export const updateCategory = (
+    category:CategoryType,
+    dispatch: React.Dispatch<ActionType>) => {
+
+        dispatch({
+            type: 'CAT/UPDATE',
+            payload: convertCategory(category)
+        });
+}
+
+
 export const setToBeDeletedCategory = (
     categoryID:string,
     dispatch: React.Dispatch<ActionType>) => {
@@ -46,11 +57,23 @@ export const deleteCategory = (
 
 export const setIsEditingImageCategory = (
     categoryID:string,
+    isEditingImage:boolean,
     dispatch: React.Dispatch<ActionType>) => {
 
         dispatch({
             type: 'CAT/SET_IS_EDITING_IMAGE',
-            payload: categoryID
+            payload: {
+                categoryID,
+                isEditingImage
+            }
+        });
+}
+
+export const resetIsEditingImageCategory = (
+    dispatch: React.Dispatch<ActionType>) => {
+
+        dispatch({
+            type: 'CAT/RESET_IS_EDITING_IMAGE',
         });
 }
 

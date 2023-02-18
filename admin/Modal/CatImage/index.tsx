@@ -21,7 +21,7 @@ const CatImageModal:CatImageModalComponent = () => {
         onFileChange, 
         file, 
         onDelete, 
-        onSave,
+        onOK,
         onCancel, 
     } = useCatImageModal();
     
@@ -67,9 +67,9 @@ const CatImageModal:CatImageModalComponent = () => {
                 </div>
                 <div className={styles.buttons}>
                         <button className={styles.button + ' ' + styles.save}
-                            onClick={onSave}
+                            onClick={onOK}
                         >
-                            Save
+                            OK
                         </button>
                         <button className={styles.button + ' ' + styles.cancel}
                             onClick={onCancel}

@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
-import { _CategoryType } from "../../types";
+
+import { _CategoryType } from "../../../../types";
 
 import styles from './Item.module.scss';
 
@@ -13,8 +14,7 @@ import useItem from "./useItem";
  */
 
 interface ItemPropsType {
-    category: _CategoryType,
-    toBeDeleted: boolean
+    category: _CategoryType
    
 } 
 
@@ -25,7 +25,7 @@ type ItemType = FunctionComponent<ItemPropsType>
 /***************************
  *  Main Component
  */
-const Item:ItemType = ({category, toBeDeleted}) => {
+const Item:ItemType = ({category}) => {
 
     const {editMode, toggleEditMode, onDelete} = useItem({category});
 
@@ -34,7 +34,6 @@ const Item:ItemType = ({category, toBeDeleted}) => {
         <EditScreen
             category={category}
             toggleEditMode={toggleEditMode}
-            setCategory={_setCategory}
             />
     ) : (
         <>
@@ -65,7 +64,7 @@ const Item:ItemType = ({category, toBeDeleted}) => {
 
 
     return (
-        <div className={styles.wrapper + (category.new? ' ' + styles.new: '') + (category.newest? ' ' + styles.newest: '') + (toBeDeleted? ' ' + styles.toBeDeleted: '' )}>
+        <div className={styles.wrapper + (category.new? ' ' + styles.new: '') + (category.newest? ' ' + styles.newest: '') + (category.toBeDeleted? ' ' + styles.toBeDeleted: '' )}>
             {content}            
         </div>
     )

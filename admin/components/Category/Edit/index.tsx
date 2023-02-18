@@ -38,7 +38,6 @@ const Edit:EditType = () => {
                         <Item 
                             key={category.id}
                             category={category}
-                            toBeDeleted={deletedCatID === category.id}
                             />
                     ))
                 }

@@ -44,7 +44,7 @@ export default function handler(
         }
       })
   }
-  else if(type === 'edit') {
+  else if(type === 'update') {
     updateCategory(data)
       .then((dbRes) => {
         if(dbRes[0] === 'success') {

@@ -1,73 +1,79 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
-import { CategoryType } from '../../../../../database';
+import { CategoryToUpdate, _CategoryType } from '../../../../types';
+
 import { AdminContext } from '../../../../Context';
-import axios from 'axios';
 import upload from '../../../../tools/upload';
-import { setIsEditingImageCategory } from '../../../../reducer/actions.Categories';
+import { setIsEditingImageCategory, updateCategory } from '../../../../reducer/actions.Categories';
+import postCategory from '../../../../tools/postCategory';
+import { CategoryType } from '../../../../../database';
 
 
 
 type useEditScreenParams = {
     category: _CategoryType;
-    setCategory: (category: _CategoryType) => void;
-    setEditMode: (editMode:boolean) => void;
+    toggleEditMode: () => void;
 }
 
-const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams) => {
+const useEditScreen = ({category, toggleEditMode}: useEditScreenParams) => {
     
-    const {openCatImageModal, dispatch} = useContext(AdminContext);
+    const {openCatImageModal, dispatch, state} = useContext(AdminContext);
 
 
     // private state
     const [categoryName, setCategoryName] = useState(category.name);
     const [categoryDescription, setCategoryDescription] = useState(category.description);
 
-    // const [imageFile, setImageFile] = useState<File|null>(null);
+    const [imageUrl, setImageUrl] = useState<string>(category.imageUrl);
 
-    // useEffect(() => {
-        
-    //     if(currentCatID === category.id) {
-    //         setImageFile(currentCatImageFile);
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [currentCatImageFile])
-   
+    const reset = () => {
+        setCategoryName(category.name);
+        setCategoryDescription(category.description);
+        setImageUrl(category.imageUrl);
+    }
+
+
+    useEffect(() => {
+        if(category.isEditingImage){
+            if(state.cache.catImageFile) {
+                setImageUrl(URL.createObjectURL(state.cache.catImageFile));
+            }
+            else {
+                setImageUrl(category.imageUrl);
+            }
+        }
+    }, [state.cache.catImageFile]);
+
+
 
     
-    // const updateCategory = async () => {
-    //     try {
-    //         let data = {
-    //             id: category.id,
-    //             name: categoryName,
-    //             description: categoryDescription,
-    //             imageUrl: category.imageUrl
-    //         }
+    const prepareCategory = async () => {
+        try {
+
+            let preparedCat:CategoryToUpdate = {
+                id: category.id,
+                name: categoryName,
+                description: categoryDescription,
+                imageUrl: category.imageUrl
+            }
     
-    //         if(imageFile) {
-    //             const imageUrl = await uploadImage(imageFile);
+            if(state.cache.catImageFile) {
+                const uploadedImageUrl = await uploadImage(state.cache.catImageFile);
+                preparedCat = {
+                    ...preparedCat,
+                    imageUrl: uploadedImageUrl
+                }
+            }
+            
+            return preparedCat;
     
-    //             data = {
-    //                 ...data,
-    //                 imageUrl: imageUrl
-    //             }
-    //         }
-    
-    //         const reqBody:CategoryRequestBody = {
-    //             type: 'edit',
-    //             data: data
-    //         }
-    
-    
-    //         const updatedCategory = await updateCategoryInfo(reqBody);
-    
-    //         return updatedCategory;
-    //     }
-    //     catch(err) {
-    //         throw err;
-    //     }
-    // }
-  
+            
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
     /******************************
      *  Public functions          *
      */
@@ -80,25 +86,33 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
     }
 
     const onCancel = () => {
-        setEditMode(false);
-        // setImageFile(null);
+        toggleEditMode();
+        reset();
     }
 
     const onImageClick = () => {
-        setIsEditingImageCategory(category.id, dispatch);
+        setIsEditingImageCategory(category.id, true, dispatch);
         openCatImageModal();
     }
 
-    // const onSave = () => {
-    //     updateCategory().then((updatedCategory) => {
-    //         setCategory({
-    //             ...category,
-    //             ...updatedCategory
-    //         });
+    const onSave = () => {
+         prepareCategory()
+            .then((preparedCat) => {
+                
+                postCategory({
+                    type: 'update',
+                    data: preparedCat,
+                    onSuccess: (updatedCat) => {
+                        updateCategory(updatedCat as CategoryType, dispatch);
+                        toggleEditMode();
+                    }
+                })
 
-    //         setEditMode(false);
-    //     }) 
-    // }
+            })  
+        
+    }
+
+
 
 
 
@@ -108,9 +122,10 @@ const useEditScreen = ({category, setCategory, setEditMode}: useEditScreenParams
         categoryDescription,
         onCategoryDescriptionChange,
         onImageClick,
-        // imageFile,
-        // onSave,
-        onCancel
+        onCancel,
+        imageUrl,
+        isSaveButtonDisabled: categoryName === category.name && categoryDescription === category.description && !state.cache.catImageFile,
+        onSave
     }
 
 }
@@ -125,42 +140,16 @@ export default useEditScreen;
 
 
 const uploadImage = async (imgFile: File) => {
-    upload({
+    const res = await upload({
         type: 'cat-image',
         file: imgFile,
-    })
-    .then((res) => {
-        const { filename } = res.data;
-    
-        return `/images/category/${filename}`;
-    
-    })
-    .catch((err) => {
-        throw err;
-    }); 
-    
+    });
 
-    
+    const { filename } = res.data;
 
-}
+    return `/images/category/${filename}`;
 
-// const updateCategoryInfo = async (reqBody: CategoryRequestBody) => {
-//     const res = await axios.post('/api/category', 
-//                                     reqBody, {
-//                                     headers: {
-//                                         'Content-Type': 'application/json'
-//                                     }
-//                                 });
+}   
 
-//     const { success } = res.data;
 
-//     if(success) {
-//         const { category } = res.data;
-//         return category as CategoryType;
-//     }
-//     else {
-//         const { message } = res.data;
-//         throw new Error(message);
-//     }
-// }
 
