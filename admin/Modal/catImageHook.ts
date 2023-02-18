@@ -1,5 +1,5 @@
 import {useContext, ChangeEvent} from 'react';
-import AdminContext from '../Context/AdminContext';
+import AdminContext from '../Context/useAdminContext';
 
 import {useState} from 'react';
 

@@ -7,7 +7,7 @@ import { pageConfigs } from '../../config';
 import { About, Category, Product, Subtitles } from '../../admin/components';
 
 import Modals from '../../admin/Modal';
-import Contexts from '../../admin/Context';
+import Context from '../../admin/Context';
 
 // styles
 import styles from '../../styles/admin.module.scss';
@@ -35,7 +35,7 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
 
 
   return (
-    <Contexts>
+    <Context categories={categories} products={products} aboutHtmlText={aboutHtmlText}>
       <div className={styles.wrapper}>
         <section className={styles.section}>
           <Category
@@ -60,7 +60,7 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
         </section>
       </div>
       <Modals />
-    </Contexts>
+    </Context>
   ); 
 }
 
