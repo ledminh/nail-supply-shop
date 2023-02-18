@@ -22,6 +22,9 @@ export type ActionType = {
     type:'CAT/DELETE';
     payload: string;
 } | {
+    type:'CAT/SET_IS_EDITING_IMAGE';
+    payload: string;
+} | {
     type:'PROD/SET';
     payload:(ProductType|ProductGroupType)[];
 } | {

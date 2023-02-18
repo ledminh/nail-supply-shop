@@ -44,6 +44,16 @@ export const deleteCategory = (
         });
 }
 
+export const setIsEditingImageCategory = (
+    categoryID:string,
+    dispatch: React.Dispatch<ActionType>) => {
+
+        dispatch({
+            type: 'CAT/SET_IS_EDITING_IMAGE',
+            payload: categoryID
+        });
+}
+
 export const getCategories = (
     state:StateType) => {
         return state.categories;

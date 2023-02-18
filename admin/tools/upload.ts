@@ -2,7 +2,7 @@ import axios from 'axios';
 
 type Props = {
     type: 'cat-image' | 'product-image'
-    onUploadProgress: (event: any) => void;
+    onUploadProgress?: (event: any) => void;
     file: File;
 }
 

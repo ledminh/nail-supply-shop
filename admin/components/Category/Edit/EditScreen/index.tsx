@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 import { _CategoryType } from "../../types";
 
-import  useEditScreen  from "./hooks";
+import  useEditScreen  from "./useEditScreen";
 
 /***************************
  *  Types
@@ -26,7 +26,19 @@ type EditScreenType = FunctionComponent<EditScreenPropsType>
  */
 const EditScreen:EditScreenType = ({category, setCategory, setEditMode}) => {
 
-    const {categoryName, categoryDescription, imageFile, onCategoryNameChange, onCategoryDescriptionChange, onImageClick, onSave, onCancel} = useEditScreen({category, setCategory, setEditMode});
+    const {
+        categoryName, 
+        onCategoryNameChange, 
+        categoryDescription, 
+        onCategoryDescriptionChange, 
+        onImageClick, 
+        // imageFile, 
+        // onSave, 
+        onCancel} = useEditScreen({
+                                category, 
+                                setCategory, 
+                                setEditMode
+                            });
 
 
     return (

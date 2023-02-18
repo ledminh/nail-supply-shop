@@ -39,6 +39,22 @@ const categoriesReducer = (state:_CategoryType[], action:ActionType) => {
 
         case 'CAT/DELETE':
             return state.filter(category => category.id !== action.payload);
+
+        case 'CAT/SET_IS_EDITING_IMAGE':
+            return state.map(category => {
+                if(category.id === action.payload) {
+                    return {
+                        ...category,
+                        isEditingImage: true
+                    }
+                } else {
+                    return {
+                        ...category,
+                        isEditingImage: false
+                    }
+                }
+            });
+            
             
 
         default:

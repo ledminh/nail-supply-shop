@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useState } from 'react';
 
 import { CategoryType, ProductGroupType, ProductType } from '../../database';
 
@@ -15,6 +15,7 @@ import { _CategoryType } from '../types';
 export type AdminContextType = {
     state: StateType;
     dispatch: React.Dispatch<ActionType>;
+    openCatImageModal: () => void;
     
 };
 
@@ -33,6 +34,7 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const [isCatImageModalOpen, setIsCatImageModalOpen] = useState(false);
     
     useEffect(() => {
         setCategories(categories, dispatch);
@@ -41,11 +43,17 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
     }, [categories, products, aboutHtmlText]);
     
 
-
+    /*********************************
+     *  Public functions
+     */
+    const openCatImageModal = () => {
+        setIsCatImageModalOpen(true);
+    }
 
     return {
         state,
-        dispatch
+        dispatch,
+        openCatImageModal,
     };
 }
 
