@@ -1,8 +1,8 @@
-import { FunctionComponent, ChangeEvent, useState } from "react";
+import { FunctionComponent } from "react";
 
 import styles from './UploadForm.module.scss';
 
-import useUpload from "./hooks";
+import useUpload from "./useUpload";
 
 /***************************
  *  Types
@@ -26,26 +26,16 @@ const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onIm
     const {currentProgress, onFileChange, onDelete, fileName} = useUpload({onImgPathChange});
 
     // Show progress bar if there is a progress
-    if (currentProgress) {
+    if (fileName) {
         return (
             <div className={styles.wrapper + ' '  + inputClassName}>
-                <div className={styles.progressBar} style={{
-                    padding: '0',
-                    position: 'relative',
-                    overflow: 'hidden'
-                    
-                }}>
-                    <div className={styles.progress} style={{
-                        width: `${currentProgress}%`
-                    }}/>
+                <div className={styles.fileName}>
                     {
-                        fileName? <div className={styles.fileName}>{fileName.length < 20? fileName: "... " + fileName.substring(fileName.length - 20)}</div>: null 
-                    }
-                    
+                        fileName.length < 20? fileName: "... " + fileName.substring(fileName.length - 20)
+                    }         
                 </div>
                 <button className={styles.cancelButton} 
                     onClick={onDelete}
-                    disabled={currentProgress < 100}
                     >
                     Delete
                 </button>

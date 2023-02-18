@@ -5,26 +5,20 @@
 
     gap: 10px;
 }
-.progressBar {
-    position: relative;
-    flex-basis: 75%;
-}
 
-
-.progress {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-color: rgba(57, 34, 34, 0.5);
-    margin-bottom: 10px;
-
-
-}
 
 .fileName {
-    padding: 5px;
+    flex-basis: 75%;
+    background-color: rgba(57, 34, 34, 0.5);
+
+    display: flex;
+
+    align-items: center;
+    padding-left: 10px;
+
 }
+
+
 
 .cancelButton {
     flex-basis: 25%;
