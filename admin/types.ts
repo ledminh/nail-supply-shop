@@ -1,10 +1,10 @@
-export type NewCategoryType = {
+export type CategoryToAdd = {
     name: string,
     description: string,
     imageUrl: string
 }
 
-export type CategoryToUpdateType = {
+export type CategoryToUpdate = {
     id: string,
     name: string,
     description: string,
@@ -13,10 +13,10 @@ export type CategoryToUpdateType = {
 
 export type CategoryRequestBody = {
     type: 'add',
-    data: NewCategoryType,
+    data: CategoryToAdd,
 } | {
     type: 'edit',
-    data: CategoryToUpdateType
+    data: CategoryToUpdate
 } | {
     type: 'delete',
     data: {

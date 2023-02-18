@@ -1,55 +1,40 @@
 import { useState } from 'react';
 import { _CategoryType } from './types';
-import { CategoryRequestBody} from '../../../types';
-import { NewCategoryType } from '../../../database/types';
+import { CategoryToAdd } from '../../types';
 
-import axios from 'axios';
+import postCategory from '../../tools/postCategory';
+
 
 
 const useCategory = (categories:_CategoryType[]) => {
 
     const [_categories, _setCategories] = useState<_CategoryType[]>(categories);
     
-    const handleAdd = (newCat: NewCategoryType) => {
+    const handleAdd = (category: CategoryToAdd) => {
 
-        const reqBody:CategoryRequestBody = {
-            type: 'add',
-            data: newCat
-        } 
-
-        axios.post('/api/category', reqBody,
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(({data}) => {
-            const { success } = data;
-
-            if(success) {
-                const newCategory = data.category;
-
+        postCategory({
+            type: 'add', 
+            data: category, 
+            onSuccess: (newCategory) => {
                 const cats = _categories.map(cat => {
                     if(cat.newest)
                         cat.newest = false;
                     
                     return cat;
                 });
-
+    
                 newCategory.new = true;
                 newCategory.newest = true;
-
-
+    
+    
                 _setCategories([newCategory, ...cats]);
-            }
-            else {
-                const { message } = data;
-                throw new Error(message);
-            }
+            }});            
 
-            
-        });
+
+        
     }
+
+
 
 
     return {

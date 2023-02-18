@@ -4,9 +4,16 @@ import { CategoryType, ProductGroupType, ProductType } from '../../database';
 
 import reducer, {initialState} from '../reducer';
 
+import {setCategories} from '../reducer/actions.Categories';
+import {setProducts} from '../reducer/actions.Products';
+import {setAboutHtmlText} from '../reducer/actions.AboutHtmlText';
+
+import {StateType, ActionType} from '../reducer/types';
+
 
 export type AdminContextType = {
-    
+    state: StateType;
+    dispatch: React.Dispatch<ActionType>;
     
 } | null;
 
@@ -27,33 +34,11 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
 
     
     useEffect(() => {
-        setCategories(categories);
-        setProducts(products);
-        setAboutHtmlText(aboutHtmlText);
+        setCategories(categories, dispatch);
+        setProducts(products, dispatch);
+        setAboutHtmlText(aboutHtmlText, dispatch);
     }, [categories, products, aboutHtmlText]);
     
-    
-    const setCategories = (categories:CategoryType[]) => {
-        dispatch({
-            type: 'SET_CATEGORIES',
-            payload: categories
-        });
-    }
-
-    const setProducts = (products:(ProductType|ProductGroupType)[]) => {
-        dispatch({
-            type: 'SET_PRODUCTS',
-            payload: products
-        });
-    }
-
-    const setAboutHtmlText = (aboutHtmlText:string) => {
-        dispatch({
-            type: 'SET_ABOUT_HTML_TEXT',
-            payload: aboutHtmlText
-        });
-    }
-
 
 
 

@@ -1,5 +1,8 @@
 import { StateType, ActionType } from './types';
 
+import categoriesReducer from './reducer.Categories';
+import productsReducer from './reducer.Products';
+import aboutHtmlTextReducer from './reducer.AboutHtmlText';
 
 
 export const initialState:StateType = {
@@ -11,25 +14,11 @@ export const initialState:StateType = {
 
 
 const reducer = (state:StateType, action:ActionType) => {
-    switch(action.type) {
-        case 'SET_CATEGORIES':
-            return {
-                ...state,
-                categories: action.payload
-            };
-        case 'SET_PRODUCTS':
-            return {
-                ...state,
-                products: action.payload
-            };
-        case 'SET_ABOUT_HTML_TEXT':
-            return {
-                ...state,
-                aboutHtmlText: action.payload
-            };
-        default:
-            return state;
-    }
+    return {
+        categories: categoriesReducer(state.categories, action),
+        products: productsReducer(state.products, action),
+        aboutHtmlText: aboutHtmlTextReducer(state.aboutHtmlText, action),
+    };
 
 }
 
