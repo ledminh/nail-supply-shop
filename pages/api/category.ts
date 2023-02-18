@@ -1,7 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { addCategory, updateCategory, deleteCategory, CategoryType } from '../../database';
-import { CategoryRequestBody } from '../../types';
+
+import { CategoryRequestBody } from '../../admin/types';
 
 type Data = {
   success: false,

@@ -9,7 +9,7 @@ export const setCategories = (
     dispatch: React.Dispatch<ActionType>) => {
     
         dispatch({
-            type: 'SET_CATEGORIES',
+            type: 'CAT/SET',
             payload: categories.map(convertCategory)
         });
 }
@@ -19,8 +19,28 @@ export const addCategory = (
     dispatch: React.Dispatch<ActionType>) => {
     
         dispatch({
-            type: 'ADD_CATEGORY',
+            type: 'CAT/ADD',
             payload: convertCategory(category)
+        });
+}
+
+export const setToBeDeletedCategory = (
+    categoryID:string,
+    dispatch: React.Dispatch<ActionType>) => {
+
+        dispatch({
+            type: 'CAT/SET_TO_BE_DELETED',
+            payload: categoryID
+        });
+}
+
+export const deleteCategory = (
+    categoryID:string,
+    dispatch: React.Dispatch<ActionType>) => {
+
+        dispatch({
+            type: 'CAT/DELETE',
+            payload: categoryID
         });
 }
 

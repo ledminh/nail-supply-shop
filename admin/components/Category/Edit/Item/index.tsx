@@ -27,34 +27,32 @@ type ItemType = FunctionComponent<ItemPropsType>
  */
 const Item:ItemType = ({category, toBeDeleted}) => {
 
-    const {editMode, _category, setEditMode, _setCategory, onDelete} = useItem({category});
+    const {editMode, toggleEditMode, onDelete} = useItem({category});
 
 
     const content = editMode ? (
         <EditScreen
-            category={_category}
-            setEditMode={setEditMode}
+            category={category}
+            toggleEditMode={toggleEditMode}
             setCategory={_setCategory}
             />
     ) : (
         <>
             <div className={styles.image}>
                 <Image
-                    src={_category.imageUrl}
-                    alt={_category.name}
+                    src={category.imageUrl}
+                    alt={category.name}
                     fill
                     style={{objectFit: 'cover'}}
                     />
             </div>
             <div className={styles.text}>
-                <h5>{_category.name}</h5>
-                <p>{_category.description}</p>
+                <h5>{category.name}</h5>
+                <p>{category.description}</p>
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button + ' ' + styles.edit}
-                    onClick={() => {
-                        setEditMode(true)
-                    }}
+                    onClick={toggleEditMode}
                 >
                     Edit
                 </button>

@@ -8,6 +8,7 @@ const convertCategory = (category: CategoryType): _CategoryType => {
         ...category,
         new: false,
         newest: false,
+        toBeDeleted: false
     };
 };
 

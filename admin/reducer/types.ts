@@ -10,15 +10,21 @@ export type StateType = {
 }
 
 export type ActionType = {
-    type:'SET_CATEGORIES';
+    type:'CAT/SET';
     payload: _CategoryType[];
 } | {
-    type:'ADD_CATEGORY';
+    type:'CAT/ADD';
     payload: _CategoryType;
 } | {
-    type:'SET_PRODUCTS';
+    type:'CAT/SET_TO_BE_DELETED';
+    payload: string;
+} | {
+    type:'CAT/DELETE';
+    payload: string;
+} | {
+    type:'PROD/SET';
     payload:(ProductType|ProductGroupType)[];
 } | {
-    type:'SET_ABOUT_HTML_TEXT';
+    type:'ABOUT/SET_HTML_TEXT';
     payload:string;
 }; 

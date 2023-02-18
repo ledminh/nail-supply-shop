@@ -1,9 +1,13 @@
 import { useState } from 'react';
 
-import { _CategoryType } from '../../types';
+
+import { _CategoryType } from '../../../../types';
 import { useContext } from 'react';
 
 import { AdminContext } from '../../../../Context';
+import { setToBeDeletedCategory, deleteCategory } from '../../../../reducer/actions.Categories';
+import postCategory from '../../../../tools/postCategory';
+
 
 type Props = {
     category: _CategoryType;
@@ -11,23 +15,49 @@ type Props = {
 
 
 
-const useHooks = ({category}:Props) => {
+const useItem = ({category}:Props) => {
     const [editMode, setEditMode] = useState(false);
-    const [_category, _setCategory] = useState<_CategoryType>(category);
     
-    const {deleteCat} = useContext(AdminContext);
+    const {dispatch} = useContext(AdminContext);
+
+    const deleteWithEffect = () => {
+        setToBeDeletedCategory(category.id, dispatch);
+
+        setTimeout(() => {
+            deleteCategory(category.id, dispatch);
+        }, 500);
+    }
+
+
+    /*********************************
+     *  Public Functions
+     */
+    const toggleEditMode = () => {
+        setEditMode(!editMode);
+    }
 
     const onDelete = () => {
-        deleteCat(_category.id);
+        
+
+        postCategory({
+            type: 'delete',
+            data: {id: category.id},
+            onSuccess: (res) => {
+                if(res === null){
+                    deleteWithEffect();
+                }
+            }
+        })
+
+
     }
+
 
     return {
         editMode,
-        setEditMode,
-        _category,
-        _setCategory,
+        toggleEditMode,
         onDelete
     };
 }
 
-export default useHooks;
+export default useItem;

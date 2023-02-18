@@ -3,7 +3,7 @@ import { CategoryType } from '../../database';
 import {  CategoryRequestBody } from '../types';
 
 type Props = {
-    onSuccess: (category:CategoryType) => void;
+    onSuccess: (category:CategoryType|null) => void;
 } & CategoryRequestBody;
 
 const postCategory = async ({type, data, onSuccess}: Props) => {
@@ -27,9 +27,9 @@ const postCategory = async ({type, data, onSuccess}: Props) => {
 
                 onSuccess(newCategory);
             }
-            
-
-            
+            else if (type === 'delete') {
+                onSuccess(null);
+            }
         }
         else {
             const { message } = res.data;

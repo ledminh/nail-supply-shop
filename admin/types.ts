@@ -37,11 +37,8 @@ export type CategoryRequestBody = {
 export type _CategoryType = CategoryType & {
     new: boolean,
     newest: boolean,
+    toBeDeleted: boolean,
 }
-
-
-
-
 
 
 

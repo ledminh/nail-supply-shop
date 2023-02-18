@@ -3,7 +3,7 @@ import { ActionType } from "./types";
 
 const productsReducer = (state:(ProductType|ProductGroupType)[], action:ActionType) => {
     switch(action.type) {
-        case 'SET_PRODUCTS':
+        case 'PROD/SET':
             return action.payload;
         default:
             return state;

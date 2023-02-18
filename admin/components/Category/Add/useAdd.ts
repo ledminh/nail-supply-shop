@@ -51,7 +51,11 @@ const useAdd = () => {
         postCategory({
             type: 'add',
             data: categoryToAdd,
-            onSuccess: (newCategory) => addCategory(newCategory, dispatch)
+            onSuccess: (newCategory) => {
+                if(newCategory){
+                    addCategory(newCategory, dispatch);
+                }
+            }
         });       
 
         reset();

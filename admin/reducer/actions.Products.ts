@@ -3,7 +3,7 @@ import { ActionType } from "./types";
 
 export const setProducts = (products:(ProductType|ProductGroupType)[], dispatch: React.Dispatch<ActionType>) => {
     dispatch({
-        type: 'SET_PRODUCTS',
+        type: 'PROD/SET',
         payload: products
     });
 }
