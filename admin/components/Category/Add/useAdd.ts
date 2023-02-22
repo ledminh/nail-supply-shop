@@ -5,6 +5,8 @@ import { CategoryToAdd } from '../../../types';
 
 import { AdminContext } from '../../../Context';
 
+import upload from '../../../tools/upload';
+
 const useAdd = () => {
 
     const {dispatch} = useContext(AdminContext);
@@ -41,15 +43,28 @@ const useAdd = () => {
     const onAdd = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        const categoryToAdd:CategoryToAdd = {
-            name,
-            description,
-            imageFile: file 
-        };
+        if(!file)  return; 
 
-        addCategory(categoryToAdd, dispatch);
+        upload({
+            type: 'cat-image',
+            file,
+        }).then((res) => {
+            const imgUrl = `/category/${res.data.filename}`;
 
-        reset();
+            const categoryToAdd:CategoryToAdd = {
+                name,
+                description,
+                imageUrl: imgUrl
+            };
+
+            addCategory(categoryToAdd, dispatch);
+
+            reset();
+        });
+
+
+
+        
     
     }
 

@@ -11,6 +11,7 @@ export const initialState:StateType = {
     products: [],
     aboutHtmlText: '',
     cache: {
+        newCatImageFile: null,
         catImageFile: null
     }
 

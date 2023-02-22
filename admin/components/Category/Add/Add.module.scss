@@ -70,10 +70,24 @@
         &:focus {
             outline: none;
         }
+
+
     }
 
     button.add {
         @include base.button("primary");
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: .5;
+            border: none;
+
+            background-color: gray;
+
+            &:hover {
+                background-color: gray;
+            }
+        }
     }
 
     button.cancel {
