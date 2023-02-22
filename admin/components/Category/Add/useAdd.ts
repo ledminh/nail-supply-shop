@@ -11,13 +11,12 @@ const useAdd = () => {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [imgPath, setImgPath] = useState<string|null>(null);
-
+    const [file, setFile] = useState<File|null>(null);
 
     const reset = () => {
         setName('');
         setDescription('');
-        setImgPath(null);
+        setFile(null);
     }
 
 
@@ -35,8 +34,8 @@ const useAdd = () => {
         setDescription(e.target.value);
     }
 
-    const onImgPathChange = (imgPath:string|null) => {
-        setImgPath(imgPath);
+    const onFileChange = (file:File|null) => {
+        setFile(file);
     }
 
     const onAdd = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -45,7 +44,7 @@ const useAdd = () => {
         const categoryToAdd:CategoryToAdd = {
             name,
             description,
-            imageUrl: imgPath || ''
+            imageFile: file 
         };
 
         addCategory(categoryToAdd, dispatch);
@@ -64,8 +63,8 @@ const useAdd = () => {
         onNameChange,
         description,
         onDescriptionChange,
-        imgPath,
-        onImgPathChange,
+        imgPath: file? URL.createObjectURL(file) : null,
+        onFileChange,
         onAdd,
         onCancel
     }

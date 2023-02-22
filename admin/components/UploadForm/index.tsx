@@ -11,7 +11,7 @@ interface UploadFormPropsType {
     id: string;
     inputClassName?: string;
     allowMultipleFiles?: boolean;
-    onImgPathChange: (imgPath: string|null) => void;
+    onFileChange: (file:File|null) => void;
     
 } 
 
@@ -22,8 +22,8 @@ type UploadFormType = FunctionComponent<UploadFormPropsType>
 /***************************
  *  Main Component
  */
-const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onImgPathChange}) => {
-    const { onFileChange, onDelete, fileName} = useUpload({onImgPathChange});
+const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onFileChange}) => {
+    const { _onFileChange, onDelete, fileName} = useUpload({onFileChange});
 
     // Show progress bar if there is a progress
     if (fileName) {
@@ -49,7 +49,7 @@ const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onIm
             accept="image/*"
             id={id}
             className={inputClassName}
-            onChange={onFileChange}
+            onChange={_onFileChange}
             multiple={allowMultipleFiles}
         />
     );

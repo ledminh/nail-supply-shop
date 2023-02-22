@@ -19,6 +19,8 @@ export const addCategory = (
     categoryToAdd: CategoryToAdd, 
     dispatch: React.Dispatch<ActionType>) => {
         
+        // TODO: process the image file (categoryToAdd.imageFile become a file, before it was categoryToAdd.imageURL)
+
         postCategory({
             type: 'add',
             data: categoryToAdd,

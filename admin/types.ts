@@ -7,7 +7,7 @@ import { CategoryType } from "../database";
 export type CategoryToAdd = {
     name: string,
     description: string,
-    imageUrl: string
+    imageFile: File|null
 }
 
 export type CategoryToUpdate = {

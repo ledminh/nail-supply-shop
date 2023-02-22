@@ -3,16 +3,13 @@ import {MouseEvent} from 'react';
 
 import { useState, ChangeEvent } from 'react';
 
-import upload from '../../tools/upload';
-import deleteFile from '../../tools/deleteFile';
-
 type useUploadParamsType = {
-    onImgPathChange: (imgPath:string|null) => void, 
+    onFileChange: (file:File|null) => void;
 }; 
 
-const useUpload= ({onImgPathChange}:useUploadParamsType) => {
+const useUpload= ({onFileChange}:useUploadParamsType) => {
     
-    const [fileName, setFileName] = useState<null|string>(null);
+    const [file, setFile] = useState<File|null>(null);
     
 
     /***************************
@@ -21,14 +18,14 @@ const useUpload= ({onImgPathChange}:useUploadParamsType) => {
 
 
     const reset = () => {
-        setFileName(null);
-        onImgPathChange(null);
+        setFile(null);
+        onFileChange(null);
     }
 
     /***************************
      *  Public functions
      */
-    const onFileChange = (event:ChangeEvent<HTMLInputElement>) => {
+    const _onFileChange = (event:ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) {
             reset();
             return;
@@ -36,27 +33,23 @@ const useUpload= ({onImgPathChange}:useUploadParamsType) => {
 
         const file = event.target.files[0];
         
-        setFileName(file.name);
-
-        upload({type: 'cat-image', file})
-            .then((res:any) => {
-                onImgPathChange(`/images/category/${res.data.filename}`);
-            });
+        setFile(file);
+        onFileChange(file);
+        
         
     };
 
     const onDelete = (e: MouseEvent) => {
         e.preventDefault();
 
-        if(fileName) {
-            deleteFile({type: 'cat-image', fileName})
-                .then(reset);
+        if(file) {
+            reset();
         }
     };
 
     return {
-        fileName,
-        onFileChange,
+        fileName: file?.name || '',
+        _onFileChange,
         onDelete,
     }
 }
