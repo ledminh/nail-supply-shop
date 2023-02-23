@@ -29,12 +29,7 @@ const ProductComponent:ProductComponentType = ({categories, products}) => {
         <AdminSection
             title="Product"
             >
-            <Add
-                categories={categories}
-                onClick={(data) => {
-                    console.log(data);
-                }}
-            />
+            <Add />
             <Edit 
                 categories={categories}
                 products={products}
