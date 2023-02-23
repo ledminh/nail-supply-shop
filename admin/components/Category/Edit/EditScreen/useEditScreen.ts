@@ -7,6 +7,7 @@ import upload from '../../../../tools/upload';
 import { setIsEditingImageCategory, updateCategory } from '../../../../reducer/actions.Categories';
 import postCategory from '../../../../tools/postCategory';
 import { CategoryType } from '../../../../../database';
+import { getCategoryImageFromCache } from '../../../../reducer/actions.Cache';
 
 
 
@@ -34,15 +35,17 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
 
 
     useEffect(() => {
-        if(category.isEditingImage){
-            if(state.cache.catImageFile) {
-                setImageUrl(URL.createObjectURL(state.cache.catImageFile));
-            }
-            else {
-                setImageUrl(category.imageUrl);
-            }
+
+        const cachedImage = getCategoryImageFromCache(category.id, state);
+
+        if(cachedImage) {
+            setImageUrl(URL.createObjectURL(cachedImage));
         }
-    }, [state.cache.catImageFile]);
+        else {
+            setImageUrl(category.imageUrl);
+        }
+        
+    }, [state.cache.catImageFiles])
 
 
 
@@ -56,9 +59,11 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
                 description: categoryDescription,
                 imageUrl: category.imageUrl
             }
-    
-            if(state.cache.catImageFile) {
-                const uploadedImageUrl = await uploadImage(state.cache.catImageFile);
+            
+            const cachedImage = getCategoryImageFromCache(category.id, state);
+
+            if(cachedImage) {
+                const uploadedImageUrl = await uploadImage(cachedImage);
                 preparedCat = {
                     ...preparedCat,
                     imageUrl: uploadedImageUrl
@@ -124,7 +129,7 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
         onImageClick,
         onCancel,
         imageUrl,
-        isSaveButtonDisabled: categoryName === category.name && categoryDescription === category.description && !state.cache.catImageFile,
+        isSaveButtonDisabled: categoryName === category.name && categoryDescription === category.description && !imageUrl,
         onSave
     }
 

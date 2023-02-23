@@ -1,4 +1,4 @@
-import {useContext, ChangeEvent} from 'react';
+import {useEffect, useState, useContext, ChangeEvent} from 'react';
 import {AdminContext} from '../../Context';
 
 import {deleteCategoryImageOnCache, setCategoryImageOnCache, getCategoryImageFromCache } from '../../reducer/actions.Cache';
@@ -14,8 +14,14 @@ const useCatImage = () => {
         dispatch
     } = useContext(AdminContext);
 
-    const currentCatID = getEditingImageCategoryID(state);
+    const [currentCatID, setCurrentCatID] = useState<string | undefined>(undefined);
 
+
+    useEffect(() => {
+        const catID = getEditingImageCategoryID(state);
+        setCurrentCatID(catID);
+
+    }, [state.categories]);
     
     // /**************************
     //  * Public API
