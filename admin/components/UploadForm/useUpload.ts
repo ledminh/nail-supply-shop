@@ -4,12 +4,12 @@ import {MouseEvent} from 'react';
 import { useState, ChangeEvent } from 'react';
 
 type useUploadParamsType = {
-    onFileChange: (file:File|null) => void;
+    file: File | null,
+    setFile: (file: File | null) => void,
 }; 
 
-const useUpload= ({onFileChange}:useUploadParamsType) => {
+const useUpload= ({file, setFile}:useUploadParamsType) => {
     
-    const [file, setFile] = useState<File|null>(null);
     
 
     /***************************
@@ -17,24 +17,18 @@ const useUpload= ({onFileChange}:useUploadParamsType) => {
      */
 
 
-    const reset = () => {
-        setFile(null);
-        onFileChange(null);
-    }
-
     /***************************
      *  Public functions
      */
-    const _onFileChange = (event:ChangeEvent<HTMLInputElement>) => {
+    const onFileChange = (event:ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files) {
-            reset();
+            setFile(null);
             return;
         }
 
         const file = event.target.files[0];
         
         setFile(file);
-        onFileChange(file);
         
         
     };
@@ -43,13 +37,13 @@ const useUpload= ({onFileChange}:useUploadParamsType) => {
         e.preventDefault();
 
         if(file) {
-            reset();
+            setFile(null);
         }
     };
 
     return {
         file,
-        _onFileChange,
+        onFileChange,
         onDelete,
     }
 }

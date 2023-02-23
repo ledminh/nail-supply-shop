@@ -32,7 +32,7 @@ const Add:AddType = () => {
         description, 
         onDescriptionChange, 
         file, 
-        onFileChange, 
+        setFile, 
         onAdd,
         onCancel 
     } = useAdd();
@@ -82,7 +82,8 @@ const Add:AddType = () => {
                         id="image" 
                         inputClassName={styles.input}
                         allowMultipleFiles={false}
-                        onFileChange={onFileChange}
+                        file={file}
+                        setFile={setFile}
                         />
                 </fieldset>
 

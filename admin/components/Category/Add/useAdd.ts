@@ -36,9 +36,6 @@ const useAdd = () => {
         setDescription(e.target.value);
     }
 
-    const onFileChange = (file:File|null) => {
-        setFile(file);
-    }
 
     const onAdd = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -79,7 +76,7 @@ const useAdd = () => {
         description,
         onDescriptionChange,
         file,
-        onFileChange,
+        setFile,
         onAdd,
         onCancel
     }
