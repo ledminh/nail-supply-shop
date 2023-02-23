@@ -32,10 +32,6 @@ const useItem = ({category}:Props) => {
     /*********************************
      *  Public Functions
      */
-    const toggleEditMode = () => {
-        setEditMode(!editMode);
-    }
-
     const onDelete = () => {
         
 
@@ -55,7 +51,7 @@ const useItem = ({category}:Props) => {
 
     return {
         editMode,
-        toggleEditMode,
+        setEditMode,
         onDelete
     };
 }

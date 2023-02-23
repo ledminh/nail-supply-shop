@@ -27,8 +27,7 @@ export const initialAdminContext:AdminContextType = {
         products: [],
         aboutHtmlText: "",
         cache: {
-            catImageFile: null,
-            newCatImageFile: null
+            catImageFiles: {},
         }
     },
     dispatch: () => {},

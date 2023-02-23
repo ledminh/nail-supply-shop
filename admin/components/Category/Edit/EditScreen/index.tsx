@@ -12,7 +12,7 @@ import  useEditScreen  from "./useEditScreen";
  */
 interface EditScreenPropsType {
     category: _CategoryType;
-    toggleEditMode: () => void;
+    setEditMode: (mode:boolean) => void;
 } 
 
 type EditScreenType = FunctionComponent<EditScreenPropsType>
@@ -22,7 +22,7 @@ type EditScreenType = FunctionComponent<EditScreenPropsType>
 /***************************
  *  Main Component
  */
-const EditScreen:EditScreenType = ({category, toggleEditMode}) => {
+const EditScreen:EditScreenType = ({category, setEditMode}) => {
 
     const {
         categoryName, 
@@ -36,7 +36,7 @@ const EditScreen:EditScreenType = ({category, toggleEditMode}) => {
         onSave, 
     } = useEditScreen({
                     category,  
-                    toggleEditMode
+                    setEditMode
                 });
 
 

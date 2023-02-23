@@ -7,8 +7,24 @@ const cacheReducer = (state:CacheType, action:ActionType) => {
         case 'CACHE/SET_CAT_IMAGE_FILE':
             return {
                 ...state,
-                catImageFile: action.payload
-            }
+                catImageFiles: {
+                    ...state.catImageFiles,
+                    [action.payload.categoryID]: action.payload.file
+                }
+            };
+
+        case 'CACHE/DELETE_CAT_IMAGE':
+            const newCatImageFiles = {...state.catImageFiles};
+
+            delete newCatImageFiles[action.payload];
+
+            return {
+                ...state,
+                catImageFiles: newCatImageFiles
+            };
+
+            
+
         default:
             return state;
     }

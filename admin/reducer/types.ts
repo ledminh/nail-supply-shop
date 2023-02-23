@@ -3,8 +3,9 @@ import { _CategoryType } from '../types';
 
 
 export type CacheType = {
-    catImageFile: File | null;
-    newCatImageFile: File | null;
+    catImageFiles: {
+        [key:string]: File;
+    };
 }
 
 export type StateType = {
@@ -44,7 +45,13 @@ export type ActionType =
 // Cache
 {
     type:'CACHE/SET_CAT_IMAGE_FILE';
-    payload: File|null;
+    payload: {
+        categoryID: string;
+        file: File;
+    };
+} | {
+    type:'CACHE/DELETE_CAT_IMAGE';
+    payload: string;
 } | {
     type:'PROD/SET';
     payload:(ProductType|ProductGroupType)[];

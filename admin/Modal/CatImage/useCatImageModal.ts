@@ -1,8 +1,9 @@
 import {useContext, ChangeEvent} from 'react';
 import {AdminContext} from '../../Context';
 
-import {getCatImgFileFromCache, setCatImgFileOnCache} from '../../reducer/actions.Cache';
-import { resetIsEditingImageCategory } from '../../reducer/actions.Categories';
+import {deleteCategoryImageOnCache, setCategoryImageOnCache, getCategoryImageFromCache } from '../../reducer/actions.Cache';
+
+import { getEditingImageCategoryID, resetIsEditingImageCategory } from '../../reducer/actions.Categories';
 
 
 const useCatImage = () => {
@@ -13,20 +14,25 @@ const useCatImage = () => {
         dispatch
     } = useContext(AdminContext);
 
+    const currentCatID = getEditingImageCategoryID(state);
 
-    // const [file, setFile] = useState<File|null>(null);
-
+    
     // /**************************
     //  * Public API
     //  */
 
     const onDelete = () => {
-        setCatImgFileOnCache(null, dispatch);
+
+        if(currentCatID)
+            deleteCategoryImageOnCache(currentCatID, dispatch);
     }
 
     const onCancel = () => {
         closeCatImageModal();
-        setCatImgFileOnCache(null, dispatch);
+        
+        if(currentCatID)
+            deleteCategoryImageOnCache(currentCatID, dispatch);
+        
         resetIsEditingImageCategory(dispatch);
     }
 
@@ -39,19 +45,26 @@ const useCatImage = () => {
         const file = event.target.files && event.target.files[0];
 
         if(file) {
-            setCatImgFileOnCache(file, dispatch);
+            
+            if(currentCatID)
+                setCategoryImageOnCache(currentCatID, file, dispatch);
         }
         else {
-            setCatImgFileOnCache(null, dispatch);
+            
+            if(currentCatID)
+                deleteCategoryImageOnCache(currentCatID, dispatch);
         }
 
     } 
 
 
+
     return {
         shown: isCatImageModalOpened,
         onFileChange,
-        file: getCatImgFileFromCache(state),
+        // file === undefined might mean no file is cached or no currentCat is opened. But  no currentCat is opened is impossible, because before opening the modal, currentCat must be set on Edit/Item/EditScreen
+        // file === File means a file is selected
+        file: currentCatID? getCategoryImageFromCache(currentCatID, state): undefined,
         onDelete,
         onOK,
         onCancel,

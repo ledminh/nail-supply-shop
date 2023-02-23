@@ -89,6 +89,13 @@ export const resetIsEditingImageCategory = (
         });
 }
 
+export const getEditingImageCategoryID = (
+    state:StateType) => {
+        return state.categories.find(cat => cat.isEditingImage)?.id;
+
+}
+
+
 export const getCategories = (
     state:StateType) => {
         return state.categories;

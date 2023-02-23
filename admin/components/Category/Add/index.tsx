@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 
 import AdminSubSection from "../../../../layouts/AdminSubSection";
-import UploadForm from "../../UploadForm";
+import UploadForm from "./UploadForm";
 
 import styles from './Add.module.scss';
 

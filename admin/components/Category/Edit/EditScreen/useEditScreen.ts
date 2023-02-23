@@ -12,10 +12,10 @@ import { CategoryType } from '../../../../../database';
 
 type useEditScreenParams = {
     category: _CategoryType;
-    toggleEditMode: () => void;
+    setEditMode: (mode:boolean) => void;
 }
 
-const useEditScreen = ({category, toggleEditMode}: useEditScreenParams) => {
+const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
     
     const {openCatImageModal, dispatch, state} = useContext(AdminContext);
 
@@ -86,7 +86,7 @@ const useEditScreen = ({category, toggleEditMode}: useEditScreenParams) => {
     }
 
     const onCancel = () => {
-        toggleEditMode();
+        setEditMode(false);
         reset();
     }
 
@@ -104,7 +104,7 @@ const useEditScreen = ({category, toggleEditMode}: useEditScreenParams) => {
                     data: preparedCat,
                     onSuccess: (updatedCat) => {
                         updateCategory(updatedCat as CategoryType, dispatch);
-                        toggleEditMode();
+                        setEditMode(false);
                     }
                 })
 

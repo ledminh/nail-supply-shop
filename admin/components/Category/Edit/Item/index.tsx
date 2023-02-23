@@ -27,13 +27,13 @@ type ItemType = FunctionComponent<ItemPropsType>
  */
 const Item:ItemType = ({category}) => {
 
-    const {editMode, toggleEditMode, onDelete} = useItem({category});
+    const {editMode, setEditMode, onDelete} = useItem({category});
 
 
     const content = editMode ? (
         <EditScreen
             category={category}
-            toggleEditMode={toggleEditMode}
+            setEditMode={setEditMode}
             />
     ) : (
         <>
@@ -51,7 +51,7 @@ const Item:ItemType = ({category}) => {
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button + ' ' + styles.edit}
-                    onClick={toggleEditMode}
+                    onClick={() => setEditMode(true)}
                 >
                     Edit
                 </button>
