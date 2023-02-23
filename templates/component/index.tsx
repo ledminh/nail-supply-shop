@@ -2,6 +2,8 @@ import { FunctionComponent } from "react";
 
 import styles from './templatename.module.scss';
 
+import usetemplatename from "./useTemplateName";
+
 /***************************
  *  Types
  */
@@ -17,6 +19,8 @@ type templatenameType = FunctionComponent<templatenamePropsType>
  *  Main Component
  */
 const templatename:templatenameType = () => {
+
+    const {} = usetemplatename();
 
     return (
         <div className={styles.wrapper}>

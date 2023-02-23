@@ -9,11 +9,14 @@
         "withStory": false,
         "withStyle": true,
         "withTest": false,
+        "withHook": true,
 
         "customTemplates": {
-        "component": "templates/component/index.tsx",
-        "style": "templates/component/TemplateName.module.scss"
+            "component": "templates/component/index.tsx",
+            "style": "templates/component/TemplateName.module.scss",
+            "hook": "templates/component/useTemplateName.ts"
         }
+    
     },
 
     "page": {

@@ -6,9 +6,7 @@ import { getCategories } from '../../../reducer/actions.Categories';
 const useAdd = () => {
     const {state} = useContext(AdminContext);
 
-    const [productName, setProductName] = useState('');
-    const [shortDescription, setShortDescription] = useState('');
-    const [fullDescription, setFullDescription] = useState('');
+    
 
 
 
@@ -22,14 +20,7 @@ const useAdd = () => {
     const onCategoryChange = (e: any) => {
     }
 
-    const onProductNameChange = (e: any) => {
-    }
-
-    const onShortDescriptionChange = (e: any) => {
-    }
-
-    const onFullDescriptionChange = (e: any) => {
-    }
+    
 
     const onAddClick = () => {
     }
@@ -44,12 +35,6 @@ const useAdd = () => {
     return {
         onCategoryChange,
         categories: getCategories(state),
-        productName,
-        onProductNameChange,
-        shortDescription,
-        onShortDescriptionChange,
-        fullDescription,
-        onFullDescriptionChange,
         onAddClick,
         onCancelClick
     }
