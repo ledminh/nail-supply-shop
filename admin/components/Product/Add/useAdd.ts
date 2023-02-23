@@ -1,6 +1,5 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AdminContext } from '../../../Context';
-import { getCategories } from '../../../reducer/actions.Categories';
 
 
 const useAdd = () => {
@@ -17,9 +16,6 @@ const useAdd = () => {
     /*************************************
      *  Public methods
      */
-    const onCategoryChange = (e: any) => {
-    }
-
     
 
     const onAddClick = () => {
@@ -33,8 +29,6 @@ const useAdd = () => {
 
     
     return {
-        onCategoryChange,
-        categories: getCategories(state),
         onAddClick,
         onCancelClick
     }

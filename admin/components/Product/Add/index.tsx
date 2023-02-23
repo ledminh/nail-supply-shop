@@ -4,6 +4,8 @@ import AdminSubSection from "../../../../layouts/AdminSubSection";
 
 import styles from './Add.module.scss';
 import AddForm from "./AddForm";
+import GroupAdd from "./GroupAdd";
+import SingleAdd from "./SingleAdd";
 
 import useAdd from "./useAdd";
 
@@ -24,8 +26,6 @@ type AddType = FunctionComponent<AddPropsType>
 const Add:AddType = () => {
 
     const {
-        onCategoryChange,
-        categories,
         onAddClick,
         onCancelClick
     } = useAdd();
@@ -44,30 +44,8 @@ const Add:AddType = () => {
                     <button>Single</button>
                     <button>Group</button>
                 </div>
-                <div className={styles.field}>
-                    <label htmlFor="category">Category</label>
-                    <select name="category" id="category"
-                        onChange={onCategoryChange}
-                        >
-                        {categories.map((category) => (
-                            <option key={category.id} value={category.id}>{category.name}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className={styles.field}>
-                    <div>Other products in group:</div>
-                    <div>Product 1, Product 2, Product 3, Product 1, Product 2, Product 3</div>
-                </div>
-
-                <AddForm 
-                    stylesField={styles.field}
-                    onChange={(data) => {console.log(data)}}
-                />
-                
-                <div className={styles.field}>
-                    <button>Add to group</button>
-                    <button>Cancel</button>
-                </div>
+                <GroupAdd stylesField={styles.field} />
+                <SingleAdd stylesField={styles.field} />
                 <div className={styles.field}>
                     <button className={styles.button + " " + styles.add}
                         onClick={onAddClick}>

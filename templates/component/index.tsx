@@ -20,7 +20,7 @@ type templatenameType = FunctionComponent<templatenamePropsType>
  */
 const templatename:templatenameType = () => {
 
-    const {} = usetemplatename();
+    const {} = usetemplatename({});
 
     return (
         <div className={styles.wrapper}>
