@@ -46,9 +46,7 @@ const useItem = ({category}:Props) => {
                 fileName: imageName
             });
         
-        }
-
-                
+        }           
 
 
 

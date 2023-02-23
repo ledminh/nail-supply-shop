@@ -9,6 +9,7 @@ import postCategory from '../../../../tools/postCategory';
 import { CategoryType } from '../../../../../database';
 import { getCategoryImageFromCache } from '../../../../reducer/actions.Cache';
 
+import deleteFile from '../../../../tools/deleteFile';
 
 
 type useEditScreenParams = {
@@ -63,6 +64,18 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
             const cachedImage = getCategoryImageFromCache(category.id, state);
 
             if(cachedImage) {
+                const oldImageUrl = category.imageUrl;
+
+                if(oldImageUrl.indexOf('/images/category/') === 0) {
+                    const imageName = oldImageUrl.slice(oldImageUrl.lastIndexOf('/') + 1);
+
+                    await deleteFile({
+                        type: 'cat-image',
+                        fileName: imageName
+                    });
+
+                }
+
                 const res = await upload({
                     type: 'cat-image',
                     file: cachedImage,
