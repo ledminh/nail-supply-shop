@@ -31,7 +31,7 @@ const Add:AddType = () => {
         onNameChange, 
         description, 
         onDescriptionChange, 
-        imgPath, 
+        file, 
         onFileChange, 
         onAdd,
         onCancel 
@@ -87,10 +87,10 @@ const Add:AddType = () => {
                 </fieldset>
 
                 {
-                    imgPath && (
+                    file && (
                         <div className={styles.imgWrapper}>
                             <Image
-                                src={imgPath}
+                                src={URL.createObjectURL(file)}
                                 alt={`Category ${name}`}
                                 fill
                                 style={{
@@ -104,7 +104,7 @@ const Add:AddType = () => {
                 <div className={styles.buttons}>
                     <button className={styles.add}
                         onClick={onAdd}    
-                        disabled={name.length === 0 || description.length === 0 || imgPath === null}
+                        disabled={name.length === 0 || description.length === 0 || file === null}
                         >
                         Add
                     </button>

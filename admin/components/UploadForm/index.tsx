@@ -23,15 +23,18 @@ type UploadFormType = FunctionComponent<UploadFormPropsType>
  *  Main Component
  */
 const UploadForm:UploadFormType = ({id, inputClassName, allowMultipleFiles, onFileChange}) => {
-    const { _onFileChange, onDelete, fileName} = useUpload({onFileChange});
+    const { _onFileChange, 
+            onDelete, 
+            file
+        } = useUpload({onFileChange});
 
     // Show progress bar if there is a progress
-    if (fileName) {
+    if (file) {
         return (
             <div className={styles.wrapper + ' '  + inputClassName}>
                 <div className={styles.fileName}>
                     {
-                        fileName.length < 20? fileName: "... " + fileName.substring(fileName.length - 20)
+                        file.name.length < 20? file.name: "... " + file.name.substring(file.name.length - 20)
                     }         
                 </div>
                 <button className={styles.cancelButton} 

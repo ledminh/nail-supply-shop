@@ -49,7 +49,7 @@ const useAdd = () => {
             type: 'cat-image',
             file,
         }).then((res) => {
-            const imgUrl = `/category/${res.data.filename}`;
+            const imgUrl = `/images/category/${res.data.filename}`;
 
             const categoryToAdd:CategoryToAdd = {
                 name,
@@ -78,7 +78,7 @@ const useAdd = () => {
         onNameChange,
         description,
         onDescriptionChange,
-        imgPath: file? URL.createObjectURL(file) : null,
+        file,
         onFileChange,
         onAdd,
         onCancel

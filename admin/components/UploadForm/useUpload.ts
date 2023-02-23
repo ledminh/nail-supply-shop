@@ -48,7 +48,7 @@ const useUpload= ({onFileChange}:useUploadParamsType) => {
     };
 
     return {
-        fileName: file?.name || '',
+        file,
         _onFileChange,
         onDelete,
     }
