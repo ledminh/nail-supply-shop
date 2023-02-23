@@ -63,7 +63,15 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
             const cachedImage = getCategoryImageFromCache(category.id, state);
 
             if(cachedImage) {
-                const uploadedImageUrl = await uploadImage(cachedImage);
+                const res = await upload({
+                    type: 'cat-image',
+                    file: cachedImage,
+                });
+            
+                const { filename } = res.data;
+            
+                const uploadedImageUrl = `/images/category/${filename}`;
+                
                 preparedCat = {
                     ...preparedCat,
                     imageUrl: uploadedImageUrl
@@ -138,23 +146,6 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
 export default useEditScreen;
 
 
-/**********************************
- * Private functions             *
- */
-
-
-
-const uploadImage = async (imgFile: File) => {
-    const res = await upload({
-        type: 'cat-image',
-        file: imgFile,
-    });
-
-    const { filename } = res.data;
-
-    return `/images/category/${filename}`;
-
-}   
 
 
 
