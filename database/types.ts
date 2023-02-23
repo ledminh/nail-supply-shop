@@ -1,4 +1,4 @@
-import { NewCategoryType, CategoryToUpdateType } from "../admin/types";
+import { CategoryToAdd, CategoryToUpdate } from "../admin/types";
 
 /*********************************************
  *  Database schema
@@ -119,11 +119,11 @@ export type AdminPageDataType = PageDataType & {
 
 export type GetDBCategoriesType = () => Promise<DBCategoryType[]>;
 
-export type AddDBCategoryType = (newCategory: NewCategoryType) => Promise<DBCategoryType>;
+export type AddDBCategoryType = (newCategory: CategoryToAdd) => Promise<DBCategoryType>;
 
 export type DeleteDBCategoryType = (id: string) => Promise<string>;
 
-export type UpdateDBCategoryType = (category: CategoryToUpdateType) => Promise<DBCategoryType>;
+export type UpdateDBCategoryType = (category: CategoryToUpdate) => Promise<DBCategoryType>;
 
 type ProductOptionsType = {
     limit?: number;
@@ -159,11 +159,11 @@ export type GetDBAboutHtmlTextType = () => Promise<string>;
 
 export type GetCategoriesType = () => Promise<ResponseType<CategoryType[]>>;
 
-export type AddCategoryType = (category: NewCategoryType) => Promise<ResponseType<CategoryType>>;
+export type AddCategoryType = (category: CategoryToAdd) => Promise<ResponseType<CategoryType>>;
 
 export type DeleteCategoryType = (id: string) => Promise<ResponseType<string>>;
 
-export type UpdateCategoryType = (category: CategoryToUpdateType) => Promise<ResponseType<CategoryType>>;
+export type UpdateCategoryType = (category: CategoryToUpdate) => Promise<ResponseType<CategoryType>>;
 
 
 export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<DBProductsResponseType>>;
