@@ -36,9 +36,9 @@ const GroupAdd:GroupAddType = ({stylesField}) => {
                     ))}
                 </select>
             </div>
-            <div className={stylesField}>
-                <div>Other products in group:</div>
-                <div>Product 1, Product 2, Product 3, Product 1, Product 2, Product 3</div>
+            <div className={styles.listProducts}>
+                <div className={styles.title}>Other products in group:</div>
+                <div className={styles.body}>Product 1, Product 2, Product 3, Product 1, Product 2, Product 3</div>
             </div>
 
             <AddForm 

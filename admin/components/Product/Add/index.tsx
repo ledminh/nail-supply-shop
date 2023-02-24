@@ -1,9 +1,7 @@
 import { FunctionComponent } from "react";
-import { CategoryType } from "../../../../database";
 import AdminSubSection from "../../../../layouts/AdminSubSection";
 
 import styles from './Add.module.scss';
-import AddForm from "./AddForm";
 import GroupAdd from "./GroupAdd";
 import SingleAdd from "./SingleAdd";
 
@@ -41,8 +39,8 @@ const Add:AddType = () => {
             >
             <form className={styles.wrapper}>
                 <div className={styles.field}>
-                    <button>Single</button>
-                    <button>Group</button>
+                    <button className={styles.single}>Single</button>
+                    <button className={styles.group}>Group</button>
                 </div>
                 <GroupAdd stylesField={styles.field} />
                 <SingleAdd stylesField={styles.field} />

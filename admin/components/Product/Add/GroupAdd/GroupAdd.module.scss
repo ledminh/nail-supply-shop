@@ -19,14 +19,8 @@
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
 
     button {
-
         padding: 2px;
-
         font-size: 0.85rem;
-
-        font-weight: 700;
-
-    
     }
 
     button.add {
@@ -47,5 +41,27 @@
 
     button.cancel {
         @include base.button("secondary");
+    }
+}
+
+.listProducts {
+    background-color: adjust-color($color: base.$backgroundColor, $lightness: -10%);
+
+    border-radius: 10px;
+
+    .title {
+        display: inline-block;
+        font-weight: 900;
+        padding-left: .5rem;
+        padding-top: .5rem;
+        
+        margin-bottom: .2rem;
+    }
+
+    .body {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 4px;
+        padding: .5rem;
     }
 }

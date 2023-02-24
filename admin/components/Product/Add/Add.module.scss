@@ -8,26 +8,6 @@
 
     font-size: .8rem;
 
-    
-
-
-    button {
-        width: 100%;
-    
-        padding: 5px;
-    
-        border: 1px solid #000;
-    
-        border-radius: 5px;
-    
-        background-color: rgb(55, 55, 55);
-    
-        color: #fff;
-    
-        font-size: medium;
-    
-        font-weight: 700;
-    }
 }
 
 .field {
@@ -88,6 +68,44 @@
         &:focus {
             outline: none;
         }
+    }
+
+    button {
+        width: 100%;
+
+        padding: 5px;
+
+        border: 1px solid #000;
+
+        border-radius: 5px;
+
+        background-color: rgb(55, 55, 55);
+
+        color: #fff;
+
+        font-size: 1rem;
+
+        font-weight: 700;
+    }
+
+    button.add {
+        @include base.button("primary");
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: .5;
+            border: none;
+
+            background-color: gray;
+
+            &:hover {
+                background-color: gray;
+            }
+        }
+    }
+
+    button.cancel {
+        @include base.button("secondary");
     }
 }
 
