@@ -10,9 +10,11 @@ import useAddForm from "./useAddForm";
 
 export type AddFormData = {
     productName: string;
+    serialNumber: string;
     shortDescription: string;
     fullDescription: string;
     price: number;
+
 }
 
 interface AddFormPropsType {
@@ -32,6 +34,8 @@ const AddForm:AddFormType = ({stylesField, onChange}) => {
     const {
         productName,
         onProductNameChange,
+        serialNumber,
+        onSerialNumberChange,
         shortDescription,
         onShortDescriptionChange,
         fullDescription,
@@ -49,6 +53,15 @@ const AddForm:AddFormType = ({stylesField, onChange}) => {
                     id="name"
                     value={productName}
                     onChange={onProductNameChange}
+                />
+            </div>
+            <div className={stylesField}>
+                <label htmlFor="Serial Number">Serial Number</label>
+                <input type="text" 
+                    name="Serial Number" 
+                    id="serial_number"
+                    value={serialNumber}
+                    onChange={onSerialNumberChange}
                 />
             </div>
             <div className={stylesField}>
@@ -92,3 +105,14 @@ const AddForm:AddFormType = ({stylesField, onChange}) => {
 }
 
 export default AddForm;
+
+
+export const isAddFormDataValid = (data: AddFormData) => {
+    if(data.productName === "") return false;
+    if(data.serialNumber === "") return false;
+    if(data.shortDescription === "") return false;
+    if(data.fullDescription === "") return false;
+    if(data.price === 0) return false;
+
+    return true;
+}

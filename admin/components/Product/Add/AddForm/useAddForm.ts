@@ -9,6 +9,7 @@ type useAddFormParams = {
 const useAddForm = ({onChange}:useAddFormParams) => {
     
     const [productName, setProductName] = useState('');
+    const [serialNumber, setSerialNumber] = useState(''); 
     const [shortDescription, setShortDescription] = useState('');
     const [fullDescription, setFullDescription] = useState('');
     const [price, setPrice] = useState(0);
@@ -18,11 +19,12 @@ const useAddForm = ({onChange}:useAddFormParams) => {
     useEffect(() => {
         onChange({
             productName,
+            serialNumber,
             shortDescription,
             fullDescription,
             price
         });
-    }, [productName, shortDescription, fullDescription, price]);
+    }, [productName, serialNumber, shortDescription, fullDescription, price]);
     
     
     
@@ -31,6 +33,10 @@ const useAddForm = ({onChange}:useAddFormParams) => {
      */
     const onProductNameChange:ChangeEventHandler<HTMLInputElement> = (e) => {
         setProductName(e.target.value);
+    }
+
+    const onSerialNumberChange:ChangeEventHandler<HTMLInputElement> = (e) => {
+        setSerialNumber(e.target.value);
     }
 
     const onShortDescriptionChange:ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -49,6 +55,8 @@ const useAddForm = ({onChange}:useAddFormParams) => {
     return {
         productName,
         onProductNameChange,
+        serialNumber,
+        onSerialNumberChange,
         shortDescription,
         onShortDescriptionChange,
         fullDescription,
