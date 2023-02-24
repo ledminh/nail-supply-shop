@@ -29,6 +29,8 @@ const Add:AddType = () => {
         onGroupClick,
         onAddClick,
         onCancelClick,
+        isDataValid,
+        setIsDataValid,
     } = useAdd();
 
 
@@ -57,10 +59,14 @@ const Add:AddType = () => {
                     currentMode === "group" ?
                     <GroupAdd stylesField={styles.field} />
                     :
-                    <SingleAdd stylesField={styles.field} />
+                    <SingleAdd 
+                        stylesField={styles.field} 
+                        setIsDataValid={setIsDataValid}
+                        />
                 }
                 <div className={styles.buttons}>
                     <button className={styles.button + " " + styles.add}
+                        disabled={!isDataValid}
                         onClick={onAddClick}>
                         Add
                     </button>

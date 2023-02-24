@@ -5,7 +5,8 @@ import { AdminContext } from '../../../Context';
 const useAdd = () => {
     const {state} = useContext(AdminContext);
 
-    const [currentMode, setMode] = useState<'single'|'group'>('single');    
+    const [currentMode, setMode] = useState<'single'|'group'>('single');
+    const [isDataValid, setIsDataValid] = useState<boolean>(false);    
 
     /*************************************
      *  Public methods
@@ -20,13 +21,18 @@ const useAdd = () => {
 
     const onSingleClick:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
-
+        if(currentMode === 'single') return;
+        
+        setIsDataValid(false);
         setMode('single');
     }
 
     const onGroupClick:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         
+        if(currentMode === 'group') return;
+
+        setIsDataValid(false);
         setMode('group');
     }
 
@@ -37,7 +43,9 @@ const useAdd = () => {
         onSingleClick,
         onGroupClick,
         onAddClick,
-        onCancelClick
+        onCancelClick,
+        isDataValid,
+        setIsDataValid
     }
 }
 

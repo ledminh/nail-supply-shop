@@ -11,6 +11,7 @@ import AddForm from "../AddForm";
  */
 interface SingleAddPropsType {
     stylesField: string;
+    setIsDataValid: (isDataValid: boolean) => void;
 } 
 
 type SingleAddType = FunctionComponent<SingleAddPropsType>
@@ -20,12 +21,13 @@ type SingleAddType = FunctionComponent<SingleAddPropsType>
 /***************************
  *  Main Component
  */
-const SingleAdd:SingleAddType = ({stylesField}) => {
+const SingleAdd:SingleAddType = ({stylesField, setIsDataValid}) => {
 
     const {
         categories,
-        onCategoryChange
-    } = useSingleAdd({});
+        onCategoryChange,
+        onAddFormChange,
+    } = useSingleAdd({setIsDataValid});
 
     return (
         <div className={styles.wrapper}>
@@ -41,7 +43,7 @@ const SingleAdd:SingleAddType = ({stylesField}) => {
             </div>
             <AddForm 
                 stylesField={stylesField}
-                onChange={(data) => {console.log(data)}}
+                onChange={onAddFormChange}
             />
         </div>
     )
