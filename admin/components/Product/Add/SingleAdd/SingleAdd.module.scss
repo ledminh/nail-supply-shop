@@ -1,0 +1,22 @@
+@use '../../../../../styles/base';
+
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+
+    gap: 10px;
+
+    
+
+    width: 90%;
+    margin: 0 auto;
+    padding: 1rem;
+
+    background-color: base.$backgroundColor;
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+
+}

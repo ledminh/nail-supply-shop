@@ -1,0 +1,51 @@
+@use '../../../../../styles/base';
+
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+
+    gap: 10px;
+
+    
+
+    width: 90%;
+    margin: 0 auto;
+    padding: 1rem;
+
+    background-color: base.$backgroundColor;
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+    button {
+
+        padding: 2px;
+
+        font-size: 0.85rem;
+
+        font-weight: 700;
+
+    
+    }
+
+    button.add {
+        @include base.button("primary");
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: .5;
+            border: none;
+
+            background-color: gray;
+
+            &:hover {
+                background-color: gray;
+            }
+        }
+    }
+
+    button.cancel {
+        @include base.button("secondary");
+    }
+}

@@ -47,8 +47,8 @@ const GroupAdd:GroupAddType = ({stylesField}) => {
             />
             
             <div className={stylesField}>
-                <button>Add to group</button>
-                <button>Cancel</button>
+                <button className={styles.add}>Add to group</button>
+                <button className={styles.cancel}>Cancel</button>
             </div>
         </div>
     )

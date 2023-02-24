@@ -8,87 +8,88 @@
 
     font-size: .8rem;
 
-    .field {
-        flex-basis: 100%;
-
-        display: flex;
-        justify-content: space-between;
-        
-        gap: 10px;
-
-
-
-        label {
-            flex-basis: 20%;
-            
-            font-weight: 700;
-        }
-
-        select {
-            flex-basis: 75%;
-            
-            padding: 5px;
-
-            border: 1px solid #000;
-
-            border-radius: 5px;
-        
-            &:focus {
-                outline: none;
-            }
-        }
-
-        input {
-            flex-basis: 75%;
-            
-            padding: 5px;
-
-            border: 1px solid #000;
-
-            border-radius: 5px;
-        
-            &:focus {
-                outline: none;
-            }
-        }
-
-        textarea {
-            flex-basis: 75%;
-            
-            padding: 5px;
-
-            border: 1px solid #000;
-
-            border-radius: 5px;
-
-            resize: none;
-        
-            &:focus {
-                outline: none;
-            }
-        }
-    }
-
+    
 
 
     button {
         width: 100%;
+    
+        padding: 5px;
+    
+        border: 1px solid #000;
+    
+        border-radius: 5px;
+    
+        background-color: rgb(55, 55, 55);
+    
+        color: #fff;
+    
+        font-size: medium;
+    
+        font-weight: 700;
+    }
+}
 
+.field {
+    flex-basis: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    
+    gap: 10px;
+
+
+
+    label {
+        flex-basis: 20%;
+        
+        font-weight: 700;
+    }
+
+    select {
+        flex-basis: 75%;
+        
+        padding: 5px;
+
+        border: 1px solid #000;
+
+        border-radius: 5px;
+    
+        &:focus {
+            outline: none;
+        }
+    }
+
+    input {
+        flex-basis: 75%;
+        
+        padding: 5px;
+
+        border: 1px solid #000;
+
+        border-radius: 5px;
+    
+        &:focus {
+            outline: none;
+        }
+    }
+
+    textarea {
+        flex-basis: 75%;
+        
         padding: 5px;
 
         border: 1px solid #000;
 
         border-radius: 5px;
 
-        background-color: rgb(55, 55, 55);
-
-        color: #fff;
-
-        font-size: medium;
-
-        font-weight: 700;
-    }
-
-
+        resize: none;
     
+        &:focus {
+            outline: none;
+        }
+    }
 }
+
+
+
