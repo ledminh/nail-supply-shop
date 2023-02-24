@@ -1,0 +1,83 @@
+.filesInput {
+    display: none;
+}
+
+.filesLabel {
+    grid-column: 1/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: .5rem;
+    font-size: .9rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+    &:active {
+        background-color: #fff;
+        color: #000;
+    }
+}
+
+
+.buttonImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    
+
+    
+
+}
+
+
+.buttonImage_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 2;
+
+    &:hover {
+        opacity: 1;
+    }
+
+}
+
+.images {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+
+    grid-gap: 10px;
+    
+    li {
+        height: 50px;
+    }
+}

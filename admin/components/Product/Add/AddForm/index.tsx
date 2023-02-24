@@ -1,8 +1,12 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, MouseEventHandler } from "react";
+
+import Image from "next/image";
 
 import styles from './AddForm.module.scss';
 
 import useAddForm from "./useAddForm";
+
+import CloseIconSVG from '../../../../../assets/images/close_icon.svg';
 
 /***************************
  *  Types
@@ -14,6 +18,7 @@ export type AddFormData = {
     shortDescription: string;
     fullDescription: string;
     price: number;
+    files: File[];
 
 }
 
@@ -41,7 +46,10 @@ const AddForm:AddFormType = ({stylesField, onChange}) => {
         fullDescription,
         onFullDescriptionChange,
         price,
-        onPriceChange
+        onPriceChange,
+        files,
+        onFilesChange,
+        buttonImageOnClick
     } = useAddForm({onChange});
 
     return (
@@ -93,13 +101,46 @@ const AddForm:AddFormType = ({stylesField, onChange}) => {
                     />
             </div>
             <div className={stylesField}>
-                <label htmlFor="uploadImage">Upload Image</label>
-                <input 
+                
+                <label
+                    className={styles.filesLabel}
+                    htmlFor="uploadImage">
+                        Upload Images
+                </label>
+                <input
+                    className={styles.filesInput}
                     name="upload_image" 
                     id="uploadImage" 
-                    type="file" 
+                    type="file"
+                    accept="image/*"
+                    multiple={true}
+                    
+                    onChange={onFilesChange}
                     />
             </div>
+            {
+                // Show images if there are any
+                files.length > 0 && (
+                    <div className={stylesField}>
+                        <label>Images</label>
+                        <ul className={styles.images}>
+                            {
+                                files.map((file, index) => (
+                                    <li key={index}>
+                                        <ButtonImage
+                                            file={file}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                buttonImageOnClick(file);
+                                            }}
+                                        />
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+                )
+            }
         </>
     )
 }
@@ -107,12 +148,54 @@ const AddForm:AddFormType = ({stylesField, onChange}) => {
 export default AddForm;
 
 
+
+
 export const isAddFormDataValid = (data: AddFormData) => {
     if(data.productName === "") return false;
     if(data.serialNumber === "") return false;
     if(data.shortDescription === "") return false;
     if(data.fullDescription === "") return false;
-    if(data.price === 0) return false;
+    if(data.price <= 0) return false;
+    if(data.files.length === 0) return false;
 
     return true;
 }
+
+
+/***************************
+ * Other Components
+ */
+
+type ButtonImagePropsType = {
+    file: File;
+    onClick: MouseEventHandler<HTMLButtonElement>;
+}
+
+type ButtonImageType = FunctionComponent<ButtonImagePropsType>;
+
+
+const ButtonImage:ButtonImageType = ({file, onClick}) => {
+    
+
+
+    return (
+        <button className={styles.buttonImage}
+            onClick={onClick}
+            >
+            <Image 
+                src={URL.createObjectURL(file)} 
+                alt={file.name}
+                fill
+                style={{
+                    objectFit: 'cover'
+                }}
+                />
+            <div className={styles.buttonImage_overlay}>
+                <CloseIconSVG />
+            </div>
+        </button>
+    );
+}
+
+
+

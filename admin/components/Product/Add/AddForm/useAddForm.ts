@@ -13,6 +13,7 @@ const useAddForm = ({onChange}:useAddFormParams) => {
     const [shortDescription, setShortDescription] = useState('');
     const [fullDescription, setFullDescription] = useState('');
     const [price, setPrice] = useState(0);
+    const [files, setFiles] = useState<File[]>([]);
     
     
     
@@ -22,9 +23,10 @@ const useAddForm = ({onChange}:useAddFormParams) => {
             serialNumber,
             shortDescription,
             fullDescription,
-            price
+            price,
+            files
         });
-    }, [productName, serialNumber, shortDescription, fullDescription, price]);
+    }, [productName, serialNumber, shortDescription, fullDescription, price, files]);
     
     
     
@@ -51,6 +53,19 @@ const useAddForm = ({onChange}:useAddFormParams) => {
         setPrice(Number(e.target.value));
     }
 
+    const onFilesChange:ChangeEventHandler<HTMLInputElement> = (e) => {
+        const newFiles = Array.from(e.target.files || []);
+
+        setFiles([...newFiles, ...files]);
+    }
+
+    const buttonImageOnClick = (file:File) => {
+        
+        const newFiles = files.filter(f => f !== file);
+
+        setFiles(newFiles);
+
+    }
 
     return {
         productName,
@@ -63,6 +78,9 @@ const useAddForm = ({onChange}:useAddFormParams) => {
         onFullDescriptionChange,
         price,
         onPriceChange,
+        files,
+        onFilesChange,
+        buttonImageOnClick
     }
 }
 
