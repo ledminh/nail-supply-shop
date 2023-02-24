@@ -10,7 +10,7 @@ import AddForm from "../AddForm";
  *  Types
  */
 interface SingleAddPropsType {
-    stylesField: string
+    stylesField: string;
 } 
 
 type SingleAddType = FunctionComponent<SingleAddPropsType>

@@ -28,7 +28,6 @@ const Add:AddType = () => {
         onCancelClick
     } = useAdd();
 
-    
 
 
     return (
@@ -38,13 +37,13 @@ const Add:AddType = () => {
             collapsable
             >
             <form className={styles.wrapper}>
-                <div className={styles.field}>
+                <div className={styles.buttons}>
                     <button className={styles.single}>Single</button>
                     <button className={styles.group}>Group</button>
                 </div>
                 <GroupAdd stylesField={styles.field} />
                 <SingleAdd stylesField={styles.field} />
-                <div className={styles.field}>
+                <div className={styles.buttons}>
                     <button className={styles.button + " " + styles.add}
                         onClick={onAddClick}>
                         Add

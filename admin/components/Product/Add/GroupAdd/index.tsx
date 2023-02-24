@@ -10,7 +10,7 @@ import AddForm from "../AddForm";
  *  Types
  */
 interface GroupAddPropsType {
-    stylesField: string
+    stylesField: string;
 } 
 
 type GroupAddType = FunctionComponent<GroupAddPropsType>
@@ -22,7 +22,10 @@ type GroupAddType = FunctionComponent<GroupAddPropsType>
  */
 const GroupAdd:GroupAddType = ({stylesField}) => {
 
-    const {categories, onCategoryChange} = useGroupAdd({});
+    const {
+        categories, 
+        onCategoryChange
+    } = useGroupAdd({});
 
     return (
         <div className={styles.wrapper}>
@@ -46,7 +49,7 @@ const GroupAdd:GroupAddType = ({stylesField}) => {
                 onChange={(data) => {console.log(data)}}
             />
             
-            <div className={stylesField}>
+            <div className={styles.buttons}>
                 <button className={styles.add}>Add to group</button>
                 <button className={styles.cancel}>Cancel</button>
             </div>
