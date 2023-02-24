@@ -25,6 +25,8 @@ export type AddFormData = {
 interface AddFormPropsType {
     stylesField: string;
     onChange: (data: AddFormData) => void;
+    isResetting: boolean;
+    setIsResetting: (isResetting: boolean) => void;
 } 
 
 type AddFormType = FunctionComponent<AddFormPropsType>
@@ -34,7 +36,7 @@ type AddFormType = FunctionComponent<AddFormPropsType>
 /***************************
  *  Main Component
  */
-const AddForm:AddFormType = ({stylesField, onChange}) => {
+const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting}) => {
 
     const {
         productName,
@@ -50,7 +52,7 @@ const AddForm:AddFormType = ({stylesField, onChange}) => {
         files,
         onFilesChange,
         buttonImageOnClick
-    } = useAddForm({onChange});
+    } = useAddForm({onChange, isResetting, setIsResetting});
 
     return (
         <>

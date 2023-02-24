@@ -4,9 +4,11 @@ import { AddFormData } from '.';
 
 type useAddFormParams = {
     onChange: (data: AddFormData) => void;
+    isResetting: boolean;
+    setIsResetting: (isResetting: boolean) => void;
 }
 
-const useAddForm = ({onChange}:useAddFormParams) => {
+const useAddForm = ({onChange, isResetting, setIsResetting}:useAddFormParams) => {
     
     const [productName, setProductName] = useState('');
     const [serialNumber, setSerialNumber] = useState(''); 
@@ -28,6 +30,17 @@ const useAddForm = ({onChange}:useAddFormParams) => {
         });
     }, [productName, serialNumber, shortDescription, fullDescription, price, files]);
     
+    useEffect(() => {
+        if(isResetting) {
+            setProductName('');
+            setSerialNumber('');
+            setShortDescription('');
+            setFullDescription('');
+            setPrice(0);
+            setFiles([]);
+            setIsResetting(false);
+        }
+    }, [isResetting]);
     
     
     /*********************************

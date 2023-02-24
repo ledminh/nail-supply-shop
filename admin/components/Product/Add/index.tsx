@@ -31,6 +31,8 @@ const Add:AddType = () => {
         onCancelClick,
         isDataValid,
         setIsDataValid,
+        isResetting,
+        setIsResetting
     } = useAdd();
 
 
@@ -62,6 +64,8 @@ const Add:AddType = () => {
                     <SingleAdd 
                         stylesField={styles.field} 
                         setIsDataValid={setIsDataValid}
+                        isResetting={isResetting}
+                        setIsResetting={setIsResetting}
                         />
                 }
                 <div className={styles.buttons}>

@@ -14,8 +14,6 @@ const useSingleAdd = ({setIsDataValid}: useSingleAddParams) => {
     
 
 
-
-
     /*************************************
      *  Public methods
      */

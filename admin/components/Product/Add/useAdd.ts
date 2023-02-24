@@ -8,15 +8,26 @@ const useAdd = () => {
     const [currentMode, setMode] = useState<'single'|'group'>('single');
     const [isDataValid, setIsDataValid] = useState<boolean>(false);    
 
+    const [isResetting, setIsResetting] = useState<boolean>(false);
+
     /*************************************
      *  Public methods
      */
     
 
-    const onAddClick = () => {
+    const onAddClick:MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
+
+        if(!isDataValid) return;
+
+
     }
 
-    const onCancelClick = () => {
+    const onCancelClick:MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
+
+        setIsResetting(true);    
+
     }
 
     const onSingleClick:MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -45,7 +56,9 @@ const useAdd = () => {
         onAddClick,
         onCancelClick,
         isDataValid,
-        setIsDataValid
+        setIsDataValid,
+        isResetting,
+        setIsResetting
     }
 }
 
