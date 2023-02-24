@@ -24,8 +24,11 @@ type AddType = FunctionComponent<AddPropsType>
 const Add:AddType = () => {
 
     const {
+        currentMode,
+        onSingleClick,
+        onGroupClick,
         onAddClick,
-        onCancelClick
+        onCancelClick,
     } = useAdd();
 
 
@@ -38,11 +41,24 @@ const Add:AddType = () => {
             >
             <form className={styles.wrapper}>
                 <div className={styles.buttons}>
-                    <button className={styles.single}>Single</button>
-                    <button className={styles.group}>Group</button>
+                    <button 
+                        className={currentMode === "single" ? styles.active : styles.inactive} 
+                        onClick={onSingleClick}>
+                            Single
+                    </button>
+                    <button 
+                        className={currentMode === "group" ? styles.active : styles.inactive} 
+                        onClick={onGroupClick}>
+                            Group
+                    </button>
+                    <div className={styles.slider} />
                 </div>
-                <GroupAdd stylesField={styles.field} />
-                <SingleAdd stylesField={styles.field} />
+                {
+                    currentMode === "group" ?
+                    <GroupAdd stylesField={styles.field} />
+                    :
+                    <SingleAdd stylesField={styles.field} />
+                }
                 <div className={styles.buttons}>
                     <button className={styles.button + " " + styles.add}
                         onClick={onAddClick}>
