@@ -3,6 +3,8 @@ import { CategoryType, ProductGroupType, ProductType } from "../../../../databas
 
 import Item from "./Item";
 
+import useEdit from "./useEdit";
+
 import styles from './Edit.module.scss';
 import AdminSubSection from "../../../../layouts/AdminSubSection";
 
@@ -23,7 +25,13 @@ type EditType = FunctionComponent<EditPropsType>
 /***************************
  *  Main Component
  */
-const Edit:EditType = ({categories, products}) => {
+const Edit:EditType = ({products}) => {
+
+    const {
+        categories,
+        selectedCategoryID,
+        onCategoryChange,
+    } = useEdit();
 
 
     return (
@@ -32,13 +40,21 @@ const Edit:EditType = ({categories, products}) => {
             last
             >
             <div className={styles.wrapper}>
-                <select className={styles.select}>
-                    <option value="title">Category</option>
-                    {
-                        categories.map((category, index) => (
-                            <option key={index} value={category.id}>{category.name}</option>
-                        ))
-                    }
+                <select
+                    className={styles.select}
+                    name="category" 
+                    id="category"
+                    onChange={onCategoryChange}
+                    value={selectedCategoryID}
+                    >
+                    {categories.map((category) => (
+                        <option 
+                            key={category.id} 
+                            value={category.id}
+                            >
+                                {category.name}
+                        </option>
+                    ))}
                 </select>
                 {
                     products.map((product, index) => (

@@ -1,8 +1,6 @@
 import { FunctionComponent } from "react";
 import { CategoryType, ProductGroupType, ProductType } from "../../../database";
 
-import styles from './Product.module.scss';
-
 import Add from './Add';
 import Edit from "./Edit";
 import AdminSection from "../../../layouts/AdminSection";
