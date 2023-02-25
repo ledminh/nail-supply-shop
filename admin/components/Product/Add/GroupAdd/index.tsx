@@ -11,6 +11,10 @@ import AddForm from "../AddForm";
  */
 interface GroupAddPropsType {
     stylesField: string;
+    setIsDataValid: (isDataValid: boolean) => void;
+
+    isResetting: boolean,
+    setIsResetting: (isResetting: boolean) => void;
 } 
 
 type GroupAddType = FunctionComponent<GroupAddPropsType>
@@ -20,12 +24,16 @@ type GroupAddType = FunctionComponent<GroupAddPropsType>
 /***************************
  *  Main Component
  */
-const GroupAdd:GroupAddType = ({stylesField}) => {
+const GroupAdd:GroupAddType = ({stylesField, setIsDataValid, isResetting,
+    setIsResetting}) => {
 
     const {
-        categories, 
-        onCategoryChange
-    } = useGroupAdd({});
+        categories,
+        selectedCategoryID,
+        onCategoryChange,
+        onAddFormChange
+
+    } = useGroupAdd({setIsDataValid});
 
     return (
         <div className={styles.wrapper}>
@@ -33,9 +41,15 @@ const GroupAdd:GroupAddType = ({stylesField}) => {
                 <label htmlFor="category">Category</label>
                 <select name="category" id="category"
                     onChange={onCategoryChange}
+                    value={selectedCategoryID}
                     >
                     {categories.map((category) => (
-                        <option key={category.id} value={category.id}>{category.name}</option>
+                        <option 
+                            key={category.id} 
+                            value={category.id}
+                            >
+                                {category.name}
+                        </option>
                     ))}
                 </select>
             </div>
@@ -46,7 +60,9 @@ const GroupAdd:GroupAddType = ({stylesField}) => {
 
             <AddForm 
                 stylesField={stylesField}
-                onChange={(data) => {console.log(data)}}
+                onChange={onAddFormChange}
+                isResetting={isResetting}
+                setIsResetting={setIsResetting}
             />
             
             <div className={styles.buttons}>

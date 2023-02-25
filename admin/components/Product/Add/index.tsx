@@ -60,7 +60,12 @@ const Add:AddType = () => {
                 </div>
                 {
                     currentMode === "group" ?
-                    <GroupAdd stylesField={styles.field} />
+                    <GroupAdd 
+                        stylesField={styles.field} 
+                        setIsDataValid={setIsDataValid}
+                        isResetting={isResetting}
+                        setIsResetting={setIsResetting}
+                        />
                     :
                     <SingleAdd 
                         stylesField={styles.field} 

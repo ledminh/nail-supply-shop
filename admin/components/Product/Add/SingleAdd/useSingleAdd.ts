@@ -14,18 +14,18 @@ const useSingleAdd = ({setIsDataValid, onProductChange}: useSingleAddParams) => 
 
     const { state } = useContext(AdminContext);
 
-    const { categories } = state;
     
     const [productData, setProductData] = useState<SingleAddData|null>(null);
     const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
 
 
     useEffect(() => {
+        const categories = getCategories(state);
         if(categories.length === 0) return;
 
         setSelectedCategoryID(categories[0].id);
 
-    }, [categories]);
+    }, []);
 
 
     useEffect(() => {
