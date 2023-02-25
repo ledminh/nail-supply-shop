@@ -2,12 +2,15 @@ import { useContext, useState, MouseEventHandler } from 'react';
 import { AdminContext } from '../../../Context';
 import upload from '../../../tools/upload';
 
-import { AddFormData } from './AddForm';
 import { SingleAddData } from './SingleAdd';
+
+import { ProductToAdd } from '../../../types';
 
 
 
 const useAdd = () => {
+
+    const {dispatch} = useContext(AdminContext);
 
     const [currentMode, setMode] = useState<'single'|'group'>('single');
     const [isDataValid, setIsDataValid] = useState<boolean>(false);    
@@ -41,18 +44,23 @@ const useAdd = () => {
                 const imageUrls = filenames.map((filename:string) => `/images/product/${filename}`);
 
                 // add product to database
-                const productToAdd = {
-                    ...singleProduct,
-                    imageUrls
+                const productToAdd:ProductToAdd = {
+                    categoryID: singleProduct.categoryID,
+                    name: singleProduct.productName,
+                    serialNumber: singleProduct.serialNumber,
+                    shortDescription: singleProduct.shortDescription,
+                    fullDescription: singleProduct.fullDescription,
+                    price: singleProduct.price,
+                    imageUrls,
                 };
 
-                console.log(productToAdd);
                 
-                // TODO: add product to database
-                
+                addProduct(productToAdd, dispatch);
+
+                setIsResetting(true);                
 
             }).catch((err) => {
-                console.log(err.message);
+                throw new Error(err);
             });
 
             
@@ -60,11 +68,9 @@ const useAdd = () => {
         }
 
 
-        // reset form
 
 
 
-        setIsResetting(true);
     }
 
     const onCancelClick:MouseEventHandler<HTMLButtonElement> = (e) => {

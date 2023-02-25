@@ -1,4 +1,4 @@
-import { CategoryToAdd, CategoryToUpdate } from "../admin/types";
+import { CategoryToAdd, CategoryToUpdate, ProductToAdd } from "../admin/types";
 
 /*********************************************
  *  Database schema
@@ -125,6 +125,8 @@ export type DeleteDBCategoryType = (id: string) => Promise<string>;
 
 export type UpdateDBCategoryType = (category: CategoryToUpdate) => Promise<DBCategoryType>;
 
+export type AddDBProductType = (newProduct: ProductToAdd) => Promise<DBProductType>;
+
 type ProductOptionsType = {
     limit?: number;
     offset?: number;
@@ -169,6 +171,8 @@ export type UpdateCategoryType = (category: CategoryToUpdate) => Promise<Respons
 export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseType<DBProductsResponseType>>;
 
 export type GetProductType = (id: string) => Promise<ResponseType<ProductType|ProductGroupType>>;
+
+export type AddProductType = (product: ProductToAdd) => Promise<ResponseType<ProductType>>;
 
 
     //------------------------------------------------

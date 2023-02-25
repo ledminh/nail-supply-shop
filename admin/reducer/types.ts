@@ -52,10 +52,19 @@ export type ActionType =
 } | {
     type:'CACHE/DELETE_CAT_IMAGE';
     payload: string;
-} | {
+} | 
+
+// Products
+{
     type:'PROD/SET';
     payload:(ProductType|ProductGroupType)[];
 } | {
+    type:'PROD/ADD_SINGLE';
+    payload: ProductType;
+} | 
+
+// About
+{
     type:'ABOUT/SET_HTML_TEXT';
     payload:string;
 }; 

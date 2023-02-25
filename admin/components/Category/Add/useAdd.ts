@@ -57,6 +57,8 @@ const useAdd = () => {
             addCategory(categoryToAdd, dispatch);
 
             reset();
+        }).catch((err) => {
+            throw new Error(err.message);
         });
 
 

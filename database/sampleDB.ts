@@ -1,4 +1,4 @@
-import { GetDBCategoriesType, AddDBCategoryType, UpdateDBCategoryType, DeleteDBCategoryType, GetDBProductsType, GetDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
+import { GetDBCategoriesType, AddDBCategoryType, UpdateDBCategoryType, DeleteDBCategoryType, GetDBProductsType, GetDBProductType, AddDBProductType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
 
 
 export const getDBCategories:GetDBCategoriesType = async () => {
@@ -291,6 +291,28 @@ export const getDBProduct:GetDBProductType = async (id) => {
 
   resolve(product);
 
+  });
+}
+
+
+export const addDBProduct:AddDBProductType = async (product) => {
+  return new Promise((resolve) => {
+    const newProduct:DBProductType = {
+      ...product,
+      id: (products.length + 1).toString(),
+      date: new Date().toISOString(),
+      sellCount: 0,
+
+      images: product.imageUrls.map((url) => {
+        return {
+          url,
+        }
+      }),
+    };
+
+    products.push(newProduct);
+
+    resolve(newProduct);
   });
 }
 
