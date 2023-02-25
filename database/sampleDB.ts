@@ -299,7 +299,7 @@ export const addDBProduct:AddDBProductType = async (product) => {
   return new Promise((resolve) => {
     const newProduct:DBProductType = {
       ...product,
-      id: (products.length + 1).toString(),
+      id: product.serialNumber,
       date: new Date().toISOString(),
       sellCount: 0,
 

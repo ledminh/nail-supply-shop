@@ -1,5 +1,5 @@
-import { ProductType, ProductGroupType } from '../../database';
-import { _CategoryType } from '../types';
+import { ProductGroupType } from '../../database';
+import { _CategoryType, _ProductType } from '../types';
 
 
 export type CacheType = {
@@ -10,7 +10,7 @@ export type CacheType = {
 
 export type StateType = {
     categories: _CategoryType[];
-    products:(ProductType|ProductGroupType)[];
+    products:(_ProductType|ProductGroupType)[];
     aboutHtmlText:string;
     cache: CacheType;
 }
@@ -57,10 +57,10 @@ export type ActionType =
 // Products
 {
     type:'PROD/SET';
-    payload:(ProductType|ProductGroupType)[];
+    payload:(_ProductType|ProductGroupType)[];
 } | {
     type:'PROD/ADD_SINGLE';
-    payload: ProductType;
+    payload: _ProductType;
 } | 
 
 // About

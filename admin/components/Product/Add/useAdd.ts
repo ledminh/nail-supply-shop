@@ -5,7 +5,7 @@ import upload from '../../../tools/upload';
 import { SingleAddData } from './SingleAdd';
 
 import { ProductToAdd } from '../../../types';
-
+import { addProduct } from '../../../reducer/actions.Products';
 
 
 const useAdd = () => {

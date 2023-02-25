@@ -1,4 +1,4 @@
-import { CategoryType } from "../database";
+import { CategoryType, ProductType } from "../database";
 
 /************************************
  *  These types are used for sending
@@ -67,7 +67,12 @@ export type _CategoryType = CategoryType & {
     isEditingImage: boolean,
 }
 
-
+export type _ProductType = ProductType & {
+    new: boolean,
+    newest: boolean,
+    toBeDeleted: boolean,
+    isEditingImages: boolean,
+}
 
 
 export type DeleteFileRequestBody = {
