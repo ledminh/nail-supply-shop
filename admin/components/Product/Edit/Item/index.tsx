@@ -26,7 +26,7 @@ const Item:ItemType = ({data}) => {
     
     return Array.isArray(data)? 
                 <ProductGroup />
-                : <Product />;    
+                : <Product product={data}/>;    
     
 }
 

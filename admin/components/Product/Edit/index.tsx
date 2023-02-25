@@ -14,8 +14,6 @@ import AdminSubSection from "../../../../layouts/AdminSubSection";
  *  Types
  */
 interface EditPropsType {
-    products: (ProductType|ProductGroupType)[];
-    categories: CategoryType[];
 } 
 
 type EditType = FunctionComponent<EditPropsType>
@@ -25,7 +23,7 @@ type EditType = FunctionComponent<EditPropsType>
 /***************************
  *  Main Component
  */
-const Edit:EditType = ({products}) => {
+const Edit:EditType = () => {
 
     const {
         categories,

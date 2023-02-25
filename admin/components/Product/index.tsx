@@ -8,11 +8,7 @@ import AdminSection from "../../../layouts/AdminSection";
 /***************************
  *  Types
  */
-interface ProductPropsType {
-    categories: CategoryType[],
-    products: (ProductType|ProductGroupType)[]
-
-} 
+interface ProductPropsType {} 
 
 type ProductComponentType = FunctionComponent<ProductPropsType>
 
@@ -21,17 +17,14 @@ type ProductComponentType = FunctionComponent<ProductPropsType>
 /***************************
  *  Main Component
  */
-const ProductComponent:ProductComponentType = ({categories, products}) => {
+const ProductComponent:ProductComponentType = () => {
 
     return (
         <AdminSection
             title="Product"
             >
             <Add />
-            <Edit 
-                categories={categories}
-                products={products}
-                />
+            <Edit />
         </AdminSection>
     )
 }
