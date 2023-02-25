@@ -19,7 +19,11 @@ const imageFilter = (req:any, file: Express.Multer.File, cb: FileFilterCallback)
 const catImageUpload = multer({
   storage: multer.diskStorage({
     destination: './public/images/category',
-    filename: (req, file, cb) => cb(null, file.originalname),
+    filename: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      const fileName = `cat-image-${uniqueSuffix}.${file.mimetype.split('/')[1]}}`;
+      cb(null, fileName);
+    },
   }),
   fileFilter: imageFilter,
 });
@@ -27,7 +31,15 @@ const catImageUpload = multer({
 const productImagesUpload = multer({
   storage: multer.diskStorage({
     destination: './public/images/product',
-    filename: (req, file, cb) => cb(null, file.originalname),
+    filename: (req, file, cb) => {
+
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      const fileName = `product-image-${uniqueSuffix}.${file.mimetype.split('/')[1]}`;
+      
+      cb(null, fileName);
+
+      
+    },
   }),
   fileFilter: imageFilter,
 });

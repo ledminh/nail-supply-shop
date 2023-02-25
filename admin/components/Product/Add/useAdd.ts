@@ -46,6 +46,8 @@ const useAdd = () => {
                     imageUrls
                 };
 
+                console.log(productToAdd);
+                
                 // TODO: add product to database
                 
 
