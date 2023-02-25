@@ -10,7 +10,7 @@ import { getProductsByCategoryID } from '../../../reducer/actions.Products';
 const useEdit = () => {
     const { state } = useContext(AdminContext);
 
-    const { categories } = state;   
+    const { categories, products } = state;   
     const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
     
     const [currentProducts, setCurrentProducts] = useState<(_ProductType|ProductGroupType)[]>([]);
@@ -21,7 +21,7 @@ const useEdit = () => {
 
         setSelectedCategoryID(categories[0].id);
 
-    }, [categories]);
+    }, [categories, products]);
 
     
     

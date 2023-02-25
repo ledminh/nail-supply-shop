@@ -38,6 +38,7 @@ const Product:ProductType = ({product}) => {
             />
     ) : (
         <>
+            <h5 className={styles.name}>{product.name}</h5>
             <div className={styles.images}>
                 {
                     product.images.map((image, index) => (
@@ -53,9 +54,14 @@ const Product:ProductType = ({product}) => {
                 }                
             </div>
             <div className={styles.text}>
-                <h5>{product.name}</h5>
-                <p>{product.shortDescription}</p>
-                <p>{product.fullDescription}</p>
+                <h5 className={styles.label}>
+                    Short Description
+                </h5>
+                <p className={styles.content}>{product.shortDescription}</p>
+                <h5 className={styles.label}>
+                    Full Description
+                </h5>
+                <p className={styles.content}>{product.fullDescription}</p>
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button + ' ' + styles.edit}
