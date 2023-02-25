@@ -1,7 +1,7 @@
 import { ProductGroupType, ProductType } from "../../database";
 
 import { ProductToAdd, _ProductType } from "../types";
-import { ActionType } from "./types";
+import { ActionType, StateType } from "./types";
 
 import convertProduct from "../tools/convertProduct";
 import postProduct from "../tools/postProduct";
@@ -40,5 +40,16 @@ export const addProduct = (
                 });
             }
         }
+    });
+}
+
+export const getProductsByCategoryID = (categoryID:string, state:StateType) => {
+    return state.products.filter(prod => 
+        {
+            if(Array.isArray(prod)){
+                return prod[0].categoryID === categoryID;
+            }
+            return prod.categoryID === categoryID;
+    
     });
 }

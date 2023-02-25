@@ -1,13 +1,17 @@
 import { FunctionComponent } from "react";
-import { ProductGroupType, ProductType } from "../../../../../database";
+import { ProductGroupType } from "../../../../../database";
+import { _ProductType } from "../../../../types";
 
 import styles from './Item.module.scss';
+
+import Product from "../Product";
+import ProductGroup from "../ProductGroup";
 
 /***************************
  *  Types
  */
 interface ItemPropsType {
-    product: ProductType|ProductGroupType
+    data: _ProductType|ProductGroupType
 } 
 
 type ItemType = FunctionComponent<ItemPropsType>
@@ -17,18 +21,14 @@ type ItemType = FunctionComponent<ItemPropsType>
 /***************************
  *  Main Component
  */
-const Item:ItemType = ({product}) => {
+const Item:ItemType = ({data}) => {
 
-    return (
-        <div className={styles.wrapper}>
-            {/* <h5>{product.name}</h5>
-            <p>{product.fullDescription}</p>
-            <div className={styles.buttons}>
-                <button className={styles.button}>Edit</button>
-                <button className={styles.button}>Delete</button>
-            </div> */}
-        </div>
-    )
+    
+    return Array.isArray(data)? 
+                <ProductGroup />
+                : <Product />;    
+    
 }
 
 export default Item;
+

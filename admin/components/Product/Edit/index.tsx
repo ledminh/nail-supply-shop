@@ -31,6 +31,7 @@ const Edit:EditType = ({products}) => {
         categories,
         selectedCategoryID,
         onCategoryChange,
+        currentProducts,
     } = useEdit();
 
 
@@ -57,10 +58,10 @@ const Edit:EditType = ({products}) => {
                     ))}
                 </select>
                 {
-                    products.map((product, index) => (
+                    currentProducts.map((product, index) => (
                         <Item 
                             key={index}
-                            product={product}
+                            data={product}
                             />
                     ))
                 }
