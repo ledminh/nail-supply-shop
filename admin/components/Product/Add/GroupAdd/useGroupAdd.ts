@@ -4,6 +4,8 @@ import { getCategories } from "../../../../reducer/actions.Categories";
 
 import { AddFormData, isAddFormDataValid } from "../AddForm";
 
+import {ProductGroupToAdd} from '.';
+
 type useGroupAddParams = {
 }
 
@@ -17,6 +19,9 @@ const useGroupAdd = ({
     const [isAddFormResetting, setIsAddFormResetting] = useState<boolean>(false);
 
     const [_isAddFormDataValid, setIsAddFormDataValid] = useState<boolean>(false);
+
+    const [productGroup, setProductGroup] = useState<ProductGroupToAdd>([]);
+    const [currentProductID, setCurrentProductID] = useState<string>('');
 
     useEffect(() => {
         const categories = getCategories(state);
@@ -42,6 +47,9 @@ const useGroupAdd = ({
         const isDataValid = isAddFormDataValid(data);
 
         setIsAddFormDataValid(isDataValid);
+
+            
+
     
     }
 

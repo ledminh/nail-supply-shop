@@ -9,6 +9,18 @@ import AddForm from "../AddForm";
 /***************************
  *  Types
  */
+export type ProductGroupToAdd = {
+    _id: string;
+    groupName: string;
+    mainProduct: boolean;
+    variantName: string;
+    serialNumber: string;
+    shortDescription: string;
+    fullDescription: string;
+    price: number;
+    files: File[];
+}[];
+
 interface GroupAddPropsType {
     stylesField: string;
 
@@ -55,11 +67,22 @@ const GroupAdd:GroupAddType = ({
                     ))}
                 </select>
             </div>
+            <div className={stylesField}>
+                <label htmlFor="group-name">Group name</label>
+                <input type="text" name="group-name" id="group-name" />
+            </div>
+            <div className={stylesField}>
+                <label htmlFor="main-product">Main Product</label>
+                <select name="main-product" id="main-product">
+                    <option value="product-1">Product 1</option>
+                    <option value="product-2">Product 2</option>
+                    <option value="product-3">Product 3</option>
+                </select>
+            </div>
             <div className={styles.listProducts}>
                 <div className={styles.title}>Other products in group:</div>
                 <div className={styles.body}>Product 1, Product 2, Product 3, Product 1, Product 2, Product 3</div>
             </div>
-
             <AddForm 
                 stylesField={stylesField}
                 onChange={onAddFormChange}
