@@ -62,6 +62,10 @@ const Product:ProductType = ({product}) => {
                     Full Description
                 </h5>
                 <p className={styles.content}>{product.fullDescription}</p>
+                <h5 className={styles.label}>
+                    Price
+                </h5>
+                <p className={styles.content}>${product.price}</p>
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button + ' ' + styles.edit}
