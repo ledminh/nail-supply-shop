@@ -36,13 +36,23 @@ const useAdd = () => {
             upload({
                 type: 'product-images',
                 files: singleProduct.files,
-            }).then((res) => {
-                console.log(res);
+            }).then(({data}) => {
+                const {filenames} = data;
+                const imageUrls = filenames.map((filename:string) => `/images/product/${filename}`);
+
+                // add product to database
+                const productToAdd = {
+                    ...singleProduct,
+                    imageUrls
+                };
+
+                // TODO: add product to database
+                
+
             }).catch((err) => {
                 console.log(err.message);
             });
 
-            // upload product to server with image urls
             
 
         }
