@@ -20,9 +20,20 @@ const useGroupAdd = ({
 
     const [_isAddFormDataValid, setIsAddFormDataValid] = useState<boolean>(false);
 
+
+    const [groupName, setGroupName] = useState<string>('');
+
+
     const [productGroup, setProductGroup] = useState<ProductGroupToAdd>([]);
     const [currentProductID, setCurrentProductID] = useState<string>('');
 
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         const categories = getCategories(state);
         if(categories.length === 0) return;
@@ -30,6 +41,16 @@ const useGroupAdd = ({
         setSelectedCategoryID(categories[0].id);
 
     }, []);
+
+
+
+    const getMainProductID = () => {
+        const mainProduct = productGroup.find(product => product.mainProduct === true);
+
+        if(!mainProduct) return '';
+
+        return mainProduct._id;
+    }
 
     /*************************************
      *  Public methods
@@ -40,7 +61,34 @@ const useGroupAdd = ({
 
         setSelectedCategoryID(e.target.value);
 
+    }
 
+    const onGroupNameChange:ChangeEventHandler<HTMLInputElement> = (e) => {
+        e.preventDefault();
+
+        setGroupName(e.target.value);
+    }
+
+    const onMainProductChange:ChangeEventHandler<HTMLSelectElement> = (e) => {
+        e.preventDefault();
+
+        const newProductGroup  = productGroup.map(product => {
+            return {
+                ...product,
+                mainProduct: false
+                }
+        });
+
+        const productID = e.target.value;
+
+        const productIndex = newProductGroup.findIndex(product => product._id === productID);
+
+        newProductGroup[productIndex] = {
+            ...newProductGroup[productIndex],
+            mainProduct: true        
+        }
+
+        setProductGroup(newProductGroup);
     }
 
     const onAddFormChange = (data: AddFormData) => {
@@ -67,6 +115,7 @@ const useGroupAdd = ({
     }
 
 
+
     return {
         categories: getCategories(state),
         selectedCategoryID,
@@ -76,7 +125,12 @@ const useGroupAdd = ({
         setIsAddFormResetting,
         onCancel,
         onAdd,
-        _isAddFormDataValid
+        _isAddFormDataValid,
+        groupName,
+        onGroupNameChange,
+        productGroup,
+        onMainProductChange,
+        mainProductID: getMainProductID()
     }
 }
 

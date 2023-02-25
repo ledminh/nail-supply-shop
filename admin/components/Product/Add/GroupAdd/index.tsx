@@ -46,7 +46,12 @@ const GroupAdd:GroupAddType = ({
         setIsAddFormResetting,
         onCancel,
         onAdd,
-        _isAddFormDataValid
+        _isAddFormDataValid,
+        groupName,
+        onGroupNameChange,
+        productGroup,
+        onMainProductChange,
+        mainProductID
     } = useGroupAdd({});
 
     return (
@@ -69,18 +74,37 @@ const GroupAdd:GroupAddType = ({
             </div>
             <div className={stylesField}>
                 <label htmlFor="group-name">Group name</label>
-                <input type="text" name="group-name" id="group-name" />
+                <input 
+                    type="text" 
+                    name="group-name"
+                    id="group-name" 
+                    value={groupName}
+                    onChange={onGroupNameChange}
+                    />
             </div>
             <div className={stylesField}>
                 <label htmlFor="main-product">Main Product</label>
-                <select name="main-product" id="main-product">
-                    <option value="product-1">Product 1</option>
-                    <option value="product-2">Product 2</option>
-                    <option value="product-3">Product 3</option>
+                <select 
+                    name="main-product"
+                    id="main-product"
+                    onChange={onMainProductChange}
+                    value={mainProductID}
+                    disabled={productGroup.length === 0}
+                    >
+                    {
+                        productGroup.map((product) => (
+                            <option 
+                                key={product._id} 
+                                value={product._id}
+                                >
+                                    {product.variantName}
+                            </option>
+                        ))
+                    }
                 </select>
             </div>
             <div className={styles.listProducts}>
-                <div className={styles.title}>Other products in group:</div>
+                <div className={styles.title}>List of products:</div>
                 <div className={styles.body}>Product 1, Product 2, Product 3, Product 1, Product 2, Product 3</div>
             </div>
             <AddForm 
