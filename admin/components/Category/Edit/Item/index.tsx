@@ -42,6 +42,7 @@ const Item:ItemType = ({category}) => {
                     src={category.imageUrl}
                     alt={category.name}
                     fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 20vw, 10vw"
                     style={{objectFit: 'cover'}}
                     />
             </div>

@@ -43,6 +43,14 @@ export default function handler(
           })
         }
       })
+      .catch((err) => {
+        console.log(err);
+
+        res.status(400).json({
+          success: false,
+          message: 'Error adding category'
+        });
+      });
   }
   else if(type === 'update') {
     updateCategory(data)
@@ -79,6 +87,12 @@ export default function handler(
           })
         }
       });
+  }
+  else {
+    res.status(400).json({
+      success: false,
+      message: 'Invalid request type'
+    })
   }
 
 }
