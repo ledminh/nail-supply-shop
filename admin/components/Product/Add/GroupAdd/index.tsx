@@ -11,10 +11,7 @@ import AddForm from "../AddForm";
  */
 interface GroupAddPropsType {
     stylesField: string;
-    setIsDataValid: (isDataValid: boolean) => void;
 
-    isResetting: boolean,
-    setIsResetting: (isResetting: boolean) => void;
 } 
 
 type GroupAddType = FunctionComponent<GroupAddPropsType>
@@ -24,16 +21,21 @@ type GroupAddType = FunctionComponent<GroupAddPropsType>
 /***************************
  *  Main Component
  */
-const GroupAdd:GroupAddType = ({stylesField, setIsDataValid, isResetting,
-    setIsResetting}) => {
+const GroupAdd:GroupAddType = ({
+    stylesField, 
+}) => {
 
     const {
         categories,
         selectedCategoryID,
         onCategoryChange,
-        onAddFormChange
-
-    } = useGroupAdd({setIsDataValid});
+        onAddFormChange,
+        isAddFormResetting,
+        setIsAddFormResetting,
+        onCancel,
+        onAdd,
+        _isAddFormDataValid
+    } = useGroupAdd({});
 
     return (
         <div className={styles.wrapper}>
@@ -61,13 +63,22 @@ const GroupAdd:GroupAddType = ({stylesField, setIsDataValid, isResetting,
             <AddForm 
                 stylesField={stylesField}
                 onChange={onAddFormChange}
-                isResetting={isResetting}
-                setIsResetting={setIsResetting}
+                isResetting={isAddFormResetting}
+                setIsResetting={setIsAddFormResetting}
             />
             
             <div className={styles.buttons}>
-                <button className={styles.add}>Add to group</button>
-                <button className={styles.cancel}>Cancel</button>
+                <button className={styles.add}
+                    disabled={!_isAddFormDataValid} 
+                    onClick={onAdd}
+                    >
+                        Add to group
+                    </button>
+                <button className={styles.cancel}
+                    onClick={onCancel}
+                    >
+                        Cancel
+                    </button>
             </div>
         </div>
     )

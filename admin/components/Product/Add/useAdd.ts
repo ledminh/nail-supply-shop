@@ -30,8 +30,6 @@ const useAdd = () => {
     const onAddClick:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
 
-
-
         if(currentMode === 'single') {
             if(!singleProduct) return;
         
@@ -66,10 +64,6 @@ const useAdd = () => {
             
 
         }
-
-
-
-
 
     }
 
