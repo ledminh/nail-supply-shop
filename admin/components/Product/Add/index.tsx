@@ -32,7 +32,8 @@ const Add:AddType = () => {
         isDataValid,
         setIsDataValid,
         isResetting,
-        setIsResetting
+        setIsResetting,
+        onProductChange,
     } = useAdd();
 
 
@@ -66,6 +67,7 @@ const Add:AddType = () => {
                         setIsDataValid={setIsDataValid}
                         isResetting={isResetting}
                         setIsResetting={setIsResetting}
+                        onProductChange={onProductChange}
                         />
                 }
                 <div className={styles.buttons}>
