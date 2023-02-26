@@ -42,8 +42,6 @@ const Admin: NextPageCustomized<AdminProps> = ({categories, products, aboutHtmlT
         </section>
         <section className={styles.section}>
           <Product
-            categories={categories}
-            products={products}
             />
         </section>
         <section className={styles.section + ' ' + styles.full}>
