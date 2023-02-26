@@ -6,6 +6,8 @@ import useGroupAdd from "./useGroupAdd";
 
 import AddForm from "../AddForm";
 
+import CloseIconSVG from '../../../../../assets/images/close_icon.svg';
+
 /***************************
  *  Types
  */
@@ -207,12 +209,30 @@ const ListOfProducts:ListOfProductsType = ({productGroup}) => {
             <div className={styles.body}>
                 {
                     productGroup.map((product) => (
-                        <span className={styles.product} key={product._id}>
-                            {product.variantName}
-                        </span>
+                        <Product 
+                            key={product._id}
+                            product={product} />
                     ))
                 }
             </div>
+        </div>
+    )
+}
+
+type ProductPropsType = {
+    product: ProductGroupItemToAdd;
+}
+
+type ProductType = FunctionComponent<ProductPropsType>;
+
+const Product:ProductType = ({product}) => {
+
+    return (
+        <div className={styles.product}>
+            <span>{product.variantName}</span>
+            <button className={styles.delete}>
+                <CloseIconSVG/>
+            </button>
         </div>
     )
 }
