@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext, ChangeEventHandler, MouseEventHandler } from "react";
+import { ChangeEventHandler, MouseEventHandler, useContext, useEffect, useState } from "react";
 import { AdminContext } from "../../../../Context";
 import { getCategories } from "../../../../reducer/actions.Categories";
 
 import { AddFormData, isAddFormDataValid } from "../AddForm";
 
-import {ProductGroupItemToAdd, ProductGroupToAdd} from '.';
+import { ProductGroupItemToAdd, ProductGroupToAdd } from '.';
 import generateRandomId from "../../../../../utils/generateRandomId";
 
 type useGroupAddParams = {

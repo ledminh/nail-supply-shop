@@ -37,7 +37,6 @@ const Add:AddType = () => {
     } = useAdd();
 
 
-
     return (
         <AdminSubSection
             title="Add New Product"
