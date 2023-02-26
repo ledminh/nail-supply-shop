@@ -122,9 +122,14 @@ export default GroupAdd;
 
 
 
-/***********************
+/******************************************
  *  Private Components
  */
+
+/****************************
+ * GroupName
+ ****************************/
+
 type GroupNamePropsType = {
     stylesField: string;
     groupName: string;
@@ -152,8 +157,9 @@ const GroupName:GroupNameType = ({stylesField, groupName, onChange}) => {
 }
 
 
-
-
+/****************************
+ * MainProductSelection
+ ****************************/
 
 type MainProductSelectionPropsType = {
     stylesField: string;
@@ -196,6 +202,10 @@ const MainProductSelection:MainProductSelectionType = ({
     )
 }
 
+/****************************
+ * ListOfProducts
+ ****************************/
+
 type ListOfProductsPropsType = {
     productGroup: ProductGroupToAdd;
 }
@@ -219,6 +229,11 @@ const ListOfProducts:ListOfProductsType = ({productGroup}) => {
     )
 }
 
+
+
+// ***********************
+// Product
+// ***********************
 type ProductPropsType = {
     product: ProductGroupItemToAdd;
 }
@@ -228,10 +243,17 @@ type ProductType = FunctionComponent<ProductPropsType>;
 const Product:ProductType = ({product}) => {
 
     return (
-        <div className={styles.product}>
-            <span>{product.variantName}</span>
-            <button className={styles.delete}>
-                <CloseIconSVG/>
+        <div className={styles.product + (product.mainProduct? ' ' + styles.mainProduct: '')}>
+            <span className={styles.name}>{product.variantName}</span>
+            <button className={styles.delete}
+                onClick={() => console.log('delete')}
+            >
+                <CloseIconSVG
+                    className={styles.icon}
+                    viewBox="0 0 18 18"
+                    height="10"
+                    width="10"
+                />
             </button>
         </div>
     )
