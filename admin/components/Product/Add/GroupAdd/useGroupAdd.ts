@@ -26,7 +26,7 @@ const useGroupAdd = ({
     const [currentAddForm, setCurrentAddForm] = useState<AddFormData|null>(null);
 
     const [productGroup, setProductGroup] = useState<ProductGroupToAdd>([]);
-    const [currentProductID, setCurrentProductID] = useState<string>('');
+    const [currentProductID, setCurrentProductID] = useState<string|null>(null);
 
     
     
@@ -128,7 +128,9 @@ const useGroupAdd = ({
         setIsAddFormResetting(true);
     }
 
-
+    const onProductClick = (productID:string) => {
+        setCurrentProductID(productID);
+    }
 
     return {
         categories: getCategories(state),
@@ -144,7 +146,8 @@ const useGroupAdd = ({
         onGroupNameChange,
         productGroup,
         onMainProductChange,
-        mainProductID: getMainProductID()
+        mainProductID: getMainProductID(),
+        onProductClick
     }
 }
 

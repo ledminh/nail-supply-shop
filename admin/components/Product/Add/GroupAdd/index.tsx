@@ -55,7 +55,8 @@ const GroupAdd:GroupAddType = ({
         onGroupNameChange,
         productGroup,
         onMainProductChange,
-        mainProductID
+        mainProductID,
+        onProductClick
     } = useGroupAdd({});
 
     return (
@@ -92,6 +93,7 @@ const GroupAdd:GroupAddType = ({
             
             <ListOfProducts 
                 productGroup={productGroup}
+                onProductClick={onProductClick}
             />
             
             <AddForm 
@@ -208,11 +210,12 @@ const MainProductSelection:MainProductSelectionType = ({
 
 type ListOfProductsPropsType = {
     productGroup: ProductGroupToAdd;
+    onProductClick: (id: string) => void;
 }
 
 type ListOfProductsType = FunctionComponent<ListOfProductsPropsType>;
 
-const ListOfProducts:ListOfProductsType = ({productGroup}) => {
+const ListOfProducts:ListOfProductsType = ({productGroup, onProductClick}) => {
     return (
         <div className={styles.listProducts}>
             <div className={styles.title}>List of products:</div>
@@ -221,7 +224,9 @@ const ListOfProducts:ListOfProductsType = ({productGroup}) => {
                     productGroup.map((product) => (
                         <Product 
                             key={product._id}
-                            product={product} />
+                            product={product} 
+                            onProductClick={onProductClick}
+                            />
                     ))
                 }
             </div>
@@ -236,14 +241,17 @@ const ListOfProducts:ListOfProductsType = ({productGroup}) => {
 // ***********************
 type ProductPropsType = {
     product: ProductGroupItemToAdd;
+    onProductClick: (id: string) => void;
 }
 
 type ProductType = FunctionComponent<ProductPropsType>;
 
-const Product:ProductType = ({product}) => {
+const Product:ProductType = ({product, onProductClick}) => {
 
     return (
-        <div className={styles.product + (product.mainProduct? ' ' + styles.mainProduct: '')}>
+        <div className={styles.product + (product.mainProduct? ' ' + styles.mainProduct: '')}
+            onClick={() => onProductClick(product._id)}
+        >
             <span className={styles.name}>{product.variantName}</span>
             <button className={styles.delete}
                 onClick={() => console.log('delete')}
