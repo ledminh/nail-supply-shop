@@ -88,7 +88,9 @@ const GroupAdd:GroupAddType = ({
                 mainProductID={mainProductID}
                 />
             
-            <ListOfProducts />
+            <ListOfProducts 
+                productGroup={productGroup}
+            />
             
             <AddForm 
                 stylesField={stylesField}
@@ -192,11 +194,25 @@ const MainProductSelection:MainProductSelectionType = ({
     )
 }
 
-const ListOfProducts = () => {
+type ListOfProductsPropsType = {
+    productGroup: ProductGroupToAdd;
+}
+
+type ListOfProductsType = FunctionComponent<ListOfProductsPropsType>;
+
+const ListOfProducts:ListOfProductsType = ({productGroup}) => {
     return (
         <div className={styles.listProducts}>
             <div className={styles.title}>List of products:</div>
-            <div className={styles.body}>Product 1, Product 2, Product 3, Product 1, Product 2, Product 3</div>
+            <div className={styles.body}>
+                {
+                    productGroup.map((product) => (
+                        <span className={styles.product} key={product._id}>
+                            {product.variantName}
+                        </span>
+                    ))
+                }
+            </div>
         </div>
     )
 }
