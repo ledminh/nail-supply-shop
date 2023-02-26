@@ -6,7 +6,12 @@ import useGroupAdd from "./useGroupAdd";
 
 import AddForm from "../AddForm";
 
-import CloseIconSVG from '../../../../../assets/images/close_icon.svg';
+
+
+import GroupName from "./GroupName";
+import MainProductSelection from "./MainProductSelection";
+import ListOfProducts from "./ListOfProducts";
+
 
 /***************************
  *  Types
@@ -124,145 +129,6 @@ export default GroupAdd;
 
 
 
-/******************************************
- *  Private Components
- */
-
-/****************************
- * GroupName
- ****************************/
-
-type GroupNamePropsType = {
-    stylesField: string;
-    groupName: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-type GroupNameType = FunctionComponent<GroupNamePropsType>;
-
-
-const GroupName:GroupNameType = ({stylesField, groupName, onChange}) => {
-
-
-    return (
-        <div className={stylesField}>
-            <label htmlFor="group-name">Group name</label>
-            <input 
-                type="text" 
-                name="group-name"
-                id="group-name" 
-                value={groupName}
-                onChange={onChange}
-                />
-        </div>
-    );
-}
-
-
-/****************************
- * MainProductSelection
- ****************************/
-
-type MainProductSelectionPropsType = {
-    stylesField: string;
-    productGroup: ProductGroupToAdd;
-    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    mainProductID: string;
-}
-
-type MainProductSelectionType = FunctionComponent<MainProductSelectionPropsType>
-
-const MainProductSelection:MainProductSelectionType = ({
-    stylesField,
-    productGroup,
-    onChange,
-    mainProductID
-}) => {
-
-    return (
-        <div className={stylesField}>
-            <label htmlFor="main-product">Main Product</label>
-            <select 
-                name="main-product"
-                id="main-product"
-                onChange={onChange}
-                value={mainProductID}
-                disabled={productGroup.length === 0}
-                >
-                {
-                    productGroup.map((product) => (
-                        <option 
-                            key={product._id} 
-                            value={product._id}
-                            >
-                                {product.variantName}
-                        </option>
-                    ))
-                }
-            </select>
-        </div>
-    )
-}
-
-/****************************
- * ListOfProducts
- ****************************/
-
-type ListOfProductsPropsType = {
-    productGroup: ProductGroupToAdd;
-    onProductClick: (id: string) => void;
-}
-
-type ListOfProductsType = FunctionComponent<ListOfProductsPropsType>;
-
-const ListOfProducts:ListOfProductsType = ({productGroup, onProductClick}) => {
-    return (
-        <div className={styles.listProducts}>
-            <div className={styles.title}>List of products:</div>
-            <div className={styles.body}>
-                {
-                    productGroup.map((product) => (
-                        <Product 
-                            key={product._id}
-                            product={product} 
-                            onProductClick={onProductClick}
-                            />
-                    ))
-                }
-            </div>
-        </div>
-    )
-}
 
 
 
-// ***********************
-// Product
-// ***********************
-type ProductPropsType = {
-    product: ProductGroupItemToAdd;
-    onProductClick: (id: string) => void;
-}
-
-type ProductType = FunctionComponent<ProductPropsType>;
-
-const Product:ProductType = ({product, onProductClick}) => {
-
-    return (
-        <div className={styles.product + (product.mainProduct? ' ' + styles.mainProduct: '')}
-            onClick={() => onProductClick(product._id)}
-        >
-            <span className={styles.name}>{product.variantName}</span>
-            <button className={styles.delete}
-                onClick={() => console.log('delete')}
-            >
-                <CloseIconSVG
-                    className={styles.icon}
-                    viewBox="0 0 18 18"
-                    height="10"
-                    width="10"
-                />
-            </button>
-        </div>
-    )
-}
