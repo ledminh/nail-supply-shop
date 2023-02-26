@@ -21,7 +21,7 @@ const catImageUpload = multer({
     destination: './public/images/category',
     filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      const fileName = `cat-image-${uniqueSuffix}.${file.mimetype.split('/')[1]}}`;
+      const fileName = `cat-image-${uniqueSuffix}.${file.mimetype.split('/')[1]}`;
       cb(null, fileName);
     },
   }),
