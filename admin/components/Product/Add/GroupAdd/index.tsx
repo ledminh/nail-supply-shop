@@ -9,7 +9,7 @@ import AddForm from "../AddForm";
 /***************************
  *  Types
  */
-export type ProductGroupToAdd = {
+export type ProductGroupItemToAdd = {
     _id: string;
     groupName: string;
     mainProduct: boolean;
@@ -19,7 +19,9 @@ export type ProductGroupToAdd = {
     fullDescription: string;
     price: number;
     files: File[];
-}[];
+};
+
+export type ProductGroupToAdd = ProductGroupItemToAdd[];
 
 interface GroupAddPropsType {
     stylesField: string;
@@ -72,41 +74,22 @@ const GroupAdd:GroupAddType = ({
                     ))}
                 </select>
             </div>
-            <div className={stylesField}>
-                <label htmlFor="group-name">Group name</label>
-                <input 
-                    type="text" 
-                    name="group-name"
-                    id="group-name" 
-                    value={groupName}
-                    onChange={onGroupNameChange}
-                    />
-            </div>
-            <div className={stylesField}>
-                <label htmlFor="main-product">Main Product</label>
-                <select 
-                    name="main-product"
-                    id="main-product"
-                    onChange={onMainProductChange}
-                    value={mainProductID}
-                    disabled={productGroup.length === 0}
-                    >
-                    {
-                        productGroup.map((product) => (
-                            <option 
-                                key={product._id} 
-                                value={product._id}
-                                >
-                                    {product.variantName}
-                            </option>
-                        ))
-                    }
-                </select>
-            </div>
-            <div className={styles.listProducts}>
-                <div className={styles.title}>List of products:</div>
-                <div className={styles.body}>Product 1, Product 2, Product 3, Product 1, Product 2, Product 3</div>
-            </div>
+
+            <GroupName 
+                stylesField={stylesField}
+                groupName={groupName}
+                onChange={onGroupNameChange}
+            />
+            
+            <MainProductSelection
+                stylesField={stylesField}
+                productGroup={productGroup}
+                onChange={onMainProductChange}
+                mainProductID={mainProductID}
+                />
+            
+            <ListOfProducts />
+            
             <AddForm 
                 stylesField={stylesField}
                 onChange={onAddFormChange}
@@ -132,3 +115,88 @@ const GroupAdd:GroupAddType = ({
 }
 
 export default GroupAdd;
+
+
+
+/***********************
+ *  Private Components
+ */
+type GroupNamePropsType = {
+    stylesField: string;
+    groupName: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+type GroupNameType = FunctionComponent<GroupNamePropsType>;
+
+
+const GroupName:GroupNameType = ({stylesField, groupName, onChange}) => {
+
+
+    return (
+        <div className={stylesField}>
+            <label htmlFor="group-name">Group name</label>
+            <input 
+                type="text" 
+                name="group-name"
+                id="group-name" 
+                value={groupName}
+                onChange={onChange}
+                />
+        </div>
+    );
+}
+
+
+
+
+
+type MainProductSelectionPropsType = {
+    stylesField: string;
+    productGroup: ProductGroupToAdd;
+    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    mainProductID: string;
+}
+
+type MainProductSelectionType = FunctionComponent<MainProductSelectionPropsType>
+
+const MainProductSelection:MainProductSelectionType = ({
+    stylesField,
+    productGroup,
+    onChange,
+    mainProductID
+}) => {
+
+    return (
+        <div className={stylesField}>
+            <label htmlFor="main-product">Main Product</label>
+            <select 
+                name="main-product"
+                id="main-product"
+                onChange={onChange}
+                value={mainProductID}
+                disabled={productGroup.length === 0}
+                >
+                {
+                    productGroup.map((product) => (
+                        <option 
+                            key={product._id} 
+                            value={product._id}
+                            >
+                                {product.variantName}
+                        </option>
+                    ))
+                }
+            </select>
+        </div>
+    )
+}
+
+const ListOfProducts = () => {
+    return (
+        <div className={styles.listProducts}>
+            <div className={styles.title}>List of products:</div>
+            <div className={styles.body}>Product 1, Product 2, Product 3, Product 1, Product 2, Product 3</div>
+        </div>
+    )
+}

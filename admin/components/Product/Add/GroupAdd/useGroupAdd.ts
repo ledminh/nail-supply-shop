@@ -4,7 +4,8 @@ import { getCategories } from "../../../../reducer/actions.Categories";
 
 import { AddFormData, isAddFormDataValid } from "../AddForm";
 
-import {ProductGroupToAdd} from '.';
+import {ProductGroupItemToAdd, ProductGroupToAdd} from '.';
+import generateRandomId from "../../../../../utils/generateRandomId";
 
 type useGroupAddParams = {
 }
@@ -18,11 +19,11 @@ const useGroupAdd = ({
     const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
     const [isAddFormResetting, setIsAddFormResetting] = useState<boolean>(false);
 
-    const [_isAddFormDataValid, setIsAddFormDataValid] = useState<boolean>(false);
-
+    
 
     const [groupName, setGroupName] = useState<string>('');
 
+    const [currentAddForm, setCurrentAddForm] = useState<AddFormData|null>(null);
 
     const [productGroup, setProductGroup] = useState<ProductGroupToAdd>([]);
     const [currentProductID, setCurrentProductID] = useState<string>('');
@@ -92,13 +93,7 @@ const useGroupAdd = ({
     }
 
     const onAddFormChange = (data: AddFormData) => {
-        const isDataValid = isAddFormDataValid(data);
-
-        setIsAddFormDataValid(isDataValid);
-
-            
-
-    
+        setCurrentAddForm(data);
     }
 
     const onCancel:MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -111,6 +106,25 @@ const useGroupAdd = ({
         e.preventDefault();
 
 
+        const newProduct:ProductGroupItemToAdd = {
+            _id: generateRandomId(),
+            groupName: '',
+            mainProduct: false,
+            variantName: currentAddForm?.productName || '',
+            serialNumber: currentAddForm?.serialNumber || '',
+            shortDescription: currentAddForm?.shortDescription || '',
+            fullDescription: currentAddForm?.fullDescription || '',
+            price: currentAddForm?.price || 0,
+            files: currentAddForm?.files || [],
+        }
+
+        if(productGroup.length === 0) {
+            newProduct.mainProduct = true;
+        }
+
+        const newProductGroup = [...productGroup, newProduct];
+
+        setProductGroup(newProductGroup);
         setIsAddFormResetting(true);
     }
 
@@ -125,7 +139,7 @@ const useGroupAdd = ({
         setIsAddFormResetting,
         onCancel,
         onAdd,
-        _isAddFormDataValid,
+        _isAddFormDataValid: currentAddForm? isAddFormDataValid(currentAddForm): false,
         groupName,
         onGroupNameChange,
         productGroup,
