@@ -43,7 +43,6 @@ const useGroupAdd = ({
     // do something with the currentProductID
     useEffect(() => {
         if(!currentProductID) {
-            setAddFormFeedingData(null);
             return;
         }
         
@@ -114,7 +113,7 @@ const useGroupAdd = ({
         setCurrentAddForm(data);
     }
 
-    const onCancel:MouseEventHandler<HTMLButtonElement> = (e) => {
+    const onClear:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
 
         setIsAddFormResetting(true);
@@ -151,6 +150,7 @@ const useGroupAdd = ({
         e.preventDefault();
 
         setCurrentProductID(null);
+        setIsAddFormResetting(true);
     }
 
 
@@ -171,7 +171,7 @@ const useGroupAdd = ({
         onAddFormChange,
         isAddFormResetting,
         setIsAddFormResetting,
-        onCancel,
+        onClear,
         onAdd,
         _isAddFormDataValid: currentAddForm? isAddFormDataValid(currentAddForm): false,
         groupName,

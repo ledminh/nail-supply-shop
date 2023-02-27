@@ -77,7 +77,8 @@
         font-size: 0.85rem;
     }
 
-    button.add {
+    button.add,
+    button.createNewProduct {
         @include base.button("primary");
 
         &:disabled {
@@ -93,7 +94,7 @@
         }
     }
 
-    button.cancel {
+    button.clear {
         @include base.button("secondary");
     }
 }
