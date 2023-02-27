@@ -155,10 +155,16 @@ const useGroupAdd = ({
         setProductGroup(newProductGroup);
         setIsAddFormResetting(true);
     }
-    
+
 
     const onProductClick = (productID:string) => {
         setCurrentProductID(productID);
+    }
+
+    const onProductDelete = (productID:string) => {
+        const newProductGroup = productGroup.filter(product => product._id !== productID);
+
+        setProductGroup(newProductGroup);
     }
 
     return {
@@ -178,7 +184,8 @@ const useGroupAdd = ({
         mainProductID: getMainProductID(),
         onProductClick,
         currentProductID,
-        onUpdate
+        onUpdate,
+        onProductDelete
     }
 }
 

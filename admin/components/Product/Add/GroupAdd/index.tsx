@@ -63,8 +63,9 @@ const GroupAdd:GroupAddType = ({
         onMainProductChange,
         mainProductID,
         onProductClick,
+        onProductDelete,
         currentProductID,
-        onUpdate
+        onUpdate,
     } = useGroupAdd({});
 
     return (
@@ -102,11 +103,10 @@ const GroupAdd:GroupAddType = ({
                     <ListOfProducts 
                         productGroup={productGroup}
                         onProductClick={onProductClick}
+                        onProductDelete={onProductDelete}
                     />
                 )
-
             }
-
             
             <AddForm 
                 stylesField={stylesField}

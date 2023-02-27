@@ -15,6 +15,7 @@ import styles from './ListOfProducts.module.scss';
 type ListOfProductsPropsType = {
     productGroup: ProductGroupToAdd;
     onProductClick: (id: string) => void;
+    onProductDelete: (id: string) => void;
 }
 
 type ListOfProductsType = FunctionComponent<ListOfProductsPropsType>;
@@ -23,7 +24,7 @@ type ListOfProductsType = FunctionComponent<ListOfProductsPropsType>;
  * Main Component
  */
 
-const ListOfProducts:ListOfProductsType = ({productGroup, onProductClick}) => {
+const ListOfProducts:ListOfProductsType = ({productGroup, onProductClick, onProductDelete}) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.title}>List of products:</div>
@@ -34,6 +35,7 @@ const ListOfProducts:ListOfProductsType = ({productGroup, onProductClick}) => {
                             key={product._id}
                             product={product} 
                             onProductClick={onProductClick}
+                            onProductDelete={onProductDelete}
                             />
                     ))
                 }
@@ -50,11 +52,12 @@ export default ListOfProducts;
 type ProductPropsType = {
     product: ProductGroupItemToAdd;
     onProductClick: (id: string) => void;
+    onProductDelete: (id: string) => void;
 }
 
 type ProductType = FunctionComponent<ProductPropsType>;
 
-const Product:ProductType = ({product, onProductClick}) => {
+const Product:ProductType = ({product, onProductClick, onProductDelete}) => {
 
     return (
         <div className={styles.product + (product.mainProduct? ' ' + styles.mainProduct: '')}
@@ -64,7 +67,8 @@ const Product:ProductType = ({product, onProductClick}) => {
             <button className={styles.delete}
                 onClick={(e) => {
                     e.preventDefault();
-                    console.log('delete');
+                    e.stopPropagation();
+                    onProductDelete(product._id);
                 }}
             >
                 <CloseIconSVG
