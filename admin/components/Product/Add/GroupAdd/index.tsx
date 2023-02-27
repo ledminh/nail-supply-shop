@@ -65,7 +65,7 @@ const GroupAdd:GroupAddType = ({
         onProductClick,
         onProductDelete,
         currentProductID,
-        onUpdate,
+        onCreateNewProduct,
         addFormFeedingData,
         setAddFormFeedingData
     } = useGroupAdd({});
@@ -122,10 +122,10 @@ const GroupAdd:GroupAddType = ({
             <div className={styles.buttons}>
                 <button className={styles.add}
                     disabled={!_isAddFormDataValid} 
-                    onClick={currentProductID === null? onAdd: onUpdate}
+                    onClick={currentProductID === null? onAdd: onCreateNewProduct}
                     >
                         {
-                            currentProductID === null ? 'Add' : 'Update'
+                            currentProductID === null ? 'Add' : 'Create new product'
                         }
                     </button>
                 <button className={styles.cancel}

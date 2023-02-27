@@ -42,7 +42,10 @@ const useGroupAdd = ({
 
     // do something with the currentProductID
     useEffect(() => {
-        if(!currentProductID) return;
+        if(!currentProductID) {
+            setAddFormFeedingData(null);
+            return;
+        }
         
         const product = productGroup.find(product => product._id === currentProductID);
 
@@ -144,27 +147,10 @@ const useGroupAdd = ({
         setIsAddFormResetting(true);
     }
 
-    const onUpdate:MouseEventHandler<HTMLButtonElement> = (e) => {
+    const onCreateNewProduct:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
 
-        if(!currentProductID) return;
-
-        const productIndex = productGroup.findIndex(product => product._id === currentProductID);
-
-        const newProductGroup = [...productGroup];
-
-        newProductGroup[productIndex] = {
-            ...newProductGroup[productIndex],
-            variantName: currentAddForm?.productName || '',
-            serialNumber: currentAddForm?.serialNumber || '',
-            shortDescription: currentAddForm?.shortDescription || '',
-            fullDescription: currentAddForm?.fullDescription || '',
-            price: currentAddForm?.price || 0,
-            files: currentAddForm?.files || [],
-        }
-
-        setProductGroup(newProductGroup);
-        setIsAddFormResetting(true);
+        setCurrentProductID(null);
     }
 
 
@@ -195,7 +181,7 @@ const useGroupAdd = ({
         mainProductID: getMainProductID(),
         onProductClick,
         currentProductID,
-        onUpdate,
+        onCreateNewProduct,
         onProductDelete,
         addFormFeedingData,
         setAddFormFeedingData
