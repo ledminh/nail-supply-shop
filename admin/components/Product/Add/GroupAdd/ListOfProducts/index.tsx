@@ -16,6 +16,7 @@ type ListOfProductsPropsType = {
     productGroup: ProductGroupToAdd;
     onProductClick: (id: string) => void;
     onProductDelete: (id: string) => void;
+    currentProductID: string|null;
 }
 
 type ListOfProductsType = FunctionComponent<ListOfProductsPropsType>;
@@ -24,7 +25,7 @@ type ListOfProductsType = FunctionComponent<ListOfProductsPropsType>;
  * Main Component
  */
 
-const ListOfProducts:ListOfProductsType = ({productGroup, onProductClick, onProductDelete}) => {
+const ListOfProducts:ListOfProductsType = ({productGroup, onProductClick, onProductDelete, currentProductID}) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.title}>List of products:</div>
@@ -33,7 +34,8 @@ const ListOfProducts:ListOfProductsType = ({productGroup, onProductClick, onProd
                     productGroup.map((product) => (
                         <Product 
                             key={product._id}
-                            product={product} 
+                            product={product}
+                            current={product._id === currentProductID} 
                             onProductClick={onProductClick}
                             onProductDelete={onProductDelete}
                             />
@@ -53,14 +55,15 @@ type ProductPropsType = {
     product: ProductGroupItemToAdd;
     onProductClick: (id: string) => void;
     onProductDelete: (id: string) => void;
+    current: boolean;
 }
 
 type ProductType = FunctionComponent<ProductPropsType>;
 
-const Product:ProductType = ({product, onProductClick, onProductDelete}) => {
+const Product:ProductType = ({product, onProductClick, onProductDelete, current}) => {
 
     return (
-        <div className={styles.product + (product.mainProduct? ' ' + styles.mainProduct: '')}
+        <div className={styles.product + (product.mainProduct? ' ' + styles.mainProduct: '') + (current? ' ' + styles.current: '')}
             onClick={() => onProductClick(product._id)}
         >
             <span className={styles.name}>{product.variantName}</span>

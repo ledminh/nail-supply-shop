@@ -104,12 +104,11 @@ const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting
                     onChange={onPriceChange}
                     />
             </div>
-            <div className={stylesField}>
-                
+            <div className={stylesField}>                
                 <label
                     className={styles.filesLabel}
                     htmlFor="uploadImage">
-                        Upload Images
+                        Choose Images
                 </label>
                 <input
                     className={styles.filesInput}

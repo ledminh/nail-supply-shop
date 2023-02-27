@@ -107,6 +107,7 @@ const GroupAdd:GroupAddType = ({
                         productGroup={productGroup}
                         onProductClick={onProductClick}
                         onProductDelete={onProductDelete}
+                        currentProductID={currentProductID}
                     />
                 )
             }
