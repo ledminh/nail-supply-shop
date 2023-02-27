@@ -183,7 +183,22 @@ const useGroupAdd = ({
     }
 
     const onProductDelete = (productID:string) => {
-        const newProductGroup = productGroup.filter(product => product._id !== productID);
+        const toBeDeletedProduct = productGroup.find(product => product._id === productID);
+
+        if(!toBeDeletedProduct) return;
+
+        let newProductGroup = productGroup.filter(product => product._id !== productID);
+
+        if(toBeDeletedProduct.mainProduct && newProductGroup.length > 0) {
+            newProductGroup[0].mainProduct = true;
+        }
+
+        
+        if(currentProductID === productID) {
+            setCurrentProductID(null);
+            setIsAddFormResetting(true);
+        }
+
 
         setProductGroup(newProductGroup);
     }
