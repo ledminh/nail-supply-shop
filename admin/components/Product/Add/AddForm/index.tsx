@@ -101,6 +101,7 @@ const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting
                     name="price" 
                     id="price"
                     value={price} 
+                    min="0"
                     onChange={onPriceChange}
                     />
             </div>

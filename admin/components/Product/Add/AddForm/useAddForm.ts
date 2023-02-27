@@ -79,6 +79,12 @@ const useAddForm = ({onChange, isResetting, setIsResetting, feedingData, setFeed
     }
 
     const onPriceChange:ChangeEventHandler<HTMLInputElement> = (e) => {
+        const value = Number(e.target.value);
+
+        if(isNaN(value)) return;
+
+        if(value < 0) return;
+
         setPrice(Number(e.target.value));
     }
 
