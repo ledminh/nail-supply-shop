@@ -146,6 +146,30 @@ const useGroupAdd = ({
         setIsAddFormResetting(true);
     }
 
+    const onUpdate:MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
+
+        if(!currentProductID) return;
+
+        const productIndex = productGroup.findIndex(product => product._id === currentProductID);
+
+        const newProductGroup = [...productGroup];
+
+        newProductGroup[productIndex] = {
+            ...newProductGroup[productIndex],
+            variantName: currentAddForm?.productName || '',
+            serialNumber: currentAddForm?.serialNumber || '',
+            shortDescription: currentAddForm?.shortDescription || '',
+            fullDescription: currentAddForm?.fullDescription || '',
+            price: currentAddForm?.price || 0,
+            files: currentAddForm?.files || [],
+        }
+
+        setProductGroup(newProductGroup);
+        setIsAddFormResetting(true);
+        setCurrentProductID(null);
+    }
+
     const onCreateNewProduct:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
 
@@ -173,6 +197,7 @@ const useGroupAdd = ({
         setIsAddFormResetting,
         onClear,
         onAdd,
+        onUpdate,
         _isAddFormDataValid: currentAddForm? isAddFormDataValid(currentAddForm): false,
         groupName,
         onGroupNameChange,

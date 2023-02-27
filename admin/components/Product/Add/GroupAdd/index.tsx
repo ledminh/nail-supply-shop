@@ -56,6 +56,7 @@ const GroupAdd:GroupAddType = ({
         setIsAddFormResetting,
         onClear,
         onAdd,
+        onUpdate,
         _isAddFormDataValid,
         groupName,
         onGroupNameChange,
@@ -126,14 +127,22 @@ const GroupAdd:GroupAddType = ({
                             disabled={!_isAddFormDataValid} 
                             onClick={onAdd}
                             >
-                                Add
+                                Add to group
                         </button>
                     ) :(
-                        <button className={styles.createNewProduct}
-                            onClick={onCreateNewProduct}
-                            >
-                                Create new product
-                        </button>
+                        <>
+                            <button className={styles.createNewProduct}
+                                onClick={onCreateNewProduct}
+                                >
+                                    Create new 
+                            </button>
+                            <button className={styles.updateProduct}
+                                disabled={!_isAddFormDataValid}
+                                onClick={onUpdate}
+                                >
+                                    Update
+                            </button>
+                        </>
                     )                        
                 }
                 <button className={styles.clear}

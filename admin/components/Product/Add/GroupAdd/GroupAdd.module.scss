@@ -50,8 +50,12 @@
 
 
 .buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+
+    flex-flow: row nowrap;
+
+    justify-content: space-between;
+    align-items: center;
 
     gap: 2px;
 
@@ -93,6 +97,22 @@
             }
         }
     }
+
+    button.updateProduct {
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: .5;
+            border: none;
+
+            background-color: gray;
+
+            &:hover {
+                background-color: gray;
+            }
+        }
+    }
+
 
     button.clear {
         @include base.button("secondary");
