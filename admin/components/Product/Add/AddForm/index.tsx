@@ -27,6 +27,8 @@ interface AddFormPropsType {
     onChange: (data: AddFormData) => void;
     isResetting: boolean;
     setIsResetting: (isResetting: boolean) => void;
+    feedingData: AddFormData|null;
+    setFeedingData: (feedingData: AddFormData|null) => void;
 } 
 
 type AddFormType = FunctionComponent<AddFormPropsType>
@@ -36,7 +38,7 @@ type AddFormType = FunctionComponent<AddFormPropsType>
 /***************************
  *  Main Component
  */
-const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting}) => {
+const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting, feedingData, setFeedingData}) => {
 
     const {
         productName,
@@ -52,7 +54,7 @@ const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting
         files,
         onFilesChange,
         buttonImageOnClick
-    } = useAddForm({onChange, isResetting, setIsResetting});
+    } = useAddForm({onChange, isResetting, setIsResetting, feedingData, setFeedingData});
 
     return (
         <>
@@ -121,7 +123,7 @@ const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting
                     />
             </div>
             {
-                // Show images if there are any
+                // Show images if there is any
                 files.length > 0 && (
                     <div className={stylesField}>
                         <label>Images</label>

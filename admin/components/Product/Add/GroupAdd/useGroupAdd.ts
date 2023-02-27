@@ -28,7 +28,7 @@ const useGroupAdd = ({
     const [productGroup, setProductGroup] = useState<ProductGroupToAdd>([]);
     const [currentProductID, setCurrentProductID] = useState<string|null>(null);
 
-        
+    const [addFormFeedingData, setAddFormFeedingData] = useState<AddFormData|null>(null);
     
     // set the first category as selected category when the component is mounted
     useEffect(() => {
@@ -44,7 +44,18 @@ const useGroupAdd = ({
     useEffect(() => {
         if(!currentProductID) return;
         
-        console.log(currentProductID);
+        const product = productGroup.find(product => product._id === currentProductID);
+
+        if(!product) return;
+
+        setAddFormFeedingData({
+            productName: product.variantName,
+            serialNumber: product.serialNumber,
+            shortDescription: product.shortDescription,
+            fullDescription: product.fullDescription,
+            price: product.price,
+            files: product.files
+        });
 
     }, [currentProductID]);
 
@@ -185,7 +196,9 @@ const useGroupAdd = ({
         onProductClick,
         currentProductID,
         onUpdate,
-        onProductDelete
+        onProductDelete,
+        addFormFeedingData,
+        setAddFormFeedingData
     }
 }
 

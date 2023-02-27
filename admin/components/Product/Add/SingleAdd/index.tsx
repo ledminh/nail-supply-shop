@@ -59,6 +59,8 @@ const SingleAdd:SingleAddType = ({stylesField, setIsDataValid, isResetting, setI
                 onChange={onAddFormChange}
                 isResetting={isResetting}
                 setIsResetting={setIsResetting}
+                feedingData={null}
+                setFeedingData={() => {}}
             />
         </div>
     )

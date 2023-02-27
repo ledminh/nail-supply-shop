@@ -66,6 +66,8 @@ const GroupAdd:GroupAddType = ({
         onProductDelete,
         currentProductID,
         onUpdate,
+        addFormFeedingData,
+        setAddFormFeedingData
     } = useGroupAdd({});
 
     return (
@@ -113,6 +115,8 @@ const GroupAdd:GroupAddType = ({
                 onChange={onAddFormChange}
                 isResetting={isAddFormResetting}
                 setIsResetting={setIsAddFormResetting}
+                feedingData={addFormFeedingData}
+                setFeedingData={setAddFormFeedingData}
             />
             
             <div className={styles.buttons}>

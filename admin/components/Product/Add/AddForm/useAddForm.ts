@@ -6,9 +6,11 @@ type useAddFormParams = {
     onChange: (data: AddFormData) => void;
     isResetting: boolean;
     setIsResetting: (isResetting: boolean) => void;
+    feedingData: AddFormData|null;
+    setFeedingData: (feedingData: AddFormData|null) => void;
 }
 
-const useAddForm = ({onChange, isResetting, setIsResetting}:useAddFormParams) => {
+const useAddForm = ({onChange, isResetting, setIsResetting, feedingData, setFeedingData}:useAddFormParams) => {
     
     const [productName, setProductName] = useState('');
     const [serialNumber, setSerialNumber] = useState(''); 
@@ -30,6 +32,8 @@ const useAddForm = ({onChange, isResetting, setIsResetting}:useAddFormParams) =>
         });
     }, [productName, serialNumber, shortDescription, fullDescription, price, files]);
     
+
+    // when isResetting is true, reset all the states
     useEffect(() => {
         if(isResetting) {
             setProductName('');
@@ -42,6 +46,18 @@ const useAddForm = ({onChange, isResetting, setIsResetting}:useAddFormParams) =>
         }
     }, [isResetting]);
     
+
+    useEffect(() => {
+        if(feedingData) {
+            setProductName(feedingData.productName);
+            setSerialNumber(feedingData.serialNumber);
+            setShortDescription(feedingData.shortDescription);
+            setFullDescription(feedingData.fullDescription);
+            setPrice(feedingData.price);
+            setFiles(feedingData.files);
+            setFeedingData(null);
+        }
+    }, [feedingData]);
     
     /*********************************
      * Public methods
