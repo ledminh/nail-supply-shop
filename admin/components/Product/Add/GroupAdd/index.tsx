@@ -11,6 +11,7 @@ import AddForm from "../AddForm";
 import GroupName from "./GroupName";
 import MainProductSelection from "./MainProductSelection";
 import ListOfProducts from "./ListOfProducts";
+import CategoryList from "../CategoryList";
 
 
 /***************************
@@ -61,27 +62,19 @@ const GroupAdd:GroupAddType = ({
         productGroup,
         onMainProductChange,
         mainProductID,
-        onProductClick
+        onProductClick,
+        currentProductID,
+        onUpdate
     } = useGroupAdd({});
 
     return (
         <div className={styles.wrapper}>
-            <div className={stylesField}>
-                <label htmlFor="category">Category</label>
-                <select name="category" id="category"
-                    onChange={onCategoryChange}
-                    value={selectedCategoryID}
-                    >
-                    {categories.map((category) => (
-                        <option 
-                            key={category.id} 
-                            value={category.id}
-                            >
-                                {category.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <CategoryList
+                stylesField={stylesField}
+                onCategoryChange={onCategoryChange}
+                selectedCategoryID={selectedCategoryID}
+                categories={categories}
+            />
 
             <GroupName 
                 stylesField={stylesField}
@@ -95,11 +88,25 @@ const GroupAdd:GroupAddType = ({
                 onChange={onMainProductChange}
                 mainProductID={mainProductID}
                 />
-            
-            <ListOfProducts 
-                productGroup={productGroup}
-                onProductClick={onProductClick}
-            />
+
+            {
+                productGroup.length === 0 && (
+                    <div className={styles.noProduct}>
+                        <span>No product in group</span>
+                    </div>
+                )
+            }
+
+            {
+                productGroup.length > 0 && (
+                    <ListOfProducts 
+                        productGroup={productGroup}
+                        onProductClick={onProductClick}
+                    />
+                )
+
+            }
+
             
             <AddForm 
                 stylesField={stylesField}
@@ -111,9 +118,11 @@ const GroupAdd:GroupAddType = ({
             <div className={styles.buttons}>
                 <button className={styles.add}
                     disabled={!_isAddFormDataValid} 
-                    onClick={onAdd}
+                    onClick={currentProductID === null? onAdd: onUpdate}
                     >
-                        Add to group
+                        {
+                            currentProductID === null ? 'Add' : 'Update'
+                        }
                     </button>
                 <button className={styles.cancel}
                     onClick={onCancel}
@@ -126,9 +135,3 @@ const GroupAdd:GroupAddType = ({
 }
 
 export default GroupAdd;
-
-
-
-
-
-

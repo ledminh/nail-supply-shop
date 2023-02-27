@@ -6,6 +6,8 @@ import useSingleAdd from "./useSingleAdd";
 
 import AddForm from "../AddForm";
 
+import CategoryList from "../CategoryList";
+
 /***************************
  *  Types
  */
@@ -46,22 +48,12 @@ const SingleAdd:SingleAddType = ({stylesField, setIsDataValid, isResetting, setI
 
     return (
         <div className={styles.wrapper}>
-            <div className={stylesField}>
-                <label htmlFor="category">Category</label>
-                <select name="category" id="category"
-                    onChange={onCategoryChange}
-                    value={selectedCategoryID}
-                    >
-                    {categories.map((category) => (
-                        <option 
-                            key={category.id} 
-                            value={category.id}
-                            >
-                                {category.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <CategoryList
+                stylesField={stylesField}
+                onCategoryChange={onCategoryChange}
+                selectedCategoryID={selectedCategoryID}
+                categories={categories}
+            />
             <AddForm 
                 stylesField={stylesField}
                 onChange={onAddFormChange}

@@ -62,7 +62,10 @@ const Product:ProductType = ({product, onProductClick}) => {
         >
             <span className={styles.name}>{product.variantName}</span>
             <button className={styles.delete}
-                onClick={() => console.log('delete')}
+                onClick={(e) => {
+                    e.preventDefault();
+                    console.log('delete');
+                }}
             >
                 <CloseIconSVG
                     className={styles.icon}

@@ -28,13 +28,9 @@ const useGroupAdd = ({
     const [productGroup, setProductGroup] = useState<ProductGroupToAdd>([]);
     const [currentProductID, setCurrentProductID] = useState<string|null>(null);
 
+        
     
-    
-    
-    
-    
-    
-    
+    // set the first category as selected category when the component is mounted
     useEffect(() => {
         const categories = getCategories(state);
         if(categories.length === 0) return;
@@ -44,6 +40,13 @@ const useGroupAdd = ({
     }, []);
 
 
+    // do something with the currentProductID
+    useEffect(() => {
+        if(!currentProductID) return;
+        
+        console.log(currentProductID);
+
+    }, [currentProductID]);
 
     const getMainProductID = () => {
         const mainProduct = productGroup.find(product => product.mainProduct === true);
@@ -70,6 +73,7 @@ const useGroupAdd = ({
         setGroupName(e.target.value);
     }
 
+    // reset all products's mainProduct to false and set the selected product's mainProduct to true
     const onMainProductChange:ChangeEventHandler<HTMLSelectElement> = (e) => {
         e.preventDefault();
 
@@ -118,6 +122,7 @@ const useGroupAdd = ({
             files: currentAddForm?.files || [],
         }
 
+        // if there is no main product, set the first product as main product
         if(productGroup.length === 0) {
             newProduct.mainProduct = true;
         }
@@ -127,6 +132,30 @@ const useGroupAdd = ({
         setProductGroup(newProductGroup);
         setIsAddFormResetting(true);
     }
+
+    const onUpdate:MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
+
+        if(!currentProductID) return;
+
+        const productIndex = productGroup.findIndex(product => product._id === currentProductID);
+
+        const newProductGroup = [...productGroup];
+
+        newProductGroup[productIndex] = {
+            ...newProductGroup[productIndex],
+            variantName: currentAddForm?.productName || '',
+            serialNumber: currentAddForm?.serialNumber || '',
+            shortDescription: currentAddForm?.shortDescription || '',
+            fullDescription: currentAddForm?.fullDescription || '',
+            price: currentAddForm?.price || 0,
+            files: currentAddForm?.files || [],
+        }
+
+        setProductGroup(newProductGroup);
+        setIsAddFormResetting(true);
+    }
+    
 
     const onProductClick = (productID:string) => {
         setCurrentProductID(productID);
@@ -147,7 +176,9 @@ const useGroupAdd = ({
         productGroup,
         onMainProductChange,
         mainProductID: getMainProductID(),
-        onProductClick
+        onProductClick,
+        currentProductID,
+        onUpdate
     }
 }
 
