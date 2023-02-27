@@ -8,10 +8,11 @@ import { ProductGroupItemToAdd, ProductGroupToAdd } from '.';
 import generateRandomId from "../../../../../utils/generateRandomId";
 
 type useGroupAddParams = {
+    setIsDataValid: (isDataValid: boolean) => void;
 }
 
 const useGroupAdd = ({
-    
+    setIsDataValid
 }: useGroupAddParams) => {
 
     const { state } = useContext(AdminContext);
@@ -61,6 +62,20 @@ const useGroupAdd = ({
 
     }, [currentProductID]);
 
+    // set the isDataValid state, thus enable/disable the add button. Data is valid when there is at least one product in the product group, and the group name is not empty
+    useEffect(() => {
+        if(productGroup.length === 0 || groupName === '' || selectedCategoryID === '') {
+            setIsDataValid(false);
+            return;
+        }
+        else {
+            setIsDataValid(true);
+        }
+
+
+    }, [productGroup, groupName]);
+
+
     const getMainProductID = () => {
         const mainProduct = productGroup.find(product => product.mainProduct === true);
 
@@ -101,10 +116,7 @@ const useGroupAdd = ({
 
         const productIndex = newProductGroup.findIndex(product => product._id === productID);
 
-        newProductGroup[productIndex] = {
-            ...newProductGroup[productIndex],
-            mainProduct: true        
-        }
+        newProductGroup[productIndex].mainProduct = true; 
 
         setProductGroup(newProductGroup);
     }

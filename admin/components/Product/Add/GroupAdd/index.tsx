@@ -33,6 +33,7 @@ export type ProductGroupToAdd = ProductGroupItemToAdd[];
 
 interface GroupAddPropsType {
     stylesField: string;
+    setIsDataValid: (isDataValid: boolean) => void;
 
 } 
 
@@ -45,6 +46,7 @@ type GroupAddType = FunctionComponent<GroupAddPropsType>
  */
 const GroupAdd:GroupAddType = ({
     stylesField, 
+    setIsDataValid
 }) => {
 
     const {
@@ -69,7 +71,7 @@ const GroupAdd:GroupAddType = ({
         onCreateNewProduct,
         addFormFeedingData,
         setAddFormFeedingData
-    } = useGroupAdd({});
+    } = useGroupAdd({setIsDataValid});
 
     return (
         <div className={styles.wrapper}>

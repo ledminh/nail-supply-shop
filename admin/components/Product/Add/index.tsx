@@ -61,7 +61,7 @@ const Add:AddType = () => {
                     currentMode === "group" ?
                     <GroupAdd 
                         stylesField={styles.field} 
-
+                        setIsDataValid={setIsDataValid}
                         />
                     :
                     <SingleAdd 
