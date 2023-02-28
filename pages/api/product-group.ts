@@ -9,7 +9,7 @@ type Data = {
     message: string,
 } | {
     success: true,
-    product: ProductGroupType | null
+    productGroup: ProductGroupType | null
 }
 
 export default function handler(
@@ -30,9 +30,11 @@ export default function handler(
         addProductGroup(data)
         .then((dbRes) => {
             if(dbRes[0] === 'success') {
+
+            
             res.status(200).json({
                 success: true, 
-                product: dbRes[1]
+                productGroup: dbRes[1]
             })
             }
             else {

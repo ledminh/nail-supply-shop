@@ -176,7 +176,7 @@ const useGroupAdd = ({
             files: currentAddForm?.files || [],
         }
 
-        // if there is no product in the product group, set the new product as the main product
+        
         if(productGroup.length === 0) {
             newProduct.mainProduct = true;
         }

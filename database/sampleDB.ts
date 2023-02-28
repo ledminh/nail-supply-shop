@@ -320,11 +320,16 @@ export const addDBProductGroup:AddDBProductGroupType = async (productGroup) => {
   return new Promise((resolve) => {
     const newProductGroup:DBProductGroupType = productGroup.map((product) => {
       return {
-        ...product,
+        categoryID: product.categoryID,
         id: product.serialNumber,
+        name: product.name,
+        variantName: product.variantName,
+        shortDescription: product.shortDescription,
+        fullDescription: product.fullDescription,
+        price: product.price,
+        mainProduct: product.mainProduct,
         date: new Date().toISOString(),
         sellCount: 0,
-
         images: product.imageUrls.map((url) => {
           return {
             url,

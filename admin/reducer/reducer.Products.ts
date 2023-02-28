@@ -1,8 +1,7 @@
-import { ProductGroupType } from "../../database";
-import { _ProductType } from "../types";
+import { _ProductType, _ProductGroupType } from "../types";
 import { ActionType } from "./types";
 
-const productsReducer = (state:(_ProductType|ProductGroupType)[], action:ActionType) => {
+const productsReducer = (state:(_ProductType|_ProductGroupType)[], action:ActionType) => {
     switch(action.type) {
         case 'PROD/SET':
             return action.payload;
@@ -14,6 +13,16 @@ const productsReducer = (state:(_ProductType|ProductGroupType)[], action:ActionT
             } 
 
             const newState = state.map(product => {
+                if(Array.isArray(product)) {
+                    return product.map(product => {
+
+                        return {
+                            ...product,
+                            newest: false
+                        }
+                    });
+                }
+
                 return {
                     ...product,
                     newest: false
@@ -30,14 +39,26 @@ const productsReducer = (state:(_ProductType|ProductGroupType)[], action:ActionT
                 }
             });
 
+
             const newStateGroup = state.map(product => {
+                if(Array.isArray(product)) {
+                    return product.map(product => {
+
+                        return {
+                            ...product,
+                            newest: false
+                        }
+                    });
+                }
+
+
                 return {
                     ...product,
                     newest: false
                 }
             });
 
-            return [...newStateGroup, ...newestProductGroup];
+            return [newestProductGroup, ...newStateGroup];
         default:
             return state;
     }

@@ -82,7 +82,7 @@ const useAdd = () => {
 
                         productGroupToAdd.push({
                             categoryID: groupAddData.categoryID,
-                            name: product.groupName,
+                            name: groupAddData.groupName,
                             variantName: product.variantName,
                             mainProduct: product.mainProduct,
                             serialNumber: product.serialNumber,
@@ -142,6 +142,7 @@ const useAdd = () => {
     }
 
     const onGroupAddDataChange = (groupAddData: GroupAddData) => {
+        
         setGroupAddData(groupAddData);
     }
 

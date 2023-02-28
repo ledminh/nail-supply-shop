@@ -56,6 +56,7 @@ export const addProductGroup = (
         data: productGroupToAdd,
         onSuccess: (newProductGroup) => {
             if(newProductGroup){
+                
                 dispatch({
                     type: 'PROD/ADD_GROUP',
                     payload: convertGroupProduct(newProductGroup)
