@@ -269,17 +269,8 @@ export const getDBProduct:GetDBProductType = async (id) => {
     
   const product = products.find((product) => {
     if(Array.isArray(product)) {
-      
-      const mainProduct = product.find((p) => p.mainProduct);
-
-      if(!mainProduct) {
-        throw new Error(`Product group "${product[0].name}" does not have a main product`);
-      }
-
-      return mainProduct.id === id;
+      return product[0].id === id;
     }
-
-    
     
     return product.id === id;
 
@@ -299,7 +290,7 @@ export const addDBProduct:AddDBProductType = async (product) => {
   return new Promise((resolve) => {
     const newProduct:DBProductType = {
       ...product,
-      id: product.serialNumber,
+      id: product.id,
       date: new Date().toISOString(),
       sellCount: 0,
 
@@ -321,7 +312,7 @@ export const addDBProductGroup:AddDBProductGroupType = async (productGroup) => {
     const newProductGroup:DBProductGroupType = productGroup.map((product) => {
       return {
         categoryID: product.categoryID,
-        id: product.serialNumber,
+        id: product.id,
         name: product.name,
         variantName: product.variantName,
         shortDescription: product.shortDescription,

@@ -48,6 +48,34 @@ const ProductGroup:ProductGroupType = ({productGroup}) => {
                         </li>))
                 }
             </ul>
+            <ul className={styles.images}>
+                {
+                    currentProduct.images.map((image, index) => (
+                        <li key={index} className={styles.image}>
+                            <Image
+                                src={image.url}
+                                alt={image.alt? image.alt : currentProduct.name}
+                                fill
+                                style={{
+                                    objectFit: 'cover'
+                                }}
+                                />
+                        </li>
+                    ))
+                }
+            </ul>
+            <div className={styles.infos}>
+                <div className="label">Variant name</div>
+                <div className="value">{currentProduct.variantName}</div>
+                <div className="label">ID</div>
+                <div className="value">{currentProduct.id}</div>
+                <div className="label">Short Description</div>
+                <div className="value">{currentProduct.shortDescription}</div>
+                <div className="label">Full Description</div>
+                <div className="value">{currentProduct.fullDescription}</div>
+                <div className="label">Price</div>
+                <div className="value">{currentProduct.price}</div>
+            </div>
         </>
     )
 

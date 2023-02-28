@@ -59,7 +59,7 @@ const useGroupAdd = ({
 
         setAddFormFeedingData({
             productName: product.variantName,
-            serialNumber: product.serialNumber,
+            id: product.id,
             shortDescription: product.shortDescription,
             fullDescription: product.fullDescription,
             price: product.price,
@@ -169,7 +169,7 @@ const useGroupAdd = ({
             groupName: '',
             mainProduct: false,
             variantName: currentAddForm?.productName || '',
-            serialNumber: currentAddForm?.serialNumber || '',
+            id: currentAddForm?.id || '',
             shortDescription: currentAddForm?.shortDescription || '',
             fullDescription: currentAddForm?.fullDescription || '',
             price: currentAddForm?.price || 0,
@@ -199,7 +199,7 @@ const useGroupAdd = ({
         newProductGroup[productIndex] = {
             ...newProductGroup[productIndex],
             variantName: currentAddForm?.productName || '',
-            serialNumber: currentAddForm?.serialNumber || '',
+            id: currentAddForm?.id || '',
             shortDescription: currentAddForm?.shortDescription || '',
             fullDescription: currentAddForm?.fullDescription || '',
             price: currentAddForm?.price || 0,

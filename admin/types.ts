@@ -34,7 +34,7 @@ export type CategoryRequestBody = {
 export type ProductToAdd = {
     categoryID: string,
     name: string,
-    serialNumber: string,
+    id: string,
     shortDescription: string,
     fullDescription: string,
     price: number,
@@ -46,7 +46,7 @@ export type ProductGroupToAdd = {
     name: string,
     variantName: string,
     mainProduct: boolean,
-    serialNumber: string,
+    id: string,
     shortDescription: string,
     fullDescription: string,
     price: number,

@@ -14,7 +14,7 @@ import CloseIconSVG from '../../../../../assets/images/close_icon.svg';
 
 export type AddFormData = {
     productName: string;
-    serialNumber: string;
+    id: string;
     shortDescription: string;
     fullDescription: string;
     price: number;
@@ -43,7 +43,7 @@ const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting
     const {
         productName,
         onProductNameChange,
-        serialNumber,
+        id,
         onSerialNumberChange,
         shortDescription,
         onShortDescriptionChange,
@@ -68,11 +68,11 @@ const AddForm:AddFormType = ({stylesField, onChange, isResetting, setIsResetting
                 />
             </div>
             <div className={stylesField}>
-                <label htmlFor="Serial Number">Serial Number</label>
+                <label htmlFor="Serial Number">ID</label>
                 <input type="text" 
                     name="Serial Number" 
                     id="serial_number"
-                    value={serialNumber}
+                    value={id}
                     onChange={onSerialNumberChange}
                 />
             </div>
@@ -156,7 +156,7 @@ export default AddForm;
 
 export const isAddFormDataValid = (data: AddFormData) => {
     if(data.productName === "") return false;
-    if(data.serialNumber === "") return false;
+    if(data.id === "") return false;
     if(data.shortDescription === "") return false;
     if(data.fullDescription === "") return false;
     if(data.price <= 0) return false;

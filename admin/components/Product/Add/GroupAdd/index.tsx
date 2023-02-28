@@ -22,7 +22,7 @@ export type ProductItem = {
     groupName: string;
     mainProduct: boolean;
     variantName: string;
-    serialNumber: string;
+    id: string;
     shortDescription: string;
     fullDescription: string;
     price: number;

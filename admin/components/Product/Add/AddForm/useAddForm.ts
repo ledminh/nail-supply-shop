@@ -13,7 +13,7 @@ type useAddFormParams = {
 const useAddForm = ({onChange, isResetting, setIsResetting, feedingData, setFeedingData}:useAddFormParams) => {
     
     const [productName, setProductName] = useState('');
-    const [serialNumber, setSerialNumber] = useState(''); 
+    const [id, setId] = useState(''); 
     const [shortDescription, setShortDescription] = useState('');
     const [fullDescription, setFullDescription] = useState('');
     const [price, setPrice] = useState(0);
@@ -24,20 +24,20 @@ const useAddForm = ({onChange, isResetting, setIsResetting, feedingData, setFeed
     useEffect(() => {
         onChange({
             productName,
-            serialNumber,
+            id,
             shortDescription,
             fullDescription,
             price,
             files
         });
-    }, [productName, serialNumber, shortDescription, fullDescription, price, files]);
+    }, [productName, id, shortDescription, fullDescription, price, files]);
     
 
     // when isResetting is true, reset all the states
     useEffect(() => {
         if(isResetting) {
             setProductName('');
-            setSerialNumber('');
+            setId('');
             setShortDescription('');
             setFullDescription('');
             setPrice(0);
@@ -50,7 +50,7 @@ const useAddForm = ({onChange, isResetting, setIsResetting, feedingData, setFeed
     useEffect(() => {
         if(feedingData) {
             setProductName(feedingData.productName);
-            setSerialNumber(feedingData.serialNumber);
+            setId(feedingData.id);
             setShortDescription(feedingData.shortDescription);
             setFullDescription(feedingData.fullDescription);
             setPrice(feedingData.price);
@@ -67,7 +67,7 @@ const useAddForm = ({onChange, isResetting, setIsResetting, feedingData, setFeed
     }
 
     const onSerialNumberChange:ChangeEventHandler<HTMLInputElement> = (e) => {
-        setSerialNumber(e.target.value);
+        setId(e.target.value);
     }
 
     const onShortDescriptionChange:ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -105,7 +105,7 @@ const useAddForm = ({onChange, isResetting, setIsResetting, feedingData, setFeed
     return {
         productName,
         onProductNameChange,
-        serialNumber,
+        id,
         onSerialNumberChange,
         shortDescription,
         onShortDescriptionChange,

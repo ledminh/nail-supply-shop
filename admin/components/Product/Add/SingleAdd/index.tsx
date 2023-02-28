@@ -15,7 +15,7 @@ import CategoryList from "../CategoryList";
 export type SingleAddData = {
     categoryID: string;
     productName: string;
-    serialNumber: string;
+    id: string;
     shortDescription: string;
     fullDescription: string;
     price: number;
