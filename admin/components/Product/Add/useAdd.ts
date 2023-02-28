@@ -46,12 +46,13 @@ const useAdd = () => {
                 const productToAdd:ProductToAdd = {
                     categoryID: singleProduct.categoryID,
                     name: singleProduct.productName,
-                    serialNumber: singleProduct.serialNumber,
+                    id: singleProduct.id,
                     shortDescription: singleProduct.shortDescription,
                     fullDescription: singleProduct.fullDescription,
                     price: singleProduct.price,
                     imageUrls,
                 };
+
 
                 addProduct(productToAdd, dispatch);
 
@@ -85,7 +86,7 @@ const useAdd = () => {
                             name: groupAddData.groupName,
                             variantName: product.variantName,
                             mainProduct: product.mainProduct,
-                            serialNumber: product.serialNumber,
+                            id: product.id,
                             shortDescription: product.shortDescription,
                             fullDescription: product.fullDescription,
                             price: product.price,
@@ -138,6 +139,7 @@ const useAdd = () => {
 
 
     const onProductChange = (productData: SingleAddData) => {
+        
         setSingleProduct(productData);
     }
 

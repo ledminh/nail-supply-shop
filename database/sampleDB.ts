@@ -329,6 +329,7 @@ export const addDBProductGroup:AddDBProductGroupType = async (productGroup) => {
       };
     });
 
+
     products.push(newProductGroup);
 
     resolve(newProductGroup);

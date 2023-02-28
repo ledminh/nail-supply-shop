@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { _ProductGroupType } from '../../../../types';
 
 type useProductGroupParams = {
@@ -9,6 +9,8 @@ const useProductGroup = ({productGroup}: useProductGroupParams) => {
     
     const [currentProduct, setCurrentProduct] = useState(productGroup[0]); 
     const [editMode, setEditMode] = useState(false);
+
+
 
 
     /*******************************
