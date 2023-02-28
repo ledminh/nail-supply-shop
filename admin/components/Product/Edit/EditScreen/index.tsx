@@ -1,16 +1,18 @@
 import { FunctionComponent } from "react";
-import { ProductGroupType } from "../../../../../database";
-import { _ProductType } from "../../../../types";
+import { _ProductType, _ProductGroupType } from "../../../../types";
 
 import styles from './EditScreen.module.scss';
 
 import useEditScreen from "./useEditScreen";
 
+import SingleEdit from "./SingleEdit";
+import GroupEdit from "./GroupEdit";
+
 /***************************
  *  Types
  */
 interface EditScreenPropsType {
-    data: _ProductType | ProductGroupType;
+    data: _ProductType | _ProductGroupType;
     setEditMode: (value:boolean) => void;
 } 
 
@@ -23,11 +25,17 @@ type EditScreenType = FunctionComponent<EditScreenPropsType>
  */
 const EditScreen:EditScreenType = ({data, setEditMode}) => {
 
-    const {} = useEditScreen({});
+    const {currentMode} = useEditScreen({data});
 
     return (
         <div className={styles.wrapper}>
-            EditScreen component
+            {
+                currentMode === "single" ? (
+                    <SingleEdit />
+                ) : (
+                    <GroupEdit />
+                )
+            }       
         </div>
     )
 }

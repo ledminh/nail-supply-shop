@@ -1,8 +1,6 @@
 import { FunctionComponent } from "react";
-import { ProductGroupType } from "../../../../../database";
-import { _ProductType } from "../../../../types";
+import { _ProductType, _ProductGroupType } from "../../../../types";
 
-import styles from './Item.module.scss';
 
 import Product from "../Product";
 import ProductGroup from "../ProductGroup";
@@ -11,7 +9,7 @@ import ProductGroup from "../ProductGroup";
  *  Types
  */
 interface ItemPropsType {
-    data: _ProductType|ProductGroupType
+    data: _ProductType|_ProductGroupType
 } 
 
 type ItemType = FunctionComponent<ItemPropsType>
@@ -25,7 +23,9 @@ const Item:ItemType = ({data}) => {
 
     
     return Array.isArray(data)? 
-                <ProductGroup />
+                <ProductGroup 
+                    productGroup={data}
+                    />
                 : <Product product={data}/>;    
     
 }
