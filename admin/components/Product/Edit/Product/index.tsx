@@ -54,6 +54,8 @@ const Product:ProductType = ({product}) => {
                 }                
             </div>
             <div className={styles.text}>
+                <h5 className={styles.label}>ID</h5>
+                <p className={styles.content}>{product.id}</p>
                 <h5 className={styles.label}>
                     Short Description
                 </h5>

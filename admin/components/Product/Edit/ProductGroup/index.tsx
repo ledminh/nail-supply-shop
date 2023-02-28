@@ -59,22 +59,39 @@ const ProductGroup:ProductGroupType = ({productGroup}) => {
                                 style={{
                                     objectFit: 'cover'
                                 }}
+                                sizes="(max-width: 640px) 50vw, (max-width: 768px) 20vw, 10vw"
                                 />
                         </li>
                     ))
                 }
             </ul>
-            <div className={styles.infos}>
-                <div className="label">Variant name</div>
-                <div className="value">{currentProduct.variantName}</div>
-                <div className="label">ID</div>
-                <div className="value">{currentProduct.id}</div>
-                <div className="label">Short Description</div>
-                <div className="value">{currentProduct.shortDescription}</div>
-                <div className="label">Full Description</div>
-                <div className="value">{currentProduct.fullDescription}</div>
-                <div className="label">Price</div>
-                <div className="value">{currentProduct.price}</div>
+            <div className={styles.text}>
+                <h5 className={styles.label}>ID</h5>
+                <p className={styles.content}>{currentProduct.id}</p>
+                <h5 className={styles.label}>Variant name</h5>
+                <p className={styles.content}>{currentProduct.variantName}</p>
+                <h5 className={styles.label}>
+                    Short Description
+                </h5>
+                <p className={styles.content}>{currentProduct.shortDescription}</p>
+                <h5 className={styles.label}>
+                    Full Description
+                </h5>
+                <p className={styles.content}>{currentProduct.fullDescription}</p>
+                <h5 className={styles.label}>
+                    Price
+                </h5>
+                <p className={styles.content}>${currentProduct.price}</p>
+            </div>
+            <div className={styles.buttons}>
+                <button className={styles.button + ' ' + styles.edit}
+                    onClick={() => setEditMode(true)}
+                >
+                    Edit
+                </button>
+                <button className={styles.button + ' ' + styles.delete}
+                    onClick={onDelete}
+                    >Delete</button>
             </div>
         </>
     )
