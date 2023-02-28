@@ -4,8 +4,9 @@ import upload from '../../../tools/upload';
 
 import { SingleAddData } from './SingleAdd';
 
-import { ProductToAdd } from '../../../types';
-import { addProduct } from '../../../reducer/actions.Products';
+import { ProductToAdd, ProductGroupToAdd } from '../../../types';
+import { addProduct, addProductGroup } from '../../../reducer/actions.Products';
+import { GroupAddData } from './GroupAdd';
 
 
 const useAdd = () => {
@@ -18,7 +19,7 @@ const useAdd = () => {
     const [isResetting, setIsResetting] = useState<boolean>(false);
 
     const [singleProduct, setSingleProduct] = useState<SingleAddData|null>(null);
-    
+    const [groupAddData, setGroupAddData] = useState<GroupAddData|null>(null);
 
 
 
@@ -52,7 +53,6 @@ const useAdd = () => {
                     imageUrls,
                 };
 
-                
                 addProduct(productToAdd, dispatch);
 
                 setIsResetting(true);                
@@ -62,6 +62,51 @@ const useAdd = () => {
             });
 
             
+
+        }
+        else if (currentMode === 'group') {
+            const productGroupToAdd:ProductGroupToAdd= [];
+
+            if(!groupAddData) return;
+
+            groupAddData.products.map((product) => {
+                
+                upload({
+                    type: 'product-images',
+                    files: product.files,
+                    }).then(({data}) => {
+
+                        const {filenames} = data;
+
+                        const imageUrls = filenames.map((filename:string) => `/images/product/${filename}`);
+
+                        productGroupToAdd.push({
+                            categoryID: groupAddData.categoryID,
+                            name: product.groupName,
+                            variantName: product.variantName,
+                            mainProduct: product.mainProduct,
+                            serialNumber: product.serialNumber,
+                            shortDescription: product.shortDescription,
+                            fullDescription: product.fullDescription,
+                            price: product.price,
+                            imageUrls,
+                        });
+
+                        if(productGroupToAdd.length === groupAddData.products.length) {
+                            addProductGroup(productGroupToAdd, dispatch);
+                            setIsResetting(true);
+                        }
+
+                    }).catch((err) => {
+                        throw new Error(err);
+                    });
+
+
+
+            
+            })                
+
+
 
         }
 
@@ -95,6 +140,11 @@ const useAdd = () => {
     const onProductChange = (productData: SingleAddData) => {
         setSingleProduct(productData);
     }
+
+    const onGroupAddDataChange = (groupAddData: GroupAddData) => {
+        setGroupAddData(groupAddData);
+    }
+
     
     return {
         currentMode,
@@ -106,7 +156,8 @@ const useAdd = () => {
         setIsDataValid,
         isResetting,
         setIsResetting,
-        onProductChange
+        onProductChange,
+        onGroupAddDataChange,
     }
 }
 

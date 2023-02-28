@@ -1,4 +1,4 @@
-import { CategoryToAdd, CategoryToUpdate, ProductToAdd } from "../admin/types";
+import { CategoryToAdd, CategoryToUpdate, ProductToAdd, ProductGroupToAdd } from "../admin/types";
 
 /*********************************************
  *  Database schema
@@ -32,10 +32,12 @@ export type DBProductType = {
     sellCount: number;
 };
 
-export type DBProductGroupType = (DBProductType & {
+export type DBProductGroupItemType = DBProductType & {
     mainProduct?: boolean;
     variantName: string;
-})[];
+};
+
+export type DBProductGroupType = DBProductGroupItemType[];
 
 export type DBPageInfoType = {
     id: string,
@@ -62,6 +64,7 @@ export type ResponseType<T> = ['success', T ]
     // Specific types for response from API functions
 export type CategoryType = DBCategoryType;
 export type ProductType = DBProductType;
+export type ProductGroupItemType = DBProductGroupItemType;
 export type ProductGroupType = DBProductGroupType;
 export type PageInfoType = DBPageInfoType;
 
@@ -127,6 +130,8 @@ export type UpdateDBCategoryType = (category: CategoryToUpdate) => Promise<DBCat
 
 export type AddDBProductType = (newProduct: ProductToAdd) => Promise<DBProductType>;
 
+export type AddDBProductGroupType = (newProductGroup: ProductGroupToAdd) => Promise<DBProductGroupType>;
+
 type ProductOptionsType = {
     limit?: number;
     offset?: number;
@@ -173,6 +178,8 @@ export type GetProductsType = (options: ProductOptionsType) => Promise<ResponseT
 export type GetProductType = (id: string) => Promise<ResponseType<ProductType|ProductGroupType>>;
 
 export type AddProductType = (product: ProductToAdd) => Promise<ResponseType<ProductType>>;
+
+export type AddProductGroupType = (product: ProductGroupToAdd) => Promise<ResponseType<ProductGroupType>>;
 
 
     //------------------------------------------------

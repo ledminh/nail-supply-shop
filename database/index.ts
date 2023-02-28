@@ -6,13 +6,13 @@
 
 
 // return types for API functions
-import { CategoryType, ProductType, ProductGroupType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType, DBProductImageType } from './types';
+import { CategoryType, ProductType, ProductGroupItemType, ProductGroupType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ShopPageDataType, AdminPageDataType, ProductPageDataType, ResponseType, DBProductImageType } from './types';
 
 // database functions, these functions are used to get data from the database, interact directly with the database
-import {getDBCategories, addDBCategory, updateDBCategory, deleteDBCategory, getDBProducts, getDBProduct, addDBProduct, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
+import {getDBCategories, addDBCategory, updateDBCategory, deleteDBCategory, getDBProducts, getDBProduct, addDBProduct, addDBProductGroup, getDBPageInfo, getDBAboutHtmlText} from './sampleDB';
 
 // types for API functions implemented in this file
-import {GetCategoriesType, AddCategoryType, UpdateCategoryType, DeleteCategoryType, GetProductsType, GetProductType, AddProductType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
+import {GetCategoriesType, AddCategoryType, UpdateCategoryType, DeleteCategoryType, GetProductsType, GetProductType, AddProductType, AddProductGroupType, GetCategoryPageDataType, GetShopPageDataType, GetAboutPageDataType, GetAdminPageDataType, GetProductPageDataType, GetHomePageDataType} from './types';
 
 import { defaultSortConfig } from '../config';
 
@@ -31,7 +31,7 @@ import { defaultSortConfig } from '../config';
 
 type ProductImageType = DBProductImageType;
 
-export type {CategoryType, ProductType, ProductGroupType, ProductImageType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ProductPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
+export type {CategoryType, ProductType, ProductGroupItemType, ProductGroupType, ProductImageType, PageInfoType, HomePageDataType, AboutPageDataType, CategoryPageDataType, ProductPageDataType, ShopPageDataType, AdminPageDataType, ResponseType};
 
 
 /*****************************
@@ -126,6 +126,20 @@ export const addProduct:AddProductType = async (newProduct) => {
         return ['error', (err as Error).message];
     }
 }
+
+export const addProductGroup:AddProductGroupType = async (newProductGroup) => {
+    try {
+        const newProductGroupDB = await addDBProductGroup(newProductGroup);
+
+        return ['success', newProductGroupDB];
+
+    }
+    catch(err) {
+        return ['error', (err as Error).message];
+    }
+}
+
+
 
 // fetches data for pages
 

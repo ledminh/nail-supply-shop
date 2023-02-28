@@ -21,7 +21,23 @@ const productsReducer = (state:(_ProductType|ProductGroupType)[], action:ActionT
             });
 
             return [newestProduct, ...newState];
-        
+        case 'PROD/ADD_GROUP':
+            const newestProductGroup = action.payload.map(product => {
+                return {
+                    ...product,
+                    new: true,
+                    newest: true
+                }
+            });
+
+            const newStateGroup = state.map(product => {
+                return {
+                    ...product,
+                    newest: false
+                }
+            });
+
+            return [...newStateGroup, ...newestProductGroup];
         default:
             return state;
     }

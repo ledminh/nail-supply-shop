@@ -1,10 +1,13 @@
 import { ProductGroupType, ProductType } from "../../database";
 
-import { ProductToAdd, _ProductType } from "../types";
+import { ProductGroupToAdd, ProductToAdd, _ProductType } from "../types";
 import { ActionType, StateType } from "./types";
 
 import convertProduct from "../tools/convertProduct";
+import convertGroupProduct from "../tools/convertGroupProduct";
+
 import postProduct from "../tools/postProduct";
+import postProductGroup from "../tools/postProductGroup";
 
 
 const _convertBoth = (data: ProductType|ProductGroupType): _ProductType|ProductGroupType => {
@@ -41,7 +44,28 @@ export const addProduct = (
             }
         }
     });
+
 }
+
+export const addProductGroup = (
+    productGroupToAdd: ProductGroupToAdd,
+    dispatch: React.Dispatch<ActionType>) => {
+
+    postProductGroup({
+        type: 'add',
+        data: productGroupToAdd,
+        onSuccess: (newProductGroup) => {
+            if(newProductGroup){
+                dispatch({
+                    type: 'PROD/ADD_GROUP',
+                    payload: convertGroupProduct(newProductGroup)
+                });
+            }
+        }
+    });
+
+}
+
 
 export const getProductsByCategoryID = (categoryID:string, state:StateType) => {
     return state.products.filter(prod => 

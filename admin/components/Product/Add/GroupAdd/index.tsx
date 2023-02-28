@@ -17,7 +17,7 @@ import CategoryList from "../CategoryList";
 /***************************
  *  Types
  */
-export type ProductGroupItemToAdd = {
+export type ProductItem = {
     _id: string;
     groupName: string;
     mainProduct: boolean;
@@ -29,12 +29,18 @@ export type ProductGroupItemToAdd = {
     files: File[];
 };
 
-export type ProductGroupToAdd = ProductGroupItemToAdd[];
+export type GroupAddData = {
+    groupName: string;
+    categoryID: string;
+    products: ProductItem[];
+};
 
 interface GroupAddPropsType {
     stylesField: string;
     setIsDataValid: (isDataValid: boolean) => void;
-
+    isResetting: boolean;
+    setIsResetting: (isResetting: boolean) => void;
+    onGroupAddDataChange: (groupAddData: GroupAddData) => void;
 } 
 
 type GroupAddType = FunctionComponent<GroupAddPropsType>
@@ -46,7 +52,10 @@ type GroupAddType = FunctionComponent<GroupAddPropsType>
  */
 const GroupAdd:GroupAddType = ({
     stylesField, 
-    setIsDataValid
+    setIsDataValid,
+    isResetting,
+    setIsResetting,
+    onGroupAddDataChange
 }) => {
 
     const {
@@ -71,7 +80,12 @@ const GroupAdd:GroupAddType = ({
         onCreateNewProduct,
         addFormFeedingData,
         setAddFormFeedingData
-    } = useGroupAdd({setIsDataValid});
+    } = useGroupAdd({
+        setIsDataValid,
+        isResetting,
+        setIsResetting,
+        onGroupAddDataChange
+    });
 
     return (
         <div className={styles.wrapper}>

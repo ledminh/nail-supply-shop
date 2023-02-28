@@ -61,7 +61,10 @@ export type ActionType =
 } | {
     type:'PROD/ADD_SINGLE';
     payload: _ProductType;
-} | 
+} | {
+    type:'PROD/ADD_GROUP';
+    payload: ProductGroupType;
+} |
 
 // About
 {

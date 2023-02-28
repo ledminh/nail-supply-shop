@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { ProductType } from '../../database';
-import {  ProductRequestBody } from '../types';
+import { ProductRequestBody } from '../types';
 
 type Props = {
     onSuccess: (product:ProductType|null) => void;

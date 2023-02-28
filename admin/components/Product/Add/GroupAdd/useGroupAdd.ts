@@ -4,15 +4,21 @@ import { getCategories } from "../../../../reducer/actions.Categories";
 
 import { AddFormData, isAddFormDataValid } from "../AddForm";
 
-import { ProductGroupItemToAdd, ProductGroupToAdd } from '.';
+import { ProductItem, GroupAddData } from '.';
 import generateRandomId from "../../../../../utils/generateRandomId";
 
 type useGroupAddParams = {
     setIsDataValid: (isDataValid: boolean) => void;
+    isResetting: boolean;
+    setIsResetting: (isResetting: boolean) => void;
+    onGroupAddDataChange: (groupAddData: GroupAddData) => void;
 }
 
 const useGroupAdd = ({
-    setIsDataValid
+    setIsDataValid,
+    isResetting,
+    setIsResetting,
+    onGroupAddDataChange
 }: useGroupAddParams) => {
 
     const { state } = useContext(AdminContext);
@@ -26,7 +32,7 @@ const useGroupAdd = ({
 
     const [currentAddForm, setCurrentAddForm] = useState<AddFormData|null>(null);
 
-    const [productGroup, setProductGroup] = useState<ProductGroupToAdd>([]);
+    const [productGroup, setProductGroup] = useState<ProductItem[]>([]);
     const [currentProductID, setCurrentProductID] = useState<string|null>(null);
 
     const [addFormFeedingData, setAddFormFeedingData] = useState<AddFormData|null>(null);
@@ -75,6 +81,29 @@ const useGroupAdd = ({
 
     }, [productGroup, groupName]);
 
+    useEffect(() => {
+        const groupAddData:GroupAddData = {
+            groupName,
+            categoryID: selectedCategoryID,
+            products: productGroup
+        };
+
+        onGroupAddDataChange(groupAddData);
+    }, [productGroup, groupName, selectedCategoryID]);
+
+
+    // reset all states when isResetting is true (when the user clicks the add or cancel button)
+    useEffect(() => {
+        if(isResetting) {
+            setGroupName('');
+            setProductGroup([]);
+            setCurrentProductID(null);
+
+            setIsAddFormResetting(true);
+
+            setIsResetting(false);
+        }
+    }, [isResetting]);
 
     const getMainProductID = () => {
         const mainProduct = productGroup.find(product => product.mainProduct === true);
@@ -135,7 +164,7 @@ const useGroupAdd = ({
         e.preventDefault();
 
 
-        const newProduct:ProductGroupItemToAdd = {
+        const newProduct:ProductItem = {
             _id: generateRandomId(),
             groupName: '',
             mainProduct: false,
@@ -147,7 +176,7 @@ const useGroupAdd = ({
             files: currentAddForm?.files || [],
         }
 
-        // if there is no main product, set the first product as main product
+        // if there is no product in the product group, set the new product as the main product
         if(productGroup.length === 0) {
             newProduct.mainProduct = true;
         }

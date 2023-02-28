@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { ProductGroupToAdd, ProductGroupItemToAdd } from "..";
+import { ProductItem } from "..";
 
 import CloseIconSVG from '../../../../../../assets/images/close_icon.svg';
 
@@ -13,7 +13,7 @@ import styles from './ListOfProducts.module.scss';
  *  Types
  */
 type ListOfProductsPropsType = {
-    productGroup: ProductGroupToAdd;
+    productGroup: ProductItem[];
     onProductClick: (id: string) => void;
     onProductDelete: (id: string) => void;
     currentProductID: string|null;
@@ -52,7 +52,7 @@ export default ListOfProducts;
 // Product
 // ***********************
 type ProductPropsType = {
-    product: ProductGroupItemToAdd;
+    product: ProductItem;
     onProductClick: (id: string) => void;
     onProductDelete: (id: string) => void;
     current: boolean;

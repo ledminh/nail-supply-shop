@@ -1,4 +1,4 @@
-import { CategoryType, ProductType } from "../database";
+import { CategoryType, ProductType, ProductGroupItemType } from "../database";
 
 /************************************
  *  These types are used for sending
@@ -30,7 +30,6 @@ export type CategoryRequestBody = {
     }
 };
 
-// TODO: serial number here and ID in database
 
 export type ProductToAdd = {
     categoryID: string,
@@ -42,9 +41,36 @@ export type ProductToAdd = {
     imageUrls: string[],
 }
 
+export type ProductGroupToAdd = {
+    categoryID: string,
+    name: string,
+    variantName: string,
+    mainProduct: boolean,
+    serialNumber: string,
+    shortDescription: string,
+    fullDescription: string,
+    price: number,
+    imageUrls: string[],
+}[]
+
 export type ProductRequestBody = {
     type: 'add',
     data: ProductToAdd,
+} 
+// | {
+//     type: 'update',
+//     data: CategoryToUpdate
+// } | {
+//     type: 'delete',
+//     data: {
+//         id: string
+//     }
+// };
+
+
+export type ProductGroupRequestBody = {
+    type: 'add',
+    data: ProductGroupToAdd,
 } 
 // | {
 //     type: 'update',
@@ -73,6 +99,13 @@ export type _ProductType = ProductType & {
     toBeDeleted: boolean,
     isEditingImages: boolean,
 }
+
+export type _ProductGroupType = (ProductGroupItemType & {
+    new: boolean,
+    newest: boolean,
+    toBeDeleted: boolean,
+    isEditingImages: boolean,
+})[];
 
 
 export type DeleteFileRequestBody = {

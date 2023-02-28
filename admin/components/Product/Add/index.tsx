@@ -34,6 +34,7 @@ const Add:AddType = () => {
         isResetting,
         setIsResetting,
         onProductChange,
+        onGroupAddDataChange
     } = useAdd();
 
 
@@ -62,6 +63,9 @@ const Add:AddType = () => {
                     <GroupAdd 
                         stylesField={styles.field} 
                         setIsDataValid={setIsDataValid}
+                        isResetting={isResetting}
+                        setIsResetting={setIsResetting}
+                        onGroupAddDataChange={onGroupAddDataChange}
                         />
                     :
                     <SingleAdd 
