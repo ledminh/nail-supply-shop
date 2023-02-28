@@ -12,7 +12,6 @@ const useEdit = () => {
 
     const { categories, products } = state;   
     const [selectedCategoryID, setSelectedCategoryID] = useState<string>('');
-    
 
     // set default category
     useEffect(() => {
@@ -22,7 +21,6 @@ const useEdit = () => {
 
     }, [categories]);
 
-    
     
 
     /*************************************

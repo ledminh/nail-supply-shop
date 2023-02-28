@@ -105,7 +105,7 @@ const ProductGroup:ProductGroupType = ({productGroup}) => {
     )
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper + (currentProduct.new? ' ' + styles.new: '') + (currentProduct.newest? ' ' + styles.newest: '') + (currentProduct.toBeDeleted? ' ' + styles.toBeDeleted: '' )}>
             {content}
         </div>
     )
