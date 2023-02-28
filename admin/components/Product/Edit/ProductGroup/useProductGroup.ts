@@ -22,6 +22,7 @@ const useProductGroup = ({productGroup}: useProductGroupParams) => {
         editMode,
         setEditMode,
         currentProduct,
+        setCurrentProduct,
         onDelete
     }
 }

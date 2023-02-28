@@ -28,6 +28,7 @@ const ProductGroup:ProductGroupType = ({productGroup}) => {
         editMode,
         setEditMode,
         currentProduct,
+        setCurrentProduct,
         onDelete
     } = useProductGroup({productGroup});
 
@@ -40,14 +41,21 @@ const ProductGroup:ProductGroupType = ({productGroup}) => {
     ) : (
         <>
             <h5 className={styles.name}>{currentProduct.name}</h5>
-            <ul className={styles.productList}>
-                {
-                    productGroup.map((product, index) => (
-                        <li key={index} className={styles.product}>
-                            <button>{product.variantName}</button>
-                        </li>))
-                }
-            </ul>
+            <div className={styles.productList}>
+                <div className={styles.title}>List of products:</div>
+                <ul className={styles.body}>
+                    {
+                        productGroup.map((product, index) => (
+                            <li key={index} className={styles.product}>
+                                <button className={product === currentProduct? styles.current : ''}
+                                    onClick={() => setCurrentProduct(product)}
+                                >
+                                    {product.variantName}
+                                </button>
+                            </li>))
+                    }
+                </ul>
+            </div>
             <ul className={styles.images}>
                 {
                     currentProduct.images.map((image, index) => (
