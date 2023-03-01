@@ -34,7 +34,6 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                 <div className={styles.body}>
                     <div className={styles.images}>
                         {
-                            images && 
                             images.map((image, index) => (
                                 <div className={styles.image} key={index}>
                                     {
@@ -56,25 +55,37 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                         }
                     </div>
                     <form className={styles.form} encType="multipart/form-data" method="post">
-                        {/* {
-                            file?
-                                (
-                                    <>
-                                        <span className={styles.filePath}>{file.name}</span>
-                                        <button className={styles.cancel}
-                                            onClick={onDelete}
-                                            >
-                                            Delete
-                                        </button>    
-                                    </>
-                                )                  
-                                :<input type="file" 
-                                    name="cat-image"
+                        {
+                            images.length < 5?
+                            <>
+                                <label className={styles.label} htmlFor="product-images">
+                                    ADD IMAGES
+                                </label>
+                                <input type="file"
+                                    name="product-images"
+                                    id="product-images"
                                     accept="image/*"
+                                    multiple
                                     onChange={onFileChange}
                                     />
+                            </>
+                            :<span>Max 5 images</span>
+                        }
 
-                        } */}
+                        {
+                            // file?
+                            //     (
+                            //         <>
+                            //             <span className={styles.filePath}>{file.name}</span>
+                            //             <button className={styles.cancel}
+                            //                 onClick={onDelete}
+                            //                 >
+                            //                 Delete
+                            //             </button>    
+                            //         </>
+                            //     )                  
+       
+                        }
                     </form>                    
                 </div>
                 <div className={styles.buttons}>

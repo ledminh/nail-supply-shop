@@ -1,7 +1,7 @@
 import {useEffect, useState, useContext, ChangeEvent} from 'react';
 import {AdminContext} from '../../Context';
 
-import {deleteCategoryImageOnCache, setCategoryImageOnCache, getProductImagesFromCache, deleteAllProductImagesOnCache } from '../../reducer/actions.Cache';
+import {deleteCategoryImageOnCache, setCategoryImageOnCache, getProductImagesFromCache, setProductImagesOnCache, deleteAllProductImagesOnCache } from '../../reducer/actions.Cache';
 
 import { getEditingImagesProductID, resetIsEditingImagesProduct } from '../../reducer/actions.Products';
 
@@ -16,7 +16,7 @@ const useProductImages = () => {
 
     const [currentProductID, setCurrentProductID] = useState<string | undefined>(undefined);
 
-    const [images, setImages] = useState<((File|{url:string; alt?: string})[]) | undefined>(undefined);
+    const [images, setImages] = useState<((File|{url:string; alt?: string})[]) >([]);
 
 
     useEffect(() => {
@@ -29,11 +29,17 @@ const useProductImages = () => {
         setCurrentProductID(productID);
         const images = getProductImagesFromCache(productID, state);    
 
-        setImages(images);
+        setImages(images? images : []);
     }, [state.products]);
     
 
+    useEffect(() => {
+        if(!currentProductID) {
+            return;
+        }
 
+        setProductImagesOnCache(currentProductID, images, dispatch);
+    }, [images]);
 
     // /**************************
     //  * Public API
@@ -55,28 +61,24 @@ const useProductImages = () => {
     }
 
     const onOK = () => {
-        if(!currentProductID)
-            return;
 
-
-        closeProductImagesModal();
-        
+        closeProductImagesModal();        
         resetIsEditingImagesProduct(dispatch);
     
     }
 
     const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files && event.target.files[0];
+        if(!currentProductID) 
+            return;
 
-        if(file) {
-            
-            if(currentProductID)
-                setCategoryImageOnCache(currentProductID, file, dispatch);
-        }
-        else {
-            
-            if(currentProductID)
-                deleteCategoryImageOnCache(currentProductID, dispatch);
+
+        const files = event.target.files;
+
+        if(files) {
+            const newImages = Array.from(files).map(file => file);
+            setImages([...newImages, ...images]);
+
+                
         }
 
     } 

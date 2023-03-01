@@ -1,11 +1,11 @@
-import { useState, useContext, MouseEventHandler } from "react";
+import { useState, useContext, MouseEventHandler, useEffect } from "react";
 
 import { _ProductType } from "../../../../../types";
 
 import { AdminContext } from "../../../../../Context";
 import {setIsEditingImagesProduct} from '../../../../../reducer/actions.Products';
 
-import {setProductImagesOnCache, deleteAllProductImagesOnCache} from '../../../../../reducer/actions.Cache';
+import {setProductImagesOnCache, getProductImagesFromCache, deleteAllProductImagesOnCache} from '../../../../../reducer/actions.Cache';
 
 type useSingleEditParams = {
     data: _ProductType;
@@ -32,6 +32,28 @@ const useSingleEdit = ({data, setEditMode}: useSingleEditParams) => {
         setPrice(data.price);
         setImages(data.images);
     }
+
+    useEffect(() => {
+        const cachedImages = getProductImagesFromCache(data.id, state);
+
+        if(cachedImages) {
+            setImages(cachedImages.map(image => {
+                if(image instanceof File) {
+                    return {
+                        url: URL.createObjectURL(image),
+                    };
+                }
+                else {
+                    return image;
+                }
+            }));
+        }
+        else {
+            setImages(data.images);
+        }
+
+
+    }, [state.cache.productImages])
 
     /*****************************
      * Public methods
