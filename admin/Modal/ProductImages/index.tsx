@@ -6,6 +6,7 @@ import Modal from "../Modal";
 import styles from './ProductImagesModal.module.scss';
 import useProductImagesModal from "./useProductImagesModal";
 
+import CloseIconSVG from '../../../assets/images/close_icon.svg'
 
 
 interface ProductImagesModalProps  {
@@ -35,7 +36,13 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                     <div className={styles.images}>
                         {
                             images.map((image, index) => (
-                                <div className={styles.image} key={index}>
+                                <button className={styles.image} key={index}
+                                    onClick={() => onDelete(index)}
+                                >
+                                    <div className={styles.imageOverlay}>
+                                        <CloseIconSVG
+                                            viewBox="0 0 12 12"/>
+                                    </div>
                                     {
                                         (image instanceof File)? 
                                         <Image
@@ -51,7 +58,7 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                                             style={{objectFit: 'cover'}}
                                             />
                                     }
-                                </div>))
+                                </button>))
                         }
                     </div>
                     <form className={styles.form} encType="multipart/form-data" method="post">
@@ -70,21 +77,6 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                                     />
                             </>
                             :<span>Max 5 images</span>
-                        }
-
-                        {
-                            // file?
-                            //     (
-                            //         <>
-                            //             <span className={styles.filePath}>{file.name}</span>
-                            //             <button className={styles.cancel}
-                            //                 onClick={onDelete}
-                            //                 >
-                            //                 Delete
-                            //             </button>    
-                            //         </>
-                            //     )                  
-       
                         }
                     </form>                    
                 </div>

@@ -1,7 +1,7 @@
 import {useEffect, useState, useContext, ChangeEvent} from 'react';
 import {AdminContext} from '../../Context';
 
-import {deleteCategoryImageOnCache, setCategoryImageOnCache, getProductImagesFromCache, setProductImagesOnCache, deleteAllProductImagesOnCache } from '../../reducer/actions.Cache';
+import {getProductImagesFromCache, setProductImagesOnCache, deleteAllProductImagesOnCache, deleteProductImageOnCache } from '../../reducer/actions.Cache';
 
 import { getEditingImagesProductID, resetIsEditingImagesProduct } from '../../reducer/actions.Products';
 
@@ -45,10 +45,10 @@ const useProductImages = () => {
     //  * Public API
     //  */
 
-    const onDelete = () => {
+    const onDelete = (imageIndex:number) => {
 
-        //if(currentProductID)
-            // TODO deleteCategoryImageOnCache(currentProductID, dispatch);
+        if(currentProductID)
+            deleteProductImageOnCache(currentProductID, imageIndex, dispatch);
     }
 
     const onCancel = () => {
