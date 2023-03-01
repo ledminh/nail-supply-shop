@@ -1,14 +1,23 @@
 @use '../../../../../../styles/base';
 
 .wrapper {
-    min-height: 50px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-flow: column nowrap;
 
-    border: 1px solid black;
+    gap: 1rem;
 
-    background-color: rgb(201, 201, 201);
+    border: 1px solid adjust-color($color: #000000, $lightness: 10%);
+
+    padding: .5rem;
+
+    border-radius: 10px;
+
+    margin-bottom: 1rem;
+
+    box-shadow: 0 0 2px 0px #000000;
+
+    font-size: .9rem;
+
 }
 
 .name {
@@ -50,9 +59,20 @@
     column-gap: 1rem;
     row-gap: 1rem;
 
-    .label {
+    label {
         font-weight: 900;
         font-size: .9rem;
+    }
+
+    textarea {
+        resize: none;
+        min-height: 100px;
+
+        padding: .5rem;
+    }
+
+    input[type="text"] {
+        padding: .5rem;
     }
 }
 
@@ -78,11 +98,11 @@
         }
     }
 
-    button.edit {
+    button.save {
         @include base.button("primary");
     }
 
-    button.delete {
+    button.cancel {
         @include base.button("secondary");
     }
 }

@@ -76,9 +76,8 @@ const SingleEdit:SingleEditType = ({data}) => {
                     onChange={onShortDescriptionChange}
                     />
                 <label htmlFor="fullDescription">Full Description</label>
-                <input 
+                <textarea 
                     id="fullDescription"
-                    type="text"
                     value={fullDescription}
                     onChange={onFullDescriptionChange}
                     />
@@ -95,11 +94,11 @@ const SingleEdit:SingleEditType = ({data}) => {
                 <button className={styles.button + ' ' + styles.save}
                     onClick={onSave}
                 >
-                    Edit
+                    Save
                 </button>
                 <button className={styles.button + ' ' + styles.cancel}
                     onClick={onCancel}
-                    >Delete</button>
+                    >Cancel</button>
             </div>
         </div>
     )

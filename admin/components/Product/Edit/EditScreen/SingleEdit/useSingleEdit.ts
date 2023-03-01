@@ -31,7 +31,7 @@ const useSingleEdit = ({data}: useSingleEditParams) => {
         setShortDescription(e.target.value);
     }
 
-    const onFullDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onFullDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setFullDescription(e.target.value);
     }
 
