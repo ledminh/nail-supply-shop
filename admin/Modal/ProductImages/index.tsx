@@ -19,7 +19,7 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
     const {
         shown, 
         onFileChange, 
-        files, 
+        images, 
         onDelete, 
         onOK,
         onCancel, 
@@ -34,20 +34,20 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                 <div className={styles.body}>
                     <div className={styles.images}>
                         {
-                            files && 
-                            files.map((file, index) => (
+                            images && 
+                            images.map((image, index) => (
                                 <div className={styles.image} key={index}>
                                     {
-                                        (typeof file === 'object')? 
+                                        (image instanceof File)? 
                                         <Image
-                                            src={file.url}
-                                            alt={file.alt? file.alt : "product image"}
+                                            src={URL.createObjectURL(image)}
+                                            alt={"placeholder"}
                                             fill
                                             style={{objectFit: 'cover'}}
                                             />  
                                         :<Image
-                                            src={URL.createObjectURL(file)}
-                                            alt={"placeholder"}
+                                            src={image.url}
+                                            alt={image.alt? image.alt : "product image"}
                                             fill
                                             style={{objectFit: 'cover'}}
                                             />

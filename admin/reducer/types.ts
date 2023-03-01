@@ -56,7 +56,9 @@ export type ActionType =
     };
 } | {
     type:'CACHE/DELETE_CAT_IMAGE';
-    payload: string;
+    payload: {
+        categoryID: string;
+    };
 } |  {
     type:'CACHE/SET_PRODUCT_IMAGES';
     payload: {
@@ -66,6 +68,11 @@ export type ActionType =
             alt?: string;
         })[];
     }
+} | {
+    type:'CACHE/DELETE_ALL_PRODUCT_IMAGES';
+    payload: {
+        productID: string;
+    };
 } |
 
 // Products

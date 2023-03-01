@@ -1,7 +1,7 @@
 import {useEffect, useState, useContext, ChangeEvent} from 'react';
 import {AdminContext} from '../../Context';
 
-import {deleteCategoryImageOnCache, setCategoryImageOnCache, getProductImagesFromCache } from '../../reducer/actions.Cache';
+import {deleteCategoryImageOnCache, setCategoryImageOnCache, getProductImagesFromCache, deleteAllProductImagesOnCache } from '../../reducer/actions.Cache';
 
 import { getEditingImagesProductID, resetIsEditingImagesProduct } from '../../reducer/actions.Products';
 
@@ -15,7 +15,8 @@ const useProductImages = () => {
     } = useContext(AdminContext);
 
     const [currentProductID, setCurrentProductID] = useState<string | undefined>(undefined);
-    const [files, setFiles] = useState<((File|{url:string; alt?: string})[]) | undefined>(undefined);
+
+    const [images, setImages] = useState<((File|{url:string; alt?: string})[]) | undefined>(undefined);
 
 
     useEffect(() => {
@@ -26,9 +27,9 @@ const useProductImages = () => {
         }
 
         setCurrentProductID(productID);
-        const files = getProductImagesFromCache(productID, state);    
+        const images = getProductImagesFromCache(productID, state);    
 
-        setFiles(files);
+        setImages(images);
     }, [state.products]);
     
 
@@ -48,14 +49,20 @@ const useProductImages = () => {
         closeProductImagesModal();
         
         if(currentProductID)
-            // TODO: deleteAllProductImagesOnCache(currentProductID, dispatch);
+            deleteAllProductImagesOnCache(currentProductID, dispatch);
         
         resetIsEditingImagesProduct(dispatch);
     }
 
     const onOK = () => {
+        if(!currentProductID)
+            return;
+
+
         closeProductImagesModal();
-        resetIsEditingImagesProduct(dispatch);    
+        
+        resetIsEditingImagesProduct(dispatch);
+        deleteAllProductImagesOnCache(currentProductID, dispatch);    
     }
 
     const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +86,7 @@ const useProductImages = () => {
     return {
         shown: isProductImagesModalOpened,
         onFileChange,
-        files,
+        images,
         onDelete,
         onOK,
         onCancel,

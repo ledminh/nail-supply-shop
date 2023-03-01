@@ -47,7 +47,7 @@ const CatImageModal:CatImageModalComponent = () => {
                             image?
                                 (
                                     <>
-                                        <span className={styles.filePath}>{typeof image === 'string'? image: image.name}</span>
+                                        <span className={styles.filePath}>{typeof image === 'string'? image.slice(image.lastIndexOf('/') + 1): image.name.slice(image.name.lastIndexOf('/') + 1)}</span>
                                         <button className={styles.cancel}
                                             onClick={onDelete}
                                             >

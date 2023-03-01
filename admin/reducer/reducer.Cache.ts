@@ -16,7 +16,7 @@ const cacheReducer = (state:CacheType, action:ActionType) => {
         case 'CACHE/DELETE_CAT_IMAGE':
             const newCatImageFiles = {...state.catImageFiles};
 
-            delete newCatImageFiles[action.payload];
+            delete newCatImageFiles[action.payload.categoryID];
 
             return {
                 ...state,
@@ -32,6 +32,17 @@ const cacheReducer = (state:CacheType, action:ActionType) => {
                     [action.payload.productID]: action.payload.files
                 }
             };
+
+        case 'CACHE/DELETE_ALL_PRODUCT_IMAGES':
+            const newProductImages = {...state.productImages};
+
+            delete newProductImages[action.payload.productID];
+
+            return {
+                ...state,
+                productImages: newProductImages
+            };
+            
         default:
             return state;
     }
