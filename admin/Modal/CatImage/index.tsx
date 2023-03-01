@@ -19,7 +19,7 @@ const CatImageModal:CatImageModalComponent = () => {
     const {
         shown, 
         onFileChange, 
-        file, 
+        image, 
         onDelete, 
         onOK,
         onCancel, 
@@ -34,8 +34,8 @@ const CatImageModal:CatImageModalComponent = () => {
                 <div className={styles.body}>
                     <div className={styles.image}>
                         {
-                            file && <Image
-                                src={URL.createObjectURL(file)}
+                            image && <Image
+                                src={typeof image === 'string'? image : URL.createObjectURL(image)}
                                 alt={"placeholder"}
                                 fill
                                 style={{objectFit: 'cover'}}
@@ -44,10 +44,10 @@ const CatImageModal:CatImageModalComponent = () => {
                     </div>
                     <form className={styles.form} encType="multipart/form-data" method="post">
                         {
-                            file?
+                            image?
                                 (
                                     <>
-                                        <span className={styles.filePath}>{file.name}</span>
+                                        <span className={styles.filePath}>{typeof image === 'string'? image: image.name}</span>
                                         <button className={styles.cancel}
                                             onClick={onDelete}
                                             >

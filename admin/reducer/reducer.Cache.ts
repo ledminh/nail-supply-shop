@@ -9,7 +9,7 @@ const cacheReducer = (state:CacheType, action:ActionType) => {
                 ...state,
                 catImageFiles: {
                     ...state.catImageFiles,
-                    [action.payload.categoryID]: action.payload.file
+                    [action.payload.categoryID]: action.payload.image
                 }
             };
 

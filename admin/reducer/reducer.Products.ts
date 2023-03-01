@@ -86,6 +86,25 @@ const productsReducer = (state:(_ProductType|_ProductGroupType)[], action:Action
                 }
             });
 
+        case 'PROD/RESET_IS_EDITING_IMAGES':
+            return state.map(product => {
+                if(Array.isArray(product)) {
+                    return product.map(product => {
+                        return {
+                            ...product,
+                            isEditingImages: false
+                        }
+                    });
+                }
+
+                return {
+                    ...product,
+                    isEditingImages: false
+                }
+            });
+
+            
+
         default:
             return state;
     }

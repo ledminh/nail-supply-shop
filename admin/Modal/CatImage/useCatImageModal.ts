@@ -1,4 +1,4 @@
-import {useEffect, useState, useContext, ChangeEvent} from 'react';
+import {useEffect, useState, useContext, ChangeEvent, MouseEventHandler} from 'react';
 import {AdminContext} from '../../Context';
 
 import {deleteCategoryImageOnCache, setCategoryImageOnCache, getCategoryImageFromCache } from '../../reducer/actions.Cache';
@@ -15,20 +15,29 @@ const useCatImage = () => {
     } = useContext(AdminContext);
 
     const [currentCatID, setCurrentCatID] = useState<string | undefined>(undefined);
-
+    const [image, setImage] = useState<File | string | undefined>(undefined);
 
     useEffect(() => {
         const catID = getEditingImageCategoryID(state);
-        setCurrentCatID(catID);
 
-    }, [state.categories]);
+        if(!catID) {
+            return;
+        }
+
+        setCurrentCatID(catID);
+        const image = getCategoryImageFromCache(catID, state);
+
+        setImage(image);
+
+    }, [state.categories, state.cache]);
     
     // /**************************
     //  * Public API
     //  */
 
-    const onDelete = () => {
-
+    const onDelete:MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
+        
         if(currentCatID)
             deleteCategoryImageOnCache(currentCatID, dispatch);
     }
@@ -50,15 +59,9 @@ const useCatImage = () => {
     const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
 
-        if(file) {
-            
-            if(currentCatID)
-                setCategoryImageOnCache(currentCatID, file, dispatch);
-        }
-        else {
-            
-            if(currentCatID)
-                deleteCategoryImageOnCache(currentCatID, dispatch);
+        if(file && currentCatID) {
+            setCategoryImageOnCache(currentCatID, file, dispatch);            
+                
         }
 
     } 
@@ -68,9 +71,7 @@ const useCatImage = () => {
     return {
         shown: isCatImageModalOpened,
         onFileChange,
-        // file === undefined might mean no file is cached or no currentCat is opened. But  no currentCat is opened is impossible, because before opening the modal, currentCat must be set on Edit/Item/EditScreen
-        // file === File means a file is selected
-        file: currentCatID? getCategoryImageFromCache(currentCatID, state): undefined,
+        image,
         onDelete,
         onOK,
         onCancel,

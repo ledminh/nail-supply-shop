@@ -3,8 +3,7 @@ import {AdminContext} from '../../Context';
 
 import {deleteCategoryImageOnCache, setCategoryImageOnCache, getProductImagesFromCache } from '../../reducer/actions.Cache';
 
-import { getEditingImageCategoryID, resetIsEditingImageCategory } from '../../reducer/actions.Categories';
-import { getEditingImagesProductID } from '../../reducer/actions.Products';
+import { getEditingImagesProductID, resetIsEditingImagesProduct } from '../../reducer/actions.Products';
 
 
 const useProductImages = () => {
@@ -41,22 +40,22 @@ const useProductImages = () => {
 
     const onDelete = () => {
 
-        if(currentProductID)
-            deleteCategoryImageOnCache(currentProductID, dispatch);
+        //if(currentProductID)
+            // TODO deleteCategoryImageOnCache(currentProductID, dispatch);
     }
 
     const onCancel = () => {
         closeProductImagesModal();
         
         if(currentProductID)
-            deleteCategoryImageOnCache(currentProductID, dispatch);
+            // TODO: deleteAllProductImagesOnCache(currentProductID, dispatch);
         
-        resetIsEditingImageCategory(dispatch);
+        resetIsEditingImagesProduct(dispatch);
     }
 
     const onOK = () => {
         closeProductImagesModal();
-        resetIsEditingImageCategory(dispatch);    
+        resetIsEditingImagesProduct(dispatch);    
     }
 
     const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {

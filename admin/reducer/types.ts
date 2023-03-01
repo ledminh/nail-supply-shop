@@ -3,7 +3,7 @@ import { _CategoryType, _ProductType, _ProductGroupType } from '../types';
 
 export type CacheType = {
     catImageFiles: {
-        [key:string]: File;
+        [key:string]: File|string;
     };
     productImages: {
         [key:string]: (File| {
@@ -52,7 +52,7 @@ export type ActionType =
     type:'CACHE/SET_CAT_IMAGE_FILE';
     payload: {
         categoryID: string;
-        file: File;
+        image: File|string;
     };
 } | {
     type:'CACHE/DELETE_CAT_IMAGE';
@@ -84,7 +84,10 @@ export type ActionType =
         productID: string;
         isEditingImages: boolean;
     };
-} | 
+} | {
+    type: 'PROD/RESET_IS_EDITING_IMAGES';
+
+} |
 
 
 // About

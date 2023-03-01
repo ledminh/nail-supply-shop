@@ -89,6 +89,13 @@ export const setIsEditingImagesProduct = (productID:string, isEditingImages:bool
     });
 }
 
+export const resetIsEditingImagesProduct = (dispatch: React.Dispatch<ActionType>) => {
+    dispatch({
+        type: 'PROD/RESET_IS_EDITING_IMAGES'
+    });
+
+}
+
 export const getEditingImagesProductID = (state:StateType) => {
 
     const editingImagesProduct = state.products.find(prod => {

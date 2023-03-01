@@ -7,7 +7,7 @@ import upload from '../../../../tools/upload';
 import { setIsEditingImageCategory, updateCategory } from '../../../../reducer/actions.Categories';
 import postCategory from '../../../../tools/postCategory';
 import { CategoryType } from '../../../../../database';
-import { getCategoryImageFromCache } from '../../../../reducer/actions.Cache';
+import { getCategoryImageFromCache, setCategoryImageOnCache } from '../../../../reducer/actions.Cache';
 
 import deleteFile from '../../../../tools/deleteFile';
 
@@ -40,7 +40,7 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
         const cachedImage = getCategoryImageFromCache(category.id, state);
 
         if(cachedImage) {
-            setImageUrl(URL.createObjectURL(cachedImage));
+            setImageUrl(cachedImage instanceof File? URL.createObjectURL(cachedImage): cachedImage);
         }
         else {
             setImageUrl(category.imageUrl);
@@ -63,7 +63,7 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
             
             const cachedImage = getCategoryImageFromCache(category.id, state);
 
-            if(cachedImage) {
+            if(cachedImage && cachedImage instanceof File) {
                 const oldImageUrl = category.imageUrl;
 
                 if(oldImageUrl.indexOf('/images/category/') === 0) {
@@ -118,6 +118,7 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
 
     const onImageClick = () => {
         setIsEditingImageCategory(category.id, true, dispatch);
+        setCategoryImageOnCache(category.id, imageUrl, dispatch);
         openCatImageModal();
     }
 

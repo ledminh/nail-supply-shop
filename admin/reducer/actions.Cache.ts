@@ -12,14 +12,14 @@ export const deleteCategoryImageOnCache = (
 
 export const setCategoryImageOnCache = (
     categoryID:string,
-    file:File,
+    image:File|string,
     dispatch: React.Dispatch<ActionType>) => {
 
     dispatch({
         type: 'CACHE/SET_CAT_IMAGE_FILE',
         payload: {
             categoryID,
-            file
+            image
         }
     });
 }
