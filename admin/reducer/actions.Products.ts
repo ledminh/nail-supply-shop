@@ -1,6 +1,6 @@
 import { ProductGroupType, ProductType } from "../../database";
 
-import { ProductGroupToAdd, ProductToAdd, _ProductType } from "../types";
+import { ProductGroupToAdd, ProductToAdd, _ProductType, _ProductGroupType } from "../types";
 import { ActionType, StateType } from "./types";
 
 import convertProduct from "../tools/convertProduct";
@@ -10,10 +10,10 @@ import postProduct from "../tools/postProduct";
 import postProductGroup from "../tools/postProductGroup";
 
 
-const _convertBoth = (data: ProductType|ProductGroupType): _ProductType|ProductGroupType => {
+const _convertBoth = (data: ProductType|ProductGroupType): _ProductType|_ProductGroupType => {
 
     if(Array.isArray(data)){
-        return data;
+        return convertGroupProduct(data);
     }
 
     return convertProduct(data);
