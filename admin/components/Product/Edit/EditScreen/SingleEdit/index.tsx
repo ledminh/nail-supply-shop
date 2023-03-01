@@ -58,7 +58,8 @@ const SingleEdit:SingleEditType = ({data}) => {
                                 style={{objectFit: 'cover'}}
                                 />
                         </div>))
-                }                
+                }
+                <button className={styles.editImages}>Edit Images</button>                
             </div>
             <form className={styles.text}>
                 <label htmlFor="id">ID</label>
