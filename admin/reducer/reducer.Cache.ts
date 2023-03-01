@@ -43,18 +43,6 @@ const cacheReducer = (state:CacheType, action:ActionType) => {
                 productImages: newProductImages
             };
 
-        case 'CACHE/DELETE_PRODUCT_IMAGE':
-            const newProductImages2 = state.productImages[action.payload.productID].filter((image,index) => {
-                return index !== action.payload.imageIndex;
-            });
-
-            return {
-                ...state,
-                productImages: {
-                    ...state.productImages,
-                    [action.payload.productID]: newProductImages2
-                }
-            };
 
 
 

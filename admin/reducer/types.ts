@@ -73,13 +73,7 @@ export type ActionType =
     payload: {
         productID: string;
     };
-} | {
-    type:'CACHE/DELETE_PRODUCT_IMAGE';
-    payload: {
-        productID: string;
-        imageIndex: number;
-    };
-} |
+} | 
 
 // Products
 {

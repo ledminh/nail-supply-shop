@@ -37,7 +37,7 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                         {
                             images.map((image, index) => (
                                 <button className={styles.image} key={index}
-                                    onClick={() => onDelete(index)}
+                                    onClick={() => onDelete(image)}
                                 >
                                     <div className={styles.imageOverlay}>
                                         <CloseIconSVG

@@ -66,19 +66,6 @@ export const getProductImagesFromCache = (
     return state.cache.productImages[productID];
 }
 
-export const deleteProductImageOnCache = (
-    productID:string,
-    imageIndex:number,
-    dispatch: React.Dispatch<ActionType>) => {
-
-    dispatch({
-        type: 'CACHE/DELETE_PRODUCT_IMAGE',
-        payload: {
-            productID,
-            imageIndex
-        }
-    });
-}
 
 
 
