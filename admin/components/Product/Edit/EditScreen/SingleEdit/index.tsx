@@ -11,7 +11,8 @@ import { _ProductType } from "../../../../../types";
  *  Types
  */
 interface SingleEditPropsType {
-    data: _ProductType
+    data: _ProductType;
+    setEditMode: (editMode: boolean) => void;
 } 
 
 type SingleEditType = FunctionComponent<SingleEditPropsType>
@@ -21,7 +22,7 @@ type SingleEditType = FunctionComponent<SingleEditPropsType>
 /***************************
  *  Main Component
  */
-const SingleEdit:SingleEditType = ({data}) => {
+const SingleEdit:SingleEditType = ({data, setEditMode}) => {
 
     const {
         productName,
@@ -38,7 +39,7 @@ const SingleEdit:SingleEditType = ({data}) => {
         onEditImages,
         onSave,
         onCancel
-    } = useSingleEdit({data});
+    } = useSingleEdit({data, setEditMode});
 
     return (
         <div className={styles.wrapper}>

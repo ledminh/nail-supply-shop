@@ -34,6 +34,7 @@ const EditScreen:EditScreenType = ({data, setEditMode}) => {
                 currentMode === "single" ? (
                     <SingleEdit 
                         data={data as _ProductType}
+                        setEditMode={setEditMode}
                         />
                 ) : (
                     <GroupEdit />

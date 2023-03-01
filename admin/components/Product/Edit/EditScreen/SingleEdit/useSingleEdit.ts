@@ -5,13 +5,14 @@ import { _ProductType } from "../../../../../types";
 import { AdminContext } from "../../../../../Context";
 import {setIsEditingImagesProduct} from '../../../../../reducer/actions.Products';
 
-import {setProductImagesOnCache} from '../../../../../reducer/actions.Cache';
+import {setProductImagesOnCache, deleteAllProductImagesOnCache} from '../../../../../reducer/actions.Cache';
 
 type useSingleEditParams = {
     data: _ProductType;
+    setEditMode: (mode:boolean) => void;
 }
 
-const useSingleEdit = ({data}: useSingleEditParams) => {
+const useSingleEdit = ({data, setEditMode}: useSingleEditParams) => {
     
     const {openProductImagesModal, dispatch, state} = useContext(AdminContext);
 
@@ -23,6 +24,14 @@ const useSingleEdit = ({data}: useSingleEditParams) => {
     const [images, setImages] = useState(data.images);
 
 
+    const reset = () => {
+        setProductName(data.name);
+        setId(data.id);
+        setShortDescription(data.shortDescription);
+        setFullDescription(data.fullDescription);
+        setPrice(data.price);
+        setImages(data.images);
+    }
 
     /*****************************
      * Public methods
@@ -60,7 +69,10 @@ const useSingleEdit = ({data}: useSingleEditParams) => {
     }
 
     const onCancel = () => {
-        console.log('Cancel');
+        setEditMode(false);
+        deleteAllProductImagesOnCache(data.id, dispatch);
+
+        reset();
     }
 
 

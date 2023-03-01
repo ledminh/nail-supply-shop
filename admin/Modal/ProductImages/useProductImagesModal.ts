@@ -62,7 +62,7 @@ const useProductImages = () => {
         closeProductImagesModal();
         
         resetIsEditingImagesProduct(dispatch);
-        deleteAllProductImagesOnCache(currentProductID, dispatch);    
+    
     }
 
     const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {

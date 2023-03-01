@@ -125,7 +125,7 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
     }
 
     const onSave = () => {
-         prepareCategory()
+        prepareCategory()
             .then((preparedCat) => {
                 
                 postCategory({
