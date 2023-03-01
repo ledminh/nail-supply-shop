@@ -42,6 +42,24 @@
     background-color: #746f6f;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 black;
+
+    .placeholder {
+        grid-column: 1/4;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            flex-basis: 100%;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: rgb(185, 185, 185);
+
+            text-align: center;
+        }
+    }
 }
 
 button.image {

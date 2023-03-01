@@ -35,6 +35,13 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                 <div className={styles.body}>
                     <div className={styles.images}>
                         {
+                            images.length === 0?
+                            <div className={styles.placeholder}>
+                                <p>No image.</p> 
+                                <p>Click ADD IMAGES to upload.</p>
+                            </div>: null
+                        }
+                        {
                             images.map((image, index) => (
                                 <button className={styles.image} key={index}
                                     onClick={() => onDelete(image)}

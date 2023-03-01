@@ -50,6 +50,13 @@ const SingleEdit:SingleEditType = ({data, setEditMode}) => {
                 />
             <div className={styles.images}>
                 {
+                    images.length === 0?
+                    <div className={styles.placeholder}>
+                        <p>No image.</p>
+                        <p>Click EDIT IMAGES to upload.</p>
+                    </div>: null
+                }
+                {
                     images.map((image, index) => (
                         <div key={index} className={styles.image}>
                             <Image
