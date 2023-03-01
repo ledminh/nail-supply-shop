@@ -29,7 +29,7 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
         <Modal show={shown}>
             <div className={styles.wrapper}>
                 <div className={styles.header}>
-                    <h4>Category Image</h4>
+                    <h4>Product Images</h4>
                 </div>
                 <div className={styles.body}>
                     <div className={styles.image}>
