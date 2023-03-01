@@ -21,7 +21,9 @@ const useSingleEdit = ({data, setEditMode}: useSingleEditParams) => {
     const [shortDescription, setShortDescription] = useState(data.shortDescription);
     const [fullDescription, setFullDescription] = useState(data.fullDescription);
     const [price, setPrice] = useState(data.price);
+
     const [images, setImages] = useState(data.images);
+    const [prevImages, setPrevImages] = useState(data.images);
 
 
     const reset = () => {
@@ -49,7 +51,7 @@ const useSingleEdit = ({data, setEditMode}: useSingleEditParams) => {
             }));
         }
         else {
-            setImages(data.images);
+            setImages(prevImages);
         }
 
 
@@ -81,7 +83,8 @@ const useSingleEdit = ({data, setEditMode}: useSingleEditParams) => {
     const onEditImages:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         setIsEditingImagesProduct(data.id, true, dispatch);
-        setProductImagesOnCache(data.id, data.images, dispatch);
+        setProductImagesOnCache(data.id, images, dispatch);
+        setPrevImages(images);
 
         openProductImagesModal();
 
