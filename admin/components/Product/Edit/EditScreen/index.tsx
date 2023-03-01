@@ -27,11 +27,14 @@ const EditScreen:EditScreenType = ({data, setEditMode}) => {
 
     const {currentMode} = useEditScreen({data});
 
+
     return (
         <div className={styles.wrapper}>
             {
                 currentMode === "single" ? (
-                    <SingleEdit />
+                    <SingleEdit 
+                        data={data as _ProductType}
+                        />
                 ) : (
                     <GroupEdit />
                 )
