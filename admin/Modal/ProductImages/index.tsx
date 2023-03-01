@@ -21,6 +21,7 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
         shown, 
         onFileChange, 
         images, 
+        imageTobeDeleted,
         onDelete, 
         onOK,
         onCancel, 
@@ -43,7 +44,7 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                         }
                         {
                             images.map((image, index) => (
-                                <button className={styles.image} key={index}
+                                <button className={styles.image + (image === imageTobeDeleted? ' ' + styles.toBeDeleted : '')} key={index}
                                     onClick={() => onDelete(image)}
                                 >
                                     <div className={styles.imageOverlay}>

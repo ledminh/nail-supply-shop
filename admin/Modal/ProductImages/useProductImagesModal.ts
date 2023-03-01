@@ -17,6 +17,7 @@ const useProductImages = () => {
     const [currentProductID, setCurrentProductID] = useState<string | undefined>(undefined);
 
     const [images, setImages] = useState<((File|{url:string; alt?: string})[]) >([]);
+    const [imageTobeDeleted, setImageTobeDeleted] = useState<File| {url:string, alt?:string} | undefined>(undefined);
 
 
     useEffect(() => {
@@ -47,8 +48,15 @@ const useProductImages = () => {
 
     const onDelete = (image:File| {url:string, alt?:string}) => {
 
-        if(currentProductID)
-            setImages(images.filter(img => img !== image));
+        if(currentProductID){
+            setImageTobeDeleted(image);
+
+            setTimeout(() => {
+                setImageTobeDeleted(undefined);
+                setImages(images.filter(img => img !== image));
+            }, 200);
+        }
+            
     }
 
     const onCancel = () => {
@@ -89,6 +97,7 @@ const useProductImages = () => {
         shown: isProductImagesModalOpened,
         onFileChange,
         images,
+        imageTobeDeleted,
         onDelete,
         onOK,
         onCancel,
