@@ -7,7 +7,7 @@ import upload from '../../../../tools/upload';
 import { setIsEditingImageCategory, updateCategory } from '../../../../reducer/actions.Categories';
 import postCategory from '../../../../tools/postCategory';
 import { CategoryType } from '../../../../../database';
-import { getCategoryImageFromCache, setCategoryImageOnCache } from '../../../../reducer/actions.Cache';
+import { getCategoryImageFromCache, setCategoryImageOnCache, deleteCategoryImageOnCache } from '../../../../reducer/actions.Cache';
 
 import deleteFile from '../../../../tools/deleteFile';
 
@@ -113,6 +113,8 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
 
     const onCancel = () => {
         setEditMode(false);
+        deleteCategoryImageOnCache(category.id, dispatch);
+
         reset();
     }
 
@@ -132,6 +134,7 @@ const useEditScreen = ({category, setEditMode}: useEditScreenParams) => {
                     onSuccess: (updatedCat) => {
                         updateCategory(updatedCat as CategoryType, dispatch);
                         setEditMode(false);
+                        deleteCategoryImageOnCache(category.id, dispatch);
                     }
                 })
 

@@ -53,6 +53,7 @@ const useCatImage = () => {
 
     const onOK = () => {
         closeCatImageModal();
+
         resetIsEditingImageCategory(dispatch);    
     }
 
