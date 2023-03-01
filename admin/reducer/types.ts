@@ -5,6 +5,12 @@ export type CacheType = {
     catImageFiles: {
         [key:string]: File;
     };
+    productImages: {
+        [key:string]: (File| {
+            url: string;
+            alt?: string;
+        })[];
+    };
 }
 
 export type StateType = {
@@ -51,7 +57,16 @@ export type ActionType =
 } | {
     type:'CACHE/DELETE_CAT_IMAGE';
     payload: string;
-} | 
+} |  {
+    type:'CACHE/SET_PRODUCT_IMAGES';
+    payload: {
+        productID: string;
+        files: (File|{
+            url: string;
+            alt?: string;
+        })[];
+    }
+} |
 
 // Products
 {
@@ -67,7 +82,7 @@ export type ActionType =
     type: 'PROD/SET_IS_EDITING_IMAGES';
     payload: {
         productID: string;
-        isEditingImage: boolean;
+        isEditingImages: boolean;
     };
 } | 
 

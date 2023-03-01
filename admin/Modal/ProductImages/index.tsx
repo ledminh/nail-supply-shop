@@ -19,7 +19,7 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
     const {
         shown, 
         onFileChange, 
-        file, 
+        files, 
         onDelete, 
         onOK,
         onCancel, 
@@ -32,18 +32,31 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                     <h4>Product Images</h4>
                 </div>
                 <div className={styles.body}>
-                    <div className={styles.image}>
+                    <div className={styles.images}>
                         {
-                            file && <Image
-                                src={URL.createObjectURL(file)}
-                                alt={"placeholder"}
-                                fill
-                                style={{objectFit: 'cover'}}
-                                />
+                            files && 
+                            files.map((file, index) => (
+                                <div className={styles.image} key={index}>
+                                    {
+                                        (typeof file === 'object')? 
+                                        <Image
+                                            src={file.url}
+                                            alt={file.alt? file.alt : "product image"}
+                                            fill
+                                            style={{objectFit: 'cover'}}
+                                            />  
+                                        :<Image
+                                            src={URL.createObjectURL(file)}
+                                            alt={"placeholder"}
+                                            fill
+                                            style={{objectFit: 'cover'}}
+                                            />
+                                    }
+                                </div>))
                         }
                     </div>
                     <form className={styles.form} encType="multipart/form-data" method="post">
-                        {
+                        {/* {
                             file?
                                 (
                                     <>
@@ -61,8 +74,7 @@ const ProductImagesModal:ProductImagesModalComponent = () => {
                                     onChange={onFileChange}
                                     />
 
-                        }
-
+                        } */}
                     </form>                    
                 </div>
                 <div className={styles.buttons}>

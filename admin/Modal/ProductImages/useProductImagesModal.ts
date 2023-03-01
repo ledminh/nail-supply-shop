@@ -1,9 +1,10 @@
 import {useEffect, useState, useContext, ChangeEvent} from 'react';
 import {AdminContext} from '../../Context';
 
-import {deleteCategoryImageOnCache, setCategoryImageOnCache, getCategoryImageFromCache } from '../../reducer/actions.Cache';
+import {deleteCategoryImageOnCache, setCategoryImageOnCache, getProductImagesFromCache } from '../../reducer/actions.Cache';
 
 import { getEditingImageCategoryID, resetIsEditingImageCategory } from '../../reducer/actions.Categories';
+import { getEditingImagesProductID } from '../../reducer/actions.Products';
 
 
 const useProductImages = () => {
@@ -14,30 +15,41 @@ const useProductImages = () => {
         dispatch
     } = useContext(AdminContext);
 
-    const [currentCatID, setCurrentCatID] = useState<string | undefined>(undefined);
+    const [currentProductID, setCurrentProductID] = useState<string | undefined>(undefined);
+    const [files, setFiles] = useState<((File|{url:string; alt?: string})[]) | undefined>(undefined);
 
 
     useEffect(() => {
-        const catID = getEditingImageCategoryID(state);
-        setCurrentCatID(catID);
+        const productID = getEditingImagesProductID(state);
+        
+        if(!productID) {
+            return;
+        }
 
-    }, [state.categories]);
+        setCurrentProductID(productID);
+        const files = getProductImagesFromCache(productID, state);    
+
+        setFiles(files);
+    }, [state.products]);
     
+
+
+
     // /**************************
     //  * Public API
     //  */
 
     const onDelete = () => {
 
-        if(currentCatID)
-            deleteCategoryImageOnCache(currentCatID, dispatch);
+        if(currentProductID)
+            deleteCategoryImageOnCache(currentProductID, dispatch);
     }
 
     const onCancel = () => {
         closeProductImagesModal();
         
-        if(currentCatID)
-            deleteCategoryImageOnCache(currentCatID, dispatch);
+        if(currentProductID)
+            deleteCategoryImageOnCache(currentProductID, dispatch);
         
         resetIsEditingImageCategory(dispatch);
     }
@@ -52,13 +64,13 @@ const useProductImages = () => {
 
         if(file) {
             
-            if(currentCatID)
-                setCategoryImageOnCache(currentCatID, file, dispatch);
+            if(currentProductID)
+                setCategoryImageOnCache(currentProductID, file, dispatch);
         }
         else {
             
-            if(currentCatID)
-                deleteCategoryImageOnCache(currentCatID, dispatch);
+            if(currentProductID)
+                deleteCategoryImageOnCache(currentProductID, dispatch);
         }
 
     } 
@@ -68,9 +80,7 @@ const useProductImages = () => {
     return {
         shown: isProductImagesModalOpened,
         onFileChange,
-        // file === undefined might mean no file is cached or no currentCat is opened. But  no currentCat is opened is impossible, because before opening the modal, currentCat must be set on Edit/Item/EditScreen
-        // file === File means a file is selected
-        file: currentCatID? getCategoryImageFromCache(currentCatID, state): undefined,
+        files,
         onDelete,
         onOK,
         onCancel,

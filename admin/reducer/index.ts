@@ -12,6 +12,7 @@ export const initialState:StateType = {
     aboutHtmlText: '',
     cache: {
         catImageFiles: {},
+        productImages: {}
     }
 
 };

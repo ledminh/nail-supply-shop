@@ -67,7 +67,7 @@ const productsReducer = (state:(_ProductType|_ProductGroupType)[], action:Action
                         if(product.id === action.payload.productID) {
                             return {
                                 ...product,
-                                isEditingImage: action.payload.isEditingImage
+                                isEditingImages: action.payload.isEditingImages
                             }
                         } else {
                             return product;
@@ -76,9 +76,10 @@ const productsReducer = (state:(_ProductType|_ProductGroupType)[], action:Action
                 }
 
                 if(product.id === action.payload.productID) {
+
                     return {
                         ...product,
-                        isEditingImage: action.payload.isEditingImage
+                        isEditingImages: action.payload.isEditingImages
                     }
                 } else {
                     return product;

@@ -5,6 +5,8 @@ import { _ProductType } from "../../../../../types";
 import { AdminContext } from "../../../../../Context";
 import {setIsEditingImagesProduct} from '../../../../../reducer/actions.Products';
 
+import {setProductImagesOnCache} from '../../../../../reducer/actions.Cache';
+
 type useSingleEditParams = {
     data: _ProductType;
 }
@@ -48,6 +50,8 @@ const useSingleEdit = ({data}: useSingleEditParams) => {
     const onEditImages:MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         setIsEditingImagesProduct(data.id, true, dispatch);
+        setProductImagesOnCache(data.id, data.images, dispatch);
+
         openProductImagesModal();
 
     }

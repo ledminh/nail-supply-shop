@@ -79,12 +79,46 @@ export const getProductsByCategoryID = (categoryID:string, state:StateType) => {
     });
 }
 
-export const setIsEditingImagesProduct = (productID:string, isEditingImage:boolean, dispatch: React.Dispatch<ActionType>) => {
+export const setIsEditingImagesProduct = (productID:string, isEditingImages:boolean, dispatch: React.Dispatch<ActionType>) => {
     dispatch({
         type: 'PROD/SET_IS_EDITING_IMAGES',
         payload: {
             productID,
-            isEditingImage
+            isEditingImages
         }
     });
+}
+
+export const getEditingImagesProductID = (state:StateType) => {
+
+    const editingImagesProduct = state.products.find(prod => {
+        if(Array.isArray(prod)){
+            const editingImagesProduct = prod.find(p => p.isEditingImages);
+
+            if(editingImagesProduct){
+                return editingImagesProduct.isEditingImages;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+
+
+            return prod.isEditingImages;
+        }
+
+
+    });
+
+    
+    if(Array.isArray(editingImagesProduct)){
+        return editingImagesProduct.find(p => p.isEditingImages)?.id;
+    }
+    else {
+        return editingImagesProduct?.id;
+    }
+
+
+    
 }

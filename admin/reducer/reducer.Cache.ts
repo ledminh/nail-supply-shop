@@ -24,7 +24,14 @@ const cacheReducer = (state:CacheType, action:ActionType) => {
             };
 
             
-
+        case 'CACHE/SET_PRODUCT_IMAGES':
+            return {
+                ...state,
+                productImages: {
+                    ...state.productImages,
+                    [action.payload.productID]: action.payload.files
+                }
+            };
         default:
             return state;
     }
