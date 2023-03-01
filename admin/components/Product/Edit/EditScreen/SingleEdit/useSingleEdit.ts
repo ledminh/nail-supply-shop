@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useState, useContext, MouseEventHandler } from "react";
 
 import { _ProductType } from "../../../../../types";
+
+import { AdminContext } from "../../../../../Context";
+import {setIsEditingImagesProduct} from '../../../../../reducer/actions.Products';
 
 type useSingleEditParams = {
     data: _ProductType;
 }
 
 const useSingleEdit = ({data}: useSingleEditParams) => {
+    
+    const {openProductImagesModal, dispatch, state} = useContext(AdminContext);
+
     const [productName, setProductName] = useState(data.name);
     const [id, setId] = useState(data.id);
     const [shortDescription, setShortDescription] = useState(data.shortDescription);
@@ -39,6 +45,12 @@ const useSingleEdit = ({data}: useSingleEditParams) => {
         setPrice(Number(e.target.value));
     }
 
+    const onEditImages:MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
+        setIsEditingImagesProduct(data.id, true, dispatch);
+        openProductImagesModal();
+
+    }
     const onSave = () => {
         console.log('Save');
     }
@@ -60,6 +72,7 @@ const useSingleEdit = ({data}: useSingleEditParams) => {
         onFullDescriptionChange,
         price,
         onPriceChange,
+        onEditImages,
         onSave,
         onCancel
     }

@@ -63,7 +63,14 @@ export type ActionType =
 } | {
     type:'PROD/ADD_GROUP';
     payload: _ProductGroupType;
-} |
+} | {
+    type: 'PROD/SET_IS_EDITING_IMAGES';
+    payload: {
+        productID: string;
+        isEditingImage: boolean;
+    };
+} | 
+
 
 // About
 {

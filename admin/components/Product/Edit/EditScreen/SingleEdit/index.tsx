@@ -35,6 +35,7 @@ const SingleEdit:SingleEditType = ({data}) => {
         onFullDescriptionChange,
         price,
         onPriceChange,
+        onEditImages,
         onSave,
         onCancel
     } = useSingleEdit({data});
@@ -59,7 +60,11 @@ const SingleEdit:SingleEditType = ({data}) => {
                                 />
                         </div>))
                 }
-                <button className={styles.editImages}>Edit Images</button>                
+                <button className={styles.editImages}
+                    onClick={onEditImages}
+                >
+                    Edit Images
+                </button>                
             </div>
             <form className={styles.text}>
                 <label htmlFor="id">ID</label>

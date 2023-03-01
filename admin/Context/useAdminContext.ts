@@ -19,6 +19,9 @@ export type AdminContextType = {
     closeCatImageModal: () => void;
     isCatImageModalOpened: boolean;
     
+    openProductImagesModal: () => void;
+    closeProductImagesModal: () => void;
+    isProductImagesModalOpened: boolean;
 };
 
 export const initialAdminContext:AdminContextType = {
@@ -34,6 +37,9 @@ export const initialAdminContext:AdminContextType = {
     openCatImageModal: () => {},
     closeCatImageModal: () => {},
     isCatImageModalOpened: false,
+    openProductImagesModal: () => {},
+    closeProductImagesModal: () => {},
+    isProductImagesModalOpened: false,
 
 }
 
@@ -51,6 +57,7 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const [isCatImageModalOpened, setIsCatImageModalOpened] = useState(false);
+    const [isProductImagesModalOpened, setIsProductImagesModalOpened] = useState(false);
     
     useEffect(() => {
         setCategories(categories, dispatch);
@@ -70,12 +77,23 @@ export const useAdminContext = ({categories, products, aboutHtmlText}:Props) => 
         setIsCatImageModalOpened(false);
     }
 
+    const openProductImagesModal = () => {
+        setIsProductImagesModalOpened(true);
+    }
+
+    const closeProductImagesModal = () => {
+        setIsProductImagesModalOpened(false);
+    }
+
     return {
         state,
         dispatch,
         openCatImageModal,
         closeCatImageModal,
         isCatImageModalOpened,
+        openProductImagesModal,
+        closeProductImagesModal,
+        isProductImagesModalOpened
     };
 }
 

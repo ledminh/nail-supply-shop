@@ -59,6 +59,32 @@ const productsReducer = (state:(_ProductType|_ProductGroupType)[], action:Action
             });
 
             return [newestProductGroup, ...newStateGroup];
+
+        case 'PROD/SET_IS_EDITING_IMAGES':
+            return state.map(product => {
+                if(Array.isArray(product)) {
+                    return product.map(product => {
+                        if(product.id === action.payload.productID) {
+                            return {
+                                ...product,
+                                isEditingImage: action.payload.isEditingImage
+                            }
+                        } else {
+                            return product;
+                        }
+                    });
+                }
+
+                if(product.id === action.payload.productID) {
+                    return {
+                        ...product,
+                        isEditingImage: action.payload.isEditingImage
+                    }
+                } else {
+                    return product;
+                }
+            });
+
         default:
             return state;
     }

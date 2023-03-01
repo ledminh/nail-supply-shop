@@ -78,3 +78,13 @@ export const getProductsByCategoryID = (categoryID:string, state:StateType) => {
     
     });
 }
+
+export const setIsEditingImagesProduct = (productID:string, isEditingImage:boolean, dispatch: React.Dispatch<ActionType>) => {
+    dispatch({
+        type: 'PROD/SET_IS_EDITING_IMAGES',
+        payload: {
+            productID,
+            isEditingImage
+        }
+    });
+}

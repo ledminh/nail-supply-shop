@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext } from "react";
 import CatImageModal from "./CatImage";
-
+import ProductImagesModal from "./ProductImages";
 
 /****************************
  *  Types
@@ -21,6 +21,7 @@ const Modals:ModalsType = ({}) => {
 
     return (
         <>
+            <ProductImagesModal />
             <CatImageModal />
             <div className="modal-root"></div>
         </>
