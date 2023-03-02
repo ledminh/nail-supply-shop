@@ -47,6 +47,16 @@ export const addProduct = (
 
 }
 
+export const updateProduct = (
+    updatedProduct:ProductType,
+    dispatch: React.Dispatch<ActionType>) => {
+
+    dispatch({
+        type: 'PROD/UPDATE_SINGLE',
+        payload: convertProduct(updatedProduct)
+    });
+}
+
 export const addProductGroup = (
     productGroupToAdd: ProductGroupToAdd,
     dispatch: React.Dispatch<ActionType>) => {

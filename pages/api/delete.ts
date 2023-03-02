@@ -21,36 +21,30 @@ export default function handler(
         res.end(JSON.stringify({ error: `Method '${req.method}' Not Allowed` }));
     }
 
-    const { fileName, type } = req.body as DeleteFileRequestBody;
+    const { fileName,  type } = req.body as DeleteFileRequestBody;
 
+    const fs = require('fs');
 
-    if (type === 'cat-image') {
-        // delete file in public/images/category
+    const appRoot = require('app-root-path');
+    
+    const filePath = appRoot + (type === 'cat-image'? `/public/images/category/${fileName}`: `/public/images/product/${fileName}`);
+    
+    fs.unlink(filePath, (err: Error) => {
 
-        const fs = require('fs');
-
-        const appRoot = require('app-root-path');
-        
-        const filePath = appRoot + `/public/images/category/${fileName}`;
-        
-        fs.unlink(filePath, (err: Error) => {
-
-            if (err) {
-                res.statusCode = 501;
-                console.log(err)
-                res.end(JSON.stringify({ error: `Sorry something Happened! ${err.message}` }));
-            }
+        if (err) {
+            res.statusCode = 501;
+            console.log(err)
+            res.end(JSON.stringify({ error: `Sorry something Happened! ${err.message}` }));
+        }
 
 
 
-            res.end(JSON.stringify({
-                success: true,
-                message: 'file deleted'
-            }))
-        });
+        res.end(JSON.stringify({
+            success: true,
+            message: 'file deleted'
+        }))
+    });
 
-
-    } 
 
 
 }

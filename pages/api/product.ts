@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { addProduct, updateCategory, deleteCategory, ProductType } from '../../database';
+import { addProduct, updateProduct,  deleteCategory, ProductType } from '../../database';
 
 import { ProductRequestBody } from '../../admin/types';
 
@@ -52,24 +52,24 @@ export default function handler(
         });
       });
   }
-//   else if(type === 'update') {
-//     updateCategory(data)
-//       .then((dbRes) => {
-//         if(dbRes[0] === 'success') {
-//           res.status(200).json({
-//             success: true, 
-//             category: dbRes[1]
-//           })
-//         }
-//         else {
-//           res.status(400).json({
-//             success: false,
-//             message: dbRes[1]
-//           })
-//         }
-//       });
+  else if(type === 'update') {
+    updateProduct(data)
+      .then((dbRes) => {
+        if(dbRes[0] === 'success') {
+          res.status(200).json({
+            success: true, 
+            product: dbRes[1]
+          })
+        }
+        else {
+          res.status(400).json({
+            success: false,
+            message: dbRes[1]
+          })
+        }
+      });
 
-//   }
+  }
 //   else if(type === 'delete') {
 //     deleteCategory(data.id)
 //       .then((dbRes) => {

@@ -28,9 +28,9 @@ const postProduct = async ({type, data, onSuccess}: Props) => {
                 onSuccess(newProduct);
             }
             else if (type === 'update') {
-                // const updatedCategory:CategoryType = res.data.category;
+                const updatedProduct:ProductType = res.data.product;
 
-                // onSuccess(updatedCategory);
+                onSuccess(updatedProduct);
             }
             else if (type === 'delete') {
                 // onSuccess(null);

@@ -3,13 +3,14 @@ import axios, {AxiosResponse} from 'axios';
 import { DeleteFileRequestBody } from '../types';
 
 type Props = {
-    type: 'cat-image' | 'product-image',
+    type: 'cat-image' | 'prod-image',
     fileName: string,
-}
+    
+} 
 
 const deleteFile = ({type, fileName}:Props) => {
     try {
-        const reqBody:DeleteFileRequestBody = {
+        const reqBody = {
             type: type,
             fileName,
         } 

@@ -60,6 +60,24 @@ const productsReducer = (state:(_ProductType|_ProductGroupType)[], action:Action
 
             return [newestProductGroup, ...newStateGroup];
 
+        case 'PROD/UPDATE_SINGLE':
+            return state.map(product => {
+                if(Array.isArray(product)) {
+                    return product;
+                }
+
+                if(product.id === action.payload.id) {
+                    return {
+                        ...product,
+                        ...action.payload
+                    }
+                } else {
+                    return product;
+                }
+            });
+
+            
+
         case 'PROD/SET_IS_EDITING_IMAGES':
             return state.map(product => {
                 if(Array.isArray(product)) {

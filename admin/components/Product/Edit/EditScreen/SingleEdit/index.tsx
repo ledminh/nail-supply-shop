@@ -59,13 +59,25 @@ const SingleEdit:SingleEditType = ({data, setEditMode}) => {
                 {
                     images.map((image, index) => (
                         <div key={index} className={styles.image}>
-                            <Image
-                                src={image.url}
-                                alt={image.alt? image.alt: productName}
-                                fill
-                                sizes="(max-width: 640px) 50vw, (max-width: 768px) 20vw, 10vw"
-                                style={{objectFit: 'cover'}}
-                                />
+                            {
+                                image instanceof File?
+                                <Image
+                                    src={URL.createObjectURL(image)}
+                                    alt={image.name}
+                                    fill
+                                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 20vw, 10vw"
+                                    style={{objectFit: 'cover'}}
+                                    />:
+                                    <Image
+                                        src={image.url}
+                                        alt={image.alt? image.alt: productName}
+                                        fill
+                                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 20vw, 10vw"
+                                        style={{objectFit: 'cover'}}
+                                        />
+
+                            }
+                            
                         </div>))
                 }
                 <button className={styles.editImages}

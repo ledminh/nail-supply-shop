@@ -1,4 +1,4 @@
-import { GetDBCategoriesType, AddDBCategoryType, UpdateDBCategoryType, DeleteDBCategoryType, GetDBProductsType, GetDBProductType, AddDBProductType, AddDBProductGroupType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
+import { GetDBCategoriesType, AddDBCategoryType, UpdateDBCategoryType, DeleteDBCategoryType, GetDBProductsType, GetDBProductType, AddDBProductType, UpdateDBProductType, AddDBProductGroupType, GetDBAboutHtmlTextType, GetDBPageInfoType, DBCategoryType, DBProductType, DBPageInfoType, DBProductGroupType } from "./types";
 
 
 export const getDBCategories:GetDBCategoriesType = async () => {
@@ -302,6 +302,32 @@ export const addDBProduct:AddDBProductType = async (product) => {
     };
 
     products.push(newProduct);
+
+    resolve(newProduct);
+  });
+}
+
+export const updateDBProduct:UpdateDBProductType = async (product) => {
+  return new Promise((resolve) => {
+    const productIndex = products.findIndex((p) => !Array.isArray(p) && p.id === product.id);
+
+    if(productIndex === -1) {
+      throw new Error("Product not found on DB Server");
+    }
+
+    const newProduct:DBProductType = {
+      ...product,
+
+      images: product.imageUrls.map((url) => {
+        return {
+          url,
+        }
+      }),
+      date: new Date().toISOString(),
+      sellCount: 0,
+    };
+
+    products[productIndex] = newProduct;
 
     resolve(newProduct);
   });

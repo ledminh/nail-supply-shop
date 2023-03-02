@@ -86,6 +86,9 @@ export type ActionType =
     type:'PROD/ADD_GROUP';
     payload: _ProductGroupType;
 } | {
+    type:'PROD/UPDATE_SINGLE';
+    payload: _ProductType;
+} |{
     type: 'PROD/SET_IS_EDITING_IMAGES';
     payload: {
         productID: string;

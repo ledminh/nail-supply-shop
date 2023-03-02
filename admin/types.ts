@@ -53,14 +53,25 @@ export type ProductGroupToAdd = {
     imageUrls: string[],
 }[]
 
+export type ProductToUpdate = {
+    categoryID: string,
+    id: string,
+    name: string,
+    shortDescription: string,
+    fullDescription: string,
+    price: number,
+    imageUrls: string[],
+}
+
 export type ProductRequestBody = {
     type: 'add',
     data: ProductToAdd,
 } 
+| {
+    type: 'update',
+    data: ProductToUpdate
+} 
 // | {
-//     type: 'update',
-//     data: CategoryToUpdate
-// } | {
 //     type: 'delete',
 //     data: {
 //         id: string
@@ -109,6 +120,7 @@ export type _ProductGroupType = (ProductGroupItemType & {
 
 
 export type DeleteFileRequestBody = {
-    type: 'cat-image' | 'product-image',
+    type: 'cat-image' | 'prod-image',
     fileName: string,
-}
+}; 
+
