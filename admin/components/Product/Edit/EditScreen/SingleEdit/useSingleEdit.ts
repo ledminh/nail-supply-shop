@@ -79,10 +79,14 @@ const useSingleEdit = ({data, setEditMode}: useSingleEditParams) => {
                 });
             }
 
-            const imagesToDelete = data.images.filter(image => !images.includes(image)).filter(image => image.url.indexOf('/images/product') !== -1);
+            const imagesToDelete = data.images.filter(image => !images.includes(image));
 
             if(imagesToDelete.length > 0) {
                 imagesToDelete.forEach(image => {
+                    if(image.url.indexOf('/images/product/') === -1) {
+                        return;
+                    }
+
                     deleteFile({
                         type: 'prod-image',
                         fileName: image.url.split('/').pop()!
