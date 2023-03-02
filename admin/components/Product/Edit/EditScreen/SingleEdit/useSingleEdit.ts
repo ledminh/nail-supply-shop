@@ -83,7 +83,7 @@ const useSingleEdit = ({data, setEditMode}: useSingleEditParams) => {
 
             if(imagesToDelete.length > 0) {
                 imagesToDelete.forEach(image => {
-                    if(image.url.indexOf('/images/product/') === -1) {
+                    if(image.url.indexOf('/images/product/') === -1)  {
                         return;
                     }
 
