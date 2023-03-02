@@ -8,6 +8,9 @@ import { ProductToAdd, ProductGroupToAdd } from '../../../types';
 import { addProduct, addProductGroup } from '../../../reducer/actions.Products';
 import { GroupAddData } from './GroupAdd';
 
+import postProduct from '../../../tools/postProduct';
+import postProductGroup from '../../../tools/postProductGroup';
+
 
 const useAdd = () => {
 
@@ -53,8 +56,16 @@ const useAdd = () => {
                     imageUrls,
                 };
 
+                postProduct({
+                    type: 'add',
+                    data: productToAdd,
+                    onSuccess: (newProduct) => {
+                        if(newProduct){
+                            addProduct(newProduct, dispatch);
+                        }
+                    }
+                });
 
-                addProduct(productToAdd, dispatch);
 
                 setIsResetting(true);                
 
@@ -94,7 +105,18 @@ const useAdd = () => {
                         });
 
                         if(productGroupToAdd.length === groupAddData.products.length) {
-                            addProductGroup(productGroupToAdd, dispatch);
+
+                            postProductGroup({
+                                type: 'add',
+                                data: productGroupToAdd,
+                                onSuccess: (newProductGroup) => {
+                                    if(newProductGroup){
+                                        addProductGroup(newProductGroup, dispatch);
+                        
+                                    }
+                                }
+                            });
+
                             setIsResetting(true);
                         }
 

@@ -29,20 +29,12 @@ export const setProducts = (products:(ProductType|ProductGroupType)[], dispatch:
 }
 
 export const addProduct = (
-    productToAdd:ProductToAdd, 
+    newProduct:ProductType, 
     dispatch: React.Dispatch<ActionType>) => {
     
-    postProduct({
-        type: 'add',
-        data: productToAdd,
-        onSuccess: (newProduct) => {
-            if(newProduct){
-                dispatch({
-                    type: 'PROD/ADD_SINGLE',
-                    payload: convertProduct(newProduct)
-                });
-            }
-        }
+    dispatch({
+        type: 'PROD/ADD_SINGLE',
+        payload: convertProduct(newProduct)
     });
 
 }
@@ -58,22 +50,14 @@ export const updateProduct = (
 }
 
 export const addProductGroup = (
-    productGroupToAdd: ProductGroupToAdd,
+    newProductGroup: ProductGroupType,
     dispatch: React.Dispatch<ActionType>) => {
 
-    postProductGroup({
-        type: 'add',
-        data: productGroupToAdd,
-        onSuccess: (newProductGroup) => {
-            if(newProductGroup){
-                
-                dispatch({
-                    type: 'PROD/ADD_GROUP',
-                    payload: convertGroupProduct(newProductGroup)
-                });
-            }
-        }
+    dispatch({
+        type: 'PROD/ADD_GROUP',
+        payload: convertGroupProduct(newProductGroup)
     });
+
 
 }
 
