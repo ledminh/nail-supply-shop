@@ -1,4 +1,4 @@
-import { CategoryType, ProductType, ProductGroupItemType } from "../database";
+import { CategoryType, ProductType, ProductGroupItemType, ProductImageType } from "../database";
 
 /************************************
  *  These types are used for sending
@@ -60,7 +60,7 @@ export type ProductToUpdate = {
     shortDescription: string,
     fullDescription: string,
     price: number,
-    imageUrls: string[],
+    images: ProductImageType[],
 }
 
 export type ProductRequestBody = {

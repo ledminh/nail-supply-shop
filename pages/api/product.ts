@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { addProduct, updateProduct,  deleteCategory, ProductType } from '../../database';
+import { addProduct, updateProduct,  ProductType } from '../../database';
 
 import { ProductRequestBody } from '../../admin/types';
 

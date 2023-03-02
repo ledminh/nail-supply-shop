@@ -30,6 +30,7 @@ const postProduct = async ({type, data, onSuccess}: Props) => {
             else if (type === 'update') {
                 const updatedProduct:ProductType = res.data.product;
 
+
                 onSuccess(updatedProduct);
             }
             else if (type === 'delete') {

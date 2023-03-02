@@ -28,8 +28,6 @@ const SingleEdit:SingleEditType = ({data, setEditMode}) => {
         productName,
         onProductNameChange,
         images,
-        id,
-        onIdChange,
         shortDescription,
         onShortDescriptionChange,
         fullDescription,
@@ -87,13 +85,6 @@ const SingleEdit:SingleEditType = ({data, setEditMode}) => {
                 </button>                
             </div>
             <form className={styles.text}>
-                <label htmlFor="id">ID</label>
-                <input 
-                    id="id"
-                    type="text"
-                    value={id}
-                    onChange={onIdChange}
-                    />
                 <label htmlFor="shortDescription">Short Description</label>
                 <input 
                     id="shortDescription"
