@@ -1,5 +1,12 @@
-# Nail Supply Shop
+# Nail Supply Shop - First Iteration
 
-This is an online shop project developed using Next.js. It represents my journey in learning Full Stack development.
+Welcome to the first iteration of the Nail Supply Shop, a project developed using Next.js. This marks my first attempt at creating a fully functional web application. Before this, my experience was limited to smaller toy projects and simple applications without a meaningful purpose.
 
-**Note:** This README is for the first iteration of the project. For the latest version, please visit the second iteration repository: [Nail Supply Shop v2](https://github.com/ledminh/nail-supply-shop-v2).
+In this initial version of the project, all data is hardcoded within the application itself, without the use of a database or external API. The primary goal was to gain a fundamental understanding of the application's structure and appearance.
+
+**Demo:** [Nail Supply Shop Demo](https://nail-supply-shop.vercel.app/)
+
+## Other Iterations:
+
+- [Nail Supply Shop v2](https://github.com/ledminh/nail-supply-shop-v2)
+- [My Favorite Shop](https://github.com/ledminh/my-favorite-shop)
