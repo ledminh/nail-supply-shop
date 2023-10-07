@@ -8,7 +8,7 @@ This initial iteration serves as a preliminary version of the app's appearance. 
 
 ## Screenshot
 
-(Add a screenshot of the app here)
+![First iteration screenshot](1st-iteration-screenshot.jpg)
 
 ## Live Demo
 
