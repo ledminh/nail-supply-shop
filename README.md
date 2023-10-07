@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project represents my initial attempt at creating a fully functional web application. Prior to this attempt, my experience was confined to smaller toy projects and simple applications.
+This project represents my first attempt at creating a fully functional web application. Prior to this attempt, my experience was confined to smaller toy projects and simple applications.
 
 This initial iteration serves as a preliminary version of the app's appearance. I did not manage to implement all the intended features, and all data is hardcoded within the application without a database or external API integration. The primary objective was to gain a fundamental understanding of the application's structure and appearance.
 
